@@ -1,13 +1,39 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset=utf-8 />
-<title> INFO30005 :: JavaScript - Workshop #2 </title>
-</head>
-<body>
-<p id ='text' style="color:blue;"> Javascript DOM :: Changing paragraph style</p>
-<div>
-<button id="style" onclick="js_new_style()">New style</button>
-</div>
-</body>
+	<head>
+		<meta charset=utf-8 />
+		<title> INFO30005 :: JavaScript - Workshop #2 </title>
+	</head>
+	<body>
+		<p id ='text'> Javascript DOM :: Changing paragraph style</p>
+		<div>
+			<button id="style" onclick="js_new_style()">New style</button>
+		</div>
+	</body>
+	
+	<script>
+
+    var btn = document.getElementById("style");
+    var txt = document.getElementById("text");
+    var isNew = false;
+    var prevColor = txt.style.color;
+    var prevSize = txt.style.fontSize;
+    var prevWeight = txt.style.fontWeight;
+
+    function js_new_style(){
+        if(!isNew){
+            btn.innerHTML = "Previous style";
+            txt.style.color = "blue";
+            txt.style.fontSize = "xx-large";
+            txt.style.fontWeight = "900";
+        } else {
+            txt.style.color = prevColor;
+            btn.innerHTML = "New style";
+            txt.style.fontSize = prevSize;
+            txt.style.fontWeight = prevWeight;
+        }
+        isNew = !isNew;
+    }
+</script>
+
 </html>
