@@ -7,7 +7,23 @@
 <body>
 <p id ='text'> Javascript DOM :: Changing paragraph style</p>
 <div>
-<button id="style" onclick="js_new_style()">New style</button>
+<button id="style" onclick="js_new_style()">New Style</button>
 </div>
 </body>
 </html>
+
+<script>
+function js_new_style() {
+    if(document.getElementById("style").innerHTML === "New Style"){
+    document.getElementById("style").innerHTML = "Previous Style";
+    document.getElementById("text").style.color = "Red";
+    document.getElementById("text").style.fontFamily = "italic bold 20px Times New Romans";
+    document.getElementById("text").style.fontSize = "xx-large";
+    } else {
+        document.getElementById("style").innerHTML = "New Style";
+        document.getElementById("text").style.color = "Black";
+        document.getElementById("text").style.fontSize = "xx-small";
+
+    }
+}
+</script>
