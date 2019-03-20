@@ -11,3 +11,27 @@
         </div>
     </body>
 </html>
+<script>
+
+    var btn = document.getElementById("style");
+    var txt = document.getElementById("text");
+    var isNew = false;
+    var prevColor = txt.style.color;
+    var prevSize = txt.style.fontSize;
+    var prevWeight = txt.style.fontWeight;
+
+    function js_new_style(){
+        if(!isNew){
+            btn.innerHTML = "Previous style";
+            txt.style.color = "blue";
+            txt.style.fontSize = "xx-large";
+            txt.style.fontWeight = "900";
+        } else {
+            txt.style.color = prevColor;
+            btn.innerHTML = "New style";
+            txt.style.fontSize = prevSize;
+            txt.style.fontWeight = prevWeight;
+        }
+        isNew = !isNew;
+    }
+</script>
