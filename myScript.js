@@ -1,3 +1,3 @@
 function getFormValue() {
-    alert("BAKANA!");
+    alert("OMAI WA SHINDERU!\n NANI??");
 }
