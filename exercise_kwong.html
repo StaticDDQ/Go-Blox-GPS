@@ -14,15 +14,19 @@
 
 <script>
 function js_new_style() {
-    if(document.getElementById("style").innerHTML === "New Style"){
-    document.getElementById("style").innerHTML = "Previous Style";
-    document.getElementById("text").style.color = "Red";
-    document.getElementById("text").style.fontFamily = "italic bold 20px Times New Romans";
-    document.getElementById("text").style.fontSize = "xx-large";
+    var text = document.getElementById("text");
+    var style = document.getElementById("style");
+
+    if(style.innerHTML === "New Style"){
+    style.innerHTML = "Previous Style";
+    text.style.color = "Red";
+    text.style.fontStyle = "italic Times New Romans";
+    text.style.fontSize = "xx-large";
     } else {
-        document.getElementById("style").innerHTML = "New Style";
-        document.getElementById("text").style.color = "Black";
-        document.getElementById("text").style.fontSize = "xx-small";
+        style.innerHTML = "New Style";
+        text.style.color = "Black";
+        text.style.fontSize = "xx-small";
+        text.style.font
 
     }
 }
