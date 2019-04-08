@@ -10,4 +10,4 @@ const mSchema = mongoose.Schema({
 
 });
 
-mongoose.model('members',mSchema);
+exports.schema = mongoose.model('members',mSchema);

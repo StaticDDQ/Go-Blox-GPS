@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const database = require('./db');
 const mongoose = require('./contorller/mongoose.js');
+var Members = require('./contorller/schemaController');
 const bodyParser = require('body-parser');
 
 var port = process.env.PORT || 3000;
@@ -23,18 +24,26 @@ app.get('/getFirstname/:firstname', function(req,res){
     }
 })
 
+
+
 //register as member
 app.post('/register',function(req,res){
-    var data = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        DOB: req.body.DOB,
-        userName: req.body.userName,
-        password: req.body.password,
-        email: req.body.email
-    };
-    res.send(data);
-
+    var data = new Members({
+        "firstName": req.body.firstName,
+        "lastName": req.body.lastName,
+        "DOB": req.body.DOB,
+        "userName": req.body.userName,
+        "password": req.body.password,
+        "email": req.body.email
+    });
+    // res.send(data);
+    data.save(function(err,newMember){
+        if(!err){
+            res.send(newMember);
+        } else{
+            res.sendStatus(400);
+        }
+    })
 })
 // update member
 app.put('/updateMember',function(req,res){
