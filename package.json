@@ -7,19 +7,14 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
-  "engines": {
-    "node": "10.15.3",
-    "npm": "6.x"
-  },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
+    "mongoose": "^5.4.22",
     "mongodb": "^3.2.3"
   },
-  "devDependencies": {
-    "mongoose": "^5.4.22"
-  },
+  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/StaticDDQ/info30005-2019-go-blox.git"
