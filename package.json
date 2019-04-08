@@ -12,7 +12,9 @@
   "dependencies": {
     "express": "^4.16.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mongoose": "^5.4.22"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/StaticDDQ/info30005-2019-go-blox.git"
