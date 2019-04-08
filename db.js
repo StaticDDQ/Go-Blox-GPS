@@ -139,31 +139,31 @@ exports.events = [
 
   exports.ratings = [
     {
-      index: 0,
+      index: "0",
       star: 4,
       datePublished: "Mon Apr 08 2019 14:55:18 GMT+1000 (Australian Eastern Standard Time)",
       comment: "Enim duis dolore quis Lorem. Consequat et est nostrud magna minim magna. Proident aliqua cupidatat et cillum consequat ut eiusmod Lorem velit irure reprehenderit sit ex."
     },
     {
-      index: 1,
+      index: "1",
       star: 1,
       datePublished: "Mon Apr 08 2019 14:55:18 GMT+1000 (Australian Eastern Standard Time)",
       comment: "Officia voluptate eu nostrud deserunt excepteur sint labore anim eu ex mollit cillum cillum. Veniam nisi et et culpa. Magna amet ut cupidatat do."
     },
     {
-      index: 2,
+      index: "2",
       star: 3,
       datePublished: "Mon Apr 08 2019 14:55:18 GMT+1000 (Australian Eastern Standard Time)",
       comment: "Consectetur magna minim officia id enim duis aliquip. Ipsum proident adipisicing adipisicing pariatur Lorem. Velit eu nostrud occaecat sit aliquip sint excepteur culpa occaecat."
     },
     {
-      index: 3,
+      index: "3",
       star: 1,
       datePublished: "Mon Apr 08 2019 14:55:18 GMT+1000 (Australian Eastern Standard Time)",
       comment: "Elit excepteur quis eiusmod reprehenderit deserunt ad non. Culpa deserunt eiusmod in magna duis ea. Voluptate tempor ad dolore elit fugiat."
     },
     {
-      index: 4,
+      index: "4",
       star: 2,
       datePublished: "Mon Apr 08 2019 14:55:18 GMT+1000 (Australian Eastern Standard Time)",
       comment: "Incididunt ex do enim est tempor excepteur cillum Lorem do. Eu do enim exercitation proident elit amet exercitation in ex irure proident. Elit pariatur consectetur pariatur velit id anim sunt amet pariatur magna deserunt."
