@@ -8,9 +8,9 @@ app.get('/', function(req,res){
     res.send("Welcome to our GPS");
 });
 
-app.get('/:firstname', function(req,res){
+app.get('/getFirstname/:firstname', function(req,res){
     for(let i = 0; i< database.members.length;i++){
-        if(req.params.firstname === database.members[i]){
+        if(req.params.firstname === database.members[i].firstName){
             res.send(database.members[i]);
             break;
         }
