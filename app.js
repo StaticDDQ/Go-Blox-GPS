@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const database = require('./db');
+const mongoose = require('./contorller/mongoose.js');
 
 var port = process.env.PORT || 3000;
 
@@ -27,11 +28,13 @@ app.post('/register',function(req,res){
         password: req.body.password,
         email: req.body.email
     };
+    res.send(data);
 
 })
 // update member
 app.put('/updateMember',function(req,res){
-    
+    var accountUpdate = req.body.userName;
+
 })
 
 
