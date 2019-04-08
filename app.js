@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
 const database = require('./db');
-const mongoose = require('./contorller/mongoose.js');
-var Members = require('./contorller/schemaController');
+const mongoose = require('./controller/mongoose.js');
+const schema = require('./controller/schemaController');
 const bodyParser = require('body-parser');
 
 var port = process.env.PORT || 3000;
@@ -27,6 +27,7 @@ app.get('/getFirstname/:firstname', function(req,res){
 
 
 //register as member
+var Members = mongoose.model("members",schema);
 app.post('/register',function(req,res){
     var data = new Members({
         "firstName": req.body.firstName,
