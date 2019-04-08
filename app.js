@@ -9,12 +9,7 @@ app.get('/', function(req,res){
 });
 
 app.get('/:firstname', function(req,res){
-    for(let i = 0; i< database.members.length;i++){
-        if(req.params.firstname === database.members[i]){
-            res.send(database.members[i]);
-            break;
-        }
-    }
+    res.send(database.members[req.params.firstname]);
 })
 
 //register as member
