@@ -75,13 +75,12 @@ app.post('/addratings',function(reg,res){
 app.get('/getRating/:index', function(req,res){
     // get index of comment
     for(let i=0 ; i < database.ratings.length; i++){
-    for(let i=0 ; i < database.ratings.length; i++){
         if(req.params.index === database.ratings[i].index){
             res.send(database.ratings[i]);
             break;
         }
     }
-}});
+});
 
 app.listen(port,function(){
     console.log("Listening to port "+ port);
