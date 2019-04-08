@@ -14,7 +14,6 @@
     "mongoose": "^5.4.22",
     "mongodb": "^3.2.3"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/StaticDDQ/info30005-2019-go-blox.git"
