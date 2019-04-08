@@ -58,21 +58,19 @@ app.get('/getEvent/:name',function(req,res){
             break;
         }
     }
-
-
     
-})
+});
 
 // get rating
 app.get('/getRating/:index', function(req,res){
     // get index of comment
-    for(let i=0 < database.rating.length; i++){
+    for(let i=0 ; i < database.rating.length; i++){
         if(req.params.index === database.rating[i].index){
             res.send(database.comment[i]);
             break;
         }
     }
-})
+});
 
 // 
 
