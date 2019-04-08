@@ -89,6 +89,26 @@ app.get('/getRating/:index', function(req,res){
     }
 });
 
+//delete member
+app.delete('/deleteMember/:username', function(req,res){
+    for(let i = 0; i < database.events.length; i++){
+        if(req.params.username === database.members[i].userName){
+            res.send(database.members[i]);
+            break;
+        }
+    }
+});
+
+//delete event
+app.delete('/deleteEvent/:name',function(req,res){
+    for(let i = 0; i < database.events.length; i++){
+        if(req.params.name === database.events[i].name){
+            res.send(database.events[i]);
+            break;
+        }
+    }
+});
+
 app.listen(port,function(){
     console.log("Listening to port "+ port);
 });
