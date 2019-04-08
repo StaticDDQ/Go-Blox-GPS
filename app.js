@@ -8,6 +8,15 @@ app.get('/', function(req,res){
     res.send("Welcome to our GPS");
 });
 
+app.get('/:firstname', function(req,res){
+    for(let i = 0; i< database.members.length;i++){
+        if(req.params.firstname === database.members[i]){
+            res.send(database.members[i]);
+            break;
+        }
+    }
+})
+
 //register as member
 app.post('/register',function(req,res){
     var data = {
