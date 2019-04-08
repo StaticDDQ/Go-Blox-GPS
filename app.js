@@ -29,6 +29,11 @@ app.post('/register',function(req,res){
     };
 
 })
+// update member
+app.put('/updateMember',function(req,res){
+    
+})
+
 
 // add event
 app.post('/addevent',function(req,res){
