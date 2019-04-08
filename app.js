@@ -2,8 +2,13 @@ const express = require('express');
 const app = express();
 const database = require('./db');
 const mongoose = require('./contorller/mongoose.js');
+const bodyParser = require('body-parser');
 
 var port = process.env.PORT || 3000;
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true})) 
+
 
 app.get('/', function(req,res){
     res.send("Welcome to our GPS");
