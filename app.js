@@ -77,7 +77,7 @@ app.get('/getRating/:index', function(req,res){
     for(let i=0 ; i < database.ratings.length; i++){
     for(let i=0 ; i < database.ratings.length; i++){
         if(req.params.index === database.ratings[i].index){
-            res.send(database.comment[i]);
+            res.send(database.ratings[i]);
             break;
         }
     }
