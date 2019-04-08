@@ -1,51 +1,51 @@
 exports.members = [
     {
-      "firstName": "Christi",
-      "lastName": "Ashley",
-      "userName": "Mcfarland63",
-      "email": "mcfarlandashley@prismatic.com",
-      "DOB": "Fri Apr 27 2018 05:52:16 GMT+1000 (Australian Eastern Standard Time)",
-      "password": "commodo"
+      firstName: "Christi",
+      lastName: "Ashley",
+      userName: "Mcfarland63",
+      email: "mcfarlandashley@prismatic.com",
+      DOB: "Fri Apr 27 2018 05:52:16 GMT+1000 (Australian Eastern Standard Time)",
+      password: "commodo"
     },
     {
-      "firstName": "Lang",
-      "lastName": "Cardenas",
-      "userName": "Roxanne56",
-      "email": "roxannecardenas@prismatic.com",
-      "DOB": "Sun Jan 20 2008 08:21:16 GMT+1100 (Australian Eastern Daylight Time)",
-      "password": "incididunt"
+      firstName: "Lang",
+      lastName: "Cardenas",
+      userName: "Roxanne56",
+      email: "roxannecardenas@prismatic.com",
+      DOB: "Sun Jan 20 2008 08:21:16 GMT+1100 (Australian Eastern Daylight Time)",
+      password: "incididunt"
     },
     {
-      "firstName": "Clay",
-      "lastName": "Neal",
-      "userName": "Shirley9",
-      "email": "shirleyneal@prismatic.com",
-      "DOB": "Mon Sep 25 2000 07:49:02 GMT+1100 (Australian Eastern Daylight Time)",
-      "password": "cupidatat"
+      firstName: "Clay",
+      lastName: "Neal",
+      userName: "Shirley9",
+      email: "shirleyneal@prismatic.com",
+      DOB: "Mon Sep 25 2000 07:49:02 GMT+1100 (Australian Eastern Daylight Time)",
+      password: "cupidatat"
     },
     {
-      "firstName": "Atkins",
-      "lastName": "Walter",
-      "userName": "Ellen51",
-      "email": "ellenwalter@prismatic.com",
-      "DOB": "Fri Apr 07 2006 00:15:35 GMT+1000 (Australian Eastern Standard Time)",
-      "password": "nostrud"
+      firstName: "Atkins",
+      lastName: "Walter",
+      userName: "Ellen51",
+      email: "ellenwalter@prismatic.com",
+      DOB: "Fri Apr 07 2006 00:15:35 GMT+1000 (Australian Eastern Standard Time)",
+      password: "nostrud"
     },
     {
-      "firstName": "Janell",
-      "lastName": "Johnston",
-      "userName": "Church15",
-      "email": "churchjohnston@prismatic.com",
-      "DOB": "Fri May 13 2011 18:13:40 GMT+1000 (Australian Eastern Standard Time)",
-      "password": "irure"
+      firstName: "Janell",
+      lastName: "Johnston",
+      userName: "Church15",
+      email: "churchjohnston@prismatic.com",
+      DOB: "Fri May 13 2011 18:13:40 GMT+1000 (Australian Eastern Standard Time)",
+      password: "irure"
     },
     {
-      "firstName": "Hodge",
-      "lastName": "Finch",
-      "userName": "Dodson72",
-      "email": "dodsonfinch@prismatic.com",
-      "DOB": "Wed Jan 10 2018 16:29:56 GMT+1100 (Australian Eastern Daylight Time)",
-      "password": "id"
+      firstName: "Hodge",
+      lastName: "Finch",
+      userName: "Dodson72",
+      email: "dodsonfinch@prismatic.com",
+      DOB: "Wed Jan 10 2018 16:29:56 GMT+1100 (Australian Eastern Daylight Time)",
+      password: "id"
     }
   ];
 
