@@ -1,7 +1,21 @@
 const express = require('express');
 const app = express();
 const database = require('./db');
-const mongoose = require('./mongooseController.js');
+var mongoose = require('mongoose');
+
+var data = {
+    username: "test",
+    password: "testing123"
+};
+
+var options = {
+    useNewUrlParser: true
+};
+
+var stringMongoose = "mongodb://" + data.username + ":" + data.password + "@ds233806.mlab.com:33806/members_goblox";
+
+mongoose.connect(stringMongoose, options)
+    .catch((err) => console.log("ERORR:" + err));
 const bodyParser = require('body-parser');
 
 var port = process.env.PORT || 3000;
