@@ -29,6 +29,11 @@ app.post('/register',function(req,res){
     };
 
 })
+// update member
+app.put('/updateMember',function(req,res){
+
+})
+
 
 // add event
 app.post('/addevent',function(req,res){
@@ -45,12 +50,16 @@ app.post('/addevent',function(req,res){
 });
 
 // get event
-app.get('/event/get',function(req,res){
+app.get('/getEvent/:name',function(req,res){
     // find the event
+    for(let i = 0; i < database.events.length; i++){
+        if(req.params.name === database.events[i].name){
+            res.send(database.events[i]);
+            break;
+        }
+    }
 
-
-    
-})
+});
 
 // give rating
 app.post('/addratings',function(reg,res){
@@ -61,10 +70,8 @@ app.post('/addratings',function(reg,res){
     }
 });
 
-// 
+//
 
 app.listen(port,function(){
     console.log("Listening to port "+ port);
 });
-
-
