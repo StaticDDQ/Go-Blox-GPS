@@ -74,9 +74,9 @@ app.post('/addratings',function(reg,res){
 // get rating
 app.get('/getRating/:index', function(req,res){
     // get index of comment
-    for(let i=0 ; i< database.rating.length; i++){
-    for(let i=0 ; i < database.rating.length; i++){
-        if(req.params.index === database.rating[i].index){
+    for(let i=0 ; i < database.ratings.length; i++){
+    for(let i=0 ; i < database.ratings.length; i++){
+        if(req.params.index === database.ratings[i].index){
             res.send(database.comment[i]);
             break;
         }
