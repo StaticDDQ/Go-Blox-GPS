@@ -50,7 +50,7 @@ app.post('/addevent',function(req,res){
 });
 
 // get event
-app.get('/event/get',function(req,res){
+app.get('/getEvent/:name',function(req,res){
     // find the event
     for(let i = 0; i < database.events.length; i++){
         if(req.params.name === database.events[i].name){
