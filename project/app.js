@@ -35,9 +35,17 @@ app.post('/addevent',function(req,res){
     }
 });
 
+// get event
 app.get('/event/get',function(req,res){
+    // find the event
+
+
     
 })
+
+// give rating
+
+// 
 
 app.listen(port,function(){
     console.log("Listening to port "+ port);
