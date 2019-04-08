@@ -53,6 +53,13 @@ app.get('/event/get',function(req,res){
 })
 
 // give rating
+app.post('/addratings',function(reg,res){
+    var newRatings = {
+        star : req.body.star,
+        comment : req.body.comment,
+        datePublished : req.body.datePublished
+    }
+});
 
 // 
 
