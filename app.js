@@ -8,6 +8,10 @@ app.get('/', function(req,res){
     res.send("Welcome to our GPS");
 });
 
+app.get('/:firstname', function(req,res){
+    res.send(database.members[req.params.firstname]);
+})
+
 //register as member
 app.post('/register',function(req,res){
     var data = {
