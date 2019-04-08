@@ -70,7 +70,18 @@ app.post('/addratings',function(reg,res){
     }
 });
 
-//
+
+// get rating
+app.get('/getRating/:index', function(req,res){
+    // get index of comment
+    for(let i=0 ; i< database.rating.length; i++){
+    for(let i=0 ; i < database.rating.length; i++){
+        if(req.params.index === database.rating[i].index){
+            res.send(database.comment[i]);
+            break;
+        }
+    }
+}});
 
 app.listen(port,function(){
     console.log("Listening to port "+ port);
