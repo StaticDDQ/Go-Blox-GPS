@@ -115,6 +115,15 @@ app.get('/getPlace/:placeName',function(req,res){
     }
 });
 
+// update places
+app.put('/updatePlace/:placeName',function(req,res){
+    var newPlace = mongooseController.Places.findOneAndUpdate(
+        {placeName: req.params.placeName}, {$set: req.body}, function(err,resp){ //callback functions
+            res.send(resp)
+        });
+
+})
+
 // RATINGS
 
 // give rating
