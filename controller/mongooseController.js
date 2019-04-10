@@ -5,11 +5,15 @@ const MongoClient = require('mongodb').MongoClient;
 var schema = new mongoose.Schema({
     "firstName": String,
     "lastName": String,
-    "userName": String,
+    "userName": {
+        type: String,
+        required: true,
+        unique: true
+    },
     "email": String,
     "DOB": Date,
     "password": String
-});
+}, { versionKey: false });
 
 var reviewSchema = new mongoose.Schema({
     "eventID": Number,
@@ -56,6 +60,7 @@ exports.addUser = (req, res) => {
             //console.log(Members.find());
             res.send(newMember);
         } else {
+            console.log("error saving");
             res.sendStatus(400);
         }
     })
