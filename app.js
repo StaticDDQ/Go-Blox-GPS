@@ -14,6 +14,8 @@ app.get('/', function(req,res){
     res.send("Welcome to our GPS");
 });
 
+// MEMBERS
+
 // get member
 app.get('/getFirstname/:firstname', function(req,res){
     for(let i = 0; i< database.members.length;i++){
@@ -37,6 +39,8 @@ app.put('/updateMember/:userName',function(req,res){
         });
 
 })
+
+// EVENTS
 
 // add event
 app.post('/addevent',function(req,res){
@@ -69,6 +73,17 @@ app.get('/getEvent/:name',function(req,res){
 
 });
 
+// update event
+app.put('/updateEvent/:name',function(req,res){
+    var newEvent = mongooseController.Events.findOneAndUpdate(
+        {name: req.params.name}, {$set: req.body}, function(err,resp){ //callback functions
+            res.send(resp)
+        });
+
+})
+
+// PLACES
+
 // add places
 app.post('/addplaces',function(req,res){
     var newPlaces = {
@@ -99,6 +114,8 @@ app.get('/getPlace/:placeName',function(req,res){
         }
     }
 });
+
+// RATINGS
 
 // give rating
 app.post('/addratings',function(reg,res){

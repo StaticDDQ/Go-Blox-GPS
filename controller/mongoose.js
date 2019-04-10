@@ -22,7 +22,9 @@ db.once("open", function (callback) {
     console.log("connection succeeded");
 });
 
-var Members = mongoose.model("members", schema);
+var Members = mongoose.model("members", memberSchema);
+var Events = mongoose.model("events", eventsSchema);
+
 
 function addUser(req) {
     var data = new Members({

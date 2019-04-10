@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 //const schema = require('./schemaController');
 const MongoClient = require('mongodb').MongoClient;
 
+// member schema
 var memberSchema = new mongoose.Schema({
     "firstName": String,
     "lastName": String,
@@ -15,6 +16,7 @@ var memberSchema = new mongoose.Schema({
     "password": String
 }, { versionKey: false });
 
+// review schema
 var reviewSchema = new mongoose.Schema({
     "eventID": Number,
     "stars": Number,
@@ -22,6 +24,18 @@ var reviewSchema = new mongoose.Schema({
     "userName": String,
     "DateTime": Date
 });
+
+// events schema
+var eventsSchema = new mongoose.Schema({
+   "name": String,
+   "date": Date,
+   "address": String,
+   "description": String,
+   "contact": String,
+   "pictures": String,
+   "tags": String 
+});
+
 
 var data = {
     username: "test",
@@ -38,6 +52,7 @@ mongoose.connect(stringMongoose, options)
     .catch((err) => console.log("ERORR:" + err));
 
 var Members = mongoose.model("members", memberSchema);
+var Events = mongoose.model("events", eventsSchema);
 
 MongoClient.connect(stringMongoose, function (err, db) {
     if (err) throw err;
