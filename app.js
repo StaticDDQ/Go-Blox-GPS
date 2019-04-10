@@ -2,8 +2,6 @@ const express = require('express');
 const app = express();
 const database = require('./db');
 const mongooseController = require('./controller/mongooseController.js');
-const mongoose = require('mongoose');
-const schema = require('./controller/schemaController');
 
 const bodyParser = require('body-parser');
 
@@ -26,33 +24,23 @@ app.get('/getFirstname/:firstname', function(req,res){
     }
 })
 
-
-
 //register as member
-var Members = mongoose.model("members",schema);
 app.post('/register',function(req,res){
-    var data = new Members({
+    /*var data = new Members({
         "firstName": req.body.firstName,
         "lastName": req.body.lastName,
         "DOB": req.body.DOB,
         "userName": req.body.userName,
         "password": req.body.password,
         "email": req.body.email
-    });
-    // res.send(data);
-    data.save(function(err,newMember){
-        if(!err){
-            res.send(newMember);
-        } else{
-            res.sendStatus(400);
-        }
-    })
+    });*/
+    mongooseController.addUser(req);
 })
+
 // update member
 app.put('/updateMember',function(req,res){
     var accountUpdate = req.body.userName;
 })
-
 
 // add event
 app.post('/addevent',function(req,res){
@@ -93,7 +81,6 @@ app.post('/addratings',function(reg,res){
         datePublished : req.body.datePublished
     }
 });
-
 
 // get rating
 app.get('/getRating/:index', function(req,res){

@@ -1,16 +1,17 @@
 var mongoose = require('mongoose');
-const schema = require('./schemaController');
+const schema = require('./controller/schemaController');
+
 
 var data = {
     username: "test",
     password: "testing123"
 };
 
-var options = {
+var options ={
     useNewUrlParser: true
 };
 
-var stringMongoose = "mongodb://" + data.username + ":" + data.password + "@ds233806.mlab.com:33806/members_goblox";
+var stringMongoose = "mongodb://"+data.username+":"+data.password+"@ds233806.mlab.com:33806/members_goblox";
 
 mongoose.connect(stringMongoose, options)
     .catch((err) => console.log("ERORR:" + err));
@@ -41,5 +42,3 @@ function addUser(req) {
         }
     })
 }
-
-module.exports = addUser; 
