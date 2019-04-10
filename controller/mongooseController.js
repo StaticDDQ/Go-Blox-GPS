@@ -11,6 +11,14 @@ var schema = new mongoose.Schema({
     "password": String
 });
 
+var reviewSchema = new mongoose.Schema({
+    "eventID": Number,
+    "stars": Number,
+    "desc": String,
+    "userName": String,
+    "DateTime": Date
+});
+
 var data = {
     username: "test",
     password: "testing123"
@@ -33,7 +41,6 @@ MongoClient.connect(stringMongoose, function (err, db) {
     var dbo = db.db("members_goblox");
     dbo.collection("members").findOne({}, function (err, result) {
         if (err) throw err;
-        console.log(result);
         db.close();
     });
 });
@@ -41,15 +48,7 @@ MongoClient.connect(stringMongoose, function (err, db) {
 exports.addUser = (req, res) => {
 
     //console.log(req.body);
-    var data = new Members({
-        "firstName": req.body.firstName,
-        "lastName": req.body.lastName,
-        "DOB": req.body.DOB,
-        "userName": req.body.userName,
-        "password": req.body.password,
-        "email": req.body.email
-    });
-    console.log(data.firstName);
+    var data = new Members(req.body);
 
     data.save(function (err, newMember) {
         if (!err) {
