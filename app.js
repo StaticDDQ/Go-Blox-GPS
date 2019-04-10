@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const database = require('./db');
 const mongooseController = require('./controller/mongooseController.js');
-
 const bodyParser = require('body-parser');
 
 var port = process.env.PORT || 3000;
@@ -30,8 +29,12 @@ app.post('/register',function(req,res){
 })
 
 // update member
-app.put('/updateMember',function(req,res){
-    var accountUpdate = req.body.userName;
+app.put('/updateMember/:userName',function(req,res){
+    var newMember = mongooseController.Members.findOneAndUpdate(
+        {userName: req.params.userName}, {$set: req.body}, function(err,resp){ //callback functions
+            res.send(resp)
+        });
+
 })
 
 // add event

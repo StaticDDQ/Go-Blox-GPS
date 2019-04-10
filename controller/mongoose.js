@@ -42,3 +42,5 @@ function addUser(req) {
         }
     })
 }
+
+module.exports = addUser;

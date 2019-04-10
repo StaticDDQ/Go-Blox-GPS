@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 //const schema = require('./schemaController');
 const MongoClient = require('mongodb').MongoClient;
 
-var schema = new mongoose.Schema({
+var memberSchema = new mongoose.Schema({
     "firstName": String,
     "lastName": String,
     "userName": {
@@ -37,7 +37,7 @@ var stringMongoose = "mongodb://" + data.username + ":" + data.password + "@ds23
 mongoose.connect(stringMongoose, options)
     .catch((err) => console.log("ERORR:" + err));
 
-var Members = mongoose.model("members", schema);
+var Members = mongoose.model("members", memberSchema);
 
 MongoClient.connect(stringMongoose, function (err, db) {
     if (err) throw err;
@@ -65,3 +65,5 @@ exports.addUser = (req, res) => {
         }
     })
 }
+
+module.exports.Members = Members;
