@@ -26,15 +26,7 @@ app.get('/getFirstname/:firstname', function(req,res){
 
 //register as member
 app.post('/register',function(req,res){
-    /*var data = new Members({
-        "firstName": req.body.firstName,
-        "lastName": req.body.lastName,
-        "DOB": req.body.DOB,
-        "userName": req.body.userName,
-        "password": req.body.password,
-        "email": req.body.email
-    });*/
-    mongooseController.addUser(req);
+    mongooseController.addUser(req,res);
 })
 
 // update member

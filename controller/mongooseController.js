@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const schema = require('./schemaController');
 
 var data = {
@@ -23,7 +23,7 @@ db.once("open", function (callback) {
 
 var Members = mongoose.model("members", schema);
 
-function addUser(req) {
+exports.addUser = (req,res) => {
     var data = new Members({
         "firstName": req.body.firstName,
         "lastName": req.body.lastName,
@@ -41,5 +41,3 @@ function addUser(req) {
         }
     })
 }
-
-module.exports = addUser; 
