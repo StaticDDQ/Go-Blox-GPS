@@ -40,6 +40,16 @@ app.put('/updateMember/:userName',function(req,res){
 
 })
 
+//delete member
+app.delete('/deleteMember/:username', function(req,res){
+    for(let i = 0; i < database.events.length; i++){
+        if(req.params.username === database.members[i].userName){
+            res.send(database.members[i]);
+            break;
+        }
+    }
+});
+
 // EVENTS
 
 // add event
@@ -81,6 +91,16 @@ app.put('/updateEvent/:name',function(req,res){
         });
 
 })
+
+//delete event
+app.delete('/deleteEvent/:name',function(req,res){
+    for(let i = 0; i < database.events.length; i++){
+        if(req.params.name === database.events[i].name){
+            res.send(database.events[i]);
+            break;
+        }
+    }
+});
 
 // PLACES
 
@@ -141,26 +161,6 @@ app.get('/getRating/:index', function(req,res){
     for(let i=0 ; i < database.ratings.length; i++){
         if(req.params.index === database.ratings[i].index){
             res.send(database.ratings[i]);
-            break;
-        }
-    }
-});
-
-//delete member
-app.delete('/deleteMember/:username', function(req,res){
-    for(let i = 0; i < database.events.length; i++){
-        if(req.params.username === database.members[i].userName){
-            res.send(database.members[i]);
-            break;
-        }
-    }
-});
-
-//delete event
-app.delete('/deleteEvent/:name',function(req,res){
-    for(let i = 0; i < database.events.length; i++){
-        if(req.params.name === database.events[i].name){
-            res.send(database.events[i]);
             break;
         }
     }
