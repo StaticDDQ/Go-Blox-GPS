@@ -36,6 +36,15 @@ var eventsSchema = new mongoose.Schema({
    "tags": String 
 });
 
+// places schema
+var placeSchema = new mongoose.Schema({
+    "placeName": Number,
+    "placeAddress": String,
+    "placeDescription": String,
+    "placePhone": String,
+    "placeTags": String
+ });
+
 
 var data = {
     username: "test",
@@ -53,6 +62,7 @@ mongoose.connect(stringMongoose, options)
 
 var Members = mongoose.model("members", memberSchema);
 var Events = mongoose.model("events", eventsSchema);
+var Places = mongoose.model("places", placeSchema);
 
 MongoClient.connect(stringMongoose, function (err, db) {
     if (err) throw err;
