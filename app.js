@@ -65,6 +65,11 @@ app.post('/addevent',function(req,res){
         tags: req.body.tag
 
     }
+    // save the event
+    newEvent.save(function(err,event){
+        res.send(event)
+        .catch(console.log(err));
+    })
 });
 
 // get event
