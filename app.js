@@ -14,7 +14,7 @@ app.get('/', function(req,res){
     res.send("Welcome to our GPS");
 });
 
-// MEMBERS
+/***************************  MEMBERS  ***************************/
 
 // get member
 app.get('/getFirstname/:firstname', function(req,res){
@@ -26,7 +26,7 @@ app.get('/getFirstname/:firstname', function(req,res){
     }
 })
 
-//register as member
+// register as member
 app.post('/register',function(req,res){
     mongooseController.addUser(req,res);
 })
@@ -40,7 +40,7 @@ app.put('/updateMember/:userName',function(req,res){
 
 })
 
-//delete member
+// delete member
 app.delete('/deleteMember/:username', function(req,res){
     for(let i = 0; i < database.events.length; i++){
         if(req.params.username === database.members[i].userName){
@@ -50,7 +50,7 @@ app.delete('/deleteMember/:username', function(req,res){
     }
 });
 
-// EVENTS
+/***************************  EVENTS  ***************************/
 
 // add event
 app.post('/addevent',function(req,res){
@@ -92,7 +92,7 @@ app.put('/updateEvent/:name',function(req,res){
 
 })
 
-//delete event
+// delete event
 app.delete('/deleteEvent/:name',function(req,res){
     for(let i = 0; i < database.events.length; i++){
         if(req.params.name === database.events[i].name){
@@ -102,7 +102,7 @@ app.delete('/deleteEvent/:name',function(req,res){
     }
 });
 
-// PLACES
+/***************************  PLACES  ***************************/
 
 // add places
 app.post('/addplaces',function(req,res){
@@ -144,7 +144,17 @@ app.put('/updatePlace/:placeName',function(req,res){
 
 })
 
-// RATINGS
+// delete places
+app.delete('/deletePlace/:placeName',function(req,res){
+    for(let i = 0; i < database.places.length; i++){
+        if(req.params.placeName === database.places[i].placeName){
+            res.send(database.places[i]);
+            break;
+        }
+    }
+});
+
+/***************************  RATINGS  ***************************/
 
 // give rating
 app.post('/addratings',function(reg,res){
