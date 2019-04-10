@@ -49,7 +49,7 @@ MongoClient.connect(stringMongoose, function (err, db) {
     });
 });
 
-exports.addUser = (req, res) => {
+var addUser = function(req, res) {
 
     //console.log(req.body);
     var data = new Members(req.body);
