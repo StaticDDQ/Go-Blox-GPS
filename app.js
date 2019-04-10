@@ -15,6 +15,7 @@ app.get('/', function(req,res){
     res.send("Welcome to our GPS");
 });
 
+// get member
 app.get('/getFirstname/:firstname', function(req,res){
     for(let i = 0; i< database.members.length;i++){
         if(req.params.firstname === database.members[i].firstName){
@@ -63,6 +64,37 @@ app.get('/getEvent/:name',function(req,res){
         }
     }
 
+});
+
+// add places
+app.post('/addplaces',function(req,res){
+    var newPlaces = {
+        placeName: req.body.placeName,
+        placeAddress: req.body.placeAddress,
+        placeDescription: req.body.placeDescription,
+        placePhone: req.body.placePhone,
+        placeTags: req.body.placeTags
+
+    }
+    // save the places
+    newPlaces.save(function(err,places){
+        res.send(places)
+        .catch(console.log(err));
+    })
+});
+
+// get places
+app.get('/getPlace/:placeName',function(req,res){
+    // find the place
+    var found = false;
+    for(let i = 0; i < database.places.length; i++){
+        //console.log(database.places[i].placeAddress);
+        if(req.params.placeName === database.places[i].placeName){
+            res.send(database.places[i]);
+            found = true;
+            break;
+        }
+    }
 });
 
 // give rating

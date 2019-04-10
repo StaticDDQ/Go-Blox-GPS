@@ -51,7 +51,7 @@ exports.members = [
 
 exports.events = [
     {
-      name: "Hunter Patton",
+      name: "abc",
       companyName: "FARMAGE",
       email: "hunterpatton@farmage.com",
       phone: "+1 (842) 586-2522",
@@ -169,3 +169,67 @@ exports.events = [
       comment: "Incididunt ex do enim est tempor excepteur cillum Lorem do. Eu do enim exercitation proident elit amet exercitation in ex irure proident. Elit pariatur consectetur pariatur velit id anim sunt amet pariatur magna deserunt."
     }
   ];
+
+  exports.places = [
+    
+      {
+        placeName: "Fibrodyne",
+        placeAddress: "Polar Street",
+        placeDescription: "Aliqua ea sit dolore commodo. In anim excepteur enim in esse. Do id est sunt proident consequat commodo laboris nulla consectetur elit excepteur ad excepteur.",
+        placePhone: "(934) 415-2868",
+        placeTags: [
+          "esse",
+          "minim",
+          "magna",
+          "qui",
+          "voluptate",
+          "deserunt",
+          "officia"
+        ]
+      },
+      {
+        placeName: "Micronaut",
+        placeAddress: "Milton Street",
+        placeDescription: "Voluptate tempor cupidatat magna consequat. Ea in consectetur deserunt magna amet ut. Culpa exercitation velit in fugiat veniam.",
+        phone: "(999) 448-3319",
+        placeTags: [
+          "esse",
+          "minim",
+          "magna",
+          "qui",
+          "voluptate",
+          "deserunt",
+          "officia"
+        ]
+      },
+      {
+        placeName: "Oatfarm",
+        placeAddress: "Heath Place",
+        placeDescription: "Sint dolor non veniam enim nulla enim id culpa nostrud. Ad nisi id aute velit deserunt eiusmod sunt tempor aliquip. Mollit anim nulla ex mollit.",
+        placePhone: "(829) 485-2733",
+        placeTags: [
+          "esse",
+          "minim",
+          "magna",
+          "qui",
+          "voluptate",
+          "deserunt",
+          "officia"
+        ]
+      },
+      {
+        placeName: "Zorromop",
+        placeAddress: "Furman Avenue",
+        placeDescription: "Nostrud Lorem nostrud do fugiat non duis adipisicing mollit sunt veniam. Minim laborum ex dolore non nulla nisi et non voluptate. Lorem culpa qui Lorem minim in voluptate amet quis cupidatat enim.",
+        placePhone: "(804) 546-3426",
+        placeTags: [
+          "esse",
+          "minim",
+          "magna",
+          "qui",
+          "voluptate",
+          "deserunt",
+          "officia"
+        ]
+      }
+    ];
