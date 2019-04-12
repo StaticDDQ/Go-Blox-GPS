@@ -31,7 +31,7 @@ var eventsSchema = new mongoose.Schema({
    "description": String,
    "contact": String,
    "pictures": String,
-   "tags": String 
+   "tags": [String] 
 });
 
 // places schema
