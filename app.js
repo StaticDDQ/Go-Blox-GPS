@@ -29,11 +29,7 @@ app.post('/register',function(req,res){
 
 // update member
 app.put('/updateMember/:userName',function(req,res){
-    var newMember = mongooseController.Members.findOneAndUpdate(
-        {userName: req.params.userName}, {$set: req.body}, function(err,resp){ //callback functions
-            res.send(resp)
-        });
-
+    apiController.newMember(req,res);
 })
 
 // delete member
@@ -50,37 +46,18 @@ app.delete('/deleteMember/:username', function(req,res){
 
 // add event
 app.post('/addEvent', function (req, res) {
-    var newEvent = new mongooseController.Events(req.body);
-    // save the event
-    newEvent.save(function(err,event){
-        if(err) throw err;
-        res.send(event);
-    })
+    apiController.newEvent(req,res);
 });
 
 // get event
 app.get('/getEvent/:name',function(req,res){
-    // find the event
-    for(let i = 0; i < database.events.length; i++){
-        if(req.params.name === database.events[i].name){
-            res.send(database.events[i]);
-            break;
-        }
-    }
-
+    apiController.getEvent(req,res);
 });
 
 // get event by tags
 app.get('/getEventTags/tags/:tags',function(req,res){
     // find the event
-    var tagsArray = [];
-    for(let i = 0; i < database.events.length; i++){
-        if(database.events[i].tags.includes(req.params.tags)){
-            tagsArray.push(database.events[i]);
-            
-        }
-    }
-    res.send(tagsArray);
+    apiController.getEventTags(req,res);
 });
 
 // update event
