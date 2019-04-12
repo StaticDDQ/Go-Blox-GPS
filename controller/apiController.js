@@ -1,4 +1,5 @@
 const mongooseController = require('./mongooseController.js');
+const database = require('./../db');
 
 
 /***************************  MEMBERS  ***************************/
@@ -16,7 +17,7 @@ var getMember = (req,res) => {
 // update member
 var newMember = (req,res) => {
     mongooseController.Members.findOneAndUpdate(
-     {userName: req.params.userName}, {$set: req.body}, function(err,resp){
+        {userName: req.params.userName}, {$set: req.body}, function(err,resp){
          res.send(resp);
     })
 };
@@ -28,9 +29,10 @@ module.exports.newMember = newMember;
 
 // add event
 var newEvent = (req,res) => {
-    new mongooseController.Events(req.body);
+    
 // save the event
-    newEvent.save(function(err,event){
+    var addNewEvent = new mongooseController.Events(req.body);
+    addNewEvent.save(function(err,event){
         if(err) throw err;
         res.send(event);
     })
@@ -55,8 +57,17 @@ var getEventTags = (req,res) => {
         }
     }
     res.send(tagsArray);
-}
+};
 
-module,exports.newEvent = newEvent;
-module,exports.getEvent = getEvent;
-module,exports.getEventTags = getEventTags;
+// update events
+var updateEvent = (req,res) => {
+    mongooseController.Events.findOneAndUpdate(
+    {name: req.params.name}, {$set: req.body}, function(err,resp){ //callback functions
+        res.send(resp);
+    });
+};
+
+module.exports.newEvent = newEvent;
+module.exports.getEvent = getEvent;
+module.exports.getEventTags = getEventTags;
+module.exports.updateEvent = updateEvent;

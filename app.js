@@ -62,12 +62,8 @@ app.get('/getEventTags/tags/:tags',function(req,res){
 
 // update event
 app.put('/updateEvent/:name',function(req,res){
-    var newEvent = mongooseController.Events.findOneAndUpdate(
-        {name: req.params.name}, {$set: req.body}, function(err,resp){ //callback functions
-            res.send(resp)
-        });
-
-})
+    apiController.updateEvent(req,res);
+});
 
 // delete event
 app.delete('/deleteEvent/:name',function(req,res){
