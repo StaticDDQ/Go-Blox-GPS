@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-//const schema = require('./schemaController');
 const MongoClient = require('mongodb').MongoClient;
 
 // member schema
