@@ -140,34 +140,39 @@ exports.events = [
 
   exports.ratings = [
     {
-      index: "0",
-      star: 4,
+      eventID: 0,
+      stars: 4,
       datePublished: "Mon Apr 08 2019 14:55:18 GMT+1000 (Australian Eastern Standard Time)",
-      comment: "Enim duis dolore quis Lorem. Consequat et est nostrud magna minim magna. Proident aliqua cupidatat et cillum consequat ut eiusmod Lorem velit irure reprehenderit sit ex."
+      desc: "Enim duis dolore quis Lorem. Consequat et est nostrud magna minim magna. Proident aliqua cupidatat et cillum consequat ut eiusmod Lorem velit irure reprehenderit sit ex.",
+      userName: "A"
     },
     {
-      index: "1",
-      star: 1,
+      eventID: 1,
+      stars: 1,
       datePublished: "Mon Apr 08 2019 14:55:18 GMT+1000 (Australian Eastern Standard Time)",
-      comment: "Officia voluptate eu nostrud deserunt excepteur sint labore anim eu ex mollit cillum cillum. Veniam nisi et et culpa. Magna amet ut cupidatat do."
+      desc: "Officia voluptate eu nostrud deserunt excepteur sint labore anim eu ex mollit cillum cillum. Veniam nisi et et culpa. Magna amet ut cupidatat do.",
+      userName: "B"
     },
     {
-      index: "2",
-      star: 3,
+      eventID: 2,
+      stars: 3,
       datePublished: "Mon Apr 08 2019 14:55:18 GMT+1000 (Australian Eastern Standard Time)",
-      comment: "Consectetur magna minim officia id enim duis aliquip. Ipsum proident adipisicing adipisicing pariatur Lorem. Velit eu nostrud occaecat sit aliquip sint excepteur culpa occaecat."
+      desc: "Consectetur magna minim officia id enim duis aliquip. Ipsum proident adipisicing adipisicing pariatur Lorem. Velit eu nostrud occaecat sit aliquip sint excepteur culpa occaecat.",
+      userName: "C"
     },
     {
-      index: "3",
-      star: 1,
+      eventID: 3,
+      stars: 1,
       datePublished: "Mon Apr 08 2019 14:55:18 GMT+1000 (Australian Eastern Standard Time)",
-      comment: "Elit excepteur quis eiusmod reprehenderit deserunt ad non. Culpa deserunt eiusmod in magna duis ea. Voluptate tempor ad dolore elit fugiat."
+      desc: "Elit excepteur quis eiusmod reprehenderit deserunt ad non. Culpa deserunt eiusmod in magna duis ea. Voluptate tempor ad dolore elit fugiat.",
+      userName: "D"
     },
     {
-      index: "4",
-      star: 2,
+      eventID: 4,
+      stars: 2,
       datePublished: "Mon Apr 08 2019 14:55:18 GMT+1000 (Australian Eastern Standard Time)",
-      comment: "Incididunt ex do enim est tempor excepteur cillum Lorem do. Eu do enim exercitation proident elit amet exercitation in ex irure proident. Elit pariatur consectetur pariatur velit id anim sunt amet pariatur magna deserunt."
+      userName: "E",
+      desc: "Incididunt ex do enim est tempor excepteur cillum Lorem do. Eu do enim exercitation proident elit amet exercitation in ex irure proident. Elit pariatur consectetur pariatur velit id anim sunt amet pariatur magna deserunt."
     }
   ];
 

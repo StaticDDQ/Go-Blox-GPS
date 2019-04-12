@@ -71,3 +71,65 @@ module.exports.newEvent = newEvent;
 module.exports.getEvent = getEvent;
 module.exports.getEventTags = getEventTags;
 module.exports.updateEvent = updateEvent;
+
+/***************************  PLACES  ***************************/
+
+// add places
+var newPlace = (req,res) => {
+    
+    // save the places
+        var addNewPlace = new mongooseController.Places(req.body);
+        addNewPlace.save(function(err,places){
+            if(err) throw err;
+            res.send(places);
+        })
+    }
+    
+    // get places
+    var getPlace = (req,res) => {
+        for(let i = 0; i < database.places.length; i++){
+            if(req.params.placeName === database.places[i].placeName){
+                res.send(database.places[i]);
+                break;
+            }
+        }
+    }
+    
+    // update places
+    var updatePlace = (req,res) => {
+        mongooseController.Places.findOneAndUpdate(
+        {placeName: req.params.placeName}, {$set: req.body}, function(err,resp){ //callback functions
+            res.send(resp);
+        });
+    };
+
+    module.exports.newPlace = newPlace;
+    module.exports.getPlace = getPlace;
+    module.exports.updatePlace = updatePlace;
+
+
+    /***************************  RATINGS  ***************************/
+
+// add rating
+var newRating = (req,res) => {
+    
+    // save the rating
+        var addNewRating = new mongooseController.Ratings(req.body);
+        addNewRating.save(function(err,ratings){
+            if(err) throw err;
+            res.send(ratings);
+        })
+    }
+    
+    // get rating
+    var getRating = (req,res) => {
+        for(let i = 0; i < database.ratings.length; i++){
+            if((Number)(req.params.eventID) === database.ratings[i].eventID){
+                res.send(database.ratings[i]);
+                break;
+            }
+        }
+    }
+    
+module.exports.getRating = getRating;
+module.exports.newRating = newRating;

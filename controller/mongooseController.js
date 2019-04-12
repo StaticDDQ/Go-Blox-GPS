@@ -20,7 +20,7 @@ var reviewSchema = new mongoose.Schema({
     "stars": Number,
     "desc": String,
     "userName": String,
-    "DateTime": Date
+    "datePublished": Date
 });
 
 // events schema
@@ -36,7 +36,7 @@ var eventsSchema = new mongoose.Schema({
 
 // places schema
 var placeSchema = new mongoose.Schema({
-    "placeName": Number,
+    "placeName": String,
     "placeAddress": String,
     "placeDescription": String,
     "placePhone": String,
@@ -61,6 +61,7 @@ mongoose.connect(stringMongoose, options)
 var Members = mongoose.model("members", memberSchema);
 var Events = mongoose.model("events", eventsSchema);
 var Places = mongoose.model("places", placeSchema);
+var Ratings = mongoose.model("ratings",reviewSchema);
 
 var addUser = function(req, res) {
 
@@ -79,6 +80,6 @@ var addUser = function(req, res) {
     })
 }
 
-module.exports = {Members,Events,Places};
+module.exports = {Members,Events,Places,Ratings};
 module.exports.addUser = addUser;
 
