@@ -70,6 +70,19 @@ app.get('/getEvent/:name',function(req,res){
 
 });
 
+// get event by tags
+app.get('/getEventTags/tags/:tags',function(req,res){
+    // find the event
+    var tagsArray = [];
+    for(let i = 0; i < database.events.length; i++){
+        if(database.events[i].tags.includes(req.params.tags)){
+            tagsArray.push(database.events[i]);
+            
+        }
+    }
+    res.send(tagsArray);
+});
+
 // update event
 app.put('/updateEvent/:name',function(req,res){
     var newEvent = mongooseController.Events.findOneAndUpdate(
