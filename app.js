@@ -3,6 +3,7 @@ const app = express();
 const database = require('./db');
 const mongooseController = require('./controller/mongooseController.js');
 const bodyParser = require('body-parser');
+const apiController = require("./controller/apiController");
 
 var port = process.env.PORT || 3000;
 
@@ -16,15 +17,10 @@ app.get('/', function(req,res){
 
 /***************************  MEMBERS  ***************************/
 
-// get member
-app.get('/getFirstname/:firstname', function(req,res){
-    for(let i = 0; i< database.members.length;i++){
-        if(req.params.firstname === database.members[i].firstName){
-            res.send(database.members[i]);
-            break;
-        }
-    }
-})
+// get member (get from mockup database)
+app.get('/getFirstname/:firstname', function (req,res){
+    apiController.getMember(req,res);
+});
 
 // register as member
 app.post('/register',function(req,res){
@@ -53,7 +49,7 @@ app.delete('/deleteMember/:username', function(req,res){
 /***************************  EVENTS  ***************************/
 
 // add event
-app.post('/addevent',function(req,res){
+app.post('/addEvent',function(req,res){
     var newEvent = {
         name: req.body.name,
         date: req.body.date,

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const MongoClient = require('mongodb').MongoClient;
 
 // member schema
 var memberSchema = new mongoose.Schema({
@@ -63,16 +62,6 @@ var Members = mongoose.model("members", memberSchema);
 var Events = mongoose.model("events", eventsSchema);
 var Places = mongoose.model("places", placeSchema);
 
-MongoClient.connect(stringMongoose, function (err, db) {
-    if (err) throw err;
-
-    var dbo = db.db("members_goblox");
-    dbo.collection("members").findOne({}, function (err, result) {
-        if (err) throw err;
-        db.close();
-    });
-});
-
 var addUser = function(req, res) {
 
     //console.log(req.body);
@@ -91,3 +80,6 @@ var addUser = function(req, res) {
 }
 
 module.exports.Members = Members;
+module.exports.addUser = addUser;
+module.exports = {memberSchema,reviewSchema,eventsSchema,placeSchema};
+
