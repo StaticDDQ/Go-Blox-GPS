@@ -50,7 +50,7 @@ app.delete('/deleteMember/:username', function(req,res){
 
 // add event
 app.post('/addEvent',function(req,res){
-    var newEvent = {
+    var newEvent = new mongooseController.Events({
         name: req.body.name,
         date: req.body.date,
         address: req.body.address,
@@ -59,11 +59,11 @@ app.post('/addEvent',function(req,res){
         pictures: req.body.pictures,
         tags: req.body.tag
 
-    }
+    })
     // save the event
     newEvent.save(function(err,event){
-        res.send(event)
-        .catch(console.log(err));
+        if(err) throw err;
+        res.send(event);
     })
 });
 

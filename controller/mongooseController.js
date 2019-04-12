@@ -79,7 +79,6 @@ var addUser = function(req, res) {
     })
 }
 
-module.exports.Members = Members;
+module.exports = {Members,Events,Places};
 module.exports.addUser = addUser;
-module.exports = {memberSchema,reviewSchema,eventsSchema,placeSchema};
 
