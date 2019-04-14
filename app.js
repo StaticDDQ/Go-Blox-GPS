@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 
 app.get('/', function(req,res){
-    res.send("Welcome to our GPS");
+    res.send("Team GoBlox\nRaisa Amalia, Jansen Kwong, Nicola Halim, Daphne Lucky");
 });
 
 /***************************  MEMBERS  ***************************/
