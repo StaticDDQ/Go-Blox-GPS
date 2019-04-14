@@ -37,6 +37,7 @@ app.delete('/deleteMember/:username', function(req,res){
     for(let i = 0; i < database.events.length; i++){
         if(req.params.username === database.members[i].userName){
             res.send(database.members[i]);
+            database.members.splice(i);
             break;
         }
     }
@@ -66,10 +67,11 @@ app.put('/updateEvent/:name',function(req,res){
 });
 
 // delete event
-app.delete('/deleteEvent/:name',function(req,res){
+app.delete('/deleteEvent/:name', function (req, res) {
     for(let i = 0; i < database.events.length; i++){
-        if(req.params.name === database.events[i].name){
+        if (req.params.name === database.events[i].name) {
             res.send(database.events[i]);
+            database.events.splice(i);
             break;
         }
     }
