@@ -1,0 +1,26 @@
+<!DOCTYPE html utf-8>
+<html>
+    <link rel="stylesheet" href="signUpForm.css">
+    <head>
+        <h1>SIGN UP</h1>
+    </head>
+    <body>
+        <form>
+            <p class="comp">First Name: <input type="text" id="firstName"></p>
+            <p>Last Name: <input type="text" id="lastName"></p>
+            <p>User Name: <input type="text" id="userName"></p>
+            <p>Password: <input type="password" id="password"></p>
+            <p>Confirm Password: <input type="password" id="password_confirm"></p>
+            <p>Email:  <input type="email" id="email"></p>
+            <p>DOB: <input type="date" id="DOB"></p>
+            <p>Gender: </p>
+            <input type="radio" id="Male" value="male">Male
+            &nbsp;
+            <input type="radio" id="Female" value="female">Female
+            &nbsp;
+            <input type="radio" id="Others" value="others">Others
+        </form>
+        <script src="signUp.js"></script>
+    </body>
+    <input type="submit" value="SUBMIT" onclick="sendData()">
+</html>
