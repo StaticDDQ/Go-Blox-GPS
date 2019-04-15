@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 
 app.get('/', function (req, res) {
-    res.sendFile('/home.html');
+    res.sendFile('home.html');
 });
 
 /***************************  MEMBERS  ***************************/
