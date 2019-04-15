@@ -11,8 +11,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true})) 
 
 
-app.get('/', function(req,res){
-    res.sendFile('public/home.html');
+app.get('/', function (req, res) {
+    res.sendFile(__dirname+'/home.html');
 });
 
 /***************************  MEMBERS  ***************************/
