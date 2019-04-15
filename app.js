@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 const database = require('./db');
 const mongooseController = require('./controller/mongooseController.js');
 const bodyParser = require('body-parser');
@@ -11,8 +12,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true})) 
 
 
-app.get('/', function(req,res){
-    res.send("Welcome to our GPS");
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname+ '/public/home.html'));
 });
 
 /***************************  MEMBERS  ***************************/
@@ -37,6 +38,7 @@ app.delete('/deleteMember/:username', function(req,res){
     for(let i = 0; i < database.events.length; i++){
         if(req.params.username === database.members[i].userName){
             res.send(database.members[i]);
+            database.members.splice(i);
             break;
         }
     }
@@ -62,18 +64,15 @@ app.get('/getEventTags/tags/:tags',function(req,res){
 
 // update event
 app.put('/updateEvent/:name',function(req,res){
-    var newEvent = mongooseController.Events.findOneAndUpdate(
-        {name: req.params.name}, {$set: req.body}, function(err,resp){ //callback functions
-            res.send(resp)
-        });
-
-})
+    apiController.updateEvent(req,res);
+});
 
 // delete event
-app.delete('/deleteEvent/:name',function(req,res){
+app.delete('/deleteEvent/:name', function (req, res) {
     for(let i = 0; i < database.events.length; i++){
-        if(req.params.name === database.events[i].name){
+        if (req.params.name === database.events[i].name) {
             res.send(database.events[i]);
+            database.events.splice(i);
             break;
         }
     }
@@ -82,44 +81,20 @@ app.delete('/deleteEvent/:name',function(req,res){
 /***************************  PLACES  ***************************/
 
 // add places
-app.post('/addplaces',function(req,res){
-    var newPlaces = {
-        placeName: req.body.placeName,
-        placeAddress: req.body.placeAddress,
-        placeDescription: req.body.placeDescription,
-        placePhone: req.body.placePhone,
-        placeTags: req.body.placeTags
-
-    }
-    // save the places
-    newPlaces.save(function(err,places){
-        res.send(places)
-        .catch(console.log(err));
-    })
+app.post('/addPlace', function (req, res) {
+    apiController.newPlace(req,res);
 });
 
-// get places
+
+// get place
 app.get('/getPlace/:placeName',function(req,res){
-    // find the place
-    var found = false;
-    for(let i = 0; i < database.places.length; i++){
-        //console.log(database.places[i].placeAddress);
-        if(req.params.placeName === database.places[i].placeName){
-            res.send(database.places[i]);
-            found = true;
-            break;
-        }
-    }
+    apiController.getPlace(req,res);
 });
 
 // update places
 app.put('/updatePlace/:placeName',function(req,res){
-    var newPlace = mongooseController.Places.findOneAndUpdate(
-        {placeName: req.params.placeName}, {$set: req.body}, function(err,resp){ //callback functions
-            res.send(resp)
-        });
-
-})
+    apiController.updatePlace(req,res);
+});
 
 // delete places
 app.delete('/deletePlace/:placeName',function(req,res){
@@ -134,23 +109,13 @@ app.delete('/deletePlace/:placeName',function(req,res){
 /***************************  RATINGS  ***************************/
 
 // give rating
-app.post('/addratings',function(reg,res){
-    var newRatings = {
-        star : req.body.star,
-        comment : req.body.comment,
-        datePublished : req.body.datePublished
-    }
+app.post('/addRating', function (req, res) {
+    apiController.newRating(req,res);
 });
 
 // get rating
-app.get('/getRating/:index', function(req,res){
-    // get index of comment
-    for(let i=0 ; i < database.ratings.length; i++){
-        if(req.params.index === database.ratings[i].index){
-            res.send(database.ratings[i]);
-            break;
-        }
-    }
+app.get('/getRating/:eventID',function(req,res){
+    apiController.getRating(req,res);
 });
 
 app.listen(port,function(){
