@@ -11,9 +11,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true})) 
 
 
-app.get('/', function(req,res){
+/*app.get('/', function(req,res){
     res.send("Team GoBlox (Raisa Amalia, Jansen Kwong, Nicola Halim, Daphne Lucky)");
-});
+});*/
 
 /***************************  MEMBERS  ***************************/
 
