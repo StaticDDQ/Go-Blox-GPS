@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 const database = require('./db');
 const mongooseController = require('./controller/mongooseController.js');
 const bodyParser = require('body-parser');
@@ -12,7 +13,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 
 app.get('/', function (req, res) {
-    res.sendFile('home.html');
+    res.sendFile(path.join(__dirname+ '/home.html'));
 });
 
 /***************************  MEMBERS  ***************************/
