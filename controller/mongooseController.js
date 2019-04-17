@@ -89,7 +89,6 @@ var addUser = async function(req, res) {
 async function findDuplicate(username) {
     var found = null;
     found = await Members.findOne({ userName: username });
-    // console.log("Found it: "+found);
     return found;
 }
 
