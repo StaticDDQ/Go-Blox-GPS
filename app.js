@@ -13,7 +13,8 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 
 app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname+ '/public/home.html'));
+    res.sendFile(path.join(__dirname + '/public/signUpForm.html'));
+    app.use(express.static(path.join(__dirname, 'public')));
 });
 
 /***************************  MEMBERS  ***************************/
