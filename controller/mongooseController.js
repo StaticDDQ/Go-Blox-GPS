@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:3000/";
 
 // member schema
 var memberSchema = new mongoose.Schema({
@@ -65,19 +67,30 @@ var Ratings = mongoose.model("ratings",reviewSchema);
 
 var addUser = function(req, res) {
 
-    //console.log(req.body);
-    var data = new Members(req.body);
+    var dupliUser = findDuplicate(req.body.userName);
+    if (!dupliUser) {
+        var data = new Members(req.body);
 
-    data.save(function (err, newMember) {
-        if (!err) {
-            
-            //console.log(Members.find());
-            res.send(newMember);
-        } else {
-            console.log("error saving");
-            res.sendStatus(400);
-        }
-    })
+        data.save(function (err, newMember) {
+            if (!err) {
+                res.send(newMember);
+            } else {
+                console.log("error saving");
+                res.sendStatus(400);
+            }
+        });
+    } else {
+        console.log("Duplicated user");
+    }
+}
+
+function findDuplicate(username) {
+    var found = null;
+    found = Members.findOne({ "userName": username }, function (err, result) {
+        if (err) throw err;
+    });
+    console.log(found.userName);
+    return false;
 }
 
 module.exports = {Members,Events,Places,Ratings};
