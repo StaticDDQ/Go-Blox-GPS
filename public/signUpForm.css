@@ -12,9 +12,9 @@ h1 {
     font-style: italic;
 }
 
-div {
-    background-image: url("../assets/communit-group.png");
+body {
+    background-image: url("https://previews.123rf.com/images/okanda/okanda1706/okanda170600009/80245917-cute-kids-with-parents-and-friends-in-a-circle-looking-down-for-photo-young-diverse-parents-with-cut.jpg");
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100%;
 
 }
