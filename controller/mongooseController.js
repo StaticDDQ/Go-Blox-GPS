@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const MongoClient = require('mongodb').MongoClient;
+const Promise = require('bluebird');
+var url = "mongodb://localhost:3000/";
 
 // member schema
 var memberSchema = new mongoose.Schema({
@@ -63,21 +66,31 @@ var Events = mongoose.model("events", eventsSchema);
 var Places = mongoose.model("places", placeSchema);
 var Ratings = mongoose.model("ratings",reviewSchema);
 
-var addUser = function(req, res) {
+var addUser = async function(req, res) {
 
-    //console.log(req.body);
-    var data = new Members(req.body);
+    var dupliUser = await findDuplicate(req.body.userName);
 
-    data.save(function (err, newMember) {
-        if (!err) {
-            
-            //console.log(Members.find());
-            res.send(newMember);
-        } else {
-            console.log("error saving");
-            res.sendStatus(400);
-        }
-    })
+    if (!dupliUser) {
+        var data = new Members(req.body);
+
+        data.save(function (err, newMember) {
+            if (!err) {
+                res.send(newMember);
+            } else {
+                console.log("error saving");
+                res.sendStatus(400);
+            }
+        });
+    } else {
+        console.log("Duplicated user");
+    }
+}
+
+async function findDuplicate(username) {
+    var found = null;
+    found = await Members.findOne({ userName: username });
+    // console.log("Found it: "+found);
+    return found;
 }
 
 module.exports = {Members,Events,Places,Ratings};
