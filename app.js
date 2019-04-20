@@ -13,11 +13,16 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 
 app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname + '/public/signUpForm.html'));
+    res.sendFile(path.join(__dirname + '/public/index.html'));
     app.use(express.static(path.join(__dirname, 'public')));
 });
 
 /***************************  MEMBERS  ***************************/
+
+// login as member
+app.get('/login',function(req,res){
+    apiController.getLogin(req,res);
+})
 
 // get member (get from mockup database)
 app.get('/getFirstname/:firstname', function (req,res){

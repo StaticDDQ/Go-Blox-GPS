@@ -14,6 +14,16 @@ var getMember = (req,res) => {
     }
 }
 
+//getMember for login
+var getLogin = (req,res) => {
+    mongooseController.Members.findOne(
+        {username: req.params.userName,
+             password: req.params.password}, {$set: req.body}, function(err,resp){
+                 res.send(resp);
+             }
+    )
+}
+
 // update member
 var newMember = (req,res) => {
     mongooseController.Members.findOneAndUpdate(
@@ -24,6 +34,7 @@ var newMember = (req,res) => {
 
 module.exports.getMember = getMember;
 module.exports.newMember = newMember;
+module.exports.getLogin = getLogin;
 
 /***************************  EVENTS  ***************************/
 
