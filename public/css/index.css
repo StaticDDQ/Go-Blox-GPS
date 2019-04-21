@@ -1,0 +1,15 @@
+body {
+    background-image: url("https://media.istockphoto.com/photos/like-getting-together-with-my-friends-picture-id869988382");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+h1 {
+    font-size: 30px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+p {
+    font-size: 20px;
+}
