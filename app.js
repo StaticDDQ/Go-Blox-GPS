@@ -17,12 +17,17 @@ app.get('/', function (req, res) {
     app.use(express.static(path.join(__dirname, 'public')));
 });
 
+app.get('/signup', function (req, res) {
+    res.sendfile(path.join(__dirname + '/public/signUpForm.html'));
+    app.use(express.static(path.join(__dirname, 'public')));
+});
+
 /***************************  MEMBERS  ***************************/
 
 // login as member
-app.get('/login',function(req,res){
-    apiController.getLogin(req,res);
-})
+app.get('/login', function (req, res) {
+    apiController.getLogin(req, res);
+});
 
 // get member (get from mockup database)
 app.get('/getFirstname/:firstname', function (req,res){
