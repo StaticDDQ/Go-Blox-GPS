@@ -1,27 +1,27 @@
 <!DOCTYPE html utf-8>
 <html>
-    <link rel="stylesheet" href="css/createEvent.css">
-    <center>
+    <link rel="stylesheet" href="./css/createEvent.css" />
     <head>
-        <h1>Create an Event</h1>
+        <center><h1>Create Event</h1></center>
     </head>
-    </center>
     <body>
         <center>
         <form>
-            <p>First Name: <input type="text" id="firstName"></p>
-            <p>Last Name: <input type="text" id="lastName"></p>
-            <p>Company: <input type="text id="company"></p>
+            <p>Name of the event: <input type="text" id="eventName"></p>
+            <p>Date: <input type="date" id="Date"></p>
+            <p>Organiser: <input type="text" id="organiser"></p>
+            <p>Location: <input type="text" id="location"></p>
+            <p>Descriptions: <input type="text" id="description"></p>
+            <p id="topic">Contact:</p>
             <p>Email:  <input type="email" id="email"></p>
-            <p>Phone number: <input type="tel" id="hp"></p>
-            <p>tags </p> <p>Options???</p>
-            <p>Existing member?</p>
-            <input type="radio" id="Yes" value="yes">Yes
-            &nbsp;
-            <input type="radio" id="No" value="no">No
+            <p>Phone number: <input type="number" id="phone"></p>
+            <p id="topic">Gallery</p>
+            <input type="image" name="image">
         </form>
+        <div id="bottom">
+        <input type="radio" id="agreed" value="agreed"> I agree to terms and conditions <br/>
+        <br/><button>Submit!</button>
+    </div>
     </center>
-        <script src=""></script>
     </body>
-    <input type="image" value="PHOTO" onclick="">
 </html>

@@ -4,20 +4,58 @@ const urlRegister = 'http://localhost:3000/register';
 
 // submit user to mlab
 function sendData() {
-    var newUser = {
-        "firstName": document.getElementById("firstName").value,
-        "lastName": document.getElementById("lastName").value,
-        "userName": document.getElementById("userName").value,
-        "email": document.getElementById("email").value,
-        "DOB": document.getElementById("DOB").value,
-        "password": document.getElementById("password").value
-    };
-    Http.open("POST", urlRegister);
-    Http.setRequestHeader("Content-type", "application/json");
 
-    var strJson = JSON.stringify(newUser);
+    var fName = document.getElementById("firstName").value;
+    var lName = document.getElementById("lastName").value;
+    var uName = document.getElementById("userName").value;
+    var email = document.getElementById("email").value;
+    var dob = document.getElementById("DOB").value;
+    var password = document.getElementById("password").value;
+    var confirmedPassword = password.length > 0 && password === document.getElementById("password_confirm").value;
 
-    Http.send(strJson);
+    if (fName.length > 0) {
+        if (lName.length > 0) {
+            if (uName.length > 0) {
+                if (confirmedPassword) {
+                    var validEmail = validate(email);
+                    if (validEmail) {
+                        if (dob.length > 0) {
+                            var newUser = {
+                                "firstName": fName,
+                                "lastName": lName,
+                                "userName": uName,
+                                "email": email,
+                                "DOB": dob,
+                                "password": password
+                            };
+                            Http.open("POST", urlRegister);
+                            Http.setRequestHeader("Content-type", "application/json");
+
+                            var strJson = JSON.stringify(newUser);
+
+                            Http.send(strJson);
+                        } else {
+                            alert("Enter Date of birth");
+                        }
+                    } else {
+                        alert("Enter valid email");
+                    }
+                } else {
+                    alert("Enter/confirm password");
+                }
+            } else {
+                alert("Enter user name");
+            }
+        } else {
+            alert("Enter last name");
+        }
+    } else {
+        alert("Enter first name");
+    }
+}
+
+function validate(email) {
+    return true;
 }
 
 // check whether the new user is a duplicate or not
