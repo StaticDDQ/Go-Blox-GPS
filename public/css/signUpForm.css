@@ -2,7 +2,7 @@
 form {
     color: rgb(236,118,85);
     font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
-    background-color: rgba(245,189,171,0.8);
+    
     
 }
 
@@ -13,8 +13,26 @@ h1 {
 }
 
 div {
-    background-image: url("../assets/communit-group.png");
+    /*background-image: url("../assets/communit-group.png");*/
     background-repeat: no-repeat;
     background-size: cover;
 
+}
+
+.box {
+    display: block;
+    background-color: rgb(255,249,248);
+    border: solid 1px rgb(214,201,201);
+    /*background-color: #fff4f0*/
+    height: 500px;
+    width: 800px;
+    padding: 30px;
+    align-content: center;
+    margin: 100px auto;
+    overflow: scroll;
+
+}
+
+body {
+    background-image: linear-gradient(to bottom right, #e15848, #90a4bc);
 }
