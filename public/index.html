@@ -8,11 +8,17 @@
     <form>
         <div class ="container">
             <h1>Login</h1>
-            <p>Username: <input title="Please Enter Your username" id="userName" name="user" type="text" /></p><br/>
-            <p>Password: <input title= "password" id="passWord" name="password" type= "password" /></p><br/>
+            <div class="logins">
+                <input title="Please Enter Your username" id="userName" name="user" type="text" placeholder="Username"/>
+                <br/>
+                <input title= "password" id="passWord" name="password" type= "password" placeholder="Password"/>
+                <br/>
+            </div>
             <script type="text/javascript" src="signUp.js"></script>
+
+            <div></div>
             <button onclick="getData()" >LOGIN</button>
-            <a href="signUpForm.html"> Register Here!</a>
+            <a href="signUpForm.html">Register Here!</a>
             <p id="pId"></p>
             <script src="./js/loginPage.js"></script>
         </div>
