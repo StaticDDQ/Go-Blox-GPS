@@ -1,6 +1,5 @@
 /* VARIABES */
 
-
 body {
     background-image: url("https://media.istockphoto.com/photos/like-getting-together-with-my-friends-picture-id869988382");
     
@@ -32,12 +31,8 @@ button {
     height: 50px;
 }
 
-div {
-    padding: 10px 10px 10px 10px;
-}
-
 .logins {
-
+    padding: 10px 10px 10px 10px;
 }
 
 .container {
@@ -46,7 +41,6 @@ div {
     background-color: rgb(255,249,248);
     border: solid 1px rgb(214,201,201);
     box-shadow: 1px 1px 0px 0px #13232f;
-    /*background-color: #fff4f0*/
     height: 500px;
     width: 800px;
     padding: 30px;
