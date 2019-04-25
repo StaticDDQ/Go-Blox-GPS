@@ -3,22 +3,17 @@ const express = require('express');
 const router = express.Router();
 const database = require('../db');
 const mongooseController = require('../controller/mongooseController');
-const bcrypt = require('bcryptjs');
 const passport = require('passport');
 
 // Bring in User Model
 let Member = require('../models/member');
 
 // login as member
-router.get('/login', function (req, res) {
-    Member.findOne(
-        {
-            username: req.params.userName,
-            password: req.params.password
-        }, { $set: req.body }, function (err, resp) {
-            res.send(resp);
-        }
-    )
+router.post('/login', function (req, res) {
+    passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/members/getFirstname/Lang',
+    })(req, res);
 });
 
 // get member (get from mockup database)

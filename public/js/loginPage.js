@@ -1,5 +1,5 @@
 const Http = new XMLHttpRequest();
-const urlRegister = 'http://localhost:3000/login';
+const urlRegister = 'http://localhost:3000/members/login';
 
 // get user to mlab
 function getData() {
@@ -7,7 +7,7 @@ function getData() {
         "userName": document.getElementById("userName").value,
         "password": document.getElementById("passWord").value
     };
-    Http.open("GET", urlRegister);
+    Http.open("POST", urlRegister);
     Http.setRequestHeader("Content-type", "application/json");
 
     var strJson = JSON.stringify(newUser);
