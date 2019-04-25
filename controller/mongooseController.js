@@ -5,7 +5,14 @@ var addUser = async function(req, res) {
     var dupliUser = await findUser(req.body.userName);
 
     if (!dupliUser) {
-        var data = new Members(req.body);
+        var data = new Members({
+            "firstName": req.body.firstName,
+            "lastName": req.body.lastName,
+            "userName": req.body.userName,
+            "email": req.body.email,
+            "DOB": req.body.DOB,
+            "password": req.body.password
+        });
 
         data.save(function (err, newMember) {
             if (!err) {

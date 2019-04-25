@@ -9,12 +9,10 @@ const passport = require('passport');
 let Member = require('../models/member');
 
 // login as member
-router.post('/login', function (req, res) {
-    passport.authenticate('local', {
+router.post('/login', passport.authenticate('basic', {
         successRedirect: '/',
-        failureRedirect: '/members/getFirstname/Lang',
-    })(req, res);
-});
+        failureRedirect: '/members/getFirstname/Lang'
+}));
 
 // get member (get from mockup database)
 router.get('/getFirstname/:firstname', function (req, res) {
@@ -28,6 +26,17 @@ router.get('/getFirstname/:firstname', function (req, res) {
 
 // register as member
 router.post('/register', function (req, res) {
+
+    req.checkBody('firstName', 'First name is required').notEmpty();
+    req.checkBody('lastName', 'Last name is required').notEmpty();
+    req.checkBody('userName', 'Username is required').notEmpty();
+    req.checkBody('email', 'Email is required').notEmpty();
+    req.checkBody('email', 'Email is not valid').isEmail();
+    req.checkBody('DOB', 'Date of Birth is required').notEmpty();
+    req.checkBody('password', 'Password is required').notEmpty();
+    req.checkBody('firstName', 'First name is required').notEmpty();
+    req.checkBody('confirm', 'Password does not match').equals(req.body.password);
+
     mongooseController.addUser(req, res);
 })
 
