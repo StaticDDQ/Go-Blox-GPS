@@ -5,11 +5,14 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const config = require('./config/database');
 const bodyParser = require('body-parser');
+const expressValidator = require('express-validator');
 
 var port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true})) 
+
+app.use(expressValidator());
 
 var options = {
     useNewUrlParser: true
