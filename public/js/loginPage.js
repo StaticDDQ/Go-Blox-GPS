@@ -11,7 +11,7 @@ function getData() {
     Http.setRequestHeader("Content-type", "application/json");
 
     var strJson = JSON.stringify(newUser);
-    console.log(strJson);
+    Http.send(strJson);
 }
 
 function userCreated(isSuccess) {

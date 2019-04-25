@@ -55,7 +55,8 @@ function sendData() {
 }
 
 function validate(email) {
-    return true;
+    var format = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return format.test(String(email).toLowerCase());
 }
 
 // check whether the new user is a duplicate or not
