@@ -25,6 +25,11 @@ require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.get('*', function (req, res, next) {
+    res.locals.user = req.user || null;
+    next();
+});
+
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname + '/public/index.html'));
     app.use(express.static(path.join(__dirname, 'public')));

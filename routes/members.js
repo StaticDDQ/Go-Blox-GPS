@@ -9,12 +9,12 @@ const passport = require('passport');
 let Member = require('../models/member');
 
 // login as member
-router.post('/login', function (req, res) {
+router.post('/login', function (req, res, next) {
     
-    passport.authenticate('basic', {
+    passport.authenticate('local', {
         successRedirect: '/members/getFirstname/Clay',
         failureRedirect: '/members/getFirstname/Lang'
-    })(req, res);
+    })(req, res, next);
 });
 
 router.get('/logout', function (req, res) {
