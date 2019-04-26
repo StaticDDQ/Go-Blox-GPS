@@ -1,0 +1,38 @@
+doctype html
+html
+    head
+        link(rel="stylesheet" type="text/css" href="../public/css/profile.css")
+        title GPS
+    body
+        h1 Get People Socialising
+
+        .banner
+            -var name = firstName;
+            p Hello #{name}
+            p Welcome to the profile page
+
+        .basicProfile
+            img(id="profile_pic", src="profile_picture.png", alt="profile_picture", 
+            style="{width:100%;max-width:150px;float:left;margin-right:10px}")
+        
+        -var fullname = firstName + ' ' + lastName;
+        p Name: #{fullname}
+        p DOB: #{DOB}
+        p Join Date: 
+        p Interests: 
+        p Reviews:
+        p Friends:
+        p Past Events Attended:
+        p Past Events Created:
+        p Events interested & Going:
+        p Bookmarks:
+
+    .interests
+
+    .events
+
+    .friends
+
+    .reviews
+
+    .bookmarks
