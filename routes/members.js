@@ -4,6 +4,7 @@ const router = express.Router();
 const database = require('../db');
 const mongooseController = require('../controller/mongooseController');
 const passport = require('passport');
+const moment = require('moment');
 
 // Bring in User Model
 let Member = require('../models/member');
@@ -41,17 +42,18 @@ router.get('/getFirstname/:firstname', function (req, res) {
 
 // register as member
 router.post('/register', function (req, res) {
-
-    req.checkBody('firstName', 'First name is required').notEmpty();
-    req.checkBody('lastName', 'Last name is required').notEmpty();
-    req.checkBody('userName', 'Username is required').notEmpty();
+    console.log(req.body);
+    req.checkBody('firstname', 'First name is required').notEmpty();
+    req.checkBody('lastname', 'Last name is required').notEmpty();
+    req.checkBody('username', 'Username is required').notEmpty();
     req.checkBody('email', 'Email is required').notEmpty();
     req.checkBody('email', 'Email is not valid').isEmail();
     req.checkBody('DOB', 'Date of Birth is required').notEmpty();
     req.checkBody('password', 'Password is required').notEmpty();
-    req.checkBody('firstName', 'First name is required').notEmpty();
     req.checkBody('confirm', 'Password does not match').equals(req.body.password);
 
+    req.body["joined_date"] = moment().format('YYYY-MM-DD');
+    console.log(req.body);
     mongooseController.addUser(req, res);
 })
 
