@@ -9,10 +9,18 @@ const passport = require('passport');
 let Member = require('../models/member');
 
 // login as member
-router.post('/login', passport.authenticate('basic', {
-        successRedirect: '/',
+router.post('/login', function (req, res) {
+    
+    passport.authenticate('basic', {
+        successRedirect: '/members/getFirstname/Clay',
         failureRedirect: '/members/getFirstname/Lang'
-}));
+    })(req, res);
+});
+
+router.get('/logout', function (req, res) {
+    req.logout();
+    res.redirect('/');
+})
 
 // get member (get from mockup database)
 router.get('/getFirstname/:firstname', function (req, res) {
