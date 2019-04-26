@@ -8,6 +8,8 @@ const passport = require('passport');
 // Bring in User Model
 let Member = require('../models/member');
 
+var currentLogin = database.members[0];
+
 // login as member
 router.post('/login', function (req, res, next) {
     
@@ -15,7 +17,12 @@ router.post('/login', function (req, res, next) {
         successRedirect: '/members/getFirstname/Clay',
         failureRedirect: '/members/getFirstname/Lang'
     })(req, res, next);
+    currentLogin = req.body;
 });
+
+router.get('/profile', function(req,res){
+    res.render('../public/views/profile.pug',currentLogin);
+})
 
 router.get('/logout', function (req, res) {
     req.logout();

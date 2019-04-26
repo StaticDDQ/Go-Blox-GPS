@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true})) 
 
 app.use(expressValidator());
+app.set('view engine','pug');
 
 var options = {
     useNewUrlParser: true
