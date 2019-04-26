@@ -1,15 +1,59 @@
+/* VARIABES */
+
 body {
     background-image: url("https://media.istockphoto.com/photos/like-getting-together-with-my-friends-picture-id869988382");
+    
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: lightsalmon;
+    background-image: linear-gradient(to top right, #f5bdab, #90a4bc);
     background-repeat: no-repeat;
-    background-size: 100%;
-    font-family: 'Times New Roman', Times, serif;
+    background-size: cover;
 }
 
 h1 {
-    font-size: 30px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 40px;
+    letter-spacing: 2px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 p {
     font-size: 20px;
+}
+
+button {
+    width: 340px;
+    height: 50px;
+}
+
+input {
+    font-size: 20px;
+    width: 300px;
+    padding: 20px;
+    /* gedein size of input gimana caranya huhu */
+}
+
+.logins {
+    padding: 10px 10px 10px 10px;
+}
+
+.loginButton {
+    
+    height: 50px;
+    padding: 10px 10px 10px 10px; 
+    margin: 0 auto;
+    
+}
+
+.container {
+    display: block;
+    text-align: center;
+    background-color: rgb(255,249,248);
+    border: solid 1px rgb(214,201,201);
+    box-shadow: 1px 1px 0px 0px #13232f;
+    height: 500px;
+    width: 800px;
+    padding: 30px;
+    align-content: center;
+    margin: 100px auto;
+    overflow: scroll;
 }

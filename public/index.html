@@ -1,23 +1,37 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <link rel="stylesheet" href="./css/index.css" />
 <head>
+    <title>Login Page</title>
 </head>
 <body>
+    <form>
+        
+        <div class ="container">
+            <h1>LOGIN</h1>
+            <div class="logins">
+                <input title="Please Enter Your username" id="userName" name="user" type="text" placeholder="Username"/>
+                </br>
+                </div>
+                <div class="logins">
+                <input title= "password" id="passWord" name="password" type= "password" placeholder="Password"/>
+                </br>
+            </div>
 
-    <center><h1>go-blox</h1></center>
-    <center>
-    <p>GPS</p>
-    <form action="/members/login" method="post">
-        Username: <input title="Please Enter Your username" id="username" name="username" type="text" /><br />
-        Password: <input title="password" id="password" name="password" type="password" /><br />
-        <input type="submit" value="Log in" />
+            <div class="loginButton">
+                <script type="text/javascript" src="signUp.js"></script>
+                <button onclick="getData()" >LOGIN</button>
+            </div>
+        </br>
+
+            <a href="signUpForm.html">
+                Click here to register
+            </a>
+
+
+            <p id="pId"></p>
+            <script src="./js/loginPage.js"></script>
+        </div>
     </form>
-    <a href="signUpForm.html"> Register Here!</a>
-    </center>
-    <p id="pId">
-    </p>
 </body>
 </html>
