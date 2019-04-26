@@ -1,30 +1,32 @@
-// JavaScript source code
 const express = require('express');
 const router = express.Router();
 const database = require('../db');
 const mongooseController = require('../controller/mongooseController');
 const passport = require('passport');
+// used to get current date to record when user is created
 const moment = require('moment');
 
-// Bring in User Model
+// Get member model
 let Member = require('../models/member');
 
 var currentLogin = database.members[0];
 
 // login as member
 router.post('/login', function (req, res, next) {
-    
+    // successful log in will launch the user's profile
     passport.authenticate('local', {
         successRedirect: '/members/profile',
-        failureRedirect: '/members/getFirstname/Lang'
+        failureMessage: 'Failed login'
     })(req, res,next);
     currentLogin = req.body;
 });
 
+// load profile
 router.get('/profile', function (req, res) {
     res.render('../public/views/profile.pug', currentLogin);
 });
 
+// logout active user
 router.get('/logout', function (req, res) {
     req.logout();
     res.redirect('/');
@@ -42,7 +44,8 @@ router.get('/getFirstname/:firstname', function (req, res) {
 
 // register as member
 router.post('/register', function (req, res) {
-    console.log(req.body);
+
+    // check each element for validity
     req.checkBody('firstname', 'First name is required').notEmpty();
     req.checkBody('lastname', 'Last name is required').notEmpty();
     req.checkBody('username', 'Username is required').notEmpty();
@@ -52,8 +55,9 @@ router.post('/register', function (req, res) {
     req.checkBody('password', 'Password is required').notEmpty();
     req.checkBody('confirm', 'Password does not match').equals(req.body.password);
 
+    // add join date of user
     req.body["joined_date"] = moment().format('YYYY-MM-DD');
-    console.log(req.body);
+
     mongooseController.addUser(req, res);
 })
 

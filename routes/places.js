@@ -1,9 +1,8 @@
-// JavaScript source code
 const express = require('express');
 const router = express.Router();
 const database = require('../db');
 
-// Bring in User Model
+// Get place model
 let Place = require('../models/place');
 
 // add places
