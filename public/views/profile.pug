@@ -1,13 +1,16 @@
-octype html
+doctype html
 html
+  style
+    include ../css/profile.css
+    include ../css/home.css
+    
+
   head
-    link(rel='stylesheet', type='text/css', href='./css/profile.css')
     title GPS
-    meta(charset='utf-8')
-    meta(name='viewport', content='width=device-width, initial scale=1.0')
-    link(rel='stylesheet', href='home.css')
-    link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+    meta(charset='utf-8')/
+    meta(name='viewport', content='width=device-width, initial scale=1.0')/
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')/
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')/
   body
     .grid
       // Nav bar
@@ -37,18 +40,19 @@ html
         a(href='#') Profile
       // Banner
       .banner
-        p Hello (name), 
-        p
-        p Welcome to your profile page
+         -var name = firstName;
+            p Hello #{name}
+            p Welcome to the profile page
       // Basic profile
       .basicProfile
         h2 Basic Profile
         p
           img#profile_pic(src='profile_picture.png', alt='profile_picture', style='width:100%;max-width:150px;float:left;margin-right:10px')
         br
-        p  Name: 
-        p  DOB: 
-        p  Join Date: 
+        -var fullname = firstName + ' ' + lastName;
+        p Name: #{fullname}
+        p DOB: #{DOB}
+        p  Join Date: #{joined_date}
         p  Interests 
         p  Reviews 
         p  Friends 

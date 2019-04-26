@@ -14,20 +14,20 @@ var currentLogin = database.members[0];
 router.post('/login', function (req, res, next) {
     
     passport.authenticate('local', {
-        successRedirect: '/members/getFirstname/Clay',
+        successRedirect: '/members/profile',
         failureRedirect: '/members/getFirstname/Lang'
-    })(req, res, next);
+    })(req, res,next);
     currentLogin = req.body;
 });
 
-router.get('/profile', function(req,res){
-    res.render('../public/views/profile.pug',currentLogin);
-})
+router.get('/profile', function (req, res) {
+    res.render('../public/views/profile.pug', currentLogin);
+});
 
 router.get('/logout', function (req, res) {
     req.logout();
     res.redirect('/');
-})
+});
 
 // get member (get from mockup database)
 router.get('/getFirstname/:firstname', function (req, res) {
