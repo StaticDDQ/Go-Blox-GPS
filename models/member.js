@@ -11,6 +11,7 @@ const memberSchema = new mongoose.Schema({
     },
     "email": String,
     "DOB": Date,
+    "joined_date": Date,
     "password": String
 }, { versionKey: false });
 

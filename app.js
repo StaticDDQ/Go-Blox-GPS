@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true})) 
 
 app.use(expressValidator());
+app.set('view engine','pug');
 
 var options = {
     useNewUrlParser: true
@@ -24,6 +25,11 @@ mongoose.connect(config.database, options)
 require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.get('*', function (req, res, next) {
+    res.locals.user = req.user || null;
+    next();
+});
 
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname + '/public/index.html'));
