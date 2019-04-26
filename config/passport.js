@@ -7,15 +7,14 @@ module.exports = function (passport) {
     passport.use(new LocalStrategy(
         
         function (username, password, done) {
-            console.log(username);
-            console.log(password);
+
             let query = { userName: username };
             Member.findOne(query, function (err, user) {
             if (err) throw err;
     
             if (!user) {
                 return done(null, false, { message: 'No user found' });
-                }
+            }
                 
             if (user.password === password)
                 return done(null, user);
