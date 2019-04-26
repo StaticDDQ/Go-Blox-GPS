@@ -6,7 +6,7 @@ form {
 }
 
 h1 {
-    color: rgb(190,202,208);
+    color: black;
     font-family: 'Helvetica';
     font-style: italic;
 }
@@ -24,9 +24,10 @@ div {
     border: solid 1px rgb(214,201,201);
     /*background-color: #fff4f0*/
     height: 500px;
-    width: 800px;
+    width: 600px;
     padding: 30px;
     align-content: center;
+    text-align: center;
     margin: 100px auto;
     overflow: scroll;
 

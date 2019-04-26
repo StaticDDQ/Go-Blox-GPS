@@ -1,21 +1,24 @@
-const BasicStrategy = require('passport-http').BasicStrategy;
+const LocalStrategy = require('passport-local').Strategy;
 const Member = require('../models/member');
+const bcrypt = require('bcryptjs');
 
 module.exports = function (passport) {
-    passport.use(new BasicStrategy(function (username, password, done) {
+
+    passport.use(new LocalStrategy(
         
-        let query = { userName: username };
-        Member.findOne(query, function (err, user) {
+        function (username, password, done) {
+            
+            let query = { userName: username };
+            Member.findOne(query, function (err, user) {
             if (err) throw err;
             
             if (!user) {
                 return done(null, false, { message: 'No user found' });
-            }
-            console.log(user);
-            if (!user.validPassword(password)) {
-                return done(null, false, { message: 'wrong password' })
-            }
-            return done(null, user);
+                }
+                if (user.password === password)
+                    return done(null, user);
+                else
+                    return done(null, false);
         });
     }));
 

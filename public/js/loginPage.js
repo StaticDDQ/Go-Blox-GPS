@@ -4,7 +4,7 @@ const urlRegister = 'http://localhost:3000/members/login';
 // get user to mlab
 function getData() {
     var newUser = {
-        "userName": document.getElementById("userName").value,
+        "user": document.getElementById("userName").value,
         "password": document.getElementById("passWord").value
     };
     Http.open("POST", urlRegister);
