@@ -1,6 +1,6 @@
 // JavaScript source code
 const Http = new XMLHttpRequest();
-const urlRegister = 'http://localhost:3000/members/register';
+const urlRegister = 'http://goblox.herokuapp.com/members/register';
 
 // submit user to mlab
 function sendData() {
