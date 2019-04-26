@@ -1,7 +1,8 @@
 doctype html
 html
+    style
+        include ../css/profile.css
     head
-        link(rel="stylesheet" type="text/css" href="../public/css/profile.css")
         title GPS
     body
         h1 Get People Socialising
@@ -13,7 +14,7 @@ html
 
         .basicProfile
             img(id="profile_pic", src="profile_picture.png", alt="profile_picture", 
-            style="{width:100%;max-width:150px;float:left;margin-right:10px}")
+            style={width:"100%",maxWidth:"150px",float:"left",marginRight:"10px"})
         
         -var fullname = firstName + ' ' + lastName;
         p Name: #{fullname}
