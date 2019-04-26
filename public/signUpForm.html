@@ -1,14 +1,14 @@
 <!DOCTYPE html utf-8>
 <html>
     <link rel="stylesheet" href="./css/signUpForm.css">
-    <center>
+
     <head>
-        <h1>SIGN UP</h1>
+        <title>SIGN UP</title>
     </head>
-    </center>
-    <center>
+
     <body>
-        
+        <div class="box">
+        <h1>SIGN UP</h1>
         <form>
             <p class="comp">First Name: <input type="text" id="firstName"></p>
             <p>Last Name: <input type="text" id="lastName"></p>
@@ -24,9 +24,12 @@
             &nbsp;
             <input type="radio" id="Others" value="others">Others
         </form>
-        <script src="./js/signUp.js"></script>
+            <script src="./js/signUp.js"></script>
+            <input type="submit" value="SUBMIT" onclick="sendData()" id="sendBtn"><br />
+        <br>
+        <a href="index.html"> Log In Here!</a>
+    </div>
     </body>
-    <input type="submit" value="SUBMIT" onclick="sendData()" id="sendBtn"><br />
-    <a href="index.html"> Log In Here!</a>
-</center>
+    
+
 </html>
