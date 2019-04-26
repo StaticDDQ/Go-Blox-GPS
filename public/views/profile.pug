@@ -1,0 +1,89 @@
+doctype html
+html
+  style
+    include ../css/profile.css
+    include ../css/home.css
+    
+
+  head
+    title GPS
+    meta(charset='utf-8')/
+    meta(name='viewport', content='width=device-width, initial scale=1.0')/
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')/
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')/
+  body
+    .grid
+      // Nav bar
+      .navBar
+        ul
+          li
+            a(href='#') GPS ||
+          li
+            a(href='#') Home
+          li
+            a(href='#') Events
+          li
+            a(href='#') Places
+          li
+            a(href='#') About
+          li
+            a(href='#') FAQ
+          li
+            a(href='#') Contact
+      // Profile
+      .profile
+        a(href='#') Profile
+      .search
+        input.searchTerm(type='text', placeholder='Search')
+        button.searchButton(type='submit')
+          i.fa.fa-search
+        a(href='#') Profile
+      // Banner
+      .banner
+         -var name = firstName;
+            p Hello #{name}
+            p Welcome to the profile page
+      // Basic profile
+      .basicProfile
+        h2 Basic Profile
+        p
+          img#profile_pic(src='profile_picture.png', alt='profile_picture', style='width:100%;max-width:150px;float:left;margin-right:10px')
+        br
+        -var fullname = firstName + ' ' + lastName;
+        p Name: #{fullname}
+        p DOB: #{DOB}
+        p  Join Date: #{joined_date}
+        p  Interests 
+        p  Reviews 
+        p  Friends 
+        p  Past Events Attended 
+        p  Past Events Created 
+        p  Events interested & going 
+        p  Bookmarks 
+      // Interests
+      .interest
+        h2 Interest
+        |     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore totam neque libero, consequuntur tenetur distinctio rerum nihil hic, ab doloribus natus similique. Repellendus soluta quisquam blanditiis, temporibus rerum maxime velit ipsa fugiat assumenda. Totam enim molestiae praesentium consectetur porro laudantium officiis laborum deleniti perferendis, eveniet, aspernatur voluptates minus ad cum! Consequatur ipsam ut quos consectetur, accusamus provident vel pariatur, dolorum cupiditate obcaecati corporis id nisi quam rem aliquid eos nobis sequi officiis illum cumque optio maxime a illo? Rerum, a.
+      // Events
+      .events
+        h2 Events
+        |     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt obcaecati quos accusamus, possimus ea incidunt ullam facere voluptate mollitia adipisci.
+      // Friends
+      .friends
+        h2 Friends
+        li
+          ul Lorem, ipsum.
+          ul Lorem, ipsum.
+          ul Lorem, ipsum.
+      // Ratings and Reviews
+      .reviews
+        h2 Reviews
+        ul Lorem, ipsum.
+        ul Lorem, ipsum.
+        ul Lorem, ipsum.
+      // Bookmarks
+      .bookmarks
+        h2 Bookmarks
+        ul Lorem, ipsum.
+        ul Lorem, ipsum.
+        ul Lorem, ipsum.

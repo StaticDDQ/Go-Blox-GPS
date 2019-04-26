@@ -51,7 +51,7 @@ exports.members = [
 
 exports.events = [
     {
-      name: "Hunter Patton",
+      name: "abc",
       companyName: "FARMAGE",
       email: "hunterpatton@farmage.com",
       phone: "+1 (842) 586-2522",
@@ -98,7 +98,8 @@ exports.events = [
         "nulla",
         "voluptate",
         "elit",
-        "magna"
+        "magna",
+        "ad"
       ]
     },
     {
@@ -139,97 +140,101 @@ exports.events = [
 
   exports.ratings = [
     {
-      index: "0",
-      star: 4,
+      eventID: 0,
+      stars: 4,
       datePublished: "Mon Apr 08 2019 14:55:18 GMT+1000 (Australian Eastern Standard Time)",
-      comment: "Enim duis dolore quis Lorem. Consequat et est nostrud magna minim magna. Proident aliqua cupidatat et cillum consequat ut eiusmod Lorem velit irure reprehenderit sit ex."
+      desc: "Enim duis dolore quis Lorem. Consequat et est nostrud magna minim magna. Proident aliqua cupidatat et cillum consequat ut eiusmod Lorem velit irure reprehenderit sit ex.",
+      userName: "A"
     },
     {
-      index: "1",
-      star: 1,
+      eventID: 1,
+      stars: 1,
       datePublished: "Mon Apr 08 2019 14:55:18 GMT+1000 (Australian Eastern Standard Time)",
-      comment: "Officia voluptate eu nostrud deserunt excepteur sint labore anim eu ex mollit cillum cillum. Veniam nisi et et culpa. Magna amet ut cupidatat do."
+      desc: "Officia voluptate eu nostrud deserunt excepteur sint labore anim eu ex mollit cillum cillum. Veniam nisi et et culpa. Magna amet ut cupidatat do.",
+      userName: "B"
     },
     {
-      index: "2",
-      star: 3,
+      eventID: 2,
+      stars: 3,
       datePublished: "Mon Apr 08 2019 14:55:18 GMT+1000 (Australian Eastern Standard Time)",
-      comment: "Consectetur magna minim officia id enim duis aliquip. Ipsum proident adipisicing adipisicing pariatur Lorem. Velit eu nostrud occaecat sit aliquip sint excepteur culpa occaecat."
+      desc: "Consectetur magna minim officia id enim duis aliquip. Ipsum proident adipisicing adipisicing pariatur Lorem. Velit eu nostrud occaecat sit aliquip sint excepteur culpa occaecat.",
+      userName: "C"
     },
     {
-      index: "3",
-      star: 1,
+      eventID: 3,
+      stars: 1,
       datePublished: "Mon Apr 08 2019 14:55:18 GMT+1000 (Australian Eastern Standard Time)",
-      comment: "Elit excepteur quis eiusmod reprehenderit deserunt ad non. Culpa deserunt eiusmod in magna duis ea. Voluptate tempor ad dolore elit fugiat."
+      desc: "Elit excepteur quis eiusmod reprehenderit deserunt ad non. Culpa deserunt eiusmod in magna duis ea. Voluptate tempor ad dolore elit fugiat.",
+      userName: "D"
     },
     {
-      index: "4",
-      star: 2,
+      eventID: 4,
+      stars: 2,
       datePublished: "Mon Apr 08 2019 14:55:18 GMT+1000 (Australian Eastern Standard Time)",
-      comment: "Incididunt ex do enim est tempor excepteur cillum Lorem do. Eu do enim exercitation proident elit amet exercitation in ex irure proident. Elit pariatur consectetur pariatur velit id anim sunt amet pariatur magna deserunt."
+      userName: "E",
+      desc: "Incididunt ex do enim est tempor excepteur cillum Lorem do. Eu do enim exercitation proident elit amet exercitation in ex irure proident. Elit pariatur consectetur pariatur velit id anim sunt amet pariatur magna deserunt."
     }
   ];
 
   exports.places = [
-    
-    {
-      placeName: "Fibrodyne",
-      placeAddress: "Polar Street",
-      placeDescription: "Aliqua ea sit dolore commodo. In anim excepteur enim in esse. Do id est sunt proident consequat commodo laboris nulla consectetur elit excepteur ad excepteur.",
-      placePhone: "(934) 415-2868",
-      placeTags: [
-        "esse",
-        "minim",
-        "magna",
-        "qui",
-        "voluptate",
-        "deserunt",
-        "officia"
-      ]
-    },
-    {
-      placeName: "Micronaut",
-      placeAddress: "Milton Street",
-      placeDescription: "Voluptate tempor cupidatat magna consequat. Ea in consectetur deserunt magna amet ut. Culpa exercitation velit in fugiat veniam.",
-      phone: "(999) 448-3319",
-      placeTags: [
-        "esse",
-        "minim",
-        "magna",
-        "qui",
-        "voluptate",
-        "deserunt",
-        "officia"
-      ]
-    },
-    {
-      placeName: "Oatfarm",
-      placeAddress: "Heath Place",
-      placeDescription: "Sint dolor non veniam enim nulla enim id culpa nostrud. Ad nisi id aute velit deserunt eiusmod sunt tempor aliquip. Mollit anim nulla ex mollit.",
-      placePhone: "(829) 485-2733",
-      placeTags: [
-        "esse",
-        "minim",
-        "magna",
-        "qui",
-        "voluptate",
-        "deserunt",
-        "officia"
-      ]
-    },
-    {
-      placeName: "Zorromop",
-      placeAddress: "Furman Avenue",
-      placeDescription: "Nostrud Lorem nostrud do fugiat non duis adipisicing mollit sunt veniam. Minim laborum ex dolore non nulla nisi et non voluptate. Lorem culpa qui Lorem minim in voluptate amet quis cupidatat enim.",
-      placePhone: "(804) 546-3426",
-      placeTags: [
-        "esse",
-        "minim",
-        "magna",
-        "qui",
-        "voluptate",
-        "deserunt",
-        "officia"
-      ]
-    }
-  ];
+      {
+        placeName: "Fibrodyne",
+        placeAddress: "Polar Street",
+        placeDescription: "Aliqua ea sit dolore commodo. In anim excepteur enim in esse. Do id est sunt proident consequat commodo laboris nulla consectetur elit excepteur ad excepteur.",
+        placePhone: "(934) 415-2868",
+        placeTags: [
+          "esse",
+          "minim",
+          "magna",
+          "qui",
+          "voluptate",
+          "deserunt",
+          "officia"
+        ]
+      },
+      {
+        placeName: "Micronaut",
+        placeAddress: "Milton Street",
+        placeDescription: "Voluptate tempor cupidatat magna consequat. Ea in consectetur deserunt magna amet ut. Culpa exercitation velit in fugiat veniam.",
+        phone: "(999) 448-3319",
+        placeTags: [
+          "esse",
+          "minim",
+          "magna",
+          "qui",
+          "voluptate",
+          "deserunt",
+          "officia"
+        ]
+      },
+      {
+        placeName: "Oatfarm",
+        placeAddress: "Heath Place",
+        placeDescription: "Sint dolor non veniam enim nulla enim id culpa nostrud. Ad nisi id aute velit deserunt eiusmod sunt tempor aliquip. Mollit anim nulla ex mollit.",
+        placePhone: "(829) 485-2733",
+        placeTags: [
+          "esse",
+          "minim",
+          "magna",
+          "qui",
+          "voluptate",
+          "deserunt",
+          "officia"
+        ]
+      },
+      {
+        placeName: "Zorromop",
+        placeAddress: "Furman Avenue",
+        placeDescription: "Nostrud Lorem nostrud do fugiat non duis adipisicing mollit sunt veniam. Minim laborum ex dolore non nulla nisi et non voluptate. Lorem culpa qui Lorem minim in voluptate amet quis cupidatat enim.",
+        placePhone: "(804) 546-3426",
+        placeTags: [
+          "esse",
+          "minim",
+          "magna",
+          "qui",
+          "voluptate",
+          "deserunt",
+          "officia"
+        ]
+      }
+    ];
