@@ -33,18 +33,3 @@ function sendData() {
 
     Http.send(strJson);
 }
-
-function validate(email) {
-    var format = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return format.test(String(email).toLowerCase());
-}
-
-// check whether the new user is a duplicate or not
-function userCreated(isSuccess) {
-    if (isSuccess) {
-        alert("User submitted");
-    }
-    else {
-        alert("UserName already existed");
-    }
-}
