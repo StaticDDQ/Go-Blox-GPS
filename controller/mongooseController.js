@@ -1,9 +1,11 @@
 let Members = require('../models/member');
 
+// add user asynchronously if the username does not exists in mongoDB
 var addUser = async function(req, res) {
 
     var dupliUser = await findUser(req.body.userName);
 
+    // will not add if same username exists
     if (!dupliUser) {
         var data = new Members({
             "firstName": req.body.firstName,
@@ -11,15 +13,15 @@ var addUser = async function(req, res) {
             "userName": req.body.userName,
             "email": req.body.email,
             "DOB": req.body.DOB,
-            "password": req.body.password
+            "password": req.body.password,
+            "joined_date": req.body.joined_date
         });
 
         data.save(function (err, newMember) {
             if (!err) {
                 res.send(newMember);
             } else {
-                console.log("error saving");
-                res.sendStatus(400);
+                throw err;
             }
         });
     } else {
@@ -27,6 +29,7 @@ var addUser = async function(req, res) {
     }
 }
 
+// look if username exists in mongoDB
 async function findUser(username) {
     var found = null;
     found = await Members.findOne({ userName: username });

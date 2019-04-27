@@ -11,7 +11,7 @@ body {
 .grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(10, 1fr);
+  grid-template-rows: repeat(20, 1fr);
 }
 .grid > div {
   background: #eee;
