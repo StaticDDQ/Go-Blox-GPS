@@ -5,7 +5,7 @@
     <title>GPS</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial scale=1.0">
-  <link rel="stylesheet" href="home.css" />
+  <link rel="stylesheet" href="css/home.css" />
   <link href="https://fonts.googleapis.com/css?family=Open+Sans|Quicksand" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -13,25 +13,29 @@
 <body>
     <div class="grid">
             <div class = "logo">
-                <a href="#"><img src = "logo.png" alt="GPS ||" width="50" height="50"></a>
+                <a href="#"><img src = "logo.png" alt="GPS" width="50" height="50"></a>
             </div>
             <div class = "nav">
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Events</a></li>
-                    <li><a href="#">Places</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">FAQ </a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="#">EVENTS</a></li>
+                    <li><a href="#">PLACES</a></li>
+                    <li><a href="#">ABOUT</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">CONTACT</a></li>
                 </ul>
             </div>
 
             <div class="profile">
-                <a href="#">Login/ Sign up </a>
+                <ul>
+                    <li><a href="#">LOGIN</a></li>
+                    <li><a href="#">SIGN UP</a></li>
+                </ul>
+                
             </div>
 
             <div class="search">
-                    <input type="text" class="searchTerm" placeholder="Search">
+                    <input type="text" class="searchTerm" placeholder=" SEARCH">
                     <button type="submit" class="searchButton">
                         <i class="fa fa-search"></i>
                     </button>
@@ -39,38 +43,93 @@
         
             
         <div class = "title">
-            <h1>GPS</h1>
-            <p>Get People Socialiasing</p>
-            <p>A platform to meet like minded people.</p>
+            <img src = "logo.png" alt="GPS" width="150" height="150">
         </div>
 
         <div class = "intro">
             <h2>What is GPS?</h2>
-            <p>GPS (Get People Socializing) is a platform for students especially those who are new in Melbourne to discover events and places based on their interests and meet new people with likeminded values! :)</p>
+            <p>
+                    A platform for students especially those who are new in Melbourne <br />
+                    to discover events and places based on their interests and meet new people with likeminded values! :)
+            </p>
+        </div>
+
+        <div class="pop_intro">
+            <h4>Popular Events and Places</h4>
         </div>
 
         <div class= "pop">
+                <div class="card">
+                    <div class="bg-img">
+                        <img src = "pictures/reb.jpg" alt="GPS" width="430" height="230">
+                    </div>
+                    <div class="content">
+                      <h4>Royal Exhibition Building</h4>
+                      <p> 9 Nicholson St, Carlton VIC 3053 </p> 
+                      <button>Readmore</button> 
+                    </div>
+                </div>
 
-                        <ul class="hs">
-                          <li class="item">test</li>
-                          <li class="item">test</li>
-                          <li class="item">test</li>
-                          <li class="item">test</li>
-                          <li class="item">test</li>
-                          <li class="item">test</li>
-                        </ul>
-        </div>
+                <div class="card">
+                        <div class="bg-img">
+                            <img src = "pictures/zoo.jpg" alt="GPS" width="430" height="230">
+                        </div>
+                        <div class="content">
+                          <h4>Melbourne Zoo</h4>
+                          <p> Elliott Ave, Parkville VIC 3052 </p> 
+                          <button>Readmore</button> 
+                        </div>
+                </div>
+                
+                <div class="card">
+                        <div class="bg-img">
+                            <img src = "pictures/shrine.jpg" alt="GPS" width="430" height="230">
+                        </div>
+                        <div class="content">
+                          <h4>Shrine of Rememberance</h4>
+                          <p> Birdwood Ave, Melbourne VIC 3001 </p> 
+                          <button>Readmore</button> 
+                        </div>
+                </div>
+                
+                <div class="card">
+                        <div class="bg-img">
+                            <img src = "pictures/ngv.jpg" alt="GPS" width="430" height="230">
+                        </div>
+                        <div class="content">
+                          <h4>National Gallery of Victoria</h4>
+                          <p> 180 St Kilda Rd, Melbourne VIC 3006</p> 
+                          <button>Readmore</button> 
+                        </div>
+                </div>
+
+                <div class="card">
+                        <div class="bg-img">
+                            <img src = "pictures/qvm.jpg" alt="GPS" width="430" height="230">
+                        </div>
+                        <div class="content">
+                          <h4>Queen Victoria Market</h4>
+                          <p> Queen St, Melbourne VIC 3000</p> 
+                          <button>Readmore</button> 
+                        </div>
+                </div>
+
+                <div class="card">
+                        <div class="bg-img">
+                            <img src = "pictures/docklands.jpg" alt="GPS" width="430" height="230">
+                        </div>
+                        <div class="content">
+                          <h4>Docklands</h4>
+                          <p>Docklands</p> 
+                          <button>Readmore</button> 
+                        </div>
+                </div>
+        </div>    
+        
 
         <div class="footer">
-            <p>&copy; 2019 GPS. All rights reserved <a href="page2.html"></p>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Events</a></li>
-                <li><a href="#">Places</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">FAQ </a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
+            <p>&copy; 2019 Get People Socilaizing. All rights reserved <a href="page2.html"></p>
+            <button>Privacy Policy</button>
         </div>
     
     </div>
