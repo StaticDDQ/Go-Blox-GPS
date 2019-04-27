@@ -1,10 +1,9 @@
-// JavaScript source code
 const express = require('express');
 const router = express.Router();
 const database = require('../db');
 
-// Bring in User Model
-let Rating = require('../models/review');
+// Get rating model to save collection
+let Rating = require('../models/rating');
 
 // give rating
 router.post('/addRating', function (req, res) {
@@ -16,7 +15,7 @@ router.post('/addRating', function (req, res) {
     });
 });
 
-// get rating
+// get rating based on event ID
 router.get('/getRating/:eventID', function (req, res) {
     for (let i = 0; i < database.ratings.length; i++) {
         if ((Number)(req.params.eventID) === database.ratings[i].eventID) {

@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const database = require('../db');
 
-// Bring in User Model
+// Get event model
 let Event = require('../models/event');
 
 // add event

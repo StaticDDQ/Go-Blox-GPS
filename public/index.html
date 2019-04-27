@@ -5,32 +5,27 @@
     <title>Login Page</title>
 </head>
 <body>
-    <form>
+    <form action="/members/login" method="post">
         
         <div class ="container">
             <h1>LOGIN</h1>
             <div class="logins">
-                <input title="Please Enter Your username" id="userName" name="user" type="text" placeholder="Username"/>
-                </br>
+                <input title="Please Enter Your username" id="userName" name="username" type="text" placeholder="Username"/>
+                <br/>
                 </div>
                 <div class="logins">
                 <input title= "password" id="passWord" name="password" type= "password" placeholder="Password"/>
-                </br>
+                <br/>
             </div>
 
             <div class="loginButton">
-                <script type="text/javascript" src="signUp.js"></script>
-                <button onclick="getData()" >LOGIN</button>
+                <input type="submit" value="Log in" />
             </div>
-        </br>
+        <br/>
 
             <a href="signUpForm.html">
                 Click here to register
             </a>
-
-
-            <p id="pId"></p>
-            <script src="./js/loginPage.js"></script>
         </div>
     </form>
 </body>

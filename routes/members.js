@@ -1,33 +1,37 @@
-// JavaScript source code
 const express = require('express');
 const router = express.Router();
 const database = require('../db');
 const mongooseController = require('../controller/mongooseController');
 const passport = require('passport');
 
-// Bring in User Model
+// used to get current date to record when user is created
+const moment = require('moment');
+
+// Get member model
 let Member = require('../models/member');
 
 var currentLogin = database.members[0];
 
 // login as member
 router.post('/login', function (req, res, next) {
-    
+    // successful log in will launch the user's profile
     passport.authenticate('local', {
-        successRedirect: '/members/getFirstname/Clay',
-        failureRedirect: '/members/getFirstname/Lang'
-    })(req, res, next);
+        successRedirect: '/members/profile',
+        failWithError: true
+    })(req, res,next);
     currentLogin = req.body;
 });
 
-router.get('/profile', function(req,res){
-    res.render('../public/views/profile.pug',currentLogin);
-})
+// load profile
+router.get('/profile', function (req, res) {
+    res.render('../public/views/profile.pug', currentLogin);
+});
 
+// logout active user
 router.get('/logout', function (req, res) {
     req.logout();
     res.redirect('/');
-})
+});
 
 // get member (get from mockup database)
 router.get('/getFirstname/:firstname', function (req, res) {
@@ -42,6 +46,9 @@ router.get('/getFirstname/:firstname', function (req, res) {
 // register as member
 router.post('/register', function (req, res) {
 
+    console.log(req.body);
+
+    // check each element for validity
     req.checkBody('firstName', 'First name is required').notEmpty();
     req.checkBody('lastName', 'Last name is required').notEmpty();
     req.checkBody('userName', 'Username is required').notEmpty();
@@ -49,10 +56,17 @@ router.post('/register', function (req, res) {
     req.checkBody('email', 'Email is not valid').isEmail();
     req.checkBody('DOB', 'Date of Birth is required').notEmpty();
     req.checkBody('password', 'Password is required').notEmpty();
-    req.checkBody('firstName', 'First name is required').notEmpty();
-    req.checkBody('confirm', 'Password does not match').equals(req.body.password);
+    req.checkBody('password_confirm', 'Password does not match').equals(req.body.password);
 
-    mongooseController.addUser(req, res);
+    var error = req.validationErrors();
+    if (!error) {
+        // add join date of user
+        req.body['joined_date'] = moment().format('YYYY-MM-DD');
+
+        mongooseController.addUser(req, res);
+    } else {
+        console.log("Failed to register");
+    }
 })
 
 // update member
