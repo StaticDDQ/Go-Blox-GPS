@@ -1,79 +1,130 @@
 * {
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
+  padding-top: 3px;
 }
 
 body {
-  background-color: rgb(26, 22, 22);
+  color:#333;
   font-family: 'Quicksand';
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(13, 1fr);
-  grid-template-rows: repeat(9, 1fr);
-  padding: 1em;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto;
+  align-self: center;
+  justify-self: center;
+  min-width: 0;
+  min-height: 0;
+  grid-gap: 30px;
+  padding-bottom: 30px;
 }
 
-.navBar {
-  grid-column: 1/9;
+a {
+  text-decoration:none;
+  color: black;
+}
+
+.logo{
+  grid-column: 1/2;
   grid-row: 1/2;
-  background-color: beige;
+}
+
+.nav {
+  grid-area: nav;
+  grid-column: 2/9;
+  grid-row: 1/2;
 } 
 
-.navBar li {
+.nav li {
   list-style-type: none;
   display: inline;
   list-style: none;
   text-align: center;
-  padding-left: 15px;
   text-decoration: none;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.nav li:hover,
+.nav li.sfHover,
+.nav li.current-menu-item {
+    background: none;
+    border-bottom: 2px solid #e15848;
 }
 
 .profile {
-  grid-column: 10/11;
+  grid-area: profile;
+  grid-column:9/11;
   grid-row: 1/2;
+  justify-self: end;
+}
+
+.profile li{
+  list-style-type: none;
+  display: inline;
+  list-style:none;
+  text-align: center;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-decoration: none;
+}
+
+.profile li:hover,
+.profile li.sfHover,
+.profile li.current-menu-item {
+    background: none;
+    border-bottom: 2px solid #e15848;
 }
 
 .search {
+  grid-area: search;
   grid-column: 11/14;
   grid-row: 1/2;
+  justify-self: end;
 }
 
 .banner {
-  grid-column: 1/14;
-  grid-row: 2/4;
+  grid-area: banner;
+  background-color: #f5bdab; 
   text-align: center;
-  background-color: pink;
+  grid-column: 1/14;
+  grid-row: 2/3;
+  border: black;
+  height: 100%;
 
 }
+
 .basicProfile {
   grid-column: 1/7;
-  grid-row: 4/6;
+  grid-row: 3/4;
 
 }
 .interest{
   grid-column: 7/14;
-  grid-row: 4/6;
+  grid-row: 3/4;
 
 }
 .events {
   grid-column: 1/7;
-  grid-row: 6/8;
+  grid-row: 4/5;
 
 }
 .friends {
   grid-column: 7/14;
-  grid-row: 6/8;
+  grid-row: 4/5;
 
 }
 .bookmarks {
   grid-column: 1/7;
-  grid-row: 8/10;
+  grid-row: 5/6;
 }
 
 .reviews{
   grid-column: 7/14;
-  grid-row: 8/10;
+  grid-row: 5/6;
 
 }
