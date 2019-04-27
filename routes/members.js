@@ -3,6 +3,7 @@ const router = express.Router();
 const database = require('../db');
 const mongooseController = require('../controller/mongooseController');
 const passport = require('passport');
+
 // used to get current date to record when user is created
 const moment = require('moment');
 
@@ -16,7 +17,7 @@ router.post('/login', function (req, res, next) {
     // successful log in will launch the user's profile
     passport.authenticate('local', {
         successRedirect: '/members/profile',
-        failureMessage: 'Failed login'
+        failWithError: true
     })(req, res,next);
     currentLogin = req.body;
 });
@@ -45,20 +46,27 @@ router.get('/getFirstname/:firstname', function (req, res) {
 // register as member
 router.post('/register', function (req, res) {
 
+    console.log(req.body);
+
     // check each element for validity
-    req.checkBody('firstname', 'First name is required').notEmpty();
-    req.checkBody('lastname', 'Last name is required').notEmpty();
-    req.checkBody('username', 'Username is required').notEmpty();
+    req.checkBody('firstName', 'First name is required').notEmpty();
+    req.checkBody('lastName', 'Last name is required').notEmpty();
+    req.checkBody('userName', 'Username is required').notEmpty();
     req.checkBody('email', 'Email is required').notEmpty();
     req.checkBody('email', 'Email is not valid').isEmail();
     req.checkBody('DOB', 'Date of Birth is required').notEmpty();
     req.checkBody('password', 'Password is required').notEmpty();
-    req.checkBody('confirm', 'Password does not match').equals(req.body.password);
+    req.checkBody('password_confirm', 'Password does not match').equals(req.body.password);
 
-    // add join date of user
-    req.body["joined_date"] = moment().format('YYYY-MM-DD');
+    var error = req.validationErrors();
+    if (!error) {
+        // add join date of user
+        req.body['joined_date'] = moment().format('YYYY-MM-DD');
 
-    mongooseController.addUser(req, res);
+        mongooseController.addUser(req, res);
+    } else {
+        console.log("Failed to register");
+    }
 })
 
 // update member
