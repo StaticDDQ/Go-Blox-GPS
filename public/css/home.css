@@ -123,7 +123,19 @@ a{
     grid-column: 1/14;
     grid-row: 4/5;
     font-family: "Open Sans";
-    font-size: 20px;
+}
+
+.pop_intro h1 {
+
+    font-style:italic;
+
+}
+
+.pop_intro p {
+    font-style: 'Quicksand';
+    text-indent: 1em;
+    padding-bottom: 1em;
+
 }
 
 .pop{
