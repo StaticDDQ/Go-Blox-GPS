@@ -11,6 +11,11 @@ body {
   padding-right: 30px;
 }
 
+h3 {
+  font-style: italic;
+  color: dimgray;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -164,8 +169,6 @@ a {
   cursor: pointer;
   border-radius: .25rem;
 }
-
-
 
 .friends {
   grid-column: 7/14;
