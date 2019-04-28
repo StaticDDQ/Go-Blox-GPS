@@ -1,14 +1,20 @@
 
+body{
+    color:#333;
+    font-family: 'Quicksand';
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
 form {
     color: rgb(236,118,85);
-    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
-
 }
 
 h1 {
     color: black;
-    font-family: 'Helvetica';
+    font-family: 'Quicksand';
     font-style: italic;
+    font-style: bold;
 }
 
 div {

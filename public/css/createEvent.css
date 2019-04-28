@@ -1,15 +1,33 @@
 
+body{
+    color:#333;
+    font-family: 'Quicksand';
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
 form {
     color: rgb(236,118,85);
-    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
-    background-color: rgba(245,189,171,0.8);
-    
+
 }
 
 h1 {
-    color: rgb(190,202,208);
-    font-family: 'Helvetica';
+    color: black;
+    font-family: 'Quicksand';
+    font-style: bold;
     font-style: italic;
+}
+
+.box {
+    display: block;
+    background-color: rgb(255,249,248);
+    border: solid 1px rgb(214,201,201);
+    height: 700px;
+    width: 700px;
+    padding: 30px;
+    align-content: center;
+    text-align: center;
+    margin: 100px auto;
 }
 
 body {
@@ -18,3 +36,16 @@ body {
     background-size: 100%;
 
 }
+
+.bottom button {
+    background-color: transparent;
+    border: 1px solid #2196F3;
+    padding: .5rem 1rem;
+    cursor: pointer;
+    border-radius: .25rem;
+  }
+
+ .uploadImage {
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+ }
