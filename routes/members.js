@@ -21,7 +21,10 @@ router.post('/login', function (req, res, next) {
 });
 
 router.get('/profile', function (req, res) {
-    Member.findOne(req.body.username, function(err, result){
+    var loginUser = {
+        userName: currentLogin.username
+    };
+    Member.findOne(loginUser, function(err, result){
         if(err) throw err;
         res.render('../public/views/profile.pug', result);
     });
