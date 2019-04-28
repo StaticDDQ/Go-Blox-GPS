@@ -1,4 +1,6 @@
-let Members = require('../models/member');
+const Members = require('../models/member');
+const path = require('path');
+
 
 // add user asynchronously if the username does not exists in mongoDB
 var addUser = async function(req, res) {
@@ -25,7 +27,7 @@ var addUser = async function(req, res) {
             }
         });
     } else {
-        console.log("Duplicated user");
+        res.sendFile(path.join(__dirname + '/../public/userExisted.html'));
     }
 }
 

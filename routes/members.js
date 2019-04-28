@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const router = express.Router();
 const database = require('../db');
 const mongooseController = require('../controller/mongooseController');
@@ -17,7 +18,7 @@ router.post('/login', function (req, res, next) {
     // successful log in will launch the user's profile
     passport.authenticate('local', {
         successRedirect: '/members/profile',
-        failWithError: true
+        failureRedirect: '/members/failedLogin'
     })(req, res,next);
     currentLogin = req.body;
 });
@@ -31,6 +32,12 @@ router.get('/profile', function (req, res) {
         if(err) throw err;
         res.render('../public/views/profile.pug', result);
     });
+
+});
+
+// load error
+router.get('/failedLogin', function (req, res) {
+    res.sendFile(path.join(__dirname + '/../public/failedLogin.html'));
 
 });
 
@@ -70,7 +77,7 @@ router.post('/register', function (req, res) {
 
         mongooseController.addUser(req, res);
     } else {
-        res.json({ success: false });
+        res.sendFile(path.join(__dirname + '/../public/failedRegister.html'));
     }
 });
 
