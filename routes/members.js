@@ -24,7 +24,11 @@ router.post('/login', function (req, res, next) {
 
 // load profile
 router.get('/profile', function (req, res) {
-    res.render('../public/views/profile.pug', currentLogin);
+    Member.findOne(req.body.username, function(err, result){
+        if(err) throw err;
+        res.render('../public/views/profile.pug', result);
+    });
+    
 });
 
 // logout active user
