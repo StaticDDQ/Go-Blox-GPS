@@ -56,6 +56,8 @@ a {
     border-bottom: 2px solid #e15848;
 }
 
+
+
 .profile {
   grid-area: profile;
   grid-column:9/11;
@@ -98,21 +100,46 @@ a {
 
 }
 
+/* Basic profile using grid */
 .basicProfile {
   grid-column: 1/7;
   grid-row: 3/4;
+  display:grid;
+  grid-template-columns: 1fr 3fr;
 
 }
+
+.profPic {
+  grid-column: 1/2;
+  
+}
+
+.profDesc {
+  grid-column: 2/4;
+  
+}
+
 .interest{
   grid-column: 7/14;
   grid-row: 3/4;
 
 }
+
+/* Events grid */
 .events {
   grid-column: 1/7;
   grid-row: 4/5;
-
+  
 }
+
+.card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+
+
 .friends {
   grid-column: 7/14;
   grid-row: 4/5;
