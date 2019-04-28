@@ -63,27 +63,61 @@ html
       // Interests
       .interest
         h2 Interest
-        |     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore totam neque libero, consequuntur tenetur distinctio rerum nihil hic, ab doloribus natus similique. Repellendus soluta quisquam blanditiis, temporibus rerum maxime velit ipsa fugiat assumenda. Totam enim molestiae praesentium consectetur porro laudantium officiis laborum deleniti perferendis, eveniet, aspernatur voluptates minus ad cum! Consequatur ipsam ut quos consectetur, accusamus provident vel pariatur, dolorum cupiditate obcaecati corporis id nisi quam rem aliquid eos nobis sequi officiis illum cumque optio maxime a illo? Rerum, a.
+        ul
+          li Lorem, ipsum.
+          li Lorem, ipsum.
+          li Lorem, ipsum.
+          li Lorem, ipsum.
+          li Lorem, ipsum.
+          li Lorem, ipsum.
       // Events
       .events
-        h2 Events
-        |     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt obcaecati quos accusamus, possimus ea incidunt ullam facere voluptate mollitia adipisci.
+        h2 Events and Places Visited
+        .eventList
+          .card
+            .bg-img
+              img(src='pictures/reb.jpg', alt='GPS', width='215', height='115')
+            .content
+              h4 Royal Exhibition Building
+              p  9 Nicholson St, Carlton VIC 3053 
+              button Readmore
+          .card
+            .bg-img
+              img(src='pictures/zoo.jpg', alt='GPS', width='215', height='115')
+            .content
+              h4 Melbourne Zoo
+              p  Elliott Ave, Parkville VIC 3052 
+              button Readmore
+          .card
+            .bg-img
+              img(src='pictures/shrine.jpg', alt='GPS', width='215', height='115')
+            .content
+              h4 Shrine of Rememberance
+              p  Birdwood Ave, Melbourne VIC 3001 
+              button Readmore
+          .card
+            .bg-img
+              img(src='pictures/ngv.jpg', alt='GPS', width='215', height='115')
+            .content
+              h4 National Gallery of Victoria
+              p  180 St Kilda Rd, Melbourne VIC 3006
+              button Readmore
       // Friends
       .friends
         h2 Friends
-        li
-          ul Lorem, ipsum.
-          ul Lorem, ipsum.
-          ul Lorem, ipsum.
+        h3 No friends to display yet...
       // Ratings and Reviews
       .reviews
         h2 Reviews
-        ul Lorem, ipsum.
-        ul Lorem, ipsum.
-        ul Lorem, ipsum.
+        h3 No review written yet...
       // Bookmarks
       .bookmarks
         h2 Bookmarks
-        ul Lorem, ipsum.
-        ul Lorem, ipsum.
-        ul Lorem, ipsum.
+        .eventList
+          .card
+            .bg-img
+              img(src='pictures/docklands.jpg', alt='GPS', width='215', height='115')
+            .content
+              h4 Docklands
+              p Docklands
+              button Readmore
