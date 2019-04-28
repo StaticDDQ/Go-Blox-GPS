@@ -49,6 +49,7 @@ router.get('/getFirstname/:firstname', function (req, res) {
 // register as member
 router.post('/register', function (req, res) {
 
+    // check each element for validity
     req.checkBody('firstName', 'First name is required').notEmpty();
     req.checkBody('lastName', 'Last name is required').notEmpty();
     req.checkBody('userName', 'Username is required').notEmpty();
@@ -56,11 +57,18 @@ router.post('/register', function (req, res) {
     req.checkBody('email', 'Email is not valid').isEmail();
     req.checkBody('DOB', 'Date of Birth is required').notEmpty();
     req.checkBody('password', 'Password is required').notEmpty();
-    req.checkBody('firstName', 'First name is required').notEmpty();
-    req.checkBody('confirm', 'Password does not match').equals(req.body.password);
+    req.checkBody('password_confirm', 'Password does not match').equals(req.body.password);
 
-    mongooseController.addUser(req, res);
-})
+    var error = req.validationErrors();
+    if (!error) {
+        // add join date of user
+        req.body['joined_date'] = moment().format('YYYY-MM-DD');
+
+        mongooseController.addUser(req, res);
+    } else {
+        res.json({ success: false });
+    }
+});
 
 // update member
 router.put('/updateMember/:userName', function (req, res) {
