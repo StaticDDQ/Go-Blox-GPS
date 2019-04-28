@@ -15,7 +15,7 @@ router.post('/login', function (req, res, next) {
     
     passport.authenticate('local', {
         successRedirect: '/members/profile',
-        failureRedirect: '/members/getFirstname/Lang'
+        failWithError: true
     })(req, res,next);
     currentLogin = req.body;
 });
