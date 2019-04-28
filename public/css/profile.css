@@ -132,10 +132,36 @@ a {
   
 }
 
-.card {
+.eventList {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.card {
+  border: 1px solid #d3d3d3;
+  border-radius: .10rem;
+}
+
+.bg-img {
+  background-size: cover;
+  text-align: center;
+  min-width: 100px;
+  min-height: 50px;
+  background-position: center;
+}
+
+.content {
+  padding: 10px;
+}
+
+.card button {
+  background-color: transparent;
+  border: 1px solid #2196F3;
+  padding: .5rem 1rem;
+  cursor: pointer;
+  border-radius: .25rem;
 }
 
 
