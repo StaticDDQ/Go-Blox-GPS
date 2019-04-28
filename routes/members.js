@@ -1,18 +1,20 @@
-// JavaScript source code
 const express = require('express');
 const router = express.Router();
 const database = require('../db');
 const mongooseController = require('../controller/mongooseController');
 const passport = require('passport');
 
-// Bring in User Model
+// used to get current date to record when user is created
+const moment = require('moment');
+
+// Get member model
 let Member = require('../models/member');
 
 var currentLogin = database.members[0];
 
 // login as member
 router.post('/login', function (req, res, next) {
-    
+    // successful log in will launch the user's profile
     passport.authenticate('local', {
         successRedirect: '/members/profile',
         failWithError: true
@@ -20,6 +22,7 @@ router.post('/login', function (req, res, next) {
     currentLogin = req.body;
 });
 
+// load profile
 router.get('/profile', function (req, res) {
     var loginUser = {
         userName: currentLogin.username
@@ -28,9 +31,10 @@ router.get('/profile', function (req, res) {
         if(err) throw err;
         res.render('../public/views/profile.pug', result);
     });
-    
+
 });
 
+// logout active user
 router.get('/logout', function (req, res) {
     req.logout();
     res.redirect('/');

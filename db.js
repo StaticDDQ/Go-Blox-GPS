@@ -177,7 +177,6 @@ exports.events = [
   ];
 
   exports.places = [
-    
       {
         placeName: "Fibrodyne",
         placeAddress: "Polar Street",

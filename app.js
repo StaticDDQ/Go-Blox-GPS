@@ -10,7 +10,7 @@ const expressValidator = require('express-validator');
 var port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true})) 
+app.use(bodyParser.urlencoded({extended: true}))
 
 app.use(expressValidator());
 app.set('view engine','pug');
