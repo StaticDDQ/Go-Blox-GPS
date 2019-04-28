@@ -61,8 +61,6 @@ a {
     border-bottom: 2px solid #e15848;
 }
 
-
-
 .profile {
   grid-area: profile;
   grid-column:9/11;
@@ -131,6 +129,23 @@ a {
 
 }
 
+.interest li {
+  list-style-type: none;
+  display: inline;
+  list-style: none;
+  text-align: center;
+  text-decoration: none;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.interest li:hover,
+.interes li.sfHover,
+.interest li.current-menu-item {
+    background: none;
+    border-bottom: 2px solid #e15848;
+}
+
 /* Events grid */
 .events {
   grid-column: 1/7;
@@ -183,5 +198,21 @@ a {
 .reviews{
   grid-column: 7/14;
   grid-row: 5/6;
+
+}
+
+.footer{
+  grid-area: footer;
+  grid-column: 1/14;
+  grid-row: 6/7;
+  background-color: #f5bdab;
+}
+
+.footer li{
+  display: inline;
+  list-style:none;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 
 }
