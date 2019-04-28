@@ -1,35 +1,27 @@
 <!DOCTYPE html utf-8>
+<link rel="stylesheet" href="./css/signUpForm.css">
 <html>
-    <link rel="stylesheet" href="./css/signUpForm.css">
+<head>
+    <title>SIGN UP</title>
+</head>
 
-    <head>
-        <title>SIGN UP</title>
-    </head>
-
-    <body>
-        <div class="box">
+<body>
+    <div class="box">
         <h1>SIGN UP</h1>
-        <form>
-            <p class="comp">First Name: <input type="text" id="firstName"></p>
-            <p>Last Name: <input type="text" id="lastName"></p>
-            <p>User Name: <input type="text" id="userName"></p>
-            <p>Password: <input type="password" id="password"></p>
-            <p>Confirm Password: <input type="password" id="password_confirm"></p>
-            <p>Email:  <input type="email" id="email"></p>
-            <p>DOB: <input type="date" id="DOB"></p>
-            <p>Gender: </p>
-            <input type="radio" id="Male" value="male">Male
-            &nbsp;
-            <input type="radio" id="Female" value="female">Female
-            &nbsp;
-            <input type="radio" id="Others" value="others">Others
+        <form action="/members/register" method="post">
+            <p class="comp">First Name: <input type="text" name="firstName"></p>
+            <p>Last Name: <input type="text" name="lastName"></p>
+            <p>User Name: <input type="text" name="userName"></p>
+            <p>Password: <input type="password" name="password"></p>
+            <p>Confirm Password: <input type="password" name="password_confirm"></p>
+            <p>Email:  <input type="email" name="email"></p>
+            <p>DOB: <input type="date" name="DOB"></p>
+            <input type="submit" value="SUBMIT" id="sendBtn"><br />
         </form>
-            <script src="./js/signUp.js"></script>
-            <input type="submit" value="SUBMIT" onclick="sendData()" id="sendBtn"><br />
         <br>
         <a href="index.html"> Log In Here!</a>
     </div>
-    </body>
-    
+</body>
+
 
 </html>
