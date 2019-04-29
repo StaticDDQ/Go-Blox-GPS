@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const database = require('../db');
 
 // Get place model
 let Place = require('../models/place');
@@ -17,12 +16,10 @@ router.post('/addPlace', function (req, res) {
 
 // get place
 router.get('/getPlace/:placeName', function (req, res) {
-    for (let i = 0; i < database.places.length; i++) {
-        if (req.params.placeName === database.places[i].placeName) {
-            res.send(database.places[i]);
-            break;
-        }
-    }
+    Place.findOne({ placeName: req.params.placeName }, function (err, resp) {
+        if (err) throw err;
+        res.send(resp);
+    });
 });
 
 // update places
@@ -35,12 +32,11 @@ router.put('/updatePlace/:placeName', function (req, res) {
 
 // delete places
 router.delete('/deletePlace/:placeName', function (req, res) {
-    for (let i = 0; i < database.places.length; i++) {
-        if (req.params.placeName === database.places[i].placeName) {
-            res.send(database.places[i]);
-            break;
-        }
-    }
+    Place.findOneAndDelete(
+        { placeName: req.params.placeName }, function (err, resp) {
+            if (err) throw err;
+            res.send(resp);
+        }); 
 });
 
 module.exports = router;

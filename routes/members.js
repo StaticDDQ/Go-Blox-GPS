@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const router = express.Router();
-const database = require('../db');
 const mongooseController = require('../controller/mongooseController');
 const passport = require('passport');
 
@@ -11,7 +10,7 @@ const moment = require('moment');
 // Get member model
 let Member = require('../models/member');
 
-var currentLogin = database.members[0];
+var currentLogin = null;
 
 // login as member
 router.post('/login', function (req, res, next) {
@@ -49,12 +48,10 @@ router.get('/logout', function (req, res) {
 
 // get member (get from mockup database)
 router.get('/getFirstname/:firstname', function (req, res) {
-    for (let i = 0; i < database.members.length; i++) {
-        if (req.params.firstname === database.members[i].firstName) {
-            res.send(database.members[i]);
-            break;
-        }
-    }
+    Member.findOne({ firstName: req.params.firstname }, function (err, resp) {
+        if (err) throw err;
+        res.send(resp);
+    });
 });
 
 // register as member
@@ -85,19 +82,19 @@ router.post('/register', function (req, res) {
 router.put('/updateMember/:userName', function (req, res) {
     Member.findOneAndUpdate(
         { userName: req.params.userName }, { $set: req.body }, function (err, resp) {
+            if (err) throw err;
             res.send(resp);
         });
 })
 
 // delete member
 router.delete('/deleteMember/:username', function (req, res) {
-    for (let i = 0; i < database.events.length; i++) {
-        if (req.params.username === database.members[i].userName) {
-            res.send(database.members[i]);
-            database.members.splice(i);
-            break;
-        }
-    }
+
+    Member.findOneAndDelete(
+        { userName: req.params.username }, function (err, resp) {
+            if (err) throw err;
+            res.send(resp);
+        }); 
 });
 
 module.exports = router;
