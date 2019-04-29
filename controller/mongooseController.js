@@ -1,6 +1,4 @@
 const Members = require('../models/member');
-const path = require('path');
-
 
 // add user asynchronously if the username does not exists in mongoDB
 var addUser = async function(req, res) {

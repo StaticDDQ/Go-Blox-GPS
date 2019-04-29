@@ -15,11 +15,16 @@ var currentLogin = null;
 // login as member
 router.post('/authenticate', function (req, res, next) {
     // successful log in will launch the user's profile
-    passport.authenticate('local', {
-        successRedirect: '/members/profile',
-        failureRedirect: '/members/failedLogin',
+    passport.authenticate('local', function (err, user, info) {
+        if (err) return next(err);
+        if (!user) return res.render('login', { error: 'Incorrect username or password' });
+
+        req.logIn(user, function (err) {
+            if (err) return next(err);
+            currentLogin = req.body;
+            return res.redirect('/members/profile');
+        });
     })(req, res,next);
-    currentLogin = req.body;
 });
 
 // load profile
@@ -33,12 +38,6 @@ router.get('/profile', function (req, res) {
     });
 
 });
-
-router.get('/failedLogin', function (req, res) {
-    res.render('login', {
-        error: 'Incorrect username or password'
-    });
-}); 
 
 router.get('/login', function (req, res) {
     res.render('login');
