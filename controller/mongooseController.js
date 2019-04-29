@@ -21,13 +21,17 @@ var addUser = async function(req, res) {
 
         data.save(function (err, newMember) {
             if (!err) {
-                res.send(newMember);
+                res.render('signup', {
+                    error: 'You are now signed up!'
+                });
             } else {
                 throw err;
             }
         });
     } else {
-        res.sendFile(path.join(__dirname + '/../public/userExisted.html'));
+        res.render('signup', {
+            error: 'Username already existed'
+        });
     }
 }
 
