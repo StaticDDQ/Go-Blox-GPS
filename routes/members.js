@@ -17,7 +17,7 @@ router.post('/authenticate', function (req, res, next) {
     // successful log in will launch the user's profile
     passport.authenticate('local', {
         successRedirect: '/members/profile',
-        failureRedirect: '/members/failedLogin'
+        failureRedirect: '/members/failedLogin',
     })(req, res,next);
     currentLogin = req.body;
 });

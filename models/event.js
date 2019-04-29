@@ -6,7 +6,8 @@ const eventsSchema = new mongoose.Schema({
     "date": Date,
     "address": String,
     "description": String,
-    "contact": String,
+    "email": String,
+    "phone": String,
     "pictures": String,
     "tags": [String]
 });

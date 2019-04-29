@@ -1,0 +1,18 @@
+doctype html
+html
+    head
+        h1 #{name}
+    body
+        p organized by: #{organizer}
+        p #{date} //how to include icon?
+        p Type: #{tags}
+        p Gallery:
+        - var pic = pictures
+        img(src = pic)/
+        p Reviews
+        p Contact details:
+        - var contacts = "Phone Number: {}\nEmail: {}".format(phone, email);
+        p #{contacts}
+        p Website
+        a(href=${link}) Organizer's website
+
