@@ -6,6 +6,17 @@ const database = require('../db');
 // Get event model
 let Event = require('../models/event');
 
+// {
+//     "name": String,
+//     "date": Date,
+//     "address": String,
+//     "description": String,
+//     "email": String,
+//     "phone": String,
+//     "pictures": String,
+//     "tags": [String]
+// }
+
 // add event
 router.post('/addEvent', function (req, res) {
     var addNewEvent = new Event(req.body);
@@ -17,12 +28,16 @@ router.post('/addEvent', function (req, res) {
 
 // get event
 router.get('/getEvent/:name', function (req, res) {
-    for (let i = 0; i < database.events.length; i++) {
-        if (req.params.name === database.events[i].name) {
-            res.send(database.events[i]);
-            break;
-        }
-    }
+    Event.findOne({name: req.params.name}, function(err, event){
+        if(err) throw err;
+        res.render("../public/views/events.pug", event);
+    })
+    // for (let i = 0; i < database.events.length; i++) {
+    //     if (req.params.name === database.events[i].name) {
+    //         res.send(database.events[i]);
+    //         break;
+    //     }
+    // }
 });
 
 // get event by tags
