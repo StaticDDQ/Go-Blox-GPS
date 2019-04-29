@@ -9,7 +9,8 @@ const eventsSchema = new mongoose.Schema({
     "email": String,
     "phone": String,
     "pictures": String,
-    "tags": [String]
+    "tags": [String],
+    "joinedUsers": [String]
 });
 
 const Event = module.exports = mongoose.model('events', eventsSchema);
