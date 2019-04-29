@@ -1,0 +1,41 @@
+doctype html
+html(lang='en')
+  head
+    title SIGN UP
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial scale=1.0')
+    link(rel='stylesheet', href='../css/signUpForm.css')
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+  body
+    .box
+      h1 SIGN UP
+      form(action='/members/register', method='post')
+        p
+          | #{error}
+        p.comp
+          | First Name: 
+          input.form-control(name='firstName', type='text')
+        p
+          | Last Name: 
+          input.form-control(name='lastName', type='text')
+        p
+          | User Name: 
+          input.form-control(name='userName', type='text')
+        p
+          | Password: 
+          input.form-control(name='password', type='password')
+        p
+          | Confirm Password: 
+          input.form-control(name='password_confirm', type='password')
+        p
+          | Email:  
+          input.form-control(name='email', type='email')
+        p
+          | DOB: 
+          input.form-control(name='DOB', type='date')
+        input.btn.btn-primary(type='submit', value='SUBMIT')
+        br
+      br
+      form(action='/members/login', method='get')
+        input(type='submit', value='Log in')

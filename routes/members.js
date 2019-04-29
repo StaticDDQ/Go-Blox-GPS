@@ -13,7 +13,7 @@ let Member = require('../models/member');
 var currentLogin = null;
 
 // login as member
-router.post('/login', function (req, res, next) {
+router.post('/authenticate', function (req, res, next) {
     // successful log in will launch the user's profile
     passport.authenticate('local', {
         successRedirect: '/members/profile',
@@ -29,15 +29,19 @@ router.get('/profile', function (req, res) {
     };
     Member.findOne(loginUser, function(err, result){
         if(err) throw err;
-        res.render('../public/views/profile.pug', result);
+        res.render('profile', result);
     });
 
 });
 
-// load error
 router.get('/failedLogin', function (req, res) {
-    res.sendFile(path.join(__dirname + '/../public/failedLogin.html'));
+    res.render('login', {
+        error: 'Incorrect username or password'
+    });
+}); 
 
+router.get('/login', function (req, res) {
+    res.render('login');
 });
 
 // logout active user
@@ -54,6 +58,10 @@ router.get('/getFirstname/:firstname', function (req, res) {
     });
 });
 
+router.get('/signup', function (req, res) {
+    res.render('signup');
+});
+
 // register as member
 router.post('/register', function (req, res) {
 
@@ -65,16 +73,25 @@ router.post('/register', function (req, res) {
     req.checkBody('email', 'Email is not valid').isEmail();
     req.checkBody('DOB', 'Date of Birth is required').notEmpty();
     req.checkBody('password', 'Password is required').notEmpty();
-    req.checkBody('password_confirm', 'Password does not match').equals(req.body.password);
 
     var error = req.validationErrors();
     if (!error) {
-        // add join date of user
-        req.body['joined_date'] = moment().format('YYYY-MM-DD');
+        req.checkBody('password_confirm', 'Password does not match').equals(req.body.password);
+        error = req.validationErrors();
+        if (!error) {
+            // add join date of user
+            req.body['joined_date'] = moment().format('YYYY-MM-DD');
 
-        mongooseController.addUser(req, res);
+            mongooseController.addUser(req, res);
+        } else {
+            res.render('signup', {
+                error: 'Password does not match.'
+            });
+        }
     } else {
-        res.sendFile(path.join(__dirname + '/../public/failedRegister.html'));
+        res.render('signup', {
+            error: 'Incorrect signup.' 
+        });
     }
 });
 
