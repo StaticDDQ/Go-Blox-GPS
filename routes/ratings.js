@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const database = require('../db');
 
 // Get rating model to save collection
 let Rating = require('../models/rating');
@@ -17,12 +16,10 @@ router.post('/addRating', function (req, res) {
 
 // get rating based on event ID
 router.get('/getRating/:eventID', function (req, res) {
-    for (let i = 0; i < database.ratings.length; i++) {
-        if ((Number)(req.params.eventID) === database.ratings[i].eventID) {
-            res.send(database.ratings[i]);
-            break;
-        }
-    }
+    Rating.findOne({ eventID: req.params.eventID }, function (err, resp) {
+        if (err) throw err;
+        res.send(resp);
+    });
 });
 
 module.exports = router;

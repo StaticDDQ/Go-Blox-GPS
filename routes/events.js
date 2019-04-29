@@ -1,7 +1,6 @@
 // JavaScript source code
 const express = require('express');
 const router = express.Router();
-const database = require('../db');
 
 // Get event model
 let Event = require('../models/event');
@@ -17,24 +16,19 @@ router.post('/addEvent', function (req, res) {
 
 // get event
 router.get('/getEvent/:name', function (req, res) {
-    for (let i = 0; i < database.events.length; i++) {
-        if (req.params.name === database.events[i].name) {
-            res.send(database.events[i]);
-            break;
-        }
-    }
+    Event.findone({ name: req.params.name }, function (err, resp) {
+        if (err) throw err;
+        res.send(resp);
+    });
 });
 
 // get event by tags
-router.get('/getEventTags/tags/:tags', function (req, res) {
+router.get('/getEventTags/tags/:tag', function (req, res) {
     // find the event
-    var tagsArray = [];
-    for (let i = 0; i < database.events.length; i++) {
-        if (database.events[i].tags.includes(req.params.tags)) {
-            tagsArray.push(database.events[i]);
-        }
-    }
-    res.send(tagsArray);
+    Event.find({ tags: req.params.tag }, function (err, resp) {
+        if (err) throw err;
+        res.send(resp);
+    });
 });
 
 // update event
@@ -47,13 +41,10 @@ router.put('/updateEvent/:name', function (req, res) {
 
 // delete event
 router.delete('/deleteEvent/:name', function (req, res) {
-    for (let i = 0; i < database.events.length; i++) {
-        if (req.params.name === database.events[i].name) {
-            res.send(database.events[i]);
-            database.events.splice(i);
-            break;
-        }
-    }
+    Event.findOneAndDelete({ name: req.params.name }, function (err, resp) {
+        if (err) throw err;
+        res.send(resp);
+    })
 });
 
 module.exports = router;
