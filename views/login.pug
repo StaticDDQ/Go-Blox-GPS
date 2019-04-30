@@ -7,9 +7,11 @@ html(lang='en')
     link(rel='stylesheet', href='../css/index.css')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+  
   body
+  .gridContainer
+  .container
     form(action='/members/authenticate', method='post')
-      .container
         h1 LOGIN
         h2 #{error}
         .logins
@@ -19,7 +21,8 @@ html(lang='en')
           input(title='password', name='password', type='password', placeholder='Password')
           br
         .loginButton
-          input(type='submit', value='Log in')
-        br
+          input(type='submit', value='Log in', class="loginTings")
+    
     form(action='/members/signup', method='get')
-        input(type='submit', value='Sign up')
+    .signUpButton
+        input(type='submit', value='Create an account' ,class="loginTings")
