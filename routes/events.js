@@ -31,18 +31,12 @@ router.get('/getEvent/:name', function (req, res) {
         if(err) throw err;
         res.render("../public/views/events.pug", event);
     })
-    // for (let i = 0; i < database.events.length; i++) {
-    //     if (req.params.name === database.events[i].name) {
-    //         res.send(database.events[i]);
-    //         break;
-    //     }
-    // }
 });
 
 // get event by tags
-router.get('/getEventTags/tags/:tag', function (req, res) {
+router.get('/getEventTags/tags', function (req, res) {
     // find the event
-    Event.find({ tags: req.params.tag }, function (err, resp) {
+    Event.find({ tags: {$all: req.body.tag} }, function (err, resp) {
         if (err) throw err;
         res.send(resp);
     });
