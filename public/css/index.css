@@ -124,4 +124,5 @@ input {
     max-height: 764px;
     align-content: center;
     margin: 100px auto;
+    box-shadow: 0px 2px 2px 0px rgba(53, 53, 53, 0.75);
 }
