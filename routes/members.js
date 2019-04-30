@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path');
 const router = express.Router();
 const mongooseController = require('../controller/mongooseController');
 const passport = require('passport');
@@ -10,16 +9,21 @@ const moment = require('moment');
 // Get member model
 let Member = require('../models/member');
 
-var currentLogin = null;
+var currentLogin;
 
 // login as member
 router.post('/authenticate', function (req, res, next) {
     // successful log in will launch the user's profile
-    passport.authenticate('local', {
-        successRedirect: '/members/profile',
-        failureRedirect: '/members/failedLogin',
+    passport.authenticate('local', function (err, user, info) {
+        if (err) return next(err);
+        if (!user) return res.render('login', { error: 'Incorrect username or password' });
+
+        req.logIn(user, function (err) {
+            if (err) return next(err);
+            currentLogin = req.body;
+            return res.redirect('/members/profile');
+        });
     })(req, res,next);
-    currentLogin = req.body;
 });
 
 // load profile
@@ -33,12 +37,6 @@ router.get('/profile', function (req, res) {
     });
 
 });
-
-router.get('/failedLogin', function (req, res) {
-    res.render('login', {
-        error: 'Incorrect username or password'
-    });
-}); 
 
 router.get('/login', function (req, res) {
     res.render('login');
@@ -102,7 +100,17 @@ router.put('/updateMember/:userName', function (req, res) {
             if (err) throw err;
             res.send(resp);
         });
-})
+});
+
+// if user joined an event append the name (and maybe link) to the user's json
+router.put('/addEvent/:userName', function (req, res) {
+    var user = Member.findone({ userName: req.params.userName });
+    var obj = JSON.parse(user);
+    obj['joinedEvents'].push(req.body.tag);
+    jsonStr = JSON.stringify(obj);
+    Member.findOneAndUpdate(
+        { username: req.params.userName }, { $set: jsonStr });
+});
 
 // delete member
 router.delete('/deleteMember/:username', function (req, res) {

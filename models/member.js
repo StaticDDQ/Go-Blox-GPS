@@ -12,7 +12,8 @@ const memberSchema = new mongoose.Schema({
     "email": String,
     "DOB": Date,
     "joined_date": Date,
-    "password": String
+    "password": String,
+    "joinedEvents": [String]
 }, { versionKey: false });
 
 const Member = module.exports = mongoose.model('members', memberSchema);

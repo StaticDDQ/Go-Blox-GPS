@@ -29,7 +29,7 @@ router.post('/addEvent', function (req, res) {
 router.get('/getEvent/:name', function (req, res) {
     Event.findOne({name: req.params.name}, function(err, event){
         if(err) throw err;
-        res.render("../public/views/events.pug", event);
+        res.render('events', event);
     })
 });
 
@@ -48,6 +48,16 @@ router.put('/updateEvent/:name', function (req, res) {
         { name: req.params.name }, { $set: req.body }, function (err, resp) { //callback functions
             res.send(resp);
         });
+});
+
+// if user joined an event append the name (and maybe link) to the user's json
+router.put('/addUser/:name', function (req, res) {
+    var event = Event.findone({ name: req.params.name });
+    var obj = JSON.parse(event);
+    obj['joinedUsers'].push(req.body.username);
+    jsonStr = JSON.stringify(obj);
+    Event.findOneAndUpdate(
+        { name: req.params.name }, { $set: jsonStr });
 });
 
 // delete event
