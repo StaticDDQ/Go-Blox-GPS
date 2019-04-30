@@ -1,4 +1,13 @@
 const Members = require('../models/member');
+const nodemailer = require('nodemailer');
+
+var transport = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: 'officialgoblox@gmail.com',
+        pass: 'goblox123'
+    }
+});
 
 // add user asynchronously if the username does not exists in mongoDB
 var addUser = async function(req, res) {
@@ -19,8 +28,22 @@ var addUser = async function(req, res) {
 
         data.save(function (err, newMember) {
             if (!err) {
+                var link = "http://" + req.get('host') + "/members/verify?user=" + req.body.userName;
+
+                let mailOption = {
+                    from: 'officialgobloxs@gmail.com',
+                    to: req.body.email,
+                    subject: 'Email confirmation from GoBlox',
+                    html: "Here is a confirmation link for setting up your GPS account,<a href=" + link + "> Click here to verify</a>"
+                };
+
+                transport.sendMail(mailOption, function (err, info) {
+                    if (err) throw err;
+                    console.log(info);
+                });
+
                 res.render('signup', {
-                    error: 'You are now signed up!'
+                    error: 'Please verify your email!'
                 });
             } else {
                 throw err;

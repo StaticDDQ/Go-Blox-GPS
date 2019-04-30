@@ -13,7 +13,8 @@ const memberSchema = new mongoose.Schema({
     "DOB": Date,
     "joined_date": Date,
     "password": String,
-    "joinedEvents": [String]
+    "joinedEvents": [String],
+    "active": Boolean
 }, { versionKey: false });
 
 const Member = module.exports = mongoose.model('members', memberSchema);

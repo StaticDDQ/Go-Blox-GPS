@@ -17,6 +17,7 @@ router.post('/authenticate', function (req, res, next) {
     passport.authenticate('local', function (err, user, info) {
         if (err) return next(err);
         if (!user) return res.render('login', { error: 'Incorrect username or password' });
+        if (!user.active) return res.render('login', { error: 'User is not active' });
 
         req.logIn(user, function (err) {
             if (err) return next(err);
@@ -60,6 +61,13 @@ router.get('/signup', function (req, res) {
     res.render('signup');
 });
 
+router.get('/verify', function (req, res) {
+    Member.findOneAndUpdate({ userName: req.query.user }, { $set: { active: true } }, function (err, user) {
+        if (err) throw err;
+        res.send(user);
+    });
+});
+
 // register as member
 router.post('/register', function (req, res) {
 
@@ -79,6 +87,7 @@ router.post('/register', function (req, res) {
         if (!error) {
             // add join date of user
             req.body['joined_date'] = moment().format('YYYY-MM-DD');
+            req.body['active'] = false;
 
             mongooseController.addUser(req, res);
         } else {
@@ -104,12 +113,7 @@ router.put('/updateMember/:userName', function (req, res) {
 
 // if user joined an event append the name (and maybe link) to the user's json
 router.put('/addEvent/:userName', function (req, res) {
-    var user = Member.findone({ userName: req.params.userName });
-    var obj = JSON.parse(user);
-    obj['joinedEvents'].push(req.body.tag);
-    jsonStr = JSON.stringify(obj);
-    Member.findOneAndUpdate(
-        { username: req.params.userName }, { $set: jsonStr });
+    Member.findOneAndUpdate({ userName: req.params.userName }, { $push: { joinedEvents : req.body.eventName} });
 });
 
 // delete member
