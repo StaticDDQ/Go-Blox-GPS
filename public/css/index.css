@@ -1,14 +1,12 @@
 /* For index, about */
-*{
+* {
     margin: 0;
     padding: 0; 
 }
 
-
 body {
     font-family: 'Quicksand';
     background-image: linear-gradient(to top right, #f5bdab, #90a4bc);
-    
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-size: cover;
@@ -37,7 +35,6 @@ input {
     padding: 20px;
     align-content: center;
     font-family: 'Quicksand';
-    
 }
 
 .logins input {
@@ -75,7 +72,6 @@ input {
     background-color: #f5bdab;
     color:  rgb(255, 255, 255);
 }
-
 
 .signUpButton input {
     height: 40px;
