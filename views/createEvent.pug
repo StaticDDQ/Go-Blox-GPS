@@ -125,6 +125,10 @@ html(lang='en')
       var preview = document.querySelector('img'); //selects the query named img
       var file = document.querySelector('input[type=file]').files[0]; //sames as here
       var reader = new FileReader();
+
+      // turn to base 64
+      const fs = require('fs');
+      
       reader.onloadend = function () {
       preview.src = reader.result;
       }
@@ -134,4 +138,5 @@ html(lang='en')
       preview.src = "";
       }
       }
+      return strImg;
       previewFile();  //calls the function named previewFile()
