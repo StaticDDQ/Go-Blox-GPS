@@ -5,14 +5,19 @@ html
     body
         p organized by: #{organizer}
         p #{date} //how to include icon?
-        p Type: #{tags}
+        - 
+            var str = "";
+            for(let i = 0; i<tags.length; i++){
+                str != "" ? str += ", " + tags[i] : str += tags[i];
+            }
+        p Type: #{str}
         p Gallery:
         - var pic = pictures
         img(src = pic)/
         p Reviews
         p Contact details:
-        - var contacts = "Phone Number: {}\nEmail: {}".format(phone, email);
+        - var contacts = "Phone Number: "+phone+"\nEmail: "+ email;
         p #{contacts}
         p Website
-        a(href=${link}) Organizer's website
+        - //a(href=${link}) Organizer's website
 

@@ -26,7 +26,7 @@ router.post('/addEvent', function (req, res) {
     });
 });
 
-router.post('/createEvent', function (req, res) {
+router.get('/createEvent', function (req, res) {
     res.render('createEvent');
 })
 
