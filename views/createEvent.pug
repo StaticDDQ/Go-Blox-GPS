@@ -1,0 +1,82 @@
+doctype html
+html(lang='en')
+  head
+    title Create Event
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial scale=1.0')
+    link(rel='stylesheet', href='./css/createEvent.css', v='')
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+  body
+    .box
+      form(action='/events/addEvent', method='POST')
+        h1 Create Event
+        p
+          | Name of the event: 
+          input(type='text', name='name')
+        p
+          | Date: 
+          input(type='date', name='date')
+        p
+          | Organiser: 
+          input(type='text', name='organizer')
+        p
+          | Location: 
+          input(type='text', name='address')
+        p
+          | Descriptions: 
+          input(type='text', name='description')
+        p#topic Contact: 
+        p
+          | Email:  
+          input(type='email', name='email')
+        p
+          | Phone number: 
+          input(type='text', name='phone')
+        p#topic
+          b Gallery
+        .uploadImage
+          div
+            input(type='file', onchange='previewFile()', name='pictures')
+          div
+            img(src='', alt='Image preview...', height='100')
+        #bottom
+          input#agreed(type='radio', value='agreed')
+          |  I agree to terms and conditions 
+          br
+          br
+          p ARTS
+          input(type='checkbox', name='tags', value='photo')
+          |  PHOTOGRAPHY
+          input(type='checkbox', name='tags', value='paint')
+          |  PAINTING
+          input(type='checkbox', name='tags', value='dance')
+          |  DANCING
+          input(type='checkbox', name='tags', value='photo')
+          |  DRAMA
+          br
+          p SPORTS
+          input(type='checkbox', name='tags', value='basket')
+          |  BASKETBALL
+          input(type='checkbox', name='tags', value='soccer')
+          |  SOCCER
+          input(type='checkbox', name='tags', value='rugby')
+          |  RUGBY
+          input(type='checkbox', name='tags', value='badminton')
+          |  BADMINTON
+          input(type='submit', value='SUBMIT')
+    script.
+      function previewFile() {
+      var preview = document.querySelector('img'); //selects the query named img
+      var file = document.querySelector('input[type=file]').files[0]; //sames as here
+      var reader = new FileReader();
+      reader.onloadend = function () {
+      preview.src = reader.result;
+      }
+      if (file) {
+      reader.readAsDataURL(file); //reads the data as a URL
+      } else {
+      preview.src = "";
+      }
+      }
+      previewFile();  //calls the function named previewFile()
