@@ -41,42 +41,44 @@ html(lang='en')
           div
             img(src='', alt='Image preview...', height='100')
         #bottom
+          input#searchBar(type='text', placeholder='SEARCH', onkeydown='addTag(event)')
+          div#tagStore
+          br
           input#agreed(type='radio', value='agreed')
           |  I agree to terms and conditions 
           br
           br
-          p ARTS
-          input(type='checkbox', name='tags', value='photo')
-          |  PHOTOGRAPHY
-          input(type='checkbox', name='tags', value='paint')
-          |  PAINTING
-          input(type='checkbox', name='tags', value='dance')
-          |  DANCING
-          input(type='checkbox', name='tags', value='photo')
-          |  DRAMA
-          br
-          p SPORTS
-          input(type='checkbox', name='tags', value='basket')
-          |  BASKETBALL
-          input(type='checkbox', name='tags', value='soccer')
-          |  SOCCER
-          input(type='checkbox', name='tags', value='rugby')
-          |  RUGBY
-          input(type='checkbox', name='tags', value='badminton')
-          |  BADMINTON
           input(type='submit', value='SUBMIT')
     script.
       function previewFile() {
-      var preview = document.querySelector('img'); //selects the query named img
-      var file = document.querySelector('input[type=file]').files[0]; //sames as here
-      var reader = new FileReader();
-      reader.onloadend = function () {
-      preview.src = reader.result;
+          var preview = document.querySelector('img'); //selects the query named img
+          var file = document.querySelector('input[type=file]').files[0]; //sames as here
+          var reader = new FileReader();
+          reader.onloadend = function () {
+              preview.src = reader.result;
+          }
+          if (file) {
+              reader.readAsDataURL(file); //reads the data as a URL
+          } else {
+              preview.src = "";
+          }
       }
-      if (file) {
-      reader.readAsDataURL(file); //reads the data as a URL
-      } else {
-      preview.src = "";
-      }
-      }
+
       previewFile();  //calls the function named previewFile()
+      var tags = [];
+
+      function addTag(event) {
+          var key = event.keyCode;
+          var newTag = document.getElementById('searchBar').value;
+          if (key === 9 && newTag.length > 0 && !tags.includes(newTag)) {
+              var tag = document.createElement('input');
+              tag.setAttribute('type', 'text');
+              tag.setAttribute('value', newTag);
+              tag.setAttribute('name', 'tags');
+              tag.setAttribute('readOnly', true);
+              document.getElementById('tagStore').appendChild(tag);
+              tag.onclick = function() { tag.parentNode.removeChild(tag) };
+              tags.push(newTag);
+          }
+          document.getElementById('searchBar').value = '';
+      }
