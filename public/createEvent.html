@@ -1,4 +1,4 @@
-<!DOCTYPE html utf-8>
+﻿<!DOCTYPE html utf-8>
 
 <HTML lang="en">
 
@@ -9,32 +9,12 @@
         <link rel="stylesheet" href="./css/createEvent.css"v/>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|Quicksand" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-        <script>
-            function previewFile(){
-                var preview = document.querySelector('img'); //selects the query named img
-                var file    = document.querySelector('input[type=file]').files[0]; //sames as here
-                var reader  = new FileReader();
-
-                reader.onloadend = function () {
-                    preview.src = reader.result;
-                }
-
-                if (file) {
-                    reader.readAsDataURL(file); //reads the data as a URL
-                } else {
-                    preview.src = "";
-                }
-            }
-            previewFile();  //calls the function named previewFile()
-        </script>
-        <script src = "./js/createEvent.js" ></script>
     
     </head>
     
     <body>
-        <div class ="box">
-            <form action="events/addEvent" method="POST">
+        <div class="box">
+            <form action="/events/addEvent" method="POST">
                 <h1>Create Event</h1>
                 <p>Name of the event: <input type="text" id="eventName"></p>
                 <p>Date: <input type="date" id="Date"></p>
@@ -49,26 +29,44 @@
                     <div><input type="file" onchange="previewFile()"></div>
                     <div><img src="" height="100" alt="Image preview..."></div>
                 </div>
-           
-             <div id="bottom">
-                <input type="radio" id="agreed" value="agreed"> I agree to terms and conditions <br/>
-                <br/>
-                <p>ARTS</p>
-                <input type="checkbox" id="not" value="photo"> PHOTOGRAPHY
-                <input type="checkbox" id="tag" value="paint"> PAINTING
-                <input type="checkbox" id="tag" value="dance"> DANCING
-                <input type="checkbox" id="tag" value="photo"> DRAMA
-                <br/>
-                <p>SPORTS</p>
-                <input type="checkbox" id="tag" value="basket"> BASKETBALL
-                <input type="checkbox" id="tag" value="soccer"> SOCCER
-                <input type="checkbox" id="tag" value="rugby"> RUGBY
-                <input type="checkbox" id="tag"" value="badminton"> BADMINTON
-                <button onclick="sendData()">Submit!</button>
+
+                <div id="bottom">
+                    <input type="radio" id="agreed" value="agreed"> I agree to terms and conditions <br />
+                    <br />
+                    <p>ARTS</p>
+                    <input type="checkbox" id="not" value="photo"> PHOTOGRAPHY
+                    <input type="checkbox" id="tag" value="paint"> PAINTING
+                    <input type="checkbox" id="tag" value="dance"> DANCING
+                    <input type="checkbox" id="tag" value="photo"> DRAMA
+                    <br />
+                    <p>SPORTS</p>
+                    <input type="checkbox" id="tag" value="basket"> BASKETBALL
+                    <input type="checkbox" id="tag" value="soccer"> SOCCER
+                    <input type="checkbox" id="tag" value="rugby"> RUGBY
+                    <input type="checkbox" id="tag" " value="badminton"> BADMINTON
+                    <button onclick="sendData()">Submit!</button>
+                </div>
 
             </form>
-            </div>
         </div>
+        <script>
+            function previewFile() {
+                var preview = document.querySelector('img'); //selects the query named img
+                var file = document.querySelector('input[type=file]').files[0]; //sames as here
+                var reader = new FileReader();
 
+                reader.onloadend = function () {
+                    preview.src = reader.result;
+                }
+
+                if (file) {
+                    reader.readAsDataURL(file); //reads the data as a URL
+                } else {
+                    preview.src = "";
+                }
+            }
+            previewFile();  //calls the function named previewFile()
+        </script>
+        <script src="./js/createEvent.js"></script>
     </body>
 </html>
