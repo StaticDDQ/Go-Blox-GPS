@@ -27,7 +27,7 @@ router.post('/addEvent', function (req, res) {
 });
 
 router.get('/createEvent', function (req, res) {
-    res.sendFile(path.join(__dirname, '../public/createEvent.html'));
+    res.render('createEvent');
 })
 
 // get event

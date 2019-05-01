@@ -12,6 +12,6 @@ const eventsSchema = new mongoose.Schema({
     "pictures": String,
     "tags": [String],
     "joinedUsers": [String]
-});
+}, { versionKey: false });
 
 const Event = module.exports = mongoose.model('events', eventsSchema);
