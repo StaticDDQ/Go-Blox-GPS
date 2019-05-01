@@ -1,6 +1,8 @@
 // JavaScript source code
 const express = require('express');
 const router = express.Router();
+const path = require('path');
+const fs = require('fs');
 
 // Get event model
 let Event = require('../models/event');
@@ -70,6 +72,11 @@ router.delete('/deleteEvent/:name', function (req, res) {
         if (err) throw err;
         res.send(resp);
     })
+});
+
+// map event
+router.get('/getMap', function (req, res){
+    res.sendFile(path.join(__dirname, '../public/map.html'));
 });
 
 module.exports = router;
