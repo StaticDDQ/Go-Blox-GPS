@@ -15,22 +15,21 @@ html(lang='en')
           p
             | #{error}
           .nameContainers
-            p.comp
+            .comp
               .signUpsFirstName
                 | First Name:
                 br
                 input(name='firstName', type='text', placeholder='First Name') 
-              .signUpsName
-                | Last Name:
                 br
-                input(name='lastName', type='text', placeholder='Last Name')
-          p
-            
+            .signUpsName
+              | Last Name:
+              br
+              input(name='lastName', type='text', placeholder='Last Name')
+          p  
             .signUps  
               | Username:
               br
               input(name='userName', type='text', placeholder='Username')
-              br
               br
           p
             .signUps  
@@ -56,9 +55,12 @@ html(lang='en')
               br
               input(name='DOB', type='date')
               br
+          p  
+            .agree  
+              input(type="checkbox")
+              | I agree to the terms and conditions
 
-          p
-            | I agree to the terms and conditions
+            
           
           .signUpButton
             input.btn.btn-primary(type='submit', value='Sign Up')
@@ -66,4 +68,4 @@ html(lang='en')
         br
         form(action='/members/login', method='get')
           .loginButton
-            input(type='submit', value='Log in')
+            input(type='submit', value='Sign in to your account')

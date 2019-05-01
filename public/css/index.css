@@ -100,12 +100,9 @@ input {
 
 .gridContainer {
     display: grid;
-    grid-template-columns: 1fr 1.2fr 1fr;
-    grid-template-rows: 1fr 1.2fr 1fr;
-    grid-column-gap: 10px;
-    grid-row-gap: 10px;
-    justify-items: stretch;
-    align-items: stretch;
+    grid-template-columns: .1fr 40fr .1fr;
+    grid-template-rows: .1fr 40fr .1fr;
+
  }
 
 .container {
@@ -116,8 +113,6 @@ input {
     border: solid 1px rgb(214,201,201);
     border-radius: .7em;
     padding: 100px;
-    max-width: 300px;
-    max-height: 764px;
     align-content: center;
     margin: 100px auto;
     box-shadow: 0px 2px 2px 0px rgba(53, 53, 53, 0.75);

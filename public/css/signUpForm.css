@@ -2,8 +2,6 @@
 body {
     color:#333;
     font-family: 'Quicksand';
-    padding-left: 30px;
-    padding-right: 30px;
     background-image: linear-gradient(to bottom right, #e15848, #90a4bc);
 }
 
@@ -19,19 +17,18 @@ h1 {
     font-size: 40px;
     font-family: Arial, Helvetica, sans-serif;
     letter-spacing: 2px;
-    padding-top: 20px;
-    padding-bottom: 40px;
+    padding-top: 40px;
+    padding-bottom: 20px;
     color: #647a94;
 }
 
 div {
     background-repeat: no-repeat;
     background-size: cover;
-
 }
 
 input {
-    font-size: 20px;
+    font-size: 14px;
     width: 200px;
     padding: 20px;
     align-content: center;
@@ -39,14 +36,25 @@ input {
 }
 
 .signUps {
-    text-align: left;
-    
+    text-align: left;  
 }
 
 .signUps input {
-    padding: 16px;
-    width: 490px;
+    padding: 10px;
+    width: 470px;
+    margin-top: 6px;
 }
+
+.agree input {
+    padding: .5em;
+    width: 20px;
+
+}
+
+.agree {
+    text-align: left;
+}
+
 
 .nameContainers {
     display: grid;
@@ -65,13 +73,16 @@ input {
 }
 
 .signUpsName input {
-    padding: 20px 20px 20px 20px;
+    padding: 12px;
+    margin-top: 6px;
 }
 
 .signUpsFirstName input {
-    padding: 20px 20px 20px 20px;
+    padding: 12px;
+    margin-top: 6px;
 }
 
+/* Sign Up Button*/
 
 .signUpButton input {
     height: 45px;
@@ -98,7 +109,7 @@ input {
 
 .loginButton input {
     height: 40px;
-    width: 60px;
+    width: 180px;
     font-size: 16px;
     padding: 5px 5px 5px 5px; 
     color: #555555;
@@ -111,7 +122,6 @@ input {
 
 .loginButton {
     text-align: left;
-    padding-top: 20px;
     padding-bottom: 40px
 }
 
@@ -122,11 +132,10 @@ input {
     border-bottom: .1em solid #f5bdab;
 }
 
-
 .gridContainer {
     display: grid;
-    grid-template-columns: 1fr 10fr 1fr;
-    grid-template-rows: 1fr 10fr 1fr;
+    grid-template-columns: .1fr 40fr .1fr;
+    grid-template-rows: .1fr 40fr .1fr;
     grid-column-gap: 10px;
     grid-row-gap: 10px;
     justify-items: stretch;
@@ -140,8 +149,8 @@ input {
     background-color: rgb(255,249,248);
     border: solid 1px rgb(214,201,201);
     border-radius: .7em;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
     margin: 100px auto;
     box-shadow: 0px 2px 2px 0px rgba(53, 53, 53, 0.75);
 }
