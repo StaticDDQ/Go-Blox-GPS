@@ -1,6 +1,7 @@
 // JavaScript source code
 const express = require('express');
 const router = express.Router();
+const path = require('path');
 
 // Get event model
 let Event = require('../models/event');
@@ -24,6 +25,10 @@ router.post('/addEvent', function (req, res) {
         res.send(event);
     });
 });
+
+router.get('/createEvent', function (req, res) {
+    res.sendFile(path.join(__dirname, '../public/createEvent.html'));
+})
 
 // get event
 router.get('/getEvent/:name', function (req, res) {
