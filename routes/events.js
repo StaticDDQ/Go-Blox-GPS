@@ -74,4 +74,9 @@ router.delete('/deleteEvent/:name', function (req, res) {
     })
 });
 
+// map event
+router.get('/getMap', function (req, res){
+    res.sendFile(path.join(__dirname, '../public/map.html'));
+});
+
 module.exports = router;
