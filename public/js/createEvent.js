@@ -1,6 +1,6 @@
 // JavaScript source code
 const Http = new XMLHttpRequest();
-const urlRegister = 'http://localhost:3000/events/getEvent/';
+const urlRegister = 'http://localhost:3000/events/addEvent/';
 
 // submit user to mlab
 function sendData() {
@@ -12,12 +12,14 @@ function sendData() {
         "address": document.getElementById("location").value,
         "description": document.getElementById("description").value,
         "email": document.getElementById("email").value,
-        "phone": document.getElementById("number").value
+        "phone": document.getElementById("number").value,
     };
+    console.log(document.getElementsById('tag'));
     Http.open("POST", urlRegister);
     Http.setRequestHeader("Content-type", "application/json");
 
     var strJson = JSON.stringify(newUser);
+    console.log(strJson);
 
     Http.send(strJson);
 }

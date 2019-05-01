@@ -28,13 +28,13 @@
             }
             previewFile();  //calls the function named previewFile()
         </script>
-    
+        <script src = "./js/createEvent.js" ></script>
     
     </head>
     
     <body>
         <div class ="box">
-            <form>
+            <form action="events/addEvent" method="POST">
                 <h1>Create Event</h1>
                 <p>Name of the event: <input type="text" id="eventName"></p>
                 <p>Date: <input type="date" id="Date"></p>
@@ -49,22 +49,25 @@
                     <div><input type="file" onchange="previewFile()"></div>
                     <div><img src="" height="100" alt="Image preview..."></div>
                 </div>
-            </form>
+           
              <div id="bottom">
                 <input type="radio" id="agreed" value="agreed"> I agree to terms and conditions <br/>
                 <br/>
                 <p>ARTS</p>
-                <input type="radio" id="photography" value="photo"> PHOTOGRAPHY
-                <input type="radio" id="painting" value="paint"> PAINTING
-                <input type="radio" id="dancing" value="dance"> DANCING
-                <input type="radio" id="drama" value="photo"> DRAMA
+                <input type="radio" id="tag" value="photo"> PHOTOGRAPHY
+                <input type="radio" id="tag" value="paint"> PAINTING
+                <input type="radio" id="tag" value="dance"> DANCING
+                <input type="radio" id="tag" value="photo"> DRAMA
                 <br/>
                 <p>SPORTS</p>
-                <input type="radio" id="basketball" value="basket"> BASKETBALL
-                <input type="radio" id="soccer" value="soccer"> SOCCER
-                <input type="radio" id="rugby" value="rugby"> RUGBY
-                <input type="radio" id="Badminton"" value="badminton"> BADMINTON
-                <button>Submit!</button>
+                <input type="radio" id="tag" value="basket"> BASKETBALL
+                <input type="radio" id="tag" value="soccer"> SOCCER
+                <input type="radio" id="tag" value="rugby"> RUGBY
+                <input type="radio" id="tag"" value="badminton"> BADMINTON
+            <form action="../views/profile.pug" method="GET">
+                <button onclick="sendData()">Submit!</button>
+            </form>
+            </form>
             </div>
         </div>
 
