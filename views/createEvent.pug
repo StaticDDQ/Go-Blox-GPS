@@ -45,8 +45,9 @@ html(lang='en')
           div#tagStore
           br
           input#agreed(type='radio', value='agreed')
-          |  I agree to terms and conditions 
+          |  I agree to the terms and conditions 
           br
+          input#submit(type='submit', value='SUBMIT')
           br
 
     script.
@@ -80,6 +81,6 @@ html(lang='en')
               document.getElementById('tagStore').appendChild(tag);
               tag.onclick = function() { tag.parentNode.removeChild(tag) };
               tags.push(newTag);
+              document.getElementById('searchBar').value = '';
           }
-          document.getElementById('searchBar').value = '';
       }
