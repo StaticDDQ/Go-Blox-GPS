@@ -3,6 +3,8 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const fs = require('fs');
+const multer = require('multer');
+const upload = multer();
 
 // Get event model
 let Event = require('../models/event');
@@ -19,8 +21,13 @@ let Event = require('../models/event');
 // }
 
 // add event
-router.post('/addEvent', function (req, res) {
+router.post('/addEvent', upload.single("pictures"), function (req, res) {
     var addNewEvent = new Event(req.body);
+    console.log(req.body);
+    console.log(req.file);
+    // var img = fs.readFileSync(req.file.buffer);
+    // var encode_image = img.toString('base64');
+    req.body.pictures = req.file;
     addNewEvent.save(function (err, event) {
         if (err) throw err;
         res.send(event);

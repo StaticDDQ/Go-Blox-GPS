@@ -9,7 +9,7 @@ html(lang='en')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
   body
     .box
-      form(action='/events/addEvent', method='POST')
+      form(action='/events/addEvent', method='POST', enctype="multipart/form-data")
         h1 Create Event
         p
           | Name of the event: 
@@ -48,9 +48,11 @@ html(lang='en')
           |  I agree to terms and conditions 
           br
           br
+          input(type="submit" value="SUBMIT")
 
     script.
       function previewFile() {
+          const Grid = require('gridfs');
           var preview = document.querySelector('img'); //selects the query named img
           var file = document.querySelector('input[type=file]').files[0]; //sames as here
           var reader = new FileReader();
@@ -59,6 +61,7 @@ html(lang='en')
           }
           if (file) {
               reader.readAsDataURL(file); //reads the data as a URL
+              
           } else {
               preview.src = "";
           }
