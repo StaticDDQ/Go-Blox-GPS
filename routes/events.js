@@ -29,11 +29,14 @@ var storage = multer.diskStorage({
 
 // add event
 router.post('/addEvent', upload.single("pictures"), function (req, res) {
+    console.log(req.body);
+    console.log(req.file);
     var img = fs.readFileSync(req.file.path);
     var encode_image = img.toString('base64');
     var finalImg = {
         contentType: req.file.mimetype,
-        image:  new Buffer(encode_image, 'base64')
+        image:  new Buffer(encode_image, 'base64'),
+        filePath: req.file.path
      };
     req.body.pictures = finalImg;
     console.log(req.body);
