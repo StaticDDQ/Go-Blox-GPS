@@ -19,26 +19,22 @@ let Event = require('../models/event');
 //     "tags": [String]
 // }
 
-var storage = multer.diskStorage({
-    filename: function (req, file, cb) {
-      cb(null, file.fieldname + '-' + Date.now())
-    }
-  });
+var storage = multer.memoryStorage();
 
   const upload = multer({storage: storage});
 
 // add event
 router.post('/addEvent', upload.single("pictures"), function (req, res) {
-    console.log(req.body);
     console.log(req.file);
-    var img = fs.readFileSync(req.file.path);
-    var encode_image = img.toString('base64');
-    var finalImg = {
-        contentType: req.file.mimetype,
-        image:  new Buffer(encode_image, 'base64'),
-        filePath: req.file.path
-     };
-    req.body.pictures = finalImg;
+    // var img = fs.readFileSync(req.file.path);
+    // var encode_image = img.toString('base64');
+    // var finalImg = {
+    //     contentType: req.file.mimetype,
+    //     image:  new Buffer(encode_image, 'base64'),
+    //     filePath: req.file.path
+    //  };
+    // req.body.pictures = finalImg;
+    req.body.pictures = req.file;
     console.log(req.body);
     var addNewEvent = new Event(req.body);
     addNewEvent.save(function (err, event) {

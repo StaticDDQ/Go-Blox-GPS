@@ -12,7 +12,8 @@ html
             }
         p Type: #{str}
         p Gallery:
-        img(src = "#{pictures.filePath}")/
+        - console.log(pictures);
+        img(src = "#{pictures.buffer}")/
         p Reviews
         p Contact details:
         - var contacts = "Phone Number: "+phone+"\nEmail: "+ email;
