@@ -12,8 +12,7 @@ html
             }
         p Type: #{str}
         p Gallery:
-        - var pic = pictures
-        img(src = pic)/
+        img(src = '#{pictures.image}')/
         p Reviews
         p Contact details:
         - var contacts = "Phone Number: "+phone+"\nEmail: "+ email;
