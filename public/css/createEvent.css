@@ -58,6 +58,7 @@ body {
  li{
      float:left;
      text-align:center;
+     visibility:hidden;
  }
 
  a{

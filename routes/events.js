@@ -4,7 +4,6 @@ const router = express.Router();
 const path = require('path');
 const fs = require('fs');
 const multer = require('multer');
-const upload = multer();
 
 // Get event model
 let Event = require('../models/event');
@@ -16,18 +15,29 @@ let Event = require('../models/event');
 //     "description": String,
 //     "email": String,
 //     "phone": String,
-//     "pictures": String,
+//     "pictures": Object,
 //     "tags": [String]
 // }
 
+var storage = multer.diskStorage({
+    filename: function (req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now())
+    }
+  });
+
+  const upload = multer({storage: storage});
+
 // add event
 router.post('/addEvent', upload.single("pictures"), function (req, res) {
-    var addNewEvent = new Event(req.body);
+    var img = fs.readFileSync(req.file.path);
+    var encode_image = img.toString('base64');
+    var finalImg = {
+        contentType: req.file.mimetype,
+        image:  new Buffer(encode_image, 'base64')
+     };
+    req.body.pictures = finalImg;
     console.log(req.body);
-    console.log(req.file);
-    // var img = fs.readFileSync(req.file.buffer);
-    // var encode_image = img.toString('base64');
-    req.body.pictures = req.file;
+    var addNewEvent = new Event(req.body);
     addNewEvent.save(function (err, event) {
         if (err) throw err;
         res.send(event);
