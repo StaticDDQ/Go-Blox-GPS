@@ -63,7 +63,7 @@ router.get('/findEvent', function (req, res) {
 // get events by name
 router.post('/getEvents', function (req, res) {
     // find the event
-    Event.find({ name: {$regex: req.body.name } }, function (err, resp) {
+    Event.find({ name: {$regex: req.body.name, $options: 'i' } }, function (err, resp) {
         if (err) throw err;
         res.render('loadEvents', { events: resp });
     });
