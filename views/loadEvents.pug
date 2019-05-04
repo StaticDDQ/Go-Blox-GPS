@@ -8,14 +8,17 @@ html(lang='en')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
     title Search
-  body
-    form(action='/events/getEvents', method='post')
-    
-      input(type='text', name='name')
-      input(type='submit', value='Find')
-    
 
-    ul
-      if events
-        each event in events
-          li #{event.name}
+  body
+    .container
+      .title
+        h1 Search Events
+      .searchBox
+        form(action='/events/getEvents', method='post')
+          input(type='text', name='name')
+          input(type='submit', value='Find')
+      .displayEvents
+        ul
+          if events
+            each event in events
+              li #{event.name}
