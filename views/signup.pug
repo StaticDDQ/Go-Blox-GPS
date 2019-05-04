@@ -8,34 +8,69 @@ html(lang='en')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
   body
-    .box
-      h1 SIGN UP
-      form(action='/members/register', method='post')
-        p
-          | #{error}
-        p.comp
-          | First Name: 
-          input(name='firstName', type='text')
-        p
-          | Last Name: 
-          input(name='lastName', type='text')
-        p
-          | User Name: 
-          input(name='userName', type='text')
-        p
-          | Password: 
-          input(name='password', type='password')
-        p
-          | Confirm Password: 
-          input(name='password_confirm', type='password')
-        p
-          | Email:  
-          input(name='email', type='email')
-        p
-          | DOB: 
-          input(name='DOB', type='date')
-        input.btn.btn-primary(type='submit', value='SUBMIT')
+    .gridContainer
+      .box
+        h1 SIGN UP
+        form(action='/members/register', method='post', onsubmit='agreed()')
+          p
+            | #{error}
+          .nameContainers
+            .comp
+              .signUpsFirstName
+                | First Name: 
+                br
+                input(name='firstName', type='text', placeholder='First Name')
+                br
+            .signUpsLastName
+              | Last Name: 
+              br
+              input(name='lastName', type='text', placeholder='Last Name')
+          p  
+            .signUps  
+              | Username:
+              br
+              input(name='userName', type='text', placeholder='Username')
+              br          
+          p
+            .signUps  
+              | Password:
+              br
+              input(name='password', type='password', placeholder='Password')
+              br
+          p
+            .signUps 
+              | Confirm Password:
+              br
+              input(name='password_confirm', type='password', placeholder='Confirm Password')
+              br
+          p
+            .signUps 
+              | Email:
+              br
+              input(name='email', type='email', placeholder='Email')
+              br
+          p
+            .signUps 
+              | DOB: 
+              br
+              input(name='DOB', type='date')
+              br
+          p  
+            .agree  
+              input(type="checkbox", name="agree")
+              | I agree to the terms and conditions
+          .signUpButton    
+            input.btn.btn-primary(type='submit', value='Sign Up')
+            br
         br
-      br
-      form(action='/members/login', method='get')
-        input(type='submit', value='Log in')
+        form(action='/members/login', method='get')
+          .loginButton
+            input(type='submit', value='Sign in to your account')
+  script.
+    function agreed(){
+      var att = document.getElementByName('agree');
+      if(!att.checked) {
+        alert('You must agree to the terms and conditions');
+        return false;
+      }
+    }
