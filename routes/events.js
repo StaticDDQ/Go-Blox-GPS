@@ -59,12 +59,16 @@ router.get('/getEvent/:name', function (req, res) {
     })
 });
 
-// get event by tags
-router.get('/getEventTags/tags', function (req, res) {
+router.get('/findEvent', function (req, res) {
+    res.render('loadEvents');
+})
+
+// get events by name
+router.post('/getEvents', function (req, res) {
     // find the event
-    Event.find({ tags: {$all: req.body.tag} }, function (err, resp) {
+    Event.find({ name: {$regex: req.body.name, $options: 'i' } }, function (err, resp) {
         if (err) throw err;
-        res.send(resp);
+        res.render('loadEvents', { events: resp });
     });
 });
 
