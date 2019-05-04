@@ -92,11 +92,11 @@ html(lang='en')
 
           for(i = 0; i < li.length; i++){
               a = li[i].getElementsByTagName('input')[0];
-              if(a.value.toUpperCase().indexOf(filter) > -1){
-                  li[i].style.display = '';
+              if(a.value.toUpperCase().indexOf(filter) > -1 && filter.length > 0){
+                  li[i].style.visibility = 'visible';
               }
               else {
-                  li[i].style.display = 'none';
+                  li[i].style.visibility = 'hidden';
               }
           }
       }
