@@ -4,7 +4,7 @@ html(lang='en')
     title Create Event
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial scale=1.0')
-    link(rel='stylesheet', href='./css/createEvent.css', v='')
+    link(rel='stylesheet', href='../css/createEvent.css', v='')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
   body
@@ -41,14 +41,91 @@ html(lang='en')
           div
             img(src='', alt='Image preview...', height='100')
         #bottom
-          input#searchBar(type='text', placeholder='SEARCH', onkeydown='addTag(event)')
-          div#tagStore
+          <div class='searchBar'>
+            input#input(type='text', placeholder='SEARCH', onkeyup='addTag()')
+          </div>
+          ul#wrapper
+            li
+              input#tag(type='checkbox', name='tags', value='Photography')
+              | Photography
+            li
+              input#tag(type='checkbox', name='tags', value='Painting')
+              | Painting           
+            li
+              input#tag(type='checkbox', name='tags', value='Dancing')
+              | Dancing
+            li
+              input#tag(type='checkbox', name='tags', value='Drama')
+              | Drama
+            li
+              input#tag(type='checkbox', name='tags', value='Basketball')
+              | Basketball           
+            li
+              input#tag(type='checkbox', name='tags', value='Soccer')
+              | Soccer
+            li
+              input#tag(type='checkbox', name='tags', value='Rugby')
+              | Rugby
+            li
+              input#tag(type='checkbox', name='tags', value='Badminton')
+              | Badminton     
+            li
+              input#tag(type='checkbox', name='tags', value='Sports')
+              | Sports
+            li
+              input#tag(type='checkbox', name='tags', value='Culture')
+              | Cultural Events
+            li
+              input#tag(type='checkbox', name='tags', value='Music')
+              | Music         
+            li
+              input#tag(type='checkbox', name='tags', value='Sing')
+              | Sing
+            li
+              input#tag(type='checkbox', name='tags', value='Instruments')
+              | Instruments
+            li
+              input#tag(type='checkbox', name='tags', value='Performance')
+              | Performance
+            li
+              input#tag(type='checkbox', name='tags', value='Vegetarian')
+              | Vegetarian         
+            li
+              input#tag(type='checkbox', name='tags', value='Vegan')
+              | Vegan       
+            li
+              input#tag(type='checkbox', name='tags', value='Sweets')
+              | Sweets Lovers
+            li
+              input#tag(type='checkbox', name='tags', value='Coffee')
+              | Coffee Lovers
+            li
+              input#tag(type='checkbox', name='tags', value='Meat Lovers')
+              | Meat Lovers
+            li
+              input#tag(type='checkbox', name='tags', value='Tea')
+              | Tea Lovers
+            li
+              input#tag(type='checkbox', name='tags', value='Brunch')
+              | Brunch
+            li
+              input#tag(type='checkbox', name='tags', value='VideoGames')
+              | Video Games
+            li
+              input#tag(type='checkbox', name='tags', value='TableTop')
+              | Table Top Gaming
+            li
+              input#tag(type='checkbox', name='tags', value='NightLife')
+              | NightLife
+            li
+              input#tag(type='checkbox', name='tags', value='Others')
+              | Others
           br
           input#agreed(type='radio', value='agreed')
           |  I agree to the terms and conditions 
           br
-          input#submit(type='submit', value='SUBMIT')
-          br
+          input(type="submit" value="SUBMIT")
+
 
     script.
       function previewFile() {
@@ -70,18 +147,21 @@ html(lang='en')
 
       var tags = [];
 
-      function addTag(event) {
-          var key = event.keyCode;
-          var newTag = document.getElementById('searchBar').value;
-          if (key === 9 && newTag.length > 0 && !tags.includes(newTag)) {
-              var tag = document.createElement('input');
-              tag.setAttribute('type', 'text');
-              tag.setAttribute('value', newTag);
-              tag.setAttribute('name', 'tags');
-              tag.setAttribute('readOnly', true);
-              document.getElementById('tagStore').appendChild(tag);
-              tag.onclick = function() { tag.parentNode.removeChild(tag) };
-              tags.push(newTag);
-              document.getElementById('searchBar').value = '';
+      function addTag() {
+          
+          var input, filter, ul, li, a, i;
+          input = document.getElementById('input');
+          filter = input.value.toUpperCase();
+          ul = document.getElementById('wrapper');
+          li = ul.getElementsByTagName('li');
+
+          for(i = 0; i < li.length; i++){
+              a = li[i].getElementsByTagName('input')[0];
+              if(a.value.toUpperCase().indexOf(filter) > -1 && filter.length > 0){
+                  li[i].style.visibility = 'visible';
+              }
+              else {
+                  li[i].style.visibility = 'hidden';
+              }
           }
       }
