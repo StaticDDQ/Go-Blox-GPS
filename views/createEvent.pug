@@ -44,18 +44,16 @@ html(lang='en')
           <div class='searchBar'>
             input#input(type='text', placeholder='SEARCH', onkeyup='addTag()')
           </div>
-        p#wrapper
-          <ul id=>
-            <li>
-                <a href="#">Food</a>
-            </li>
-            <li>
-                <a href="#">Sports</a>
-            </li>
-            <li>
-                <a href="#">Comedy</a>
-            </li>
-          </ul>
+          ul#wrapper
+            li
+              input#tag(type='checkbox', name='tags', value='Food')
+              | Food
+            li
+              input#tag(type='checkbox', name='tags', value='Communism')
+              | Communism            
+            li
+              input#tag(type='checkbox', name='tags', value='Sports')
+              | Sports
           br
           input#agreed(type='radio', value='agreed')
           |  I agree to the terms and conditions 
@@ -93,8 +91,8 @@ html(lang='en')
           li = ul.getElementsByTagName('li');
 
           for(i = 0; i < li.length; i++){
-              a = li[i].getElementsByTagName('a')[0];
-              if(a.innerHTML.toUpperCase().indexOf(filter) > -1){
+              a = li[i].getElementsByTagName('input')[0];
+              if(a.value.toUpperCase().indexOf(filter) > -1){
                   li[i].style.display = '';
               }
               else {
