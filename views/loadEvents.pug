@@ -22,3 +22,14 @@ html(lang='en')
           if events
             each event in events
               li #{event.name}
+            -
+              var tags = [];
+              for(let i = 0; i < events.length; i++){
+                  for(let j = 0; j < events[i].tags.length; j++){
+                      if(!tags.include(events[i].tags[j])){
+                          tags.push(events[i].tags[j]);
+                      }
+                  }
+              }
+             
+  

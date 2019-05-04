@@ -11,7 +11,7 @@ html(lang='en')
     .gridContainer
       .box
         h1 SIGN UP
-        form(action='/members/register', method='post', onsubmit='agreed()')
+        form(action='/members/register', method='post', onsubmit='return agreed()')
           p
             | #{error}
           .nameContainers
@@ -57,7 +57,7 @@ html(lang='en')
               br
           p  
             .agree  
-              input(type="checkbox", name="agree")
+              input(type="checkbox", id="agree")
               | I agree to the terms and conditions
           .signUpButton    
             input.btn.btn-primary(type='submit', value='Sign Up')
@@ -68,9 +68,10 @@ html(lang='en')
             input(type='submit', value='Sign in to your account')
   script.
     function agreed(){
-      var att = document.getElementByName('agree');
+      var att = document.getElementById('agree');
       if(!att.checked) {
         alert('You must agree to the terms and conditions');
         return false;
       }
+      return true;
     }
