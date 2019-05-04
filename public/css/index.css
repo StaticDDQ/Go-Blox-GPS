@@ -1,20 +1,29 @@
 /* For index, about */
+* {
+    margin: 0;
+    padding: 0; 
+}
+
+/* General body formatting */
 
 body {
-    background-image: url("https://media.istockphoto.com/photos/like-getting-together-with-my-friends-picture-id869988382");
-    
     font-family: 'Quicksand';
-    background-color: lightsalmon;
     background-image: linear-gradient(to top right, #f5bdab, #90a4bc);
     background-repeat: no-repeat;
     background-size: cover;
 }
 
+/* Format Header */
+
 h1 {
     font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
     letter-spacing: 2px;
-    font-family: 'Quicksand';
+    padding-bottom: 100px;
+    color: #647a94;
 }
+
+/* Formatting the input boxes */
 
 p {
     font-size: 20px;
@@ -27,33 +36,98 @@ button {
 
 input {
     font-size: 20px;
-    width: 300px;
+    width: 200px;
     padding: 20px;
+    align-content: center;
     font-family: 'Quicksand';
 }
 
+/* Login Elements */
 
+.logins input {
+    background: none;
+    border: none;
+    border-bottom: 1px solid #707070;
+    padding: 20px 20px 10px 20px;
+    
+}
 
 .logins {
     padding: 10px 10px 10px 10px;
 }
 
-.loginButton {
-    height: 50px;
+/* Login button */
+
+.loginButton input {
+    height: 45px;
+    width: 120px;
     padding: 10px 10px 10px 10px; 
-    margin: 0 auto;
     font-family: 'Quicksand';
+    font-size: 16px;
+    border: none;
+    border: .5px solid #707070;
+    border-radius: .4em;
+
+}
+.loginButton {
+    text-align: left;
+    padding-left: 30px;
+    padding-top: 20px;
+}
+
+.loginButton input:hover,
+.loginButton input.sfHover,
+.loginButton input.current-menu-item {
+    background-color: #f5bdab;
+    color:  rgb(255, 255, 255);
+}
+
+/* Sign up button */
+
+.signUpButton input {
+    height: 40px;
+    width: 150px;
+    font-size: 16px;
+    padding: 5px 5px 5px 5px; 
+    color: #555555;
+    font-family: 'Quicksand';
+    background: none;
+    border: none;
+    text-align: left;
     
 }
 
+.signUpButton {
+    text-align: left;
+    padding-left: 30px;
+    padding-top: 20px;
+}
+
+.signUpButton input:hover,
+.signUpButton input.sfHover,
+.signUpButton input.current-menu-item {
+    background: none;
+    border-bottom: .1em solid #f5bdab;
+}
+
+/* configuring the grid styles */
+
+.gridContainer {
+    display: grid;
+    grid-template-columns: .1fr 40fr .1fr;
+    grid-template-rows: .1fr 40fr .1fr;
+
+ }
+
 .container {
-    display: block;
+    grid-row: 2;
+    grid-column: 2;
     text-align: center;
     background-color: rgb(255,249,248);
     border: solid 1px rgb(214,201,201);
-    height: 500px;
-    width: 800px;
-    padding: 30px;
+    border-radius: .7em;
+    padding: 100px;
     align-content: center;
     margin: 100px auto;
+    box-shadow: 0px 2px 2px 0px rgba(53, 53, 53, 0.75);
 }
