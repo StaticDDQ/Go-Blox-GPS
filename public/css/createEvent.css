@@ -1,22 +1,38 @@
+* {
+    margin: 0;
+    padding: 0; 
+}
+
+/* General body formatting */
 
 body{
     color:#333;
     font-family: 'Quicksand';
     padding-left: 30px;
     padding-right: 30px;
+    background-image: linear-gradient(to top right, #f5bdab, #90a4bc);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Format Header */
+
+h1 {
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 2px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    color: #647a94;
 }
 
 form {
     color: rgb(236,118,85);
+    font-size: 20px;
 
 }
 
-h1 {
-    color: black;
-    font-family: 'Quicksand';
-    font-style: bold;
-    font-style: italic;
-}
+/* Configure grid */
 
 .box {
     display: block;
@@ -28,13 +44,6 @@ h1 {
     align-content: center;
     text-align: center;
     margin: 100px auto;
-}
-
-body {
-    background-image: url("https://previews.123rf.com/images/okanda/okanda1706/okanda170600009/80245917-cute-kids-with-parents-and-friends-in-a-circle-looking-down-for-photo-young-diverse-parents-with-cut.jpg");
-    background-repeat: no-repeat;
-    background-size: 100%;
-
 }
 
 .bottom button {
@@ -61,6 +70,6 @@ body {
      visibility:hidden;
  }
 
- a{
+ a {
      text-decoration:none;
  }
