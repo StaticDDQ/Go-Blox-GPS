@@ -1,3 +1,11 @@
+/* CSS FOR signup.pug */
+
+* {
+    margin: 0;
+    padding: 0; 
+}
+
+/* Formatting the general look */
 
 body {
     color:#333;
@@ -5,26 +13,20 @@ body {
     background-image: linear-gradient(to bottom right, #e15848, #90a4bc);
 }
 
+div {
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 form {
     color: rgb(236,118,85);
 }
 
+/* Formatting the input boxes */
+
+
 p {
     text-align: left;
-}
-
-h1 {
-    font-size: 40px;
-    font-family: Arial, Helvetica, sans-serif;
-    letter-spacing: 2px;
-    padding-top: 40px;
-    padding-bottom: 20px;
-    color: #647a94;
-}
-
-div {
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 
 input {
@@ -33,6 +35,18 @@ input {
     padding: 20px;
     align-content: center;
     font-family: 'Quicksand';
+
+}
+
+/* Formatting header */
+
+h1 {
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 2px;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    color: #647a94;
 }
 
 .signUps {
@@ -44,6 +58,8 @@ input {
     width: 470px;
     margin-top: 6px;
 }
+
+/* Configuring terms and conditions */
 
 .agree input {
     padding: .5em;
@@ -62,22 +78,24 @@ input {
     grid-column-gap: 36px;
 }
 
+/* Entering first and last name */
+
 .signUpsFirstName {
     grid-column: 1;
     text-align: left;
 }
 
-.signUpsName {
-    grid-column: 2;
-    text-align: left;
-}
-
-.signUpsName input {
+.signUpsFirstName input {
     padding: 12px;
     margin-top: 6px;
 }
 
-.signUpsFirstName input {
+.signUpsLastName {
+    grid-column: 2;
+    text-align: left;
+}
+
+.signUpsLastName input {
     padding: 12px;
     margin-top: 6px;
 }
@@ -107,6 +125,8 @@ input {
     color:  rgb(255, 255, 255);
 }
 
+/* Login button configuration */
+
 .loginButton input {
     height: 40px;
     width: 180px;
@@ -131,6 +151,8 @@ input {
     background: none;
     border-bottom: .1em solid #f5bdab;
 }
+
+/* Grid container configuration */
 
 .gridContainer {
     display: grid;
