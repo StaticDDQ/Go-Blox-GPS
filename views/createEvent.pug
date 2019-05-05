@@ -9,7 +9,7 @@ html(lang='en')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
   body
     .box
-      form(action='/events/addEvent', method='POST', enctype="multipart/form-data")
+      form(action='/events/addEvent', method='POST', enctype="multipart/form-data", onsubmit='return agreed()')
         h1 Create Event
         p
           | Name of the event: 
@@ -129,7 +129,7 @@ html(lang='en')
               input#tag(type='checkbox', name='tags', value='Others', onclick='displayTag(this.parentElement)')
               | Others
           br
-          input#agreed(type='radio', value='agreed')
+          input#agree(type='checkbox', value='agreed')
           |  I agree to the terms and conditions 
           br
           input(type="submit" value="SUBMIT")
@@ -182,3 +182,12 @@ html(lang='en')
               wrapper.append(child);
           }
       }
+
+      function agreed(){
+        var att = document.getElementById('agree');
+        if(!att.checked) {
+          alert('You must agree to the terms and conditions');
+          return false;
+        }
+        return true;
+      }      
