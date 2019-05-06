@@ -64,8 +64,8 @@ html(lang='en')
           .uploadImage
             div
               input(type='file', onchange='previewFile()', name='pictures')
-            div
-              img#preview(src='', alt='Image preview...')
+            div#preview
+              //- img(src='', alt='Image preview...')
           
           #bottom
             p
@@ -167,7 +167,8 @@ html(lang='en')
 
       script.
         function previewFile() {
-            var preview = document.getElementById('preview'); //get image element ID
+            //- var preview = document.querySelector('img'); //selects the query named img
+            var previewbox = document.getElementById('preview'); // get image by ID
             var file = document.querySelector('input[type=file]').files[0]; //sames as here
             
             // upload image
@@ -175,9 +176,14 @@ html(lang='en')
             reader.onloadend = function () {  
 
               // resize the image
-              preview.setAttribute("src", reader.result);
-              console.log(reader.result);
-              preview.setAttribute("style", "width: 100%;");
+              let imgX = document.createElement("IMG");
+              imgX.setAttribute("src", reader.result);
+              //- console.log(reader.result)
+              imgX.setAttribute("style", "width: 100%;");
+              //- imgX.setAttribute("height", "300");
+              
+              // allow user to upload multiple images
+              previewbox.appendChild(imgX);
 
             }
 
