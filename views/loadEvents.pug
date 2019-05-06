@@ -8,7 +8,6 @@ html(lang='en')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
     title Search
-  script(src='../public/js/filterTags.js')
 
   body
     .container
@@ -20,9 +19,47 @@ html(lang='en')
           input(type='submit', value='Find')
       .displayEvents
         if events
-            each tag in tags
-                input(type='button', name='tag', value = tag, onclick= 'filterOut(' + tag + ',' + events + ');' )
+            #filter
+
             .events
                 ul
                     each event in events
-                        div(class='filtered,' + event.tags) #{event.name}
+                        div(class='filtered', name = 'displayedEvents', tags = event.tags) #{event.name}
+      
+      script.
+        var events = !{JSON.stringify(events)};
+        var filter = document.getElementById('filter');
+        //var eventSpace = document.getElementById('eventSpace');
+
+        function loadTags(events) {
+
+            let tags = [];
+            for (let i = 0; i < events.length; i++) {
+                for (let j = 0; j < events[i].tags.length; j++) {
+                    if (!tags.includes(events[i].tags[j])) {
+                        tags.push(events[i].tags[j]);
+                        var btn = document.createElement('input');
+                        btn.type = 'button';
+                        btn.value = events[i].tags[j];
+                        btn.onclick = function(){
+                            filterOut(btn.value);
+                        }
+                        filter.appendChild(btn);
+                    }
+                }
+            }
+            return tags;
+        }
+
+        loadTags(events);
+
+        function filterOut(tag) {
+            var displayedEvents = document.getElementsByClassName('filtered');
+            for(let i = 0; i < displayedEvents.length; i++){
+                if(displayedEvents[i].outerHTML.includes(tag)){
+                    displayedEvents[i].style.display = 'block';
+                } else {
+                    displayedEvents[i].style.display = 'none';
+                }
+            }
+        }
