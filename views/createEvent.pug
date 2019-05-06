@@ -65,7 +65,7 @@ html(lang='en')
             div
               input(type='file', onchange='previewFile()', name='pictures')
             div
-              img(src='', alt='Image preview...', height='100')
+              img#preview(src='', alt='Image preview...')
           
           #bottom
             p
@@ -167,14 +167,22 @@ html(lang='en')
 
       script.
         function previewFile() {
-            var preview = document.querySelector('img'); //selects the query named img
+            var preview = document.getElementById('preview'); //get image element ID
             var file = document.querySelector('input[type=file]').files[0]; //sames as here
+            
+            // upload image
             var reader = new FileReader();
-            reader.onloadend = function () {
-                preview.src = reader.result;
+            reader.onloadend = function () {  
+
+              // resize the image
+              preview.setAttribute("src", reader.result);
+              console.log(reader.result);
+              preview.setAttribute("style", "width: 100%;");
+
             }
+
             if (file) {
-                reader.readAsDataURL(file); //reads the data as a URL
+                reader.readAsDataURL(file); //reads the data as a UR
                 
             } else {
                 preview.src = "";
