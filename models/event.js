@@ -9,7 +9,7 @@ const eventsSchema = new mongoose.Schema({
     "description": String,
     "email": String,
     "phone": String,
-    "pictures": Object,
+    "pictures": String,
     "tags": [String],
     "joinedUsers": [String]
 }, { versionKey: false });

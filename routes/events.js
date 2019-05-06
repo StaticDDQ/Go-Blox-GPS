@@ -2,8 +2,9 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-const fs = require('fs');
 const multer = require('multer');
+var cloudinary = require('cloudinary').v2;
+var cloudConfig = require("../config/cloudinary");
 
 // Get event model
 let Event = require('../models/event');
@@ -19,29 +20,31 @@ let Event = require('../models/event');
 //     "tags": [String]
 // }
 
-var storage = multer.memoryStorage();
-
-  const upload = multer({storage: storage});
+var storage = multer.diskStorage({
+    filename: function (req, file, cb) {
+      cb(null, file.originalname + '-' + Date.now())
+    }
+  })
+   
+var upload = multer({ storage: storage })
 
 // add event
-router.post('/addEvent', upload.single("pictures"), function (req, res) {
-    console.log(req.file);
-    // var img = fs.readFileSync(req.file.path);
-    // var encode_image = img.toString('base64');
-    // var finalImg = {
-    //     contentType: req.file.mimetype,
-    //     image:  new Buffer(encode_image, 'base64'),
-    //     filePath: req.file.path
-    //  };
-    // req.body.pictures = finalImg;
-    req.body.pictures = req.file;
-    console.log(req.body);
-    var addNewEvent = new Event(req.body);
+router.post('/addEvent',upload.single("pictures"), async function(req,res){
+    var reqURL;
+    cloudinary.image(req.file.path, {width: 0.5, crop: "scale"});
+    await cloudinary.uploader.upload(req.file.path,
+    function(error, result) {
+        reqURL = result.secure_url;
+
+    });
+    req.body.pictures = reqURL;
+    var addNewEvent = await new Event(req.body);
     addNewEvent.save(function (err, event) {
         if (err) throw err;
         res.send(event);
     });
 });
+
 
 router.get('/createEvent', function (req, res) {
     res.render('createEvent');
