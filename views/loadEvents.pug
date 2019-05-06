@@ -8,15 +8,14 @@ html(lang='en')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
     title Search
-
   body
     .container
       .title
         h1 Search Events
       .searchBox
         form(action='/events/getEvents', method='post')
-            input(type='text', name='name')
-            input(type='submit', value='Find')
+          input(type='text', name='name')
+          input(type='submit', value='Find')
       .displayEvents
         if events
             -
@@ -29,26 +28,21 @@ html(lang='en')
                         }
                     }
                 }
-
-                function searchEvents(tag){
+            -   
+                var filterOut = function(tag){
                     displayedEvents = [];
-                    for(let i = 0; i < events.length; i++){
-                        if(events[i].tags.includes(tag.value)){
-                            displayedEvents.push(events[i].tags.includes(tag));      
+                    for(let i = 0; i < events.length){
+                        if(events[i].tags.includes(tag)){
+                            displayedEvents.push(events[i]);
+                            console.log(events[i]);
                         }
                     }
-                }
 
-            .tagFilters
-                each tag in tags
-                    input(type='button', value = tag, onclick='searchEvents(this)')
+            button.btn.active() Show All
+            each tag in tags
+                button.btn(onclick= filterOut(tag)) #{tag}
+
             .events
                 ul
-                    each event in displayedEvents
-                        li #{event.name}
-    
-    script.
-        var event = events
-        console.log(event);
-        
-  
+                    each event in events
+                        div(class='filtered,' + event.tags) #{event.name}
