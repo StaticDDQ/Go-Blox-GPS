@@ -15,21 +15,40 @@ html(lang='en')
         h1 Search Events
       .searchBox
         form(action='/events/getEvents', method='post')
-          input(type='text', name='name')
-          input(type='submit', value='Find')
+            input(type='text', name='name')
+            input(type='submit', value='Find')
       .displayEvents
-        ul
-          if events
-            each event in events
-              li #{event.name}
+        if events
             -
-              var tags = [];
-              for(let i = 0; i < events.length; i++){
-                  for(let j = 0; j < events[i].tags.length; j++){
-                      if(!tags.include(events[i].tags[j])){
-                          tags.push(events[i].tags[j]);
-                      }
-                  }
-              }
-             
+                let tags = [];
+                let displayedEvents = events;
+                for(let i = 0; i < events.length; i++){
+                    for(let j = 0; j < events[i].tags.length; j++){
+                        if(!tags.includes(events[i].tags[j])){
+                            tags.push(events[i].tags[j]);
+                        }
+                    }
+                }
+
+                function searchEvents(tag){
+                    displayedEvents = [];
+                    for(let i = 0; i < events.length; i++){
+                        if(events[i].tags.includes(tag.value)){
+                            displayedEvents.push(events[i].tags.includes(tag));      
+                        }
+                    }
+                }
+
+            .tagFilters
+                each tag in tags
+                    input(type='button', value = tag, onclick='searchEvents(this)')
+            .events
+                ul
+                    each event in displayedEvents
+                        li #{event.name}
+    
+    script.
+        var event = events
+        console.log(event);
+        
   
