@@ -8,6 +8,8 @@ html(lang='en')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
     title Search
+  script(src='../public/js/filterTags.js')
+
   body
     .container
       .title
@@ -22,30 +24,8 @@ html(lang='en')
             li #{event.name}
             
         if events
-            -
-                let tags = [];
-                let displayedEvents = events;
-                for(let i = 0; i < events.length; i++){
-                    for(let j = 0; j < events[i].tags.length; j++){
-                        if(!tags.includes(events[i].tags[j])){
-                            tags.push(events[i].tags[j]);
-                        }
-                    }
-                }
-            -   
-                var filterOut = function(tag){
-                    displayedEvents = [];
-                    for(let i = 0; i < events.length){
-                        if(events[i].tags.includes(tag)){
-                            displayedEvents.push(events[i]);
-                            console.log(events[i]);
-                        }
-                    }
-
-            button.btn.active() Show All
             each tag in tags
-                button.btn(onclick= filterOut(tag)) #{tag}
-
+                input(type='button', name='tag', value = tag, onclick= 'filterOut(' + tag + ',' + events + ');' )
             .events
                 ul
                     each event in events
