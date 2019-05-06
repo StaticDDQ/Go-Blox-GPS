@@ -43,6 +43,7 @@ router.post('/addEvent',upload.single("pictures"), async function(req,res){
         if (err) throw err;
         res.send(event);
     });
+
 });
 
 
@@ -59,15 +60,21 @@ router.get('/getEvent/:name', function (req, res) {
 });
 
 router.get('/findEvent', function (req, res) {
-    res.render('loadEvents');
+    res.render('loadEvents', {events : []});
 })
 
 // get events by name
 router.post('/getEvents', function (req, res) {
     // find the event
-    Event.find({ name: {$regex: req.body.name, $options: 'i' } }, function (err, resp) {
+    Event.find({ 
+        $or: [
+            {name: {$regex: req.body.name, $options: 'i' }},
+            {email: {$regex: req.body.name, $options: 'i' }},
+            {organizers: {$regex: req.body.name, $options: 'i' }}
+        ] }, function (err, resp) {
         if (err) throw err;
-        res.render('loadEvents', { events: resp });
+        console.log(resp.length);
+        res.render('loadEvents', { events : resp});
     });
 });
 

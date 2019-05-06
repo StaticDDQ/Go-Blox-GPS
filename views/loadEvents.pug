@@ -25,7 +25,7 @@ html(lang='en')
                 ul
                     each event in events
                         div(class='filtered', name = 'displayedEvents', tags = event.tags) #{event.name}
-      
+
       script.
         var events = !{JSON.stringify(events)};
         var filter = document.getElementById('filter');
