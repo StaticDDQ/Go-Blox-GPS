@@ -18,17 +18,11 @@ html(lang='en')
         form(action='/events/getEvents', method='post')
           input(type='text', name='name')
           input(type='submit', value='Find')
-     
       .displayEvents
-        each event in events
-            li #{event.name}
-            
-        if events
-            each tag in tags
-                input(type='button', name='tag', value = tag, onclick= 'filterOut(' + tag + ',' + events + ');' )
-            .events
-                ul
-                    each event in events
-                        div(class='filtered,' + event.tags) #{event.name}
+        each val in events
+          li= val.name
+        else
+          li
+     
     
         

@@ -60,7 +60,7 @@ router.get('/getEvent/:name', function (req, res) {
 });
 
 router.get('/findEvent', function (req, res) {
-    res.render('loadEvents');
+    res.render('loadEvents', {events : []});
 })
 
 // get events by name
@@ -73,8 +73,8 @@ router.post('/getEvents', function (req, res) {
             {organizers: {$regex: req.body.name, $options: 'i' }}
         ] }, function (err, resp) {
         if (err) throw err;
-        console.log(resp);
-        res.render('loadEvents', { events: resp });
+        console.log(resp.length);
+        res.render('loadEvents', { events : resp});
     });
 });
 
