@@ -43,6 +43,7 @@ router.post('/addEvent',upload.single("pictures"), async function(req,res){
         if (err) throw err;
         res.send(event);
     });
+
 });
 
 
@@ -65,8 +66,14 @@ router.get('/findEvent', function (req, res) {
 // get events by name
 router.post('/getEvents', function (req, res) {
     // find the event
-    Event.find({ name: {$regex: req.body.name, $options: 'i' } }, function (err, resp) {
+    Event.find({ 
+        $or: [
+            {name: {$regex: req.body.name, $options: 'i' }},
+            {email: {$regex: req.body.name, $options: 'i' }},
+            {organizers: {$regex: req.body.name, $options: 'i' }}
+        ] }, function (err, resp) {
         if (err) throw err;
+        console.log(resp);
         res.render('loadEvents', { events: resp });
     });
 });

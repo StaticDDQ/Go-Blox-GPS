@@ -16,7 +16,11 @@ html(lang='en')
         form(action='/events/getEvents', method='post')
           input(type='text', name='name')
           input(type='submit', value='Find')
+     
       .displayEvents
+        each event in events
+            li #{event.name}
+            
         if events
             -
                 let tags = [];
@@ -46,3 +50,5 @@ html(lang='en')
                 ul
                     each event in events
                         div(class='filtered,' + event.tags) #{event.name}
+    
+        
