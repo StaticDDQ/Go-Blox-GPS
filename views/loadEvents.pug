@@ -21,11 +21,11 @@ html(lang='en')
         if events
             input#input(type='text', placeholder='SEARCH', onkeyup='addTag()')
             #filter
-
             .events
                 ul
                     each event in events
-                        div(class='filtered', name = 'displayedEvents', tags = event.tags) #{event.name}
+                        div#eachEvent(class='filtered', name ='displayedEvents', tags=event.tags) #{event.name} 
+
 
       script.
         var events = !{JSON.stringify(events)};
