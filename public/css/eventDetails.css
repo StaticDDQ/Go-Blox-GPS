@@ -7,11 +7,21 @@ body{
     font-family: "Quicksand";
 }
 
+p {
+  padding-top: 5px;
+}
+
+/* comments */
+i {
+  color: red;
+  font-size: 14px;
+}
+
 .grid{
     display: grid;
     height: 100%;
     grid-template-columns: auto;
-    grid-template-rows: 0.3fr 3fr 3fr 3fr 0.3fr;
+    grid-template-rows: 0.3fr 3fr 1fr 1fr 0.3fr;
     grid-template-areas: 
     "navbar"
     "main_content"
@@ -64,7 +74,22 @@ body{
 
 .main_content{
     grid-area: main_content;
-    text-align: center;
+    padding-bottom: 10px;
+    margin-right: 400px;
+    margin-left: 400px;
+}
+
+.imageContent {
+  width: 600px;
+  height: 360px;
+  border: solid black 1px;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.text_content {
+  text-align: left;
+    
 }
 .join{
     display: inline-block;
