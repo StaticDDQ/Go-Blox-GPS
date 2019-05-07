@@ -19,6 +19,7 @@ html(lang='en')
           input(type='submit', value='Find')
       .displayEvents
         if events
+            input#input(type='text', placeholder='SEARCH', onkeyup='addTag()')
             #filter
 
             .events
@@ -59,7 +60,9 @@ html(lang='en')
             return tags;
         }
 
-        loadTags(events);
+        if(events.length > 0) {
+            loadTags(events);
+        }
 
         function filterOut(tag) {
             var displayedEvents = document.getElementsByClassName('filtered');
