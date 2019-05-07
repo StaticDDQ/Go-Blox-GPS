@@ -84,7 +84,7 @@ html(lang='en')
           
             tagDiv = document.getElementsByName('tagFilter');
             tagDiv.forEach(function(element) {
-                if(element.value.toUpperCase().indexOf(filter) > -1 && filter.length > 0 || filter.length == 0){
+                if(element.value.toUpperCase().indexOf(filter) > -1 && filter.length > 0 || filter.length === 0){
                     element.style.visibility = 'visible';
                 } else {
                     element.style.visibility = 'hidden';
