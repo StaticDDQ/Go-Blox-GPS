@@ -30,8 +30,3 @@ body {
 .displayEvents {
     grid-row: 3;
 }
-
-#eachEvent {
-
-    padding: 10px;
-}

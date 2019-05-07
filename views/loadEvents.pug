@@ -24,8 +24,9 @@ html(lang='en')
             .events
                 ul
                     each event in events
-                        div#eachEvent(class='filtered', name ='displayedEvents', tags=event.tags) #{event.name} 
-
+                        div#eachEvent(class='filtered', name ='displayedEvents', tags=event.tags)
+                        li #{event.address}
+                        li #{event.name} 
 
       script.
         var events = !{JSON.stringify(events)};
