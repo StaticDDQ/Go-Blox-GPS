@@ -1,68 +1,21 @@
 doctype html
-html(lang='en')
-  head
-    title Create Event
-    meta(charset='utf-8')
-    link(rel='stylesheet', href='../css/eventDetails.css', type='text/css')
-    //- ,link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
-    //- link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
-
-  body
-    .grid
-      .navbar
-        span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Menu
-        #mySidenav.sidenav
-          a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
-          a(href='#') Home
-          a(href='#') About
-          a(href='#') Events
-          a(href='#') Places
-          a(href='#') FAQ
-        img.logo(src='logo.png', alt='GPS', width='50', height='50')
-      .main_content
-        img.main_img(src='', alt='main_image')
-        h3 #{name}
-        h3 Organised by: #{organizer}
-        h3 Type: #{str}
-        h3 Date: #{date}
-        h3 Time: 
-        h3 Contact Details:
-         - var contacts = "Phone Number: "+phone+"\nEmail: "+ email;
-        h3 Phone Number:
-        h3 Website:
-        #join
-          h3.join Join?
-          button Yes
-          button No
-      .gallery
-        h2 Gallery
-        img(src='', alt='event_pic')
-        img(src='', alt='event_pic2')
-      .ratings
-        h2 Ratings: 
-      .reviews
-        h2 Reviews
-        p review 1
-        p review 2
-      .footer
-        p(style='color:white')
-          | © 2019 Get People Socilaizing. All rights reserved. 
-          a(href='page2.html')
-        a(href='page2.html')
-        ul(style='color:white')
-          a(href='page2.html')
-          li
-            a(href='page2.html')
-            a(href='#') Privacy Policy
-          li
-            a(href='#') Terms of Service
-          li
-            a(href='#') Cookie Policy
-    script.
-      function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-      }
-      function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-      }
-
+html
+    head
+        h1 #{name}
+    body
+        p organized by: #{organizer}
+        p #{date} //how to include icon?
+        - 
+            var str = "";
+            for(let i = 0; i<tags.length; i++){
+                str != "" ? str += ", " + tags[i] : str += tags[i];
+            }
+        p Type: #{str}
+        p Gallery:
+        img(src = pictures)/
+        p Reviews
+        p Contact details:
+        - var contacts = "Phone Number: "+phone+"\nEmail: "+ email;
+        p #{contacts}
+        p Website
+        - //a(href=${link}) Organizer's website
