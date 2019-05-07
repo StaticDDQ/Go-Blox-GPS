@@ -8,186 +8,231 @@ html(lang='en')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
   body
-    .box
-      form(action='/events/addEvent', method='POST', enctype="multipart/form-data", onsubmit='return agreed()')
-        h1 Create Event
-        p
-          | Name of the event: 
-          input(type='text', name='name')
-        p
-          | Date: 
-          input(type='date', name='date')
-        p
-          | Organiser: 
-          input(type='text', name='organizer')
-        p
-          | Location: 
-          input(type='text', name='address')
-        p
-          | Descriptions: 
-          input(type='text', name='description')
-        p#topic Contact: 
-        p
-          | Email:  
-          input(type='email', name='email')
-        p
-          | Phone number: 
-          input(type='text', name='phone')
-        p#topic
-          b Gallery
-        .uploadImage
-          div
-            input(type='file', onchange='previewFile()', name='pictures')
-          div
-            img(src='', alt='Image preview...', height='100')
-        #bottom
-          <div class='searchBar'>
-            input#input(type='text', placeholder='SEARCH', onkeyup='addTag()')
-          </div>
-          ul#checked
+    .gridContainer
+      .box
+        form(action='/events/addEvent', method='POST', enctype="multipart/form-data", onsubmit='return agreed()')
+          h1 Create Event
+          p
+            .eventInputs 
+              | Name of the event: 
+              br
+              input(type='text', name='name')
+          p
+            .eventInputs  
+              | Date: 
+              br
+              input(type='date', name='date')
+          p
+            .eventInputs  
+              | Time: 
+              br
+              input(type='time', name='time')
+          p
+            .eventInputs            
+              | Organiser: 
+              br
+              input(type='text', name='organizer')
+          p
+            .eventInputs 
+              | Location: 
+              br
+              input(type='text', name='address')
+          p
+            .eventInputs
+              #topic Contact: 
+              br        
+          p
+            .eventInputs  
+              | Email:  
+              br
+              input(type='email', name='email')
+          p
+            .eventInputs  
+              | Phone number: 
+              br
+              input(type='text', name='phone')
+          p
+            .eventInputs  
+              | Descriptions: 
+              br
+              textarea(name="description" cols="40" rows="5")
+
+          p#topic
+            br
+            b Gallery
+
+          .uploadImage
+            div
+              input(type='file', onchange='previewFile()', name='pictures')
+            div#preview
+              //- img(src='', alt='Image preview...')
+          
+          #bottom
+            p
+              | Tags
+            .searchBar
+              input#input(type='text', placeholder='Search Tags', onkeyup='addTag()')
+
+            ul#checked   
+            ul#wrapper
+              li
+                input#tag(type='checkbox', name='tags', value='Art', onclick='displayTag(this.parentElement)')
+                | Art
+              li
+                input#tag(type='checkbox', name='tags', value='Photography', onclick='displayTag(this.parentElement)')
+                | Photography
+              li
+                input#tag(type='checkbox', name='tags', value='Painting', onclick='displayTag(this.parentElement)')
+                | Painting           
+              li
+                input#tag(type='checkbox', name='tags', value='Dancing', onclick='displayTag(this.parentElement)')
+                | Dancing
+              li
+                input#tag(type='checkbox', name='tags', value='Drama', onclick='displayTag(this.parentElement)')
+                | Drama
+              li
+                input#tag(type='checkbox', name='tags', value='Basketball', onclick='displayTag(this.parentElement)')
+                | Basketball           
+              li
+                input#tag(type='checkbox', name='tags', value='Soccer', onclick='displayTag(this.parentElement)')
+                | Soccer
+              li
+                input#tag(type='checkbox', name='tags', value='Rugby', onclick='displayTag(this.parentElement)')
+                | Rugby
+              li
+                input#tag(type='checkbox', name='tags', value='Badminton', onclick='displayTag(this.parentElement)')
+                | Badminton     
+              li
+                input#tag(type='checkbox', name='tags', value='Sports', onclick='displayTag(this.parentElement)')
+                | Sports
+              li
+                input#tag(type='checkbox', name='tags', value='Culture', onclick='displayTag(this.parentElement)')
+                | Cultural Events
+              li
+                input#tag(type='checkbox', name='tags', value='Music', onclick='displayTag(this.parentElement)')
+                | Music         
+              li
+                input#tag(type='checkbox', name='tags', value='Sing', onclick='displayTag(this.parentElement)')
+                | Sing
+              li
+                input#tag(type='checkbox', name='tags', value='Instruments', onclick='displayTag(this.parentElement)')
+                | Instruments
+              li
+                input#tag(type='checkbox', name='tags', value='Performance', onclick='displayTag(this.parentElement)')
+                | Performance
+              li
+                input#tag(type='checkbox', name='tags', value='Food', onclick='displayTag(this.parentElement)')
+                | Food         
+              li
+                input#tag(type='checkbox', name='tags', value='Vegetarian', onclick='displayTag(this.parentElement)')
+                | Vegetarian         
+              li
+                input#tag(type='checkbox', name='tags', value='Vegan', onclick='displayTag(this.parentElement)')
+                | Vegan       
+              li
+                input#tag(type='checkbox', name='tags', value='Sweets', onclick='displayTag(this.parentElement)')
+                | Sweets Lovers
+              li
+                input#tag(type='checkbox', name='tags', value='Coffee', onclick='displayTag(this.parentElement)')
+                | Coffee Lovers
+              li
+                input#tag(type='checkbox', name='tags', value='Meat Lovers', onclick='displayTag(this.parentElement)')
+                | Meat Lovers
+              li
+                input#tag(type='checkbox', name='tags', value='Tea', onclick='displayTag(this.parentElement)')
+                | Tea Lovers
+              li
+                input#tag(type='checkbox', name='tags', value='Brunch', onclick='displayTag(this.parentElement)')
+                | Brunch
+              li
+                input#tag(type='checkbox', name='tags', value='VideoGames', onclick='displayTag(this.parentElement)')
+                | Video Games
+              li
+                input#tag(type='checkbox', name='tags', value='TableTop', onclick='displayTag(this.parentElement)')
+                | Table Top Gaming
+              li
+                input#tag(type='checkbox', name='tags', value='NightLife', onclick='displayTag(this.parentElement)')
+                | NightLife
+              li
+                input#tag(type='checkbox', name='tags', value='Others', onclick='displayTag(this.parentElement)')
+                | Others
+            br
+            .agree  
+              input#agree(type='checkbox', value='agreed')
+              |  I agree to the terms and conditions 
+              br
+            .createEventButton
+              input(type="submit" value="Create Event")
+
+
+      script.
+        function previewFile() {
+            //- var preview = document.querySelector('img'); //selects the query named img
+            var previewbox = document.getElementById('preview'); // get image by ID
+            var file = document.querySelector('input[type=file]').files[0]; //sames as here
             
-          ul#wrapper
-            li
-              input#tag(type='checkbox', name='tags', value='Art', onclick='displayTag(this.parentElement)')
-              | Art
-            li
-              input#tag(type='checkbox', name='tags', value='Photography', onclick='displayTag(this.parentElement)')
-              | Photography
-            li
-              input#tag(type='checkbox', name='tags', value='Painting', onclick='displayTag(this.parentElement)')
-              | Painting           
-            li
-              input#tag(type='checkbox', name='tags', value='Dancing', onclick='displayTag(this.parentElement)')
-              | Dancing
-            li
-              input#tag(type='checkbox', name='tags', value='Drama', onclick='displayTag(this.parentElement)')
-              | Drama
-            li
-              input#tag(type='checkbox', name='tags', value='Basketball', onclick='displayTag(this.parentElement)')
-              | Basketball           
-            li
-              input#tag(type='checkbox', name='tags', value='Soccer', onclick='displayTag(this.parentElement)')
-              | Soccer
-            li
-              input#tag(type='checkbox', name='tags', value='Rugby', onclick='displayTag(this.parentElement)')
-              | Rugby
-            li
-              input#tag(type='checkbox', name='tags', value='Badminton', onclick='displayTag(this.parentElement)')
-              | Badminton     
-            li
-              input#tag(type='checkbox', name='tags', value='Sports', onclick='displayTag(this.parentElement)')
-              | Sports
-            li
-              input#tag(type='checkbox', name='tags', value='Culture', onclick='displayTag(this.parentElement)')
-              | Cultural Events
-            li
-              input#tag(type='checkbox', name='tags', value='Music', onclick='displayTag(this.parentElement)')
-              | Music         
-            li
-              input#tag(type='checkbox', name='tags', value='Sing', onclick='displayTag(this.parentElement)')
-              | Sing
-            li
-              input#tag(type='checkbox', name='tags', value='Instruments', onclick='displayTag(this.parentElement)')
-              | Instruments
-            li
-              input#tag(type='checkbox', name='tags', value='Performance', onclick='displayTag(this.parentElement)')
-              | Performance
-            li
-              input#tag(type='checkbox', name='tags', value='Food', onclick='displayTag(this.parentElement)')
-              | Food         
-            li
-              input#tag(type='checkbox', name='tags', value='Vegetarian', onclick='displayTag(this.parentElement)')
-              | Vegetarian         
-            li
-              input#tag(type='checkbox', name='tags', value='Vegan', onclick='displayTag(this.parentElement)')
-              | Vegan       
-            li
-              input#tag(type='checkbox', name='tags', value='Sweets', onclick='displayTag(this.parentElement)')
-              | Sweets Lovers
-            li
-              input#tag(type='checkbox', name='tags', value='Coffee', onclick='displayTag(this.parentElement)')
-              | Coffee Lovers
-            li
-              input#tag(type='checkbox', name='tags', value='Meat Lovers', onclick='displayTag(this.parentElement)')
-              | Meat Lovers
-            li
-              input#tag(type='checkbox', name='tags', value='Tea', onclick='displayTag(this.parentElement)')
-              | Tea Lovers
-            li
-              input#tag(type='checkbox', name='tags', value='Brunch', onclick='displayTag(this.parentElement)')
-              | Brunch
-            li
-              input#tag(type='checkbox', name='tags', value='VideoGames', onclick='displayTag(this.parentElement)')
-              | Video Games
-            li
-              input#tag(type='checkbox', name='tags', value='TableTop', onclick='displayTag(this.parentElement)')
-              | Table Top Gaming
-            li
-              input#tag(type='checkbox', name='tags', value='NightLife', onclick='displayTag(this.parentElement)')
-              | NightLife
-            li
-              input#tag(type='checkbox', name='tags', value='Others', onclick='displayTag(this.parentElement)')
-              | Others
-          br
-          input#agree(type='checkbox', value='agreed')
-          |  I agree to the terms and conditions 
-          br
-          input(type="submit" value="SUBMIT")
+            // upload image
+            var reader = new FileReader();
+            reader.onloadend = function () {  
 
-
-    script.
-      function previewFile() {
-          var preview = document.querySelector('img'); //selects the query named img
-          var file = document.querySelector('input[type=file]').files[0]; //sames as here
-          var reader = new FileReader();
-          reader.onloadend = function () {
-              preview.src = reader.result;
-          }
-          if (file) {
-              reader.readAsDataURL(file); //reads the data as a URL
+              // resize the image
+              let imgX = document.createElement("IMG");
+              imgX.setAttribute("src", reader.result);
+              //- console.log(reader.result)
+              imgX.setAttribute("style", "width: 100%;");
+              //- imgX.setAttribute("height", "300");
               
-          } else {
-              preview.src = "";
-          }
-      }
+              // allow user to upload multiple images
+              previewbox.appendChild(imgX);
 
-      previewFile();  //calls the function named previewFile()
+            }
 
-      var showList = document.getElementById('checked');
-      var wrapper = document.getElementById('wrapper');
-
-      function addTag() {
-          
-          var input, filter, li, a, i;
-          input = document.getElementById('input');
-          filter = input.value.toUpperCase();
-          
-          li = wrapper.getElementsByTagName('li');
-
-          for(i = 0; i < li.length; i++){
-              a = li[i].getElementsByTagName('input')[0];
-              if(a.value.toUpperCase().indexOf(filter) > -1 && filter.length > 0){
-                  li[i].style.visibility = 'visible';
-              }
-              else {
-                  li[i].style.visibility = 'hidden';
-              }
-          }
-      }
-
-      function displayTag(child){
-          if(child.getElementsByTagName('input')[0].checked){
-              showList.append(child);
-          } else {
-              wrapper.append(child);
-          }
-      }
-
-      function agreed(){
-        var att = document.getElementById('agree');
-        if(!att.checked) {
-          alert('You must agree to the terms and conditions');
-          return false;
+            if (file) {
+                reader.readAsDataURL(file); //reads the data as a UR
+                
+            } else {
+                preview.src = "";
+            }
         }
-        return true;
-      }      
+
+        previewFile();  //calls the function named previewFile()
+
+        var showList = document.getElementById('checked');
+        var wrapper = document.getElementById('wrapper');
+
+        function addTag() {
+            
+            var input, filter, li, a, i;
+            input = document.getElementById('input');
+            filter = input.value.toUpperCase();
+            
+            li = wrapper.getElementsByTagName('li');
+
+            for(i = 0; i < li.length; i++){
+                a = li[i].getElementsByTagName('input')[0];
+                if(a.value.toUpperCase().indexOf(filter) > -1 && filter.length > 0){
+                    li[i].style.visibility = 'visible';
+                }
+                else {
+                    li[i].style.visibility = 'hidden';
+                }
+            }
+        }
+
+        function displayTag(child){
+            if(child.getElementsByTagName('input')[0].checked){
+                showList.append(child);
+            } else {
+                wrapper.append(child);
+            }
+        }
+
+        // make sure user agrees to terms and conditions
+        function agreed(){
+          var att = document.getElementById('agree');
+          if(!att.checked) {
+            alert('You must agree to the terms and conditions');
+            return false;
+          }
+          return true;
+        }      
