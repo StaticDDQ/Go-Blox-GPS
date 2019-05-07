@@ -49,6 +49,7 @@ html(lang='en')
                         tags.push(events[i].tags[j]);
                         var btn = document.createElement('input');
                         btn.type = 'button';
+                        btn.name = 'tagFilter';
                         btn.value = events[i].tags[j];
                         btn.onclick = function(){
                             filterOut(btn.value);
@@ -73,4 +74,20 @@ html(lang='en')
                     displayedEvents[i].style.display = 'none';
                 }
             }
+        }
+
+        function addTag() {
+          
+            var input, filter, tagDiv;
+            input = document.getElementById('input');
+            filter = input.value.toUpperCase();
+          
+            tagDiv = document.getElementsByName('tagFilter');
+            tagDiv.forEach(function(element) {
+                if(element.value.toUpperCase().indexOf(filter) > -1 && filter.length > 0 || filter.length == 0){
+                    element.style.visibility = 'visible';
+                } else {
+                    element.style.visibility = 'hidden';
+                }
+            });
         }
