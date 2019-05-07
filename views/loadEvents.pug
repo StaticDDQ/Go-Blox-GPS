@@ -4,91 +4,142 @@ html(lang='en')
     meta(charset='UTF-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(http-equiv='X-UA-Compatible', content='ie=edge')
-    link(rel='stylesheet', href='../css/search.css', v='')
+    link(rel='stylesheet', href='../css/loadEvents.css', v='')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
-    title Search
-
+    title Search Events
   body
     .container
-      .title
-        h1 Search Events
+      .navbar
+        span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Menu
+        #mySidenav.sidenav
+          a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
+          a(href='#') Home
+          a(href='#') About
+          a(href='#') Events
+          a(href='#') Places
+          a(href='#') FAQ
+        img.logo(src='logo.png', alt='GPS', width='50', height='50')
       .searchBox
+        h1 Find Events
         form(action='/events/getEvents', method='post')
-          input(type='text', name='name')
+          input.search(type='text', placeholder='Search Events', name='name')
           input(type='submit', value='Find')
-      .displayEvents
-        if events
-            input#input(type='text', placeholder='SEARCH', onkeyup='addTag()')
-            #filter
-            .events
-                ul
-                    each event in events
-                        div#eachEvent(class='filtered', name ='displayedEvents', tags=event.tags)
-                        li #{event.address}
-                        li #{event.name} 
 
-      script.
+      //- search for tags
+      .filterSide
+        h3 Filter
+        p Tags
+        form(action='/events/getEvents', method='post')
+          input(type='text', placeholder='Search Tags', name='name', onkeyup='addTag()')
+          input(type='submit', value='Find Tags')
+      //- search for events
+      .displayEvents
+        h2 Event Details
+        if events
+          //- input#input(type='text', placeholder='SEARCH', onkeyup='addTag()')
+          #filter
+          .events
+            each event in events
+              div#eachEvent(class='filtered', name ='displayedEvents', tags=event.tags)
+              .event_card
+                .event_title
+                  h4 #{event.name}
+                .event_pic
+                  img(src='', alt='event_pic')
+                .event_desc
+                  p <b>Date:</b> #{event.date}
+                  p <b>Time:</b> #{event.date}
+                  p <b>Location:</b> #{event.address}
+                  p <b>Description:</b> #{event.description}
+                .event_tag
+                  p <b>Tags:</b> #{event.tags}
+
+      .footer
+        p(style='color:white')
+          | © 2019 Get People Socilaizing. All rights reserved. 
+          a(href='page2.html')
+        a(href='page2.html')
+        ul(style='color:white')
+          a(href='page2.html')
+          li
+            a(href='page2.html')
+            a(href='#') Privacy Policy
+          li
+            a(href='#') Terms of Service
+          li
+            a(href='#') Cookie Policy
+
+    script.
+        // Side Navigation Bar
+        function openNav() {
+          document.getElementById("mySidenav").style.width = "250px";
+        }
+        function closeNav() {
+          document.getElementById("mySidenav").style.width = "0";
+        }
+
+        // functionalities from the oldLoadEvents.pug
+
         var events = !{JSON.stringify(events)};
         var filter = document.getElementById('filter');
         //var eventSpace = document.getElementById('eventSpace');
 
         function loadTags(events) {
+          let tags = [];
+          var showAll = document.createElement('input');
+          showAll.type = 'button';
+          showAll.value = 'Show All';
+          showAll.onclick = function(){
+              filterOut('show all');
+          }
+          filter.appendChild(showAll);
 
-            let tags = [];
-            var showAll = document.createElement('input');
-            showAll.type = 'button';
-            showAll.value = 'Show All';
-            showAll.onclick = function(){
-                filterOut('show all');
+          for (let i = 0; i < events.length; i++) {
+            for (let j = 0; j < events[i].tags.length; j++) {
+              if (!tags.includes(events[i].tags[j])) {
+                  tags.push(events[i].tags[j]);
+                  var btn = document.createElement('input');
+                  btn.type = 'button';
+                  btn.name = 'tagFilter';
+                  btn.value = events[i].tags[j];
+                  btn.onclick = function(){
+                      filterOut(btn.value);
+                  }
+                  filter.appendChild(btn);
+              }
             }
-            filter.appendChild(showAll);
-
-            for (let i = 0; i < events.length; i++) {
-                for (let j = 0; j < events[i].tags.length; j++) {
-                    if (!tags.includes(events[i].tags[j])) {
-                        tags.push(events[i].tags[j]);
-                        var btn = document.createElement('input');
-                        btn.type = 'button';
-                        btn.name = 'tagFilter';
-                        btn.value = events[i].tags[j];
-                        btn.onclick = function(){
-                            filterOut(btn.value);
-                        }
-                        filter.appendChild(btn);
-                    }
-                }
-            }
-            return tags;
+          }
+          return tags;
         }
 
         if(events.length > 0) {
-            loadTags(events);
+          loadTags(events);
         }
 
         function filterOut(tag) {
-            var displayedEvents = document.getElementsByClassName('filtered');
-            for(let i = 0; i < displayedEvents.length; i++){
-                if(displayedEvents[i].outerHTML.includes(tag) || tag === 'show all'){
-                    displayedEvents[i].style.display = 'block';
-                } else {
-                    displayedEvents[i].style.display = 'none';
-                }
+          var displayedEvents = document.getElementsByClassName('filtered');
+          for(let i = 0; i < displayedEvents.length; i++){
+            if(displayedEvents[i].outerHTML.includes(tag) || tag === 'show all'){
+              displayedEvents[i].style.display = 'block';
+            } else {
+              displayedEvents[i].style.display = 'none';
             }
+          }
         }
 
         function addTag() {
+            
+          var input, filter, tagDiv;
+          input = document.getElementById('input');
+          filter = input.value.toUpperCase();
           
-            var input, filter, tagDiv;
-            input = document.getElementById('input');
-            filter = input.value.toUpperCase();
-          
-            tagDiv = document.getElementsByName('tagFilter');
-            tagDiv.forEach(function(element) {
-                if(element.value.toUpperCase().indexOf(filter) > -1 && filter.length > 0 || filter.length === 0){
-                    element.style.visibility = 'visible';
-                } else {
-                    element.style.visibility = 'hidden';
-                }
-            });
+          tagDiv = document.getElementsByName('tagFilter');
+          tagDiv.forEach(function(element) {
+            if(element.value.toUpperCase().indexOf(filter) > -1 && filter.length > 0 || filter.length === 0){
+                element.style.visibility = 'visible';
+            } else {
+                element.style.visibility = 'hidden';
+            }
+          });
         }
