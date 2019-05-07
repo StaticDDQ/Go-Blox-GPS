@@ -1,0 +1,21 @@
+doctype html
+html
+    head
+        h1 #{name}
+    body
+        p organized by: #{organizer}
+        p #{date} //how to include icon?
+        - 
+            var str = "";
+            for(let i = 0; i<tags.length; i++){
+                str != "" ? str += ", " + tags[i] : str += tags[i];
+            }
+        p Type: #{str}
+        p Gallery:
+        img(src = pictures)/
+        p Reviews
+        p Contact details:
+        - var contacts = "Phone Number: "+phone+"\nEmail: "+ email;
+        p #{contacts}
+        p Website
+        - //a(href=${link}) Organizer's website
