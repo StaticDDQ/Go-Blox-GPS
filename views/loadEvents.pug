@@ -34,6 +34,14 @@ html(lang='en')
         function loadTags(events) {
 
             let tags = [];
+            var showAll = document.createElement('input');
+            showAll.type = 'button';
+            showAll.value = 'Show All';
+            showAll.onclick = function(){
+                filterOut('show all');
+            }
+            filter.appendChild(showAll);
+
             for (let i = 0; i < events.length; i++) {
                 for (let j = 0; j < events[i].tags.length; j++) {
                     if (!tags.includes(events[i].tags[j])) {
@@ -56,7 +64,7 @@ html(lang='en')
         function filterOut(tag) {
             var displayedEvents = document.getElementsByClassName('filtered');
             for(let i = 0; i < displayedEvents.length; i++){
-                if(displayedEvents[i].outerHTML.includes(tag)){
+                if(displayedEvents[i].outerHTML.includes(tag) || tag === 'show all'){
                     displayedEvents[i].style.display = 'block';
                 } else {
                     displayedEvents[i].style.display = 'none';
