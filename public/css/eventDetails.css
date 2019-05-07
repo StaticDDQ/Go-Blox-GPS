@@ -1,0 +1,50 @@
+*{
+    padding: 0;
+    margin: 5px;;
+}
+  
+body{
+    font-family: "Quicksand";
+}
+
+.grid{
+    display: grid;
+    height: 100%;
+    grid-template-columns: auto;
+    grid-template-rows: 0.3fr 1fr 1fr 1fr 0.3fr;
+    grid-template-areas: 
+    "navbar"
+    "content"
+    "gallery"
+    "reviews"
+    "ratings"
+    "footer";
+}
+
+.navbar{
+    grid-area: navbar;
+}
+
+.logo{
+    float: right;
+}
+
+.content{
+    grid-area: main_content;
+}
+
+.gallery{
+    grid-area: gallery;
+}
+
+.reviews{
+    grid-area: reviews;
+}
+
+.ratings{
+    grid-area: ratings;
+}
+
+.footer{
+    background-color: black;
+}
