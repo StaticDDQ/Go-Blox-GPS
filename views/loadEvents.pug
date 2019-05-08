@@ -31,15 +31,13 @@ html(lang='en')
       .filterSide
         h3 Filter
         p Tags
-        form(action='/events/getEvents', method='post')
-          input(type='text', placeholder='Search Tags', name='name', onkeyup='addTag()')
-          input(type='submit', value='Find Tags')
+        input#input(type='text', placeholder='Search Tags', name='name', onkeyup='addTag()')
+        #filter
       //- search for events
       .displayEvents
         h2 Event Details
         if events
           //- input#input(type='text', placeholder='SEARCH', onkeyup='addTag()')
-          #filter
           .events
             each event in events
               div#eachEvent(class='filtered', name ='displayedEvents', tags=event.tags)
@@ -55,6 +53,7 @@ html(lang='en')
                   p <b>Description:</b> #{event.description}
                 .event_tag
                   p <b>Tags:</b> #{event.tags}
+
 
       .footer
         p(style='color:white')
