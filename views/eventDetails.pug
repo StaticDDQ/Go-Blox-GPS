@@ -3,6 +3,7 @@ html(lang='en')
   head
     title Create Event
     meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
     style
       include ../public/css/eventDetails.css
     //- link(rel='stylesheet', href='../css/eventDetails.css', type='text/css')
@@ -20,17 +21,17 @@ html(lang='en')
           a(href='#') Events
           a(href='#') Places
           a(href='#') FAQ
-        img.logo(src= "logo.png", alt='GPS', width='50', height='50')
-        <i>logo cant be shown</i>
+        img.logo(src= "/logo.png", alt='GPS', width='80', height='80')
+
       .main_content
         .imageContent
-          img.main_img(src='#{pictures}', alt='main_image') 
-          <i>upload image</i>
+          img.main_img(src=pictures, alt='main_image') 
         .textContent
           h2 #{name}
           p <b>Organised by:</b> #{organizer}
           p <b>Date:</b> #{date}
           p <b>Time:</b> #{date}
+          p <b>Description:</b> #{description}
           p <b>Contact Details:</b> <i>insert contact details here</i>
           - var contacts = "Phone Number: "+phone+"\nEmail: "+ email;
           p <b>Phone Number:</b> #{phone}
