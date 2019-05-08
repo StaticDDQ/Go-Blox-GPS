@@ -20,7 +20,6 @@ var upload = multer({ storage: storage })
 
 // add event
 router.post('/addEvent',upload.single("pictures"), async function(req,res){
-    console.log(req.body);
     var reqURL;
     // cloudinary.image(req.file.path, {width: 0.5, crop: "scale"});
     await cloudinary.uploader.upload(req.file.path,
@@ -32,7 +31,7 @@ router.post('/addEvent',upload.single("pictures"), async function(req,res){
 
     });
     req.body.pictures = reqURL;
-    var addNewEvent = await new Event(req.body);
+    var addNewEvent = new Event(req.body);
     addNewEvent.save(function (err, event) {
         if (err) throw err;
         res.send(event);
