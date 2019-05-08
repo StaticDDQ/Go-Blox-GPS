@@ -26,9 +26,14 @@
         <h3>Name of the event</h3>
         <h3>Date: </h3>
         <h3>Time: </h3>
-        <h3>Join:</h3>
-        <button class="yes">Yes</button>
-        <button class="no">No</button>
+        <h3>Contact Details:</h3>
+        <h3>Phone Number:</h3>
+        <h3>Website:</h3>
+        <div id="join">
+            <h3 class = "join">Join?</h3>
+            <button>Yes</button>
+            <button>No</button>
+        </div>
     </div>
 
     <div class="gallery">
@@ -37,15 +42,14 @@
         <img src="" alt="event_pic2">
     </div>
 
-    <div class="reviews">
-        <h2>Reviews</h2>
-        <p>The overall review: </p>
+    <div class="ratings">
+        <h2>Ratings: </h2>
     </div>
 
-    <div class="ratings">
-        <h2>Ratings</h2>
-        <p>Rating 1</p>
-        <p>Rating 2</p>
+    <div class="reviews">
+        <h2>Reviews</h2>
+        <p>review 1</p>
+        <p>review 2</p>
     </div>
 
     <div class="footer">
@@ -62,4 +66,14 @@
 
 </body>
 
+<script>
+
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+  }
+  
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+  }
+</script>
 </html>

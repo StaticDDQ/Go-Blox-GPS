@@ -49,7 +49,7 @@ router.get('/createEvent', function (req, res) {
 router.get('/getEvent/:name', function (req, res) {
     Event.findOne({name: req.params.name}, function(err, event){
         if(err) throw err;
-        res.render('events', event);
+        res.render('eventDetails', event);
     })
 });
 

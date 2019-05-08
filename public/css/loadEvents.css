@@ -1,0 +1,139 @@
+* {
+    padding: 0;
+    margin: 5px;
+}
+/* configure the body */
+
+body {
+    font-family: 'Quicksand';
+    background-image: linear-gradient(to top right, #f5bdab, #90a4bc);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* configure the grid */
+.container {
+    display: grid;
+    grid-template-columns: 0.3fr 1fr;
+    grid-template-rows: 0.005fr .05fr 5fr 0.3fr;
+    grid-template-areas: 
+    "navbar navbar"
+    "searchBox searchBox"
+    "filterSide displayEvents"
+    "footer footer";
+}
+
+.navbar{
+    grid-area: navbar;
+}   
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #ED7755;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: black;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.logo{
+    float: right;
+}
+.searchBox{
+    grid-area: searchBox;
+    max-height: 500px;
+    text-align: center;
+
+}
+
+.search{
+    width: 400px;
+}
+.filterSide{
+    grid-area: filterSide;
+}
+
+.displayEvents{
+    grid-area: displayEvents;
+    display: grid;
+    grid-template-rows: auto;
+    background-color: #f5bdab;
+}
+
+.event_card{
+    display: grid;
+    grid-template-columns: 0.4fr 0.6fr;
+    grid-template-rows: 0.3fr 1fr 0.3fr;
+    grid-template-areas: 
+    "event_title event_title"
+    "event_pic event_desc"
+    "event_tag event_tag";
+    background-color: white;
+}
+
+.event_title{
+    grid-area: event_title;
+}
+
+.event_pic{
+    grid-area: event_pic;
+    border: solid black 1px;
+    min-height: 200px;
+}
+
+.event_desc{
+    grid-area: event_desc;
+}
+
+.event_tag{
+    grid-area: event_tag;
+}
+
+
+.footer{
+    grid-area: footer; 
+    background-color: #90A4BC;
+  
+  }
+  
+  .footer li{
+    display: inline;
+    text-decoration: none;
+  }
+  
+  .footer a{
+    text-decoration: none;
+    color: white;
+  }
+  
+  .footer li:hover,
+  .footer li.sfHover,
+  .footer li.current-menu-item {
+      border-bottom: solid 0.3px black;
+  
+  }

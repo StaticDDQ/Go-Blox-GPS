@@ -1,0 +1,76 @@
+doctype html
+html(lang='en')
+  head
+    title Create Event
+    meta(charset='utf-8')
+    style
+      include ../public/css/eventDetails.css
+    //- link(rel='stylesheet', href='../css/eventDetails.css', type='text/css')
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+
+  body
+    .grid
+      .navbar
+        span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Menu
+        #mySidenav.sidenav
+          a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
+          a(href='#') Home
+          a(href='#') About
+          a(href='#') Events
+          a(href='#') Places
+          a(href='#') FAQ
+        img.logo(src= "logo.png", alt='GPS', width='50', height='50')
+        <i>logo cant be shown</i>
+      .main_content
+        .imageContent
+          img.main_img(src='#{pictures}', alt='main_image') 
+          <i>upload image</i>
+        .textContent
+          h2 #{name}
+          p <b>Organised by:</b> #{organizer}
+          p <b>Date:</b> #{date}
+          p <b>Time:</b> #{date}
+          p <b>Contact Details:</b> <i>insert contact details here</i>
+          - var contacts = "Phone Number: "+phone+"\nEmail: "+ email;
+          p <b>Phone Number:</b> #{phone}
+          p <b>Tags:</b> #{tags}
+          p <b>Website:</b> <i>insert website link here</i>
+          br
+          #join
+            h3.join <b>Join?<b>
+            button Yes
+            button No
+      
+      .gallery
+        h2 Gallery <i>create gallery</i>
+        img(src='', alt='event_pic')
+        img(src='', alt='event_pic2')
+      .ratings
+        h2 Ratings: <i>create ratings</i>
+      .reviews
+        h2 Reviews <i>create reviews</i>
+        p review 1
+        p review 2
+      .footer
+        p(style='color:white')
+          | © 2019 Get People Socilaizing. All rights reserved. 
+          a(href='page2.html')
+        a(href='page2.html')
+        ul(style='color:white')
+          a(href='page2.html')
+          li
+            a(href='page2.html')
+            a(href='#') Privacy Policy
+          li
+            a(href='#') Terms of Service
+          li
+            a(href='#') Cookie Policy
+    script.
+      function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+      }
+      function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+      }
+

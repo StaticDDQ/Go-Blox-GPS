@@ -20,41 +20,38 @@ html(lang='en')
           a(href='#') Places
           a(href='#') FAQ
         img.logo(src='logo.png', alt='GPS', width='50', height='50')
-      
       .searchBox
         h1 Find Events
         form(action='/events/getEvents', method='post')
           input.search(type='text', placeholder='Search Events', name='name')
           input(type='submit', value='Find')
-
-      //- search for tags
       .filterSide
         h3 Filter
         p Tags
         form(action='/events/getEvents', method='post')
-          input(type='text', placeholder='Search Tags', name='name', onkeyup='addTag()')
+          input(type='text', placeholder='Search Tags', name='name')
           input(type='submit', value='Find Tags')
-      //- search for events
+      
       .displayEvents
         h2 Event Details
         if events
-          //- input#input(type='text', placeholder='SEARCH', onkeyup='addTag()')
+          input#input(type='text', placeholder='SEARCH', onkeyup='addTag()')
           #filter
           .events
             each event in events
-              div#eachEvent(class='filtered', name ='displayedEvents', tags=event.tags)
-              .event_card
-                .event_title
-                  h3 #{event.name}
-                .event_pic
-                  img(src='#{event.pictures}', alt='event_pic')
-                .event_desc
-                  p <b>Date:</b> #{event.date}
-                  p <b>Time:</b> #{event.date}
-                  p <b>Location:</b> #{event.address}
-                  p <b>Description:</b> #{event.description}
-                .event_tag
-                  p <b>Tags:</b> #{event.tags}
+                div#eachEvent(class='filtered', name ='displayedEvents', tags=event.tags)
+                .event_card
+                  .event_title
+                    h4 #{event.name}
+                  .event_pic
+                    img(src='', alt='event_pic')
+                  .event_desc
+                    p <b>Date:</b> #{event.date}
+                    p <b>Time:</b> #{event.date}
+                    p <b>Location:</b> #{event.address}
+                    p <b>Description:</b> #{event.description}
+                  .event_tag
+                    p <b>Tags:</b> #{event.tags}
 
       .footer
         p(style='color:white')
