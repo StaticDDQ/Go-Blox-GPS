@@ -66,7 +66,6 @@ router.post('/getEvents', function (req, res) {
             {organizers: {$regex: req.body.name, $options: 'i' }}
         ] }, function (err, resp) {
         if (err) throw err;
-        console.log(resp.length);
         res.render('loadEvents', { events : resp});
     });
 });
