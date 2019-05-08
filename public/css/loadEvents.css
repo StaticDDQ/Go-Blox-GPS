@@ -6,7 +6,6 @@
 
 body {
     font-family: 'Quicksand';
-    background-image: linear-gradient(to top right, #f5bdab, #90a4bc);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -15,7 +14,7 @@ body {
 .container {
     display: grid;
     grid-template-columns: 0.3fr 1fr;
-    grid-template-rows: 0.005fr .05fr 5fr 0.3fr;
+    grid-template-rows: 0.005fr .05fr 5fr 0.1fr;
     grid-template-areas: 
     "navbar navbar"
     "searchBox searchBox"
@@ -82,13 +81,12 @@ body {
     grid-area: displayEvents;
     display: grid;
     grid-template-rows: auto;
-    background-color: #f5bdab;
 }
 
 .event_card{
     display: grid;
     grid-template-columns: 0.4fr 0.6fr;
-    grid-template-rows: 0.3fr 1fr 0.3fr;
+    grid-template-rows: auto;
     grid-template-areas: 
     "event_title event_title"
     "event_pic event_desc"
