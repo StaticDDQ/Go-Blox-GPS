@@ -15,6 +15,6 @@ const memberSchema = new mongoose.Schema({
     "password": String,
     "joinedEvents": [String],
     "active": Boolean
-}, { versionKey: false });
+}, { versionKey: false, timestamps: true });
 
 const Member = module.exports = mongoose.model('members', memberSchema);

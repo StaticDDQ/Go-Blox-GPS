@@ -81,12 +81,18 @@ i {
 
 .imageContent {
   width: 600px;
-  height: 360px;
-  border: solid black 1px;
+  height: auto;
   text-align: center;
   margin-top: 10px;
   margin-bottom: 20px;
 }
+
+.main_img{
+  width: 50%;
+  height: auto;
+  border: solid black 1px;
+}
+
 .text_content {
   text-align: left;
     
