@@ -19,24 +19,49 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage })
 
 // add event
-router.post('/addEvent',upload.single("pictures"), async function(req,res){
-    var reqURL;
-    // cloudinary.image(req.file.path, {width: 0.5, crop: "scale"});
-    await cloudinary.uploader.upload(req.file.path,
-        { eager : [
-            {width: 0.5, crop: "scale"}]
-        },
-    function(error, result) {
-        reqURL = result.secure_url;
+router.post('/addEvent', upload.single("pictures"), async function (req, res) {
 
-    });
-    req.body.pictures = reqURL;
-    var addNewEvent = new Event(req.body);
-    addNewEvent.save(function (err, event) {
-        if (err) throw err;
-        res.send(event);
-    });
+    // check each element for validity
+    req.checkBody('name', 'Event name is required').notEmpty();
+    req.checkBody('organizer', 'Organizer is required').notEmpty();
+    req.checkBody('address', 'Address is required').notEmpty();
+    req.checkBody('email', 'Email is required').notEmpty();
+    req.checkBody('email', 'Email is not valid').isEmail();
+    req.checkBody('description', 'Description is required').notEmpty();
+    req.checkBody('phone', 'Phone number is required').notEmpty();
 
+    var error = req.validationErrors();
+    if (!error) {
+        req.checkBody('tags', 'Require atleast 1 tag').notEmpty();
+        error = req.validationErrors();
+
+        if (!error) {
+            var reqURL;
+            
+            await cloudinary.uploader.upload(req.file.path,
+                {
+                    eager: [
+                        { width: 0.5, crop: "scale" }]
+                },
+                function (error, result) {
+                    if (error) throw error;
+
+                    reqURL = result.secure_url;
+
+                });
+            req.body.pictures = reqURL;
+            var addNewEvent = new Event(req.body);
+            addNewEvent.save(function (err, event) {
+                if (err) throw err;
+                res.send(event);
+            });
+        } else {
+            res.render('createEvent', { errors: 'Require atleast 1 tag' });
+        }
+        
+    } else {
+        res.render('createEvent', { errors: 'Incorrect event creation' });
+    }
 });
 
 
