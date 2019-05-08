@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 const config = require('./config/database');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
+// use moment to format date and time
+app.locals.moment = require('moment');
 
 var port = process.env.PORT || 3000;
 
