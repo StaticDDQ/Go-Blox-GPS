@@ -8,6 +8,7 @@ var cloudConfig = require("../config/cloudinary");
 
 // Get event model
 let Event = require('../models/event');
+let Rating = require('../models/rating');
 
 
 var storage = multer.diskStorage({
@@ -71,9 +72,14 @@ router.get('/createEvent', function (req, res) {
 
 // get event
 router.get('/getEvent/:name', function (req, res) {
-    Event.findOne({name: req.params.name}, function(err, event){
-        if(err) throw err;
-        res.render('eventDetails', event);
+
+    Event.findOne({ name: req.params.name }, function (err, event) {
+        if (err) throw err;
+        Rating.find({ eventID: event._id.toString() }, function (err, result) {
+            if (err) throw err;
+            res.render('eventDetails', { event: event, ratings: result });
+        });
+        
     })
 });
 

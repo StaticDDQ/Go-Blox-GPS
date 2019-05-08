@@ -135,3 +135,17 @@ i {
       border-bottom: solid 0.3px black;
   
   }
+
+  .star{
+      color: goldenrod;
+      font-size: 2.0rem;
+  }
+
+  .star::before{
+      content:'\2606';
+      cursor: pointer;
+  }
+
+  .star.rated::before{
+      content:'\2605'
+  }

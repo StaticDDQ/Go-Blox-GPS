@@ -21,7 +21,7 @@ router.post('/authenticate', function (req, res, next) {
 
         req.logIn(user, function (err) {
             if (err) return next(err);
-            currentLogin = req.body;
+            currentLogin = user;
             return res.redirect('/members/profile');
         });
     })(req, res,next);
@@ -46,6 +46,7 @@ router.get('/login', function (req, res) {
 // logout active user
 router.get('/logout', function (req, res) {
     req.logout();
+    currentLogin = null;
     res.redirect('/');
 });
 
