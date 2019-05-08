@@ -64,7 +64,7 @@ router.get('/signup', function (req, res) {
 router.get('/verify', function (req, res) {
     Member.findOneAndUpdate({ userName: req.query.user }, { $set: { active: true } }, function (err, user) {
         if (err) throw err;
-        res.send(user);
+        res.render('success');
     });
 });
 
