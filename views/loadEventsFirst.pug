@@ -1,0 +1,53 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
+    link(rel='stylesheet', href='../css/loadEvents.css', v='')
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+    title Search Events
+  body
+    .container
+      .navbar
+        span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Menu
+        #mySidenav.sidenav
+          a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
+          a(href='#') Home
+          a(href='#') About
+          a(href='#') Events
+          a(href='#') Places
+          a(href='#') FAQ
+        img.logo(src="/logo.png", alt='GPS', width='80', height='80')
+      
+      .searchBox
+        h1 Find Events
+        form(action='/events/getEvents', method='post')
+          input.search(type='text', placeholder='Search Events', name='name')
+          input(type='submit', value='Find')
+
+
+      .footer
+        p(style='color:white')
+          | © 2019 Get People Socilaizing. All rights reserved. 
+          a(href='page2.html')
+        a(href='page2.html')
+        ul(style='color:white')
+          a(href='page2.html')
+          li
+            a(href='page2.html')
+            a(href='#') Privacy Policy
+          li
+            a(href='#') Terms of Service
+          li
+            a(href='#') Cookie Policy
+
+    script.
+        // Side Navigation Bar
+        function openNav() {
+          document.getElementById("mySidenav").style.width = "250px";
+        }
+        function closeNav() {
+          document.getElementById("mySidenav").style.width = "0";
+        }
