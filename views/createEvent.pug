@@ -13,6 +13,8 @@ html(lang='en')
         form(action='/events/addEvent', method='POST', enctype="multipart/form-data", onsubmit='return agreed()')
           h1 Create Event
           p
+              | #{errors}
+          p
             .eventInputs 
               | Name of the event: 
               br
