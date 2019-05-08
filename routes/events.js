@@ -9,16 +9,6 @@ var cloudConfig = require("../config/cloudinary");
 // Get event model
 let Event = require('../models/event');
 
-// {
-//     "name": String,
-//     "date": Date,
-//     "address": String,
-//     "description": String,
-//     "email": String,
-//     "phone": String,
-//     "pictures": Object,
-//     "tags": [String]
-// }
 
 var storage = multer.diskStorage({
     filename: function (req, file, cb) {
@@ -30,9 +20,13 @@ var upload = multer({ storage: storage })
 
 // add event
 router.post('/addEvent',upload.single("pictures"), async function(req,res){
+    console.log(req.body);
     var reqURL;
-    cloudinary.image(req.file.path, {width: 0.5, crop: "scale"});
+    // cloudinary.image(req.file.path, {width: 0.5, crop: "scale"});
     await cloudinary.uploader.upload(req.file.path,
+        { eager : [
+            {width: 0.5, crop: "scale"}]
+        },
     function(error, result) {
         reqURL = result.secure_url;
 
