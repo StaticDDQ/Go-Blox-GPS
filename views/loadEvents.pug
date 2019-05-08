@@ -41,18 +41,19 @@ html(lang='en')
           .events
             each event in events
               div#eachEvent(class='filtered', name ='displayedEvents', tags=event.tags)
-                  .event_card
-                    .event_title
-                      h3 #{event.name}
-                    .event_pic
-                      img(src='#{event.pictures}', alt='event_pic')
-                    .event_desc
-                      p <b>Date:</b> #{event.date}
-                      p <b>Time:</b> #{event.date}
-                      p <b>Location:</b> #{event.address}
-                      p <b>Description:</b> #{event.description}
-                    .event_tag
-                      p <b>Tags:</b> #{event.tags}
+              .event_card
+                .event_title
+                  h3 #{event.name}
+                .event_pic
+                  img(src= event.pictures, alt='event_pic')
+                .event_desc
+                  p <b>Date:</b> #{event.date}
+                  p <b>Time:</b> #{event.date}
+                  p <b>Location:</b> #{event.address}
+                  p <b>Description:</b> #{event.description}
+                .event_tag
+                  p <b>Tags:</b> #{event.tags}
+
 
       .footer
         p(style='color:white')
