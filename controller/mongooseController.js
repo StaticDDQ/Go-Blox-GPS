@@ -39,7 +39,7 @@ var addUser = async function(req, res) {
 
                 transport.sendMail(mailOption, function (err, info) {
                     if (err) throw err;
-                    console.log(info);
+                    
                 });
 
                 res.render('signup', {
