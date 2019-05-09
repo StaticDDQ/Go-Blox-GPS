@@ -64,7 +64,7 @@ router.get('/signup', function (req, res) {
 router.get('/verify', function (req, res) {
     Member.findOneAndUpdate({ userName: req.query.user }, { $set: { active: true } }, function (err, user) {
         if (err) throw err;
-        res.send(user);
+        res.render('success');
     });
 });
 
@@ -86,6 +86,8 @@ router.post('/register', function (req, res) {
         error = req.validationErrors();
         if (!error) {
             // add join date of user
+            req.body['firstName'] = upperCaseName(req.body['firstName']);
+            req.body['lastName'] = upperCaseName(req.body['lastName']);
             req.body['joined_date'] = moment().format('YYYY-MM-DD');
             req.body['active'] = false;
 
@@ -101,6 +103,10 @@ router.post('/register', function (req, res) {
         });
     }
 });
+
+function upperCaseName(name) {
+    return name.charAt(0).toUpperCase() + name.slice(1);
+}
 
 // update member
 router.put('/updateMember/:userName', function (req, res) {

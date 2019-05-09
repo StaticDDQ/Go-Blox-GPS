@@ -78,7 +78,7 @@ router.get('/getEvent/:name', function (req, res) {
 });
 
 router.get('/findEvent', function (req, res) {
-    res.render('loadEvents', {events : []});
+    res.render('loadEventsFirst');
 })
 
 // get events by name
