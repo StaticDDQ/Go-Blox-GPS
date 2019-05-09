@@ -1,125 +1,99 @@
-doctype html
 html
   style
-    include ../public/css/profile.css
-    include ../public/css/home.css
-    
-
+    include ../public/css/profileEdit.css
   head
-    title GPS
-    meta(charset='utf-8')/
-    meta(name='viewport', content='width=device-width, initial scale=1.0')/
-    link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')/
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')/
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
   body
     .grid
-      .logo
-        a(href='#')
-          img(src='../logo.png', alt='GPS', width='50', height='50')
-      // Nav bar
-      .nav
-        ul
+      .navbar
+        span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Menu
+        #mySidenav.sidenav
+          a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
+          a(href='#') Home
+          a(href='#') About
+          a(href='/events/findEvent') Events
+          a(href='#') Places
+          a(href='#') FAQ
+        img.logo(src='../logo.png', alt='GPS', width='50', height='50')
+      .basic_profile
+        img.profile(src='../pictures/profile_icon.png', alt='profile_picture')
+        -var fullname = firstName + ' ' + lastName;
+        h3 #{fullname}
+        h4 Username: #{userName}
+        h4 Join Date: #{joined_date}
+        h4 Date of Birth: #{DOB}
+      .all_content
+        // Tab links
+        .tab
+          button.tablinks(onclick="openTab(event, 'Interests')") Interests
+          button.tablinks(onclick="openTab(event, 'Events')") Events
+          button.tablinks(onclick="openTab(event, 'Places')") Places
+          button.tablinks(onclick="openTab(event, 'Friends')") Friends
+          button.tablinks(onclick="openTab(event, 'Reviews')") Reviews
+          button.tablinks(onclick="openTab(event, 'Bookmarks')") Bookmarks
+        // Tab content
+        #Interests.tabcontent
+          h3 Your Interests:
+          p Some tags
+          h3 Some description about you:
+          p
+            | Hello everyone! I enjoy photography and going to places that have lots
+            | of interesting history.
+        #Events.tabcontent
+          h3 Past Events Attended
+          h3 Past Events Created
+        #Places.tabcontent
+          h3 Places to go
+          p Places went
+        #Friends.tabcontent
+          h3 Your friends:
+          p username: ...
+        #Reviews.tabcontent
+          h3 Your reviews
+          p Event 1
+          p good
+        #Bookmarks.tabcontent
+          h3 Your bookmarks
+          ul
+            li Event 1
+            li Event 2
+            li Event 3
+      .footer
+        p(style='color:white')
+          | © 2019 Get People Socilaizing. All rights reserved. 
+          a(href='page2.html')
+        a(href='page2.html')
+        ul(style='color:white')
+          a(href='page2.html')
           li
-            a(href='#') HOME
+            a(href='page2.html')
+            a(href='#') Privacy Policy
           li
-            a(href='#') EVENTS
+            a(href='#') Terms of Service
           li
-            a(href='#') PLACES
-          li
-            a(href='#') ABOUT
-          li
-            a(href='#') FAQ
-          li
-            a(href='#') CONTACT
-      .profile
-        ul
-          li
-            a(href='#') PROFILE
-      .search
-        input.searchTerm(type='text', placeholder='Search')
-        button.searchButton(type='submit')
-          i.fa.fa-search
-      // Banner
-      .banner
-         -var name = firstName;
-            p Hello #{name}
-            p Welcome to the profile page
-      // Basic profile
-      .basicProfile
-        h2 Basic Profile
-        .profPic
-          a(href='#')
-            img(src='../profile.png', alt='GPS', width='150', height='150')
-        .profDesc
-          -var fullname = firstName + ' ' + lastName;
-          p Name: #{fullname}
-          p DOB: #{DOB}
-          p  Join Date: #{joined_date}
-          p  Interests 
-          p  Reviews 
-          p  Friends 
-          p  Past Events Attended 
-          p  Past Events Created 
-          p  Events interested & going 
-          p  Bookmarks 
-      // Interests
-      .interest
-        h2 Interest
-        ul
-          li Lorem, ipsum.
-          li Lorem, ipsum.
-          li Lorem, ipsum.
-          li Lorem, ipsum.
-          li Lorem, ipsum.
-          li Lorem, ipsum.
-      // Events
-      .events
-        h2 Events and Places Visited
-        .eventList
-          .card
-            .bg-img
-              img(src='../pictures/reb.jpg', alt='GPS', width='215', height='115')
-            .content
-              h4 Royal Exhibition Building
-              p  9 Nicholson St, Carlton VIC 3053 
-              button Read more
-          .card
-            .bg-img
-              img(src='../pictures/zoo.jpg', alt='GPS', width='215', height='115')
-            .content
-              h4 Melbourne Zoo
-              p  Elliott Ave, Parkville VIC 3052 
-              button Read more
-          .card
-            .bg-img
-              img(src='../pictures/shrine.jpg', alt='GPS', width='215', height='115')
-            .content
-              h4 Shrine of Rememberance
-              p  Birdwood Ave, Melbourne VIC 3001 
-              button Read more
-          .card
-            .bg-img
-              img(src='../pictures/ngv.jpg', alt='GPS', width='215', height='115')
-            .content
-              h4 National Gallery of Victoria
-              p  180 St Kilda Rd, Melbourne VIC 3006
-              button Read more
-      // Friends
-      .friends
-        h2 Friends
-        h3 No friends to display yet...
-      // Ratings and Reviews
-      .reviews
-        h2 Reviews
-        h3 No review written yet...
-      // Bookmarks
-      .bookmarks
-        h2 Bookmarks
-        .eventList
-          .card
-            .bg-img
-              img(src='../pictures/docklands.jpg', alt='GPS', width='215', height='115')
-            .content
-              h4 Docklands
-              p Docklands
-              button Read more
+            a(href='#') Cookie Policy
+    script.
+      function openTab(evt, tabName) {
+      // Declare all variables
+      var i, tabcontent, tablinks;
+      // Get all elements with class="tabcontent" and hide them
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+      }
+      // Get all elements with class="tablinks" and remove the class "active"
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " active";
+      }
+      function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+      }
+      function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      }
+
