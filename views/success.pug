@@ -1,34 +1,32 @@
-doctype html
 html
   style
-    include ../public/css/profile.css
-    include ../public/css/home.css
-    
+    include ../public/css/success.css
   head
-    title GPS
-    meta(charset='utf-8')/
-    meta(name='viewport', content='width=device-width, initial scale=1.0')/
-    link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')/
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')/
+    link(rel='stylesheet', type='text/css', href='css/success.css')
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
   body
-    .grid
-      .logo
-        a(href='#')
-          img(src='../logo.png', alt='GPS', width='50', height='50')
-      // Nav bar
-      .nav
-        ul
-          li
-            a(href='#') HOME
-          li
-            a(href='#') EVENTS
-          li
-            a(href='#') PLACES
-          li
-            a(href='#') ABOUT
-          li
-            a(href='#') FAQ
-          li
-            a(href='#') CONTACT
-      p
-        | You have successfully activated your account
+    .navbar
+      span(style='font-size:30px;cursor:pointer;color:white', onclick='openNav()') ☰ Menu
+      #mySidenav.sidenav
+        a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
+        a(href='#') Home
+        a(href='#') About
+        a(href='#') Events
+        a(href='#') Places
+        a(href='#') FAQ
+      img.logo(src='/logo.png', alt='GPS', width='80', height='80')
+    h1
+    h1
+      | Your account has been successfully verified!
+      br
+      |     Please, proceed to a login page.
+    .btn
+      form(action='/')
+        button(type='submit') Log me in
+    script.
+      function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+      }
+      function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      }
