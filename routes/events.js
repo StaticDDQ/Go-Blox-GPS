@@ -20,7 +20,13 @@ var geocoder = NodeGeoCoder(options);
 // Get event model
 let Event = require('../models/event');
 
+// to show to get long and lat
+var options = {
+    provider: 'openstreetmap'
+};
+var geocoder = NodeGeoCoder(options);
 
+// setting up storage to upload media
 var storage = multer.diskStorage({
     filename: function (req, file, cb) {
       cb(null, file.originalname + '-' + Date.now())
@@ -41,10 +47,17 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
     req.checkBody('description', 'Description is required').notEmpty();
     req.checkBody('phone', 'Phone number is required').notEmpty();
 
+<<<<<<< HEAD
     // get geo code
     geocoder.geocode(req.body.address, function(err,resp){
         req.body.location = resp;
     });
+=======
+    // location deets
+    geocoder.geocode(req.body.address, function(err,resp){
+        req.body.location = resp;
+    })
+>>>>>>> 08d4e49c173f83d13bfae6c243c580fbae8a5186
 
     var error = req.validationErrors();
     if (!error) {
@@ -80,6 +93,18 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
     }
 });
 
+router.get('/maps', function(req,res){
+    Event.findOne({name: "Photo Photo"}, function(err, resp){
+        if(err) throw err;
+        var result = {
+            name: resp.address,
+            long: resp.location[0].longitude,
+            lat: resp.location[0].latitude
+        };
+        console.log(result);
+        res.render('maps', result);
+    })
+});
 
 router.get('/createEvent', function (req, res) {
     res.render('createEvent');
