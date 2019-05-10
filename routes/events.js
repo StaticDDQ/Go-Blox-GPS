@@ -5,6 +5,17 @@ const path = require('path');
 const multer = require('multer');
 var cloudinary = require('cloudinary').v2;
 var cloudConfig = require("../config/cloudinary");
+var NodeGeoCoder = require("node-geocoder");
+
+// Get event model
+let Event = require('../models/event');
+
+// to show to get long and lat
+var options = {
+    provider: 'openstreetmap'
+};
+var geocoder = NodeGeoCoder(options);
+
 
 // Get event model
 let Event = require('../models/event');
@@ -29,6 +40,11 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
     req.checkBody('email', 'Email is not valid').isEmail();
     req.checkBody('description', 'Description is required').notEmpty();
     req.checkBody('phone', 'Phone number is required').notEmpty();
+
+    // get geo code
+    geocoder.geocode(req.body.address, function(err,resp){
+        req.body.location = resp;
+    });
 
     var error = req.validationErrors();
     if (!error) {
