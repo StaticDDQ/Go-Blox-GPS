@@ -7,15 +7,11 @@ var cloudinary = require('cloudinary').v2;
 var cloudConfig = require("../config/cloudinary");
 var NodeGeoCoder = require("node-geocoder");
 
-// Get event model
-let Event = require('../models/event');
-
 // to show to get long and lat
 var options = {
     provider: 'openstreetmap'
 };
 var geocoder = NodeGeoCoder(options);
-
 
 // Get event model
 let Event = require('../models/event');
@@ -51,6 +47,7 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
     geocoder.geocode(req.body.address, function(err,resp){
         req.body.location = resp;
     });
+
 
 
     var error = req.validationErrors();
