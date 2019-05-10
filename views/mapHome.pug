@@ -1,0 +1,25 @@
+html
+  head
+    link(rel='stylesheet', type='text/css', href='css/home_map.css')
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
+  body
+    .navbar
+      span(style='font-size:30px;cursor:pointer;color:white', onclick='openNav()') ☰ Menu
+      #mySidenav.sidenav
+        a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
+        a(href='#') Home
+        a(href='#') About
+        a(href='#') Events
+        a(href='#') Places
+        a(href='#') FAQ
+      img.logo(src='logo.png', alt='GPS', width='80', height='80')
+    h1 get people socialising.
+    form(action='')
+      button(type='submit') connect
+    script.
+      function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+      }
+      function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      }
