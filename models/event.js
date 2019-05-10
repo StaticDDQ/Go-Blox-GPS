@@ -14,7 +14,8 @@ const eventsSchema = new mongoose.Schema({
     "phone": String,
     "pictures": String,
     "tags": [String],
-    "joinedUsers": [String]
+    "joinedUsers": [String],
+    "location" : [Object]
 }, { versionKey: false });
 
 const Event = module.exports = mongoose.model('events', eventsSchema);

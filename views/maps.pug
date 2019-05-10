@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    title Home
+    link(rel='stylesheet', href='http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css')
+    script(src='http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js')
+  body
+    #map(style='width: 900px; height: 580px')
+    script(type="text/javascript").
+      // Creating map options
+      var mapOptions = {
+      center: [parseFloat(#{lat}), parseFloat(#{long})],
+      zoom: 15
+      }
+      // Creating a map object
+      var map = new L.map('map', mapOptions);
+      var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+        // Adding layer to the map
+      map.addLayer(layer);
+      var marker = new L.Marker(mapOptions.center);
+      var customOptions = {
+        'maxWidth': '500',
+        'className' : 'custom'};
+      marker.bindPopup('Batman is here:  #{name}', customOptions).openPopup();
+      map.addLayer(marker);
+      
+      
