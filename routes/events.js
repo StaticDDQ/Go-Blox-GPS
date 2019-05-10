@@ -47,17 +47,11 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
     req.checkBody('description', 'Description is required').notEmpty();
     req.checkBody('phone', 'Phone number is required').notEmpty();
 
-<<<<<<< HEAD
     // get geo code
     geocoder.geocode(req.body.address, function(err,resp){
         req.body.location = resp;
     });
-=======
-    // location deets
-    geocoder.geocode(req.body.address, function(err,resp){
-        req.body.location = resp;
-    })
->>>>>>> 08d4e49c173f83d13bfae6c243c580fbae8a5186
+
 
     var error = req.validationErrors();
     if (!error) {
