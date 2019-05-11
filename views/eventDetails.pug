@@ -44,8 +44,9 @@ html(lang='en')
           br
           #join
             h3.join <b>Join?<b>
-            button Yes
-            button No
+            button#yes Yes
+            button#no No
+            button#interested Interested
       
       .gallery
         h2 Gallery <i>create gallery</i>
@@ -148,6 +149,30 @@ html(lang='en')
 
                     addedRating.appendChild(ratingBox);
                 });
+            });
+
+            $('#yes').click(function(event){
+                event.preventDefault();
+                var eventID = {
+                    id: $('#eventID')[0].value
+                }
+                $.post('/events/joinEvent', eventID);
+            });
+
+            $('#no').click(function(event){
+                event.preventDefault();
+                var eventID = {
+                    id: $('#eventID')[0].value
+                }
+                $.post('/events/notJoinEvent', eventID);
+            });
+
+            $('#interested').click(function(event){
+                event.preventDefault();
+                var eventID = {
+                    id: $('#eventID')[0].value
+                }
+                $.post('/events/interestedEvent', eventID);
             });
         });    
 
