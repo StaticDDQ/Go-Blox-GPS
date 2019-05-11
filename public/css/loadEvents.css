@@ -72,9 +72,17 @@ body {
 
 .search{
     width: 400px;
+    font-size: 15px;
 }
 .filterSide{
     grid-area: filterSide;
+}
+#input{
+    font-size: 15px;
+}
+
+.button{
+    background-color: #90A4BC;
 }
 
 .displayEvents{
@@ -91,7 +99,19 @@ body {
     "event_title event_title"
     "event_pic event_desc"
     "event_tag event_tag";
-    background-color: white;
+    border: 1px solid #becadb;
+    border-radius: 4px;
+    text-decoration: none;
+    overflow: hidden;
+    transition: all 0.2s ease-out;
+}
+
+.event_card:hover {
+  top: -2px;
+  box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+  border: 1px solid #cccccc;
+  transition: all 0.2s ease-out;
+  cursor: pointer;
 }
 
 .event_title{
@@ -100,8 +120,6 @@ body {
 
 .event_pic{
     grid-area: event_pic;
-    border: solid black 1px;
-    min-height: 200px;
 }
 
 .event_pic img {
