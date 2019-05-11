@@ -16,39 +16,47 @@ var addUser = async function(req, res) {
 
     // will not add if same username exists
     if (!dupliUser) {
-        var data = new Members({
-            "firstName": req.body.firstName,
-            "lastName": req.body.lastName,
-            "userName": req.body.userName,
-            "email": req.body.email,
-            "DOB": req.body.DOB,
-            "password": req.body.password,
-            "joined_date": req.body.joined_date
-        });
+        dupliUser = await findEmail(req.body.email);
+        if (!dupliUser) {
+            var data = new Members({
+                "firstName": req.body.firstName,
+                "lastName": req.body.lastName,
+                "userName": req.body.userName,
+                "email": req.body.email,
+                "DOB": req.body.DOB,
+                "password": req.body.password,
+                "joined_date": req.body.joined_date
+            });
 
-        data.save(function (err, newMember) {
-            if (!err) {
-                var link = "http://" + req.get('host') + "/members/verify?user=" + req.body.userName;
+            data.save(function (err, newMember) {
+                if (!err) {
+                    var link = "http://" + req.get('host') + "/members/verify?user=" + req.body.userName;
 
-                let mailOption = {
-                    from: 'officialgobloxs@gmail.com',
-                    to: req.body.email,
-                    subject: 'Email confirmation from GoBlox',
-                    html: "Here is a confirmation link for setting up your GPS account,<a href=" + link + "> Click here to verify</a>"
-                };
+                    let mailOption = {
+                        from: 'officialgobloxs@gmail.com',
+                        to: req.body.email,
+                        subject: 'Email confirmation from GoBlox',
+                        html: "Here is a confirmation link for setting up your GPS account,<a href=" + link + "> Click here to verify</a>"
+                    };
 
-                transport.sendMail(mailOption, function (err, info) {
-                    if (err) throw err;
-                    
-                });
+                    transport.sendMail(mailOption, function (err, info) {
+                        if (err) throw err;
 
-                res.render('signup', {
-                    error: 'Please verify your email!'
-                });
-            } else {
-                throw err;
-            }
-        });
+                    });
+
+                    res.render('signup', {
+                        error: 'Please verify your email!'
+                    });
+                } else {
+                    throw err;
+                }
+            });
+        } else {
+            res.render('signup', {
+                error: 'Email already existed'
+            });
+        }
+        
     } else {
         res.render('signup', {
             error: 'Username already existed'
@@ -60,6 +68,13 @@ var addUser = async function(req, res) {
 async function findUser(username) {
     var found = null;
     found = await Members.findOne({ userName: username });
+    return found;
+}
+
+// look if username exists in mongoDB
+async function findEmail(email) {
+    var found = null;
+    found = await Members.findOne({ email: email });
     return found;
 }
 
