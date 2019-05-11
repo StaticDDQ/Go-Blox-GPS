@@ -18,9 +18,7 @@ var geocoder = NodeGeoCoder(options);
 let Event = require('../models/event');
 let Rating = require('../models/rating');
 
-Event.aggregate([{ $sample: { size: 1 } }]).exec(function (e, d) {
-    console.log(d);
-});
+
 // to show to get long and lat
 var options = {
     provider: 'openstreetmap'
@@ -88,16 +86,17 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
 });
 
 router.get('/maps', function(req,res){
-    Event.findRandom({}, {}, {limit: 3}, function(err, resp){
+    Event.aggregate([{ $sample: { size: 1} }]).exec(function(err, resp){
         if(err) throw err;
-        var result = {
-            name: resp.name,
-            address: resp.address,
-            long: resp.location[0].longitude,
-            lat: resp.location[0].latitude
-        };
         console.log(resp);
-        res.render('maps', resp);
+        // var result = {
+        //     name: resp.name,
+        //     address: resp.address,
+        //     long: resp.location[0].longitude,
+        //     lat: resp.location[0].latitude
+        // };
+        // console.log(result);
+        // res.render('maps', result);
     });
 });
 
