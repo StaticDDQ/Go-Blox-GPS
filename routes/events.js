@@ -30,7 +30,7 @@ var storage = multer.diskStorage({
         cb(null, file.originalname + '-' + Date.now())
     }
 });
-   
+
 var upload = multer({ storage: storage })
 
 // add event
@@ -48,7 +48,7 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
     geocoder.geocode({address: req.body.address, limit: 1}, function(err,resp){
         req.body.location = resp[0];
     });
-    
+
     var error = req.validationErrors();
     if (!error) {
         req.checkBody('tags', 'Require atleast 1 tag').notEmpty();
@@ -56,7 +56,7 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
 
         if (!error) {
             var reqURL;
-            
+
             await cloudinary.uploader.upload(req.file.path,
                 {
                     eager: [
@@ -78,23 +78,24 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
         } else {
             res.render('createEvent', { errors: 'Require atleast 1 tag' });
         }
-        
+
     } else {
         res.render('createEvent', { errors: 'Incorrect event creation' });
     }
 });
 
 router.get('/maps', function(req,res){
-    Event.findRandom({}, {}, {limit: 3}, function(err, resp){
+    Event.aggregate([{ $sample: { size: 1} }]).exec(function(err, resp){
         if(err) throw err;
-        var result = {
-            name: resp.name,
-            address: resp.address,
-            long: resp.location[0].longitude,
-            lat: resp.location[0].latitude
-        };
         console.log(resp);
-        res.render('maps', resp);
+        // var result = {
+        //     name: resp.name,
+        //     address: resp.address,
+        //     long: resp.location[0].longitude,
+        //     lat: resp.location[0].latitude
+        // };
+        // console.log(result);
+        // res.render('maps', result);
     });
 });
 
@@ -125,7 +126,7 @@ router.get('/findEvent', function (req, res) {
 // get events by name
 router.post('/getEvents', function (req, res) {
     // find the event
-    Event.find({ 
+    Event.find({
         $or: [
             {name: {$regex: req.body.name, $options: 'i' }},
             {email: {$regex: req.body.name, $options: 'i' }},
