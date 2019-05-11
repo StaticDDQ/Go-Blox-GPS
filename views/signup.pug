@@ -57,8 +57,8 @@ html(lang='en')
               br
             
             .uploadImage
-              input#file-field(type='file', onchange='previewImage(event)')
-              .previewImage
+              input#file-field(type='file', onchange='previewImage(event)', name='display')
+              div#preview
               img#image-field(src='/pictures/profile_icon.png', width='150', height='150')  
 
           p

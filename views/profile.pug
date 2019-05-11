@@ -19,7 +19,7 @@ html
           a(href='/events/createEvent') Create Event!
         img.logo(src='/logo.png', alt='GPS', width='50', height='50')
       .basic_profile
-        img.profile(src='/pictures/profile_icon.png', alt='profile_picture')
+        img.profile(src=user.display, alt='profile_picture')
         -var fullname = firstName + ' ' + lastName;
         h3 #{user.firstName} #{user.lastName}
         h4 Username: #{user.userName}
