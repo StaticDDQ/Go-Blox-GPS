@@ -16,6 +16,7 @@ html
           a(href='/events/findEvent') Events
           a(href='#') Places
           a(href='#') FAQ
+          a(href='/events/createEvent') Create Event!
         img.logo(src='/logo.png', alt='GPS', width='50', height='50')
       .basic_profile
         img.profile(src='/pictures/profile_icon.png', alt='profile_picture')
@@ -38,7 +39,9 @@ html
             .settings
                 form(action='members/updatePassword/'+userName, method='PUT')
                     input(type='text', name='password', value='New password')
+                    br
                     input(type='password', name='retype', value='Retype password')
+                    br
                     input(type='submit', value='Submit new password')
                 button(onclick='removeSettings()') X 
         // Tab content
@@ -107,6 +110,7 @@ html
         document.getElementById("mySidenav").style.width = "0";
       }
 
+      // 
       function openSettings(){
         document.getElementById("overlay").style.display = "block";
       }
