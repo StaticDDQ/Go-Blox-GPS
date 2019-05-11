@@ -96,10 +96,11 @@ router.get('/getEvent/:id', function (req, res) {
     Event.findById(req.params.id, function (err, event) {
         if (err) throw err;
         if (event != null) {
-            Rating.find({ eventID: event._id.toString() }, function (err, result) {
+            Rating.find({ eventID: req.params.id }, function (err, result) {
                 if (err) throw err;
-                event.ratings = result;
-                res.render('eventDetails', { event: event });
+                
+                res.render('eventDetails', { event: event, ratings: result });
+                    
             });
         } else {
             res.render('notFound');
