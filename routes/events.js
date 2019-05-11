@@ -18,6 +18,9 @@ var geocoder = NodeGeoCoder(options);
 let Event = require('../models/event');
 let Rating = require('../models/rating');
 
+Event.aggregate([{ $sample: { size: 1 } }]).exec(function (e, d) {
+    console.log(d);
+});
 // to show to get long and lat
 var options = {
     provider: 'openstreetmap'
