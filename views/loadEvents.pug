@@ -9,6 +9,7 @@ html(lang='en')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
     title Search Events
   body
+    #loadPage
     .container
       .navbar
         span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Menu
@@ -39,7 +40,7 @@ html(lang='en')
         if events
           .events
             each event in events
-              div#eachEvent(class='filtered ', name ='displayedEvents', tags=event.tags)
+              div#eachEvent(class='filtered ', name ='displayedEvents', tags=event.tags, onclick="window.location='http://localhost:3000/events/getEvent/" + event._id + "'")
                   .event_card
                     .event_title
                       h3 #{event.name}

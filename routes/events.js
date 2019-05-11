@@ -103,15 +103,13 @@ router.get('/createEvent', function (req, res) {
 });
 
 // get event
-router.get('/getEvent/:name', function (req, res) {
-
-    Event.findOne({ name: req.params.name }, function (err, event) {
+router.get('/getEvent/:id', function (req, res) {
+    Event.findById(req.params.id, function (err, event) {
         if (err) throw err;
         Rating.find({ eventID: event._id.toString() }, function (err, result) {
             if (err) throw err;
             res.render('eventDetails', { event: event, ratings: result });
         });
-        
     })
 });
 
