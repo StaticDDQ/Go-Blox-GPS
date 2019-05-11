@@ -44,11 +44,10 @@ html
         // Tab content
         #Interests.tabcontent
           h3 Your Interests:
-          p Some tags
+          p #{user.interests}
           h3 Some description about you:
           p
-            | Hello everyone! I enjoy photography and going to places that have lots
-            | of interesting history.
+            | #{user.desc}
         #Events.tabcontent
           h3 Past Events Attended
           h3 Past Events Created

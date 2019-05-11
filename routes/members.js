@@ -9,8 +9,6 @@ const moment = require('moment');
 // Get member model
 let Member = require('../models/member');
 
-var currentLogin;
-
 // login as member
 router.post('/authenticate', function (req, res, next) {
     // successful log in will launch the user's profile
@@ -21,8 +19,11 @@ router.post('/authenticate', function (req, res, next) {
 
         req.logIn(user, function (err) {
             if (err) return next(err);
-            currentLogin = user;
-            return res.redirect('/members/profile/' + currentLogin.userName);
+            
+            if (user.firstTime) {
+                return res.render('profileTags');
+            } else
+                return res.redirect('/members/profile/' + user.userName);
         });
     })(req, res,next);
 });
@@ -34,7 +35,9 @@ router.get('/profile/:user', function (req, res) {
     };
     Member.findOne(loginUser, function(err, result){
         if (err) throw err;
-        res.render('profile', { user: result });
+        if (result) {
+            res.render('profile', { user: result });
+        }
     });
 
 });
@@ -46,7 +49,6 @@ router.get('/login', function (req, res) {
 // logout active user
 router.get('/logout', function (req, res) {
     req.logout();
-    currentLogin = null;
     res.redirect('/');
 });
 
@@ -87,6 +89,7 @@ router.post('/register', function (req, res) {
         error = req.validationErrors();
         if (!error) {
             // add join date of user
+            req.body['firstTime'] = true;
             req.body['firstName'] = upperCaseName(req.body['firstName']);
             req.body['lastName'] = upperCaseName(req.body['lastName']);
             req.body['joined_date'] = moment().format('MMM Do YY');
@@ -143,6 +146,13 @@ router.put('/interested', function (req, res) {
     Member.findByOneAndUpdate({ userName: req.user.userName }, { $push: { 'joinedEvents': req.body.eventID } }, function (err, res) {
         console.log(res);
     });
+});
+
+router.post('/storeInfo', function (req, res) {
+    Member.findOneAndUpdate({ userName: req.user.userName }, { $set: { 'desc': req.body.description, 'interests': req.body.interest, 'firstTime': false } }, function (err, res) {
+        console.log(res);
+    });
+    res.redirect('/members/profile/' + req.user.userName);
 });
 
 module.exports = router;
