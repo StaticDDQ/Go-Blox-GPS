@@ -27,9 +27,9 @@ var geocoder = NodeGeoCoder(options);
 // setting up storage to upload media
 var storage = multer.diskStorage({
     filename: function (req, file, cb) {
-      cb(null, file.originalname + '-' + Date.now())
+        cb(null, file.originalname + '-' + Date.now())
     }
-  })
+});
    
 var upload = multer({ storage: storage })
 
@@ -38,7 +38,6 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
 
     // check each element for validity
     req.checkBody('name', 'Event name is required').notEmpty();
-    req.checkBody('organizer', 'Organizer is required').notEmpty();
     req.checkBody('address', 'Address is required').notEmpty();
     req.checkBody('email', 'Email is required').notEmpty();
     req.checkBody('email', 'Email is not valid').isEmail();
@@ -71,9 +70,10 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
                 });
             req.body.pictures = reqURL;
             var addNewEvent = new Event(req.body);
+            addNewEvent['organizer'] = req.user.userName;
             addNewEvent.save(function (err, event) {
                 if (err) throw err;
-                res.send(event);
+                    res.send(event);
             });
         } else {
             res.render('createEvent', { errors: 'Require atleast 1 tag' });
@@ -98,7 +98,7 @@ router.get('/maps', function(req,res){
     });
 });
 
-router.get('/createEvent', function (req, res) {
+router.post('/createEvent', function (req, res) {
     res.render('createEvent');
 });
 
@@ -106,11 +106,13 @@ router.get('/createEvent', function (req, res) {
 router.get('/getEvent/:id', function (req, res) {
     Event.findById(req.params.id, function (err, event) {
         if (err) throw err;
-        Rating.find({ eventID: event._id.toString() }, function (err, result) {
-            if (err) throw err;
-            event.ratings = result;
-            res.render('eventDetails', { event: event });
-        });
+        if (event != null) {
+            Rating.find({ eventID: event._id.toString() }, function (err, result) {
+                if (err) throw err;
+                event.ratings = result;
+                res.render('eventDetails', { event: event });
+            });
+        }
     })
 });
 
