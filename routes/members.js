@@ -21,19 +21,19 @@ router.post('/authenticate', function (req, res, next) {
 
         req.logIn(user, function (err) {
             if (err) return next(err);
-            currentLogin = req.body;
-            return res.redirect('/members/profile');
+            currentLogin = user;
+            return res.redirect('/members/profile/' + currentLogin.userName);
         });
     })(req, res,next);
 });
 
 // load profile
-router.get('/profile', function (req, res) {
+router.get('/profile/:user', function (req, res) {
     var loginUser = {
-        userName: currentLogin.username
+        userName: req.params.user
     };
     Member.findOne(loginUser, function(err, result){
-        if(err) throw err;
+        if (err) throw err;
         res.render('profile', result);
     });
 
@@ -46,6 +46,7 @@ router.get('/login', function (req, res) {
 // logout active user
 router.get('/logout', function (req, res) {
     req.logout();
+    currentLogin = null;
     res.redirect('/');
 });
 
@@ -88,7 +89,8 @@ router.post('/register', function (req, res) {
             // add join date of user
             req.body['firstName'] = upperCaseName(req.body['firstName']);
             req.body['lastName'] = upperCaseName(req.body['lastName']);
-            req.body['joined_date'] = moment().format('YYYY-MM-DD');
+            req.body['joined_date'] = moment().format('MMM Do YY');
+            req.body['DOB'] = moment(req.body['DOB']).format('MMM Do YY');
             req.body['active'] = false;
 
             mongooseController.addUser(req, res);

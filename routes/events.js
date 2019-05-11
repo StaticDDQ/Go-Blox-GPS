@@ -16,6 +16,7 @@ var geocoder = NodeGeoCoder(options);
 
 // Get event model
 let Event = require('../models/event');
+let Rating = require('../models/rating');
 
 // to show to get long and lat
 var options = {
@@ -48,9 +49,7 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
     geocoder.geocode({address: req.body.address, limit: 1}, function(err,resp){
         req.body.location = resp[0];
     });
-
-
-
+    
     var error = req.validationErrors();
     if (!error) {
         req.checkBody('tags', 'Require atleast 1 tag').notEmpty();
@@ -104,10 +103,14 @@ router.get('/createEvent', function (req, res) {
 });
 
 // get event
-router.get('/getEvent/:name', function (req, res) {
-    Event.findOne({name: req.params.name}, function(err, event){
-        if(err) throw err;
-        res.render('eventDetails', event);
+router.get('/getEvent/:id', function (req, res) {
+    Event.findById(req.params.id, function (err, event) {
+        if (err) throw err;
+        Rating.find({ eventID: event._id.toString() }, function (err, result) {
+            if (err) throw err;
+            event.ratings = result;
+            res.render('eventDetails', { event: event });
+        });
     })
 });
 

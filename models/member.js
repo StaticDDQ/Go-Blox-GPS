@@ -10,11 +10,12 @@ const memberSchema = new mongoose.Schema({
         unique: true
     },
     "email": String,
-    "DOB": Date,
-    "joined_date": Date,
+    "DOB": String,
+    "joined_date": String,
     "password": String,
     "joinedEvents": [String],
-    "active": Boolean
+    "active": Boolean,
+    "display": String
 }, { versionKey: false, timestamps: true });
 
 const Member = module.exports = mongoose.model('members', memberSchema);
