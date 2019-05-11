@@ -10,8 +10,8 @@ const memberSchema = new mongoose.Schema({
         unique: true
     },
     "email": String,
-    "DOB": Date,
-    "joined_date": Date,
+    "DOB": String,
+    "joined_date": String,
     "password": String,
     "joinedEvents": [String],
     "active": Boolean,
