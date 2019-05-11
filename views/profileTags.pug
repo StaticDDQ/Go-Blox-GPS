@@ -1,0 +1,149 @@
+doctype html
+html(lang='en')
+  head
+    title Profile Tags
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial scale=1.0')
+    link(rel='stylesheet', href='../css/createEvent.css', v='')
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+  body
+    .gridContainer
+      .box
+        form(action='/members/storeInfo/', method='PUT', enctype="multipart/form-data", onsubmit='return agreed()')
+          h1 Select your Interests!
+          p
+              | #{errors}
+
+          //- Add interest tags
+          p
+            | Tags
+          .searchBar
+            input#input(type='text', placeholder='Search Tags', onkeyup='addTag()')
+
+          ul#checked   
+          ul#wrapper
+            li
+              input#tag(type='checkbox', name='tags', value='Art', onclick='displayTag(this.parentElement)')
+              | Art
+            li
+              input#tag(type='checkbox', name='tags', value='Photography', onclick='displayTag(this.parentElement)')
+              | Photography
+            li
+              input#tag(type='checkbox', name='tags', value='Painting', onclick='displayTag(this.parentElement)')
+              | Painting           
+            li
+              input#tag(type='checkbox', name='tags', value='Dancing', onclick='displayTag(this.parentElement)')
+              | Dancing
+            li
+              input#tag(type='checkbox', name='tags', value='Drama', onclick='displayTag(this.parentElement)')
+              | Drama
+            li
+              input#tag(type='checkbox', name='tags', value='Basketball', onclick='displayTag(this.parentElement)')
+              | Basketball           
+            li
+              input#tag(type='checkbox', name='tags', value='Soccer', onclick='displayTag(this.parentElement)')
+              | Soccer
+            li
+              input#tag(type='checkbox', name='tags', value='Rugby', onclick='displayTag(this.parentElement)')
+              | Rugby
+            li
+              input#tag(type='checkbox', name='tags', value='Badminton', onclick='displayTag(this.parentElement)')
+              | Badminton     
+            li
+              input#tag(type='checkbox', name='tags', value='Sports', onclick='displayTag(this.parentElement)')
+              | Sports
+            li
+              input#tag(type='checkbox', name='tags', value='Culture', onclick='displayTag(this.parentElement)')
+              | Cultural Events
+            li
+              input#tag(type='checkbox', name='tags', value='Music', onclick='displayTag(this.parentElement)')
+              | Music         
+            li
+              input#tag(type='checkbox', name='tags', value='Sing', onclick='displayTag(this.parentElement)')
+              | Sing
+            li
+              input#tag(type='checkbox', name='tags', value='Instruments', onclick='displayTag(this.parentElement)')
+              | Instruments
+            li
+              input#tag(type='checkbox', name='tags', value='Performance', onclick='displayTag(this.parentElement)')
+              | Performance
+            li
+              input#tag(type='checkbox', name='tags', value='Food', onclick='displayTag(this.parentElement)')
+              | Food         
+            li
+              input#tag(type='checkbox', name='tags', value='Vegetarian', onclick='displayTag(this.parentElement)')
+              | Vegetarian         
+            li
+              input#tag(type='checkbox', name='tags', value='Vegan', onclick='displayTag(this.parentElement)')
+              | Vegan       
+            li
+              input#tag(type='checkbox', name='tags', value='Sweets', onclick='displayTag(this.parentElement)')
+              | Sweets Lovers
+            li
+              input#tag(type='checkbox', name='tags', value='Coffee', onclick='displayTag(this.parentElement)')
+              | Coffee Lovers
+            li
+              input#tag(type='checkbox', name='tags', value='Meat Lovers', onclick='displayTag(this.parentElement)')
+              | Meat Lovers
+            li
+              input#tag(type='checkbox', name='tags', value='Tea', onclick='displayTag(this.parentElement)')
+              | Tea Lovers
+            li
+              input#tag(type='checkbox', name='tags', value='Brunch', onclick='displayTag(this.parentElement)')
+              | Brunch
+            li
+              input#tag(type='checkbox', name='tags', value='VideoGames', onclick='displayTag(this.parentElement)')
+              | Video Games
+            li
+              input#tag(type='checkbox', name='tags', value='TableTop', onclick='displayTag(this.parentElement)')
+              | Table Top Gaming
+            li
+              input#tag(type='checkbox', name='tags', value='NightLife', onclick='displayTag(this.parentElement)')
+              | NightLife
+            li
+              input#tag(type='checkbox', name='tags', value='Others', onclick='displayTag(this.parentElement)')
+              | Others
+            br
+          //- add event desctiption
+          p
+            .eventInputs  
+              | Descriptions: 
+              br
+              textarea(name="description" cols="40" rows="5")
+
+          //- submit
+          .createEventButton
+            input(type="submit" value="Finish")
+
+      script.
+
+        var showList = document.getElementById('checked');
+        var wrapper = document.getElementById('wrapper');
+
+        function addTag() {
+            
+            var input, filter, li, a, i;
+            input = document.getElementById('input');
+            filter = input.value.toUpperCase();
+            
+            li = wrapper.getElementsByTagName('li');
+
+            for(i = 0; i < li.length; i++){
+                a = li[i].getElementsByTagName('input')[0];
+                if(a.value.toUpperCase().indexOf(filter) > -1 && filter.length > 0){
+                    li[i].style.visibility = 'visible';
+                }
+                else {
+                    li[i].style.visibility = 'hidden';
+                }
+            }
+        }
+
+        function displayTag(child){
+            if(child.getElementsByTagName('input')[0].checked){
+                showList.append(child);
+            } else {
+                wrapper.append(child);
+            }
+        }   
