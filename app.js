@@ -39,8 +39,19 @@ app.get('*', function (req, res, next) {
     next();
 });
 
+// route to login page
 app.get('/', function (req, res) {
     res.render('login');
+});
+
+// route to about page
+app.get('/about', function (req, res) {
+    res.render('about');
+});
+
+// route to about page
+app.get('/home', function (req, res) {
+    res.render('mapHome');
 });
 
 app.use(express.static(path.join(__dirname, 'public')));

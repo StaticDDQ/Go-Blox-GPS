@@ -33,7 +33,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage })
 
 // add event
-router.post('/addEvent', upload.single("pictures"), async function (req, res) {
+router.post('/addEvent', upload.array("pictures", 3), async function (req, res) {
 
     // check each element for validity
     req.checkBody('name', 'Event name is required').notEmpty();
@@ -48,9 +48,7 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
     geocoder.geocode(req.body.address, function(err,resp){
         req.body.location = resp;
     });
-
-
-
+    
     var error = req.validationErrors();
     if (!error) {
         req.checkBody('tags', 'Require atleast 1 tag').notEmpty();
