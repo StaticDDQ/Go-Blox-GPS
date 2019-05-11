@@ -82,6 +82,7 @@ html
             a(href='#') Cookie Policy
     script.
       function openTab(evt, tabName) {
+            
           // Declare all variables
           var i, tabcontent, tablinks;
           // Get all elements with class="tabcontent" and hide them
@@ -127,6 +128,6 @@ html
 
             $.post('events/getEventById', eventID, function(data){
                 $('<li/>', {html: data}).appendTo(eventList);
-            }
+            });
         });
       });
