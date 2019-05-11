@@ -112,6 +112,8 @@ router.get('/getEvent/:id', function (req, res) {
                 event.ratings = result;
                 res.render('eventDetails', { event: event });
             });
+        } else {
+            res.render('notFound');
         }
     })
 });
