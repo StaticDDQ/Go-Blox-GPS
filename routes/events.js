@@ -7,8 +7,6 @@ var cloudinary = require('cloudinary').v2;
 var cloudConfig = require("../config/cloudinary");
 var NodeGeoCoder = require("node-geocoder");
 
-
-
 // Get event model
 let Event = require('../models/event');
 let Rating = require('../models/rating');
@@ -155,6 +153,23 @@ router.delete('/deleteEvent/:name', function (req, res) {
 // map event
 router.get('/getMap', function (req, res){
     res.sendFile(path.join(__dirname, '../public/map.html'));
+});
+
+router.put('/joinEvent', function (req, res) {
+    
+    Event.findById(req.body.id, function (err, res) {
+        if (!res.joinedUsers.includes(req.user.userName)) {
+            res.joinedUsers.push(req.user.userName);
+            res.save(function (err) {
+                if (err) throw err;
+            });
+        }
+    });
+});
+
+router.put('/declineEvent', function (req, res) {
+    
+    Event.findByIdAndUpdate(req.body.id, { $pull: { 'joinedUsers': req.user.userName } });
 });
 
 module.exports = router;

@@ -111,12 +111,17 @@ function upperCaseName(name) {
 }
 
 // update member
-router.put('/updateMember/:userName', function (req, res) {
-    Member.findOneAndUpdate(
-        { userName: req.params.userName }, { $set: req.body }, function (err, resp) {
-            if (err) throw err;
-            res.send(resp);
-        });
+router.put('/updatePassword/:userName', function (req, res) {
+    req.checkBody('password', 'Password is required').notEmpty();
+    req.checkBody('retype', 'Password does not match').equals(req.body.password);
+    var error = req.validationErrors();
+    if (!error) {
+        Member.findOneAndUpdate(
+            { userName: req.params.userName }, { $set: { 'password': req.body.password } }, function (err, resp) {
+                if (err) throw err;
+                res.send(resp);
+            });
+    }
 });
 
 // if user joined an event append the name (and maybe link) to the user's json
@@ -132,6 +137,12 @@ router.delete('/deleteMember/:username', function (req, res) {
             if (err) throw err;
             res.send(resp);
         }); 
+});
+
+router.put('/interested', function (req, res) {
+    Member.findByOneAndUpdate({ userName: req.user.userName }, { $push: { 'joinedEvents': req.body.eventID } }, function (err, res) {
+        console.log(res);
+    });
 });
 
 module.exports = router;

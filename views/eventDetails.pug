@@ -158,7 +158,14 @@ html(lang='en')
                 var eventID = {
                     id: $('#eventID')[0].value
                 }
-                $.post('/events/joinEvent', eventID);
+                $.ajax({
+                    url: '/events/joinEvent',
+                    type: 'PUT',
+                    data: eventID,
+                    success: function(data){
+                        alert("You are now joining this event");
+                    }
+                });
             });
 
             $('#no').click(function(event){
@@ -166,7 +173,14 @@ html(lang='en')
                 var eventID = {
                     id: $('#eventID')[0].value
                 }
-                $.post('/events/notJoinEvent', eventID);
+                $.ajax({
+                    url: '/events/declineEvent',
+                    type: 'PUT',
+                    data: eventID,
+                    success: function(data){
+                        alert("You are no longer joining this event");
+                    }
+                });
             });
 
             $('#interested').click(function(event){
@@ -174,7 +188,14 @@ html(lang='en')
                 var eventID = {
                     id: $('#eventID')[0].value
                 }
-                $.post('/events/interestedEvent', eventID);
+                $.ajax({
+                    url: '/members/interested',
+                    type: 'PUT',
+                    data: eventID,
+                    success: function(data){
+                        alert("You are interested of this event");
+                    }
+                });
             });
         });    
 

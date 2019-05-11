@@ -32,6 +32,14 @@ html
           button.tablinks(onclick="openTab(event, 'Friends')") Friends
           button.tablinks(onclick="openTab(event, 'Reviews')") Reviews
           button.tablinks(onclick="openTab(event, 'Bookmarks')") Bookmarks
+          button(onclick="openSettings()") Settings
+        #overlay
+            .settings
+                form(action='members/updatePassword/'+userName, method='PUT')
+                    input(type='text', name='password', value='New password')
+                    input(type='password', name='retype', value='Retype password')
+                    input(type='submit', value='Submit new password')
+                button(onclick='removeSettings()') X 
         // Tab content
         #Interests.tabcontent
           h3 Your Interests:
@@ -75,26 +83,35 @@ html
             a(href='#') Cookie Policy
     script.
       function openTab(evt, tabName) {
-      // Declare all variables
-      var i, tabcontent, tablinks;
-      // Get all elements with class="tabcontent" and hide them
-      tabcontent = document.getElementsByClassName("tabcontent");
-      for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = "none";
-      }
-      // Get all elements with class="tablinks" and remove the class "active"
-      tablinks = document.getElementsByClassName("tablinks");
-      for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" active", "");
-      }
-      // Show the current tab, and add an "active" class to the button that opened the tab
-      document.getElementById(tabName).style.display = "block";
-      evt.currentTarget.className += " active";
-      }
-      function openNav() {
-      document.getElementById("mySidenav").style.width = "250px";
-      }
-      function closeNav() {
-      document.getElementById("mySidenav").style.width = "0";
+          // Declare all variables
+          var i, tabcontent, tablinks;
+          // Get all elements with class="tabcontent" and hide them
+          tabcontent = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+          }
+          // Get all elements with class="tablinks" and remove the class "active"
+          tablinks = document.getElementsByClassName("tablinks");
+          for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+          }
+          // Show the current tab, and add an "active" class to the button that opened the tab
+          document.getElementById(tabName).style.display = "block";
+          evt.currentTarget.className += " active";
       }
 
+      function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+      }
+
+      function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+      }
+
+      function openSettings(){
+        document.getElementById("overlay").style.display = "block";
+      }
+
+      function removeSettings(){
+        document.getElementById("overlay").style.display = "none";
+      }

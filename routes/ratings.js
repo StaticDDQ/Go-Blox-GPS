@@ -12,7 +12,7 @@ router.post('/addRating', function (req, res) {
         eventID: req.body.eventID,
         stars: req.body.stars,
         desc: req.body.desc,
-        userName: "tester",
+        userName: req.user.userName,
         datePublished: moment().format('YYYY-MM-DD')
     });
 
