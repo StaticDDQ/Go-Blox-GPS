@@ -39,7 +39,7 @@ html(lang='en')
         if events
           .events
             each event in events
-              div#eachEvent(class='filtered '+event.tags, name ='displayedEvents')
+              div#eachEvent(class='filtered ', name ='displayedEvents', tags=event.tags)
                   .event_card
                     .event_title
                       h3 #{event.name}
@@ -118,8 +118,7 @@ html(lang='en')
         function filterOut(tag) {
           var displayedEvents = document.getElementsByClassName('filtered');
           for(let i = 0; i < displayedEvents.length; i++){
-
-            if(displayedEvents[i].className.indexOf(tag) > -1 || tag === 'show all'){
+            if(displayedEvents[i].getAttribute('tags').indexOf(tag) > -1 || tag === 'show all'){
               
               displayedEvents[i].style.display = 'block';
             } else {

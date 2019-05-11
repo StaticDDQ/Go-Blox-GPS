@@ -9,6 +9,7 @@ html(lang='en')
     //- link(rel='stylesheet', href='../css/eventDetails.css', type='text/css')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js")
 
   body
     .grid
@@ -27,17 +28,18 @@ html(lang='en')
         .imageContent
           img.main_img(src=pictures, alt='main_image') 
         .textContent
-          h2 #{name}
-          p <b>Organised by:</b> #{organizer}
-          p <b> Start Date:</b> #{startDate}
-          p <b> End Date:</b> #{endDate}
-          p <b> Start Time:</b> #{startTime}
-          p <b> End Time:</b> #{endTime}
-          p <b>Description:</b> #{description}
+
+          h2 #{event.name}
+          p <b>Organised by:</b> #{event.organizer}
+          p <b>Start Date:</b> #{event.startDate}
+          p <b>End Date:</b> #{event.endDate}
+          p <b>Start Time:</b> #{event.startTime}
+          p <b>End Time:</b> #{event.endTime}
+          p <b>Description:</b> #{event.description}
           p <b>Contact Details:</b> <i>insert contact details here</i>
           - var contacts = "Phone Number: "+phone+"\nEmail: "+ email;
-          p <b>Phone Number:</b> #{phone}
-          p <b>Tags:</b> #{tags}
+          p <b>Phone Number:</b> #{event.phone}
+          p <b>Tags:</b> #{event.tags}
           p <b>Website:</b> <i>insert website link here</i>
           br
           #join
@@ -51,10 +53,27 @@ html(lang='en')
         img(src='', alt='event_pic2')
       .ratings
         h2 Ratings: <i>create ratings</i>
+        form#submitReview(action='../../ratings/addRating', method='post')
+            div(class='stars', rating='3')
+                span(class='star rated', value='&nbsp;', onclick='setRating(event)')
+                span(class='star rated', value='&nbsp;', onclick='setRating(event)')
+                span(class='star rated', value='&nbsp;', onclick='setRating(event)')
+                span(class='star', value='&nbsp;', onclick='setRating(event)')
+                span(class='star', valie='&nbsp;', onclick='setRating(event)')
+            input#stars(type='hidden', value='3')
+            input#eventID(type='hidden', value=event._id)
+            input#desc(type='text')
+            input(type='submit', value='Submit review')
+            ul#response
       .reviews
         h2 Reviews <i>create reviews</i>
-        p review 1
-        p review 2
+        if ratings
+            #addedRating
+            each rating in ratings
+                .rating_card
+                    p USER: #{rating.userName}
+                    p STARS: #{rating.stars}
+                    p DESCRIPTION: #{rating.desc}
       .footer
         p(style='color:white')
           | © 2019 Get People Socilaizing. All rights reserved. 
@@ -70,10 +89,64 @@ html(lang='en')
           li
             a(href='#') Cookie Policy
     script.
-      function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-      }
-      function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-      }
+
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+
+        function setRating(event){
+            let span = event.currentTarget;
+            let stars = document.querySelectorAll('.star');
+            let match = false;
+            let num = 0;
+            stars.forEach(function(star, index){
+                if(match){
+                    star.classList.remove('rated');
+                } else {
+                    star.classList.add('rated');
+                }
+                if(star == span){
+                    match = true;
+                    num = index + 1;
+                }
+            });
+            document.getElementById('stars').value = num;
+        }
+
+        $(function(){
+            $('#submitReview').submit(function(event) {
+                event.preventDefault();
+                var formData = {
+                    eventID: $('#eventID')[0].value,
+                    stars: $('#stars')[0].value,
+                    desc: $('#desc')[0].value
+                };
+                $.post('/ratings/addRating', formData, function(resp){
+                    var stringUser = JSON.stringify(resp.userName);
+                    var stringStars = JSON.stringify(resp.stars);
+                    var stringDesc = JSON.stringify(resp.desc);
+
+                    var addedRating = document.getElementById('addedRating');
+
+                    var ratingBox = document.createElement('div');
+                    ratingBox.className = 'rating_card';
+
+                    var userText = document.createElement('p');
+                    userText.innerHTML = stringUser;
+                    var starText = document.createElement('p');
+                    starText.innerHTML = stringStars;
+                    var descText = document.createElement('p');
+                    descText.innerHTML = stringDesc;
+
+                    ratingBox.appendChild(userText);
+                    ratingBox.appendChild(starText);
+                    ratingBox.appendChild(descText);
+
+                    addedRating.appendChild(ratingBox);
+                });
+            });
+        });    
 

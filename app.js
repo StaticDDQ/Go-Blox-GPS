@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 const config = require('./config/database');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
+const session = require('express-session');
+
 // use moment to format date and time
 app.locals.moment = require('moment');
 
@@ -13,7 +15,11 @@ var port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}))
-
+app.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+}));
 app.use(expressValidator());
 app.set('view engine','pug');
 
