@@ -85,7 +85,7 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
 });
 
 router.get('/maps', function(req,res){
-    Event.aggregate([{ $sample: { size: 1} }]).exec(function(err, resp){
+    Event.aggregate([{ $sample: { size: 2} }]).exec(function(err, resp){
         if(err) throw err;
         console.log(resp);
         // var result = {
