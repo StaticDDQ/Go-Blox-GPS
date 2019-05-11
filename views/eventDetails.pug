@@ -28,10 +28,13 @@ html(lang='en')
         .imageContent
           img.main_img(src=pictures, alt='main_image') 
         .textContent
+
           h2 #{event.name}
           p <b>Organised by:</b> #{event.organizer}
-          p <b>Date:</b> #{event.date}
-          p <b>Time:</b> #{event.date}
+          p <b>Start Date:</b> #{event.startDate}
+          p <b>End Date:</b> #{event.endDate}
+          p <b>Start Time:</b> #{event.startTime}
+          p <b>End Time:</b> #{event.endTime}
           p <b>Description:</b> #{event.description}
           p <b>Contact Details:</b> <i>insert contact details here</i>
           - var contacts = "Phone Number: "+phone+"\nEmail: "+ email;
