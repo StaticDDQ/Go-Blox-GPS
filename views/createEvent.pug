@@ -21,14 +21,24 @@ html(lang='en')
               input(type='text', name='name')
           p
             .eventInputs  
-              | Date: 
+              | Start Date: 
               br
-              input(type='date', name='date')
+              input(type='date', name='startDate')
           p
             .eventInputs  
-              | Time: 
+              | End Date: 
               br
-              input(type='time', name='time')
+              input(type='date', name='endDate')
+          p
+            .eventInputs  
+              | Start Time: 
+              br
+              input(type='time', name='startTime')
+          p
+            .eventInputs  
+              | End Time: 
+              br
+              input(type='time', name='endTime')
           p
             .eventInputs 
               | Location: 

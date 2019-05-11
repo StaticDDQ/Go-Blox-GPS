@@ -35,9 +35,10 @@ html(lang='en')
           p <b>End Date:</b> #{event.endDate}
           p <b>Start Time:</b> #{event.startTime}
           p <b>End Time:</b> #{event.endTime}
-          p <b>Description:</b> #{event.description}
-          p <b>Contact Details:</b> <i>insert contact details here</i>
-          - var contacts = "Phone Number: "+phone+"\nEmail: "+ email;
+          p <b>Description:</b> 
+          p #{event.description}
+          p.contacts <b>Contact Details:</b>
+          p <b>Email:</b> #{event.email}
           p <b>Phone Number:</b> #{event.phone}
           p <b>Tags:</b> #{event.tags}
           p <b>Website:</b> <i>insert website link here</i>
@@ -48,10 +49,10 @@ html(lang='en')
             button#no No
             button#interested Interested
       
-      .gallery
-        h2 Gallery <i>create gallery</i>
-        img(src='', alt='event_pic')
-        img(src='', alt='event_pic2')
+      //- .gallery
+      //-   h2 Gallery <i>create gallery</i>
+      //-   img(src='', alt='event_pic')
+      //-   img(src='', alt='event_pic2')
 
       .ratings
         h2 Ratings:
@@ -64,7 +65,8 @@ html(lang='en')
                 span(class='star', valie='&nbsp;', onclick='setRating(event)')
             input#stars(type='hidden', value='3')
             input#eventID(type='hidden', value=event._id)
-            input#desc(type='text')
+            textarea#desc(name="description" cols="40" rows="5")
+            br
             input(type='submit', value='Submit review')
             ul#response
       .reviews
@@ -74,7 +76,7 @@ html(lang='en')
             each rating in ratings
                 .rating_card
                     p USER: #{rating.userName}
-                    p STARS: #{rating.stars}
+                    p STARS: #{rating.stars}/5
                     p DESCRIPTION: #{rating.desc}
       .footer
         p(style='color:white')

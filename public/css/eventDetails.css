@@ -17,6 +17,10 @@ i {
   font-size: 14px;
 }
 
+p.contacts {
+  font-size: 20px;
+}
+
 .grid{
     display: grid;
     height: 100%;
@@ -33,6 +37,7 @@ i {
 
 .navbar{
     grid-area: navbar;
+    
 }.sidenav {
     height: 100%;
     width: 0;
