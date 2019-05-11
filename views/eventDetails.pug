@@ -63,7 +63,8 @@ html(lang='en')
                 span(class='star', valie='&nbsp;', onclick='setRating(event)')
             input#stars(type='hidden', value='3')
             input#eventID(type='hidden', value=event._id)
-            input#desc(type='text')
+            textarea#desc(name="description" cols="40" rows="5")
+            br
             input(type='submit', value='Submit review')
             ul#response
       .reviews

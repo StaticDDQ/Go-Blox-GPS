@@ -9,14 +9,15 @@ html
         span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Menu
         #mySidenav.sidenav
           a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
-        a(href='/home') Home
-        a(href='/about') About
-        a(href='/events/findEvent') Events
-        a(href='#') Places
-        a(href='#') FAQ
-        img.logo(src='../logo.png', alt='GPS', width='50', height='50')
+          a(href='#') ☺ #{userName}
+          a(href='/home') Home
+          a(href='/about') About
+          a(href='/events/findEvent') Events
+          a(href='#') Places
+          a(href='#') FAQ
+        img.logo(src='/logo.png', alt='GPS', width='50', height='50')
       .basic_profile
-        img.profile(src='../pictures/profile_icon.png', alt='profile_picture')
+        img.profile(src='/pictures/profile_icon.png', alt='profile_picture')
         -var fullname = firstName + ' ' + lastName;
         h3 #{firstName} #{lastName}
         h4 Username: #{userName}
