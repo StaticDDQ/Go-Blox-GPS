@@ -69,8 +69,8 @@ html(lang='en')
             ul#response
       .reviews
         h2 Reviews
+        #addedRating
         if ratings
-            #addedRating
             each rating in ratings
                 .rating_card
                     p USER: #{rating.userName}
