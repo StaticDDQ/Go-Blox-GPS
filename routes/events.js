@@ -7,6 +7,7 @@ var cloudinary = require('cloudinary').v2;
 var cloudConfig = require("../config/cloudinary");
 var NodeGeoCoder = require("node-geocoder");
 
+
 // to show to get long and lat
 var options = {
     provider: 'openstreetmap'
@@ -44,8 +45,8 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
     req.checkBody('phone', 'Phone number is required').notEmpty();
 
     // get geo code
-    geocoder.geocode(req.body.address, function(err,resp){
-        req.body.location = resp;
+    geocoder.geocode({address: req.body.address, limit: 1}, function(err,resp){
+        req.body.location = resp[0];
     });
 
 
@@ -85,16 +86,17 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
 });
 
 router.get('/maps', function(req,res){
-    Event.findOne({name: "Photo Photo"}, function(err, resp){
+    Event.findRandom({}, {}, {limit: 3}, function(err, resp){
         if(err) throw err;
         var result = {
-            name: resp.address,
+            name: resp.name,
+            address: resp.address,
             long: resp.location[0].longitude,
             lat: resp.location[0].latitude
         };
-        console.log(result);
-        res.render('maps', result);
-    })
+        console.log(resp);
+        res.render('maps', resp);
+    });
 });
 
 router.get('/createEvent', function (req, res) {

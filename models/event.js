@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+var random = require('mongoose-simple-random');
 
 // events schema
 const eventsSchema = new mongoose.Schema({
@@ -18,4 +19,5 @@ const eventsSchema = new mongoose.Schema({
     "location" : [Object]
 }, { versionKey: false });
 
+eventsSchema.plugin(random);
 const Event = module.exports = mongoose.model('events', eventsSchema);
