@@ -9,19 +9,24 @@ html
     script(type="text/javascript").
       // Creating map options
       var mapOptions = {
-      center: [parseFloat(#{lat}), parseFloat(#{long})],
-      zoom: 15
+        //- center: auto,
+      center: [-37.814, 144.96332],
+      zoom: 10
       }
       // Creating a map object
       var map = new L.map('map', mapOptions);
       var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
         // Adding layer to the map
       map.addLayer(layer);
-      var marker = new L.Marker(mapOptions.center);
-      var customOptions = {
-        'maxWidth': '500',
-        'className' : 'custom'};
-      marker.bindPopup('Batman is here:  #{name},\naddress: #{address}', customOptions).openPopup();
-      map.addLayer(marker);
+    each evented in events
+      script(type="text/javascript").
+        var lat = parseFloat(evented.location[0].latitude);
+        var long = parseFloat(evented.location[0].longitude);
+        var marker = new L.Marker([lat,long]);
+        var customOptions = {
+          'maxWidth': '500',
+          'className' : 'custom'};
+        marker.bindPopup('Batman is here:  #{evented.name},\naddress: #{evented.address}', customOptions).openPopup();
+        map.addLayer(marker);
       
       
