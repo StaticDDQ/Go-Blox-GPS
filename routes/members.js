@@ -30,10 +30,10 @@ router.post('/authenticate', function (req, res, next) {
 // load profile
 router.get('/profile', function (req, res) {
     var loginUser = {
-        userName: currentLogin.username
+        userName: currentLogin.userName
     };
     Member.findOne(loginUser, function(err, result){
-        if(err) throw err;
+        if (err) throw err;
         res.render('profile', result);
     });
 
