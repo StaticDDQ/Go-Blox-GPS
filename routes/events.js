@@ -33,7 +33,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage })
 
 // add event
-router.post('/addEvent', upload.array("pictures", 3), async function (req, res) {
+router.post('/addEvent', upload.single("pictures"), async function (req, res) {
 
     // check each element for validity
     req.checkBody('name', 'Event name is required').notEmpty();
@@ -107,7 +107,8 @@ router.get('/getEvent/:name', function (req, res) {
         if (err) throw err;
         Rating.find({ eventID: event._id.toString() }, function (err, result) {
             if (err) throw err;
-            res.render('eventDetails', { event: event, ratings: result });
+            event.ratings = result;
+            res.render('eventDetails', { event: event });
         });
         
     })

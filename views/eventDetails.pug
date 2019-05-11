@@ -26,7 +26,7 @@ html(lang='en')
 
       .main_content
         .imageContent
-          img.main_img(src=pictures, alt='main_image') 
+          img.main_img(src=event.pictures, alt='main_image') 
         .textContent
 
           h2 #{event.name}
@@ -51,8 +51,9 @@ html(lang='en')
         h2 Gallery <i>create gallery</i>
         img(src='', alt='event_pic')
         img(src='', alt='event_pic2')
+
       .ratings
-        h2 Ratings: <i>create ratings</i>
+        h2 Ratings:
         form#submitReview(action='../../ratings/addRating', method='post')
             div(class='stars', rating='3')
                 span(class='star rated', value='&nbsp;', onclick='setRating(event)')
@@ -66,7 +67,7 @@ html(lang='en')
             input(type='submit', value='Submit review')
             ul#response
       .reviews
-        h2 Reviews <i>create reviews</i>
+        h2 Reviews
         if ratings
             #addedRating
             each rating in ratings
