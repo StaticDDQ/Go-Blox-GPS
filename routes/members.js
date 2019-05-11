@@ -34,7 +34,7 @@ router.get('/profile/:user', function (req, res) {
     };
     Member.findOne(loginUser, function(err, result){
         if (err) throw err;
-        res.render('profile', result);
+        res.render('profile', { user: result });
     });
 
 });

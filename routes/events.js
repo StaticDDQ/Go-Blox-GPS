@@ -172,4 +172,11 @@ router.put('/declineEvent', function (req, res) {
     Event.findByIdAndUpdate(req.body.id, { $pull: { 'joinedUsers': req.user.userName } });
 });
 
+router.post('/getEventById', function (req, res) {
+    Event.findById(req.body.id, function (err, res) {
+        if (err) throw err;
+        if (res) res.send(res.name);
+    });
+});
+
 module.exports = router;

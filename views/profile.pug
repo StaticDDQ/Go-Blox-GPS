@@ -3,13 +3,14 @@ html
     include ../public/css/profileEdit.css
   head
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js")
   body
     .grid
       .navbar
         span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Menu
         #mySidenav.sidenav
           a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
-          a(href='#') ☺ #{userName}
+          a(href='#') ☺ #{user.userName}
           a(href='/home') Home
           a(href='/about') About
           a(href='/events/findEvent') Events
@@ -19,10 +20,10 @@ html
       .basic_profile
         img.profile(src='/pictures/profile_icon.png', alt='profile_picture')
         -var fullname = firstName + ' ' + lastName;
-        h3 #{firstName} #{lastName}
-        h4 Username: #{userName}
-        h4 Join Date: #{joined_date}
-        h4 Date of Birth: #{DOB}
+        h3 #{user.firstName} #{user.lastName}
+        h4 Username: #{user.userName}
+        h4 Join Date: #{user.joined_date}
+        h4 Date of Birth: #{user.DOB}
       .all_content
         // Tab links
         .tab
@@ -63,10 +64,8 @@ html
           p good
         #Bookmarks.tabcontent
           h3 Your bookmarks
-          ul
-            li Event 1
-            li Event 2
-            li Event 3
+          ul#interestedEvents
+            
       .footer
         p(style='color:white')
           | © 2019 Get People Socilaizing. All rights reserved. 
@@ -115,3 +114,19 @@ html
       function removeSettings(){
         document.getElementById("overlay").style.display = "none";
       }
+
+      $(document).ready(function(){
+        var profile = !{JSON.stringify(user)};
+        var eventList = document.getElementById('interestedEvents');
+        
+        profile.joinedEvents.forEach(function(element){
+
+            var eventID = {
+                id: element
+            };
+
+            $.post('events/getEventById', eventID, function(data){
+                $('<li/>', {html: data}).appendTo(eventList);
+            }
+        });
+      });
