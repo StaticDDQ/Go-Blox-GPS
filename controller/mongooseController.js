@@ -25,7 +25,10 @@ var addUser = async function(req, res) {
                 "email": req.body.email,
                 "DOB": req.body.DOB,
                 "password": req.body.password,
-                "joined_date": req.body.joined_date
+                "joined_date": req.body.joined_date,
+                "firstTime": req.body.firstTime,
+                "desc": "",
+                "interests": []
             });
 
             data.save(function (err, newMember) {

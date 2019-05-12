@@ -55,6 +55,12 @@ html(lang='en')
               br
               input(name='DOB', type='date')
               br
+            
+            .uploadImage
+              input#file-field(type='file', onchange='previewImage(event)', name='display')
+              div#preview
+              img#image-field(src='/pictures/profile_icon.png', width='150', height='150')  
+
           p
             .agree
               input#agree(type="checkbox")
@@ -74,4 +80,15 @@ html(lang='en')
         return false;
       }
       return true;
+    }
+
+    function previewImage(event){
+      var reader = new FileReader();
+      var imageField = document.getElementById("image-field")
+      reader.onload = function(){
+        if(reader.readyState == 2){
+          imageField.src = reader.result;
+          }
+      }
+      reader.readAsDataURL(event.target.files[0]);
     }
