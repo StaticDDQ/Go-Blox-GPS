@@ -44,19 +44,27 @@ We have successfully implemented the front and back-end of our three original fu
     - Login
     - get the user’s profile page
     - display their data
+
+First, the user will be directed to the login page, where if they don't have an account, they must create a new account. Once they've filled in their details and created their new account, they will be sent an email confirmation tp confirm their account has been made. Then they will be directed to a login page, where they can now see their profile with the details they've entered from signing up.
+
 2. Search Events based on tags which includes:
     - Search events by name
     - Filter events by tag
+
+From their profile page, the user have access to the find events from the menu bar on the top left corner. They can search the name of the event they want to attend and the search page will display a list of events. They can also filter the list of events by tags and only the events with the corresponding tag will show.
+
 3. Create events which includes:
     - Create Event
     - Go to the created event page to see the details
 
+The user also has access to create a new event from their profile page using the menu bar on the left of the screen. First they must fill in the details about the event (time, date, place, organizer, pictures). Then they can create their new event and they can search their event in the search page and see the details they've entered.
+
 Other functionalities with their front end and back end done includes:
 4. Add ratings and reviews
 5. Join events
-6. …
+6. Maps
+7. Give ratings
 
 We also started developing the front end on some pages including: 
 - about page
-- home page: which will direct new users to create a user account and login
-- …
+- home page: which will direct new users to create a user account and login.
