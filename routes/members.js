@@ -45,6 +45,7 @@ router.get('/profile/:user', function (req, res) {
     }
 });
 
+// open login page
 router.get('/login', function (req, res) {
     res.render('login');
 });
@@ -63,6 +64,7 @@ router.get('/getFirstname/:firstname', function (req, res) {
     });
 });
 
+// open signup page
 router.get('/signup', function (req, res) {
     res.render('signup');
 });
@@ -112,6 +114,7 @@ router.post('/register', function (req, res) {
     }
 });
 
+// function to convert the first letter of the name to uppercase
 function upperCaseName(name) {
     return name.charAt(0).toUpperCase() + name.slice(1);
 }
