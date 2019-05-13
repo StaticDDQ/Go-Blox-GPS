@@ -1,4 +1,7 @@
-*{
+/* CSS FILE FOR about.pug */
+
+/* general layout */
+* {
   padding: 0;
   margin: 5px;;
 }
@@ -7,6 +10,7 @@ body{
   font-family: "Quicksand";
 }
 
+/* configuring the grid */
 .grid{
   display: grid;
   height: 100%;
@@ -19,6 +23,7 @@ body{
   "footer footer";
 }
 
+/* configuring the header */
 .navbar{
   grid-area: navbar;
 }
@@ -38,7 +43,7 @@ body{
   border: 1px solid #BECAD0;
 }
 
-
+/* configuring the footer */
 .footer{
   grid-area: footer; 
   background-color: #90A4BC;
@@ -61,14 +66,6 @@ body{
     background-color: black;
 
 }
-
-
-
-
-
-
-
-
 
 .tab {
   overflow: hidden;
