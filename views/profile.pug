@@ -5,7 +5,10 @@ html
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js")
   body
+    //- configure layout with grid
     .grid
+      
+      //- add navigation bar with links to relevant pages
       .navbar
         span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Menu
         #mySidenav.sidenav
@@ -17,6 +20,8 @@ html
           a(href='/places') Places
           a(href='/events/createEvent') Create Event!
         img.logo(src='/logo.png', alt='GPS', width='50', height='50')
+      
+      //- contains basic profile info for user
       .basic_profile
         //img.profile(src=user.display, alt='profile_picture')
         img.profile(src='/pictures/profile_icon.png', alt='profile_picture')
@@ -25,6 +30,8 @@ html
         h4 Username: #{user.userName}
         h4 Join Date: #{user.joined_date}
         h4 Date of Birth: #{user.DOB}
+
+      //- display other contents about users in tabs
       .all_content
         // Tab links
         .tab
@@ -35,8 +42,11 @@ html
           button.tablinks(onclick="openTab(event, 'Reviews')") Reviews
           button.tablinks(onclick="openTab(event, 'Bookmarks')") Bookmarks
           button(onclick="openSettings()") Settings
+        
+        //- settings tab allow users to change their info
         #overlay
             .settings
+              //- currently, only changing password is possible
               h3 Change Password:
               br
               p
@@ -51,6 +61,8 @@ html
                 br
                 input#submitChanges(type='submit', value='Submit new password')
                 button(onclick='removeSettings()') X 
+        
+        //- The rest of the tab contents
         // Tab content
         #Interests.tabcontent
           h3 Your Interests:
@@ -74,7 +86,8 @@ html
         #Bookmarks.tabcontent
           h3 Your bookmarks
           ul#interestedEvents
-            
+
+      //- Footer 
       .footer
         p(style='color:white')
           | © 2019 Get People Socilaizing. All rights reserved. 
@@ -89,8 +102,9 @@ html
             a(href='#') Terms of Service
           li
             a(href='#') Cookie Policy
+    
+    //- Javascript codes
     script.
-
       function openTab(evt, tabName) {
             
           // Declare all variables
@@ -110,6 +124,7 @@ html
           evt.currentTarget.className += " active";
       }
 
+      //- Navigation bar functions
       function openNav() {
         document.getElementById("mySidenav").style.width = "250px";
       }
@@ -118,7 +133,7 @@ html
         document.getElementById("mySidenav").style.width = "0";
       }
 
-      // 
+      // Setting tab functions
       function openSettings(){
         document.getElementById("overlay").style.display = "block";
       }
@@ -127,6 +142,7 @@ html
         document.getElementById("overlay").style.display = "none";
       }
 
+      //- For events that person is interested in
       $(document).ready(function(){
         var profile = !{JSON.stringify(user)};
         var eventList = document.getElementById('interestedEvents');
@@ -143,6 +159,7 @@ html
         });
       });
 
+      //- Dynamic update function
       $(function(){
         $('#submitChanges').click(function(event){
             event.preventDefault();
