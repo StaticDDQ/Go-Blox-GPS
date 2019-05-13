@@ -4,7 +4,6 @@ const router = express.Router();
 const path = require('path');
 const multer = require('multer');
 var cloudinary = require('cloudinary').v2;
-var cloudConfig = require("../config/cloudinary");
 var NodeGeoCoder = require("node-geocoder");
 
 // Get event model
@@ -86,7 +85,10 @@ router.get('/maps', function(req,res){
 
 //change back to post
 router.get('/createEvent', function (req, res) {
-    res.render('createEvent');
+    if (req.user === undefined)
+        res.end();
+    else
+        res.render('createEvent');
 });
 
 // get event
@@ -98,7 +100,6 @@ router.get('/getEvent/:id', function (req, res) {
                 if (err) throw err;
                 
                 res.render('eventDetails', { event: event, ratings: result });
-                    
             });
         } else {
             res.render('notFound');
@@ -107,7 +108,11 @@ router.get('/getEvent/:id', function (req, res) {
 });
 
 router.get('/findEvent', function (req, res) {
-    res.render('loadEventsFirst');
+    if (req.user === undefined) {
+        res.end();
+    } else {
+        res.render('loadEventsFirst');
+    }
 })
 
 // get events by name
@@ -155,23 +160,35 @@ router.get('/getMap', function (req, res){
     res.sendFile(path.join(__dirname, '../public/map.html'));
 });
 
+// add a user to the joinedUsers array of an event
 router.put('/joinEvent', function (req, res) {
-    
-    Event.findById(req.body.id, function (err, res) {
-        if (!res.joinedUsers.includes(req.user.userName)) {
-            res.joinedUsers.push(req.user.userName);
-            res.save(function (err) {
-                if (err) throw err;
-            });
-        }
-    });
+    if (req.user === undefined) {
+        res.error();
+    } else {
+        Event.findById(req.body.id, function (err, result) {
+            if (!result.joinedUsers.includes(req.user.userName)) {
+                res.joinedUsers.push(req.user.userName);
+                result.save(function (err) {
+                    if (err) throw err;
+                });
+            }
+            res.send(result);
+        });
+    }
 });
 
+// remove user from the joinedUsers array of an event
 router.put('/declineEvent', function (req, res) {
-    
-    Event.findByIdAndUpdate(req.body.id, { $pull: { 'joinedUsers': req.user.userName } });
+    if (req.user === undefined) {
+        res.error();
+    } else {
+        Event.findByIdAndUpdate(req.body.id, { $pull: { 'joinedUsers': req.user.userName } }, function (err, result) {
+            res.send(result)
+        });
+    }
 });
 
+// Get name of event after looking up the ID
 router.post('/getEventById', function (req, res) {
     Event.findById(req.body.id, function (err, res) {
         if (err) throw err;
