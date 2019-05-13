@@ -43,11 +43,14 @@ We have successfully implemented the front and back-end of our three original fu
 
 1. Get user (get member), which includes:
     - Sign Up
+        - enter their details
+        - upload profile picture
+        - add their interest
     - Login
     - get the user’s profile page
     - display their data
 
-First, the user will be directed to the login page, where if they don't have an account, they must create a new account. Once they've filled in their details and created their new account, they will be sent an email confirmation tp confirm their account has been made. Then they will be directed to a login page, where they can now see their profile with the details they've entered from signing up.
+First, the user will be directed to the login page, where if they don't have an account, they must create a new account. Once they've filled in their details and created their new account, they will be sent an email confirmation tp confirm their account has been made. Then they will be directed to a login page, where they can now see their profile with the details they've entered from signing up. They can also upload their profile picture and add their interests.
 
 2. Search Events based on tags which includes:
     - Search events by name
@@ -63,10 +66,14 @@ The user also has access to create a new event from their profile page using the
 
 Other functionalities with their front end and back end done includes:
 4. Add ratings and reviews
-5. Join events
-6. Maps
-7. Give ratings
+5. Maps
+6. users can add events their interested in to their profile page
+7. Join user (a button on the event page and their response is recorded in the database)
 
 We also started developing the front end on some pages including: 
 - about page
 - home page: which will direct new users to create a user account and login.
+
+Some backend functionalities we've created:
+
+
