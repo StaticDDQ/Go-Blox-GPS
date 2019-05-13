@@ -114,13 +114,14 @@ function upperCaseName(name) {
 }
 
 // update member
-router.put('/updatePassword/:userName', function (req, res) {
+router.put('/updatePassword', function (req, res) {
+
     req.checkBody('password', 'Password is required').notEmpty();
     req.checkBody('retype', 'Password does not match').equals(req.body.password);
     var error = req.validationErrors();
     if (!error) {
         Member.findOneAndUpdate(
-            { userName: req.params.userName }, { $set: { 'password': req.body.password } }, function (err, resp) {
+            { userName: req.user.userName }, { $set: { 'password': req.body.password } }, function (err, resp) {
                 if (err) throw err;
                 res.send(resp);
             });
