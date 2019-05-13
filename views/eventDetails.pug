@@ -17,16 +17,17 @@ html(lang='en')
         span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Menu
         #mySidenav.sidenav
           a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
-          a(href='#') Home
-          a(href='#') About
-          a(href='#') Events
+          a(href='/home') Home
+          a(href='/about') About
+          a(href='/events/findEvent') Events
           a(href='#') Places
           a(href='#') FAQ
         img.logo(src= "/logo.png", alt='GPS', width='80', height='80')
+      
+      .imageContent
+        img.main_img(src=event.pictures, alt='main_image') 
 
       .main_content
-        .imageContent
-          img.main_img(src=event.pictures, alt='main_image') 
         .textContent
 
           h2 #{event.name}
@@ -49,10 +50,10 @@ html(lang='en')
             button#no No
             button#interested Interested
       
-      //- .gallery
-      //-   h2 Gallery <i>create gallery</i>
-      //-   img(src='', alt='event_pic')
-      //-   img(src='', alt='event_pic2')
+      .gallery
+        h2 Gallery <i>create gallery</i>
+        img(src='', alt='event_pic')
+        img(src='', alt='event_pic2')
 
       .ratings
         h2 Ratings:

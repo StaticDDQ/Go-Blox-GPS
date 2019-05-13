@@ -5,6 +5,7 @@
   
 body{
     font-family: "Quicksand";
+    text-align: justify;
 }
 
 p {
@@ -25,9 +26,10 @@ p.contacts {
     display: grid;
     height: 100%;
     grid-template-columns: auto;
-    grid-template-rows: 0.3fr 3fr 1fr 1fr 0.3fr;
+    grid-template-rows: auto;
     grid-template-areas: 
     "navbar"
+    "image_content"
     "main_content"
     "gallery"
     "ratings"
@@ -38,64 +40,66 @@ p.contacts {
 .navbar{
     grid-area: navbar;
     
-}.sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #ED7755;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-  }
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #ED7755;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
   
-  .sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: white;
-    display: block;
-    transition: 0.3s;
-  }
+.sidenav a:hover {
+  color: black;
+}
   
-  .sidenav a:hover {
-  
-    color: black;
-  }
-  
-  .sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-  }
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
 
 .logo{
     float: right;
 }
 
-.main_content{
-    grid-area: main_content;
-    padding-bottom: 10px;
-    margin-right: 400px;
-    margin-left: 400px;
-}
-
 .imageContent {
-  width: 600px;
-  height: auto;
+  grid-area: image_content;
   text-align: center;
+  align-content: center;
   margin-top: 10px;
   margin-bottom: 20px;
+  justify-self: center;
 }
 
 .main_img{
   width: 50%;
   height: auto;
   border: solid black 1px;
+}
+
+.main_content{
+    grid-area: main_content;
+    padding-bottom: 10px;
+    align-content: center;
+    justify-self: center;
 }
 
 .text_content {
