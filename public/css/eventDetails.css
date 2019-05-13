@@ -1,4 +1,7 @@
-*{
+/* CSS FILE FOR eventDetails.css */
+
+/* general layout */
+* {
     padding: 0;
     margin: 5px;;
 }
@@ -22,6 +25,7 @@ p.contacts {
   font-size: 20px;
 }
 
+/* configuring the grid */
 .grid{
     display: grid;
     height: 100%;
@@ -37,6 +41,7 @@ p.contacts {
     "footer";
 }
 
+/* configuring the navigation bar */
 .navbar{
     grid-area: navbar;
     
@@ -76,10 +81,12 @@ p.contacts {
   margin-left: 50px;
 }
 
+/* configuring logo */
 .logo{
     float: right;
 }
 
+/* configuring the image uploaded */
 .imageContent {
   grid-area: image_content;
   text-align: center;
@@ -95,6 +102,7 @@ p.contacts {
   border: solid black 1px;
 }
 
+/* configuring the text */
 .main_content{
     grid-area: main_content;
     width: 50%;
@@ -107,14 +115,18 @@ p.contacts {
   text-align: left;
     
 }
+
+/* configure join event buttons */
 .join{
     display: inline-block;
 }
 
-.gallery{
+/* configure gallery */
+/* .gallery{
     grid-area: gallery;
-}
+} */
 
+/* add reviews and ratings*/
 .reviews{
     grid-area: reviews;
 }
@@ -123,6 +135,7 @@ p.contacts {
     grid-area: ratings;
 }
 
+/* configure footer */
 .footer{
     grid-area: footer; 
     background-color: #90A4BC;
@@ -145,6 +158,8 @@ p.contacts {
       border-bottom: solid 0.3px black;
   
   }
+
+  /* add rating stars */
 
   .star{
       color: goldenrod;
