@@ -183,16 +183,17 @@ router.put('/declineEvent', function (req, res) {
         res.error();
     } else {
         Event.findByIdAndUpdate(req.body.id, { $pull: { 'joinedUsers': req.user.userName } }, function (err, result) {
-            res.send(result)
+            res.send(result);
         });
     }
 });
 
 // Get name of event after looking up the ID
 router.post('/getEventById', function (req, res) {
-    Event.findById(req.body.id, function (err, res) {
+
+    Event.findById(req.body.id, function (err, result) {
         if (err) throw err;
-        if (res) res.send(res.name);
+        if (result) res.send(result.name);
     });
 });
 
