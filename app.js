@@ -50,6 +50,11 @@ app.get('/about', function (req, res) {
 });
 
 // route to about page
+app.get('/places', function (req, res) {
+    res.render('comingSoon');
+});
+
+// route to about page
 app.get('/home', function (req, res) {
     res.render('mapHome');
 });
