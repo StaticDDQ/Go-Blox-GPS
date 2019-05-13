@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const mongooseController = require('../controller/mongooseController');
 const passport = require('passport');
+const multer = require('multer');
+const path = require('path');
+var cloudinary = require('cloudinary').v2;
+var cloudConfig = require("../config/cloudinary");
 
 // used to get current date to record when user is created
 const moment = require('moment');
@@ -72,7 +76,17 @@ router.get('/verify', function (req, res) {
 });
 
 // register as member
-router.post('/register', function (req, res) {
+
+// setting up storage to upload media
+var storage = multer.diskStorage({
+    filename: function (req, file, cb) {
+        cb(null, file.originalname + '-' + Date.now())
+    }
+});
+
+var upload = multer({ storage: storage });
+
+router.post('/register', upload.single("display"), async function (req, res) {
 
     // check each element for validity
     req.checkBody('firstName', 'First name is required').notEmpty();
@@ -82,7 +96,7 @@ router.post('/register', function (req, res) {
     req.checkBody('email', 'Email is not valid').isEmail();
     req.checkBody('DOB', 'Date of Birth is required').notEmpty();
     req.checkBody('password', 'Password is required').notEmpty();
-
+    
     var error = req.validationErrors();
     if (!error) {
         req.checkBody('password_confirm', 'Password does not match').equals(req.body.password);
@@ -95,6 +109,17 @@ router.post('/register', function (req, res) {
             req.body['joined_date'] = moment().format('MMM Do YY');
             req.body['DOB'] = moment(req.body['DOB']).format('MMM Do YY');
             req.body['active'] = false;
+
+            var reqURL;
+            await cloudinary.uploader.upload(req.file.path,
+                function (error, result) {
+                    if (error) throw error;
+
+                    reqURL = result.secure_url;
+
+                });
+            req.body.display = reqURL;
+            console.log(req.body);
 
             mongooseController.addUser(req, res);
         } else {
