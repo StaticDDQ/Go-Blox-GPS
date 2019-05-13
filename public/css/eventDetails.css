@@ -97,6 +97,7 @@ p.contacts {
 
 .main_content{
     grid-area: main_content;
+    width: 50%;
     padding-bottom: 10px;
     align-content: center;
     justify-self: center;
