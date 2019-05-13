@@ -5,6 +5,7 @@ html
     link(rel='stylesheet', type='text/css', href='css/success.css')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
   body
+    //- display navigation bar
     .navbar
       span(style='font-size:30px;cursor:pointer;color:white', onclick='openNav()') ☰ Menu
       #mySidenav.sidenav
@@ -14,7 +15,8 @@ html
         a(href='/events/findEvents') Events
         a(href='/places') Places
       img.logo(src='/logo.png', alt='GPS', width='80', height='80')
-    h1
+    
+    //- Main content
     h1
       | Page not found!
       br
@@ -23,10 +25,14 @@ html
     .btn
       form(action='/')
         button(type='submit') Log me in
+
+    //- Javascript code
     script.
+
+      //- navigation bar script
       function openNav() {
-      document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("mySidenav").style.width = "250px";
       }
       function closeNav() {
-      document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("mySidenav").style.width = "0";
       }

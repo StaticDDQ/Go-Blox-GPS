@@ -1,4 +1,7 @@
-*{
+/* CSS FILE FOR mapHome.pug */
+
+/* Configure main body */
+* {
     padding: 0;
     margin: 0px;;
 }
@@ -16,6 +19,7 @@ p {
   padding-top: 5px;
 }
 
+/* configure navigation bar */
 .navbar{
     grid-area: navbar;
     margin: 5px;
@@ -59,6 +63,7 @@ p {
     margin: 5px;
 }
 
+/* configure contents */
 h1{
     text-align: center;
     color: white;
