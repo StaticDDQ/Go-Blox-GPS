@@ -1,4 +1,7 @@
-*{
+/* CSS FILE FOR profile.pug */
+
+/* main layout */
+* {
   padding: 0;
   margin: 5px;;
 }
@@ -7,6 +10,7 @@ body{
   font-family: "Quicksand";
 }
 
+/* configure grid */
 .grid{
   display: grid;
   height: 100%;
@@ -18,6 +22,7 @@ body{
   "footer footer";
 }
 
+/* header */
 .navbar{
   grid-area: navbar;
 }
@@ -26,6 +31,7 @@ body{
   float: right;
 }
 
+/* profile sidebar */
 .basic_profile{
   grid-area: basic_profile;
   text-align: center;
@@ -39,12 +45,13 @@ body{
   width: 150px;
 }
 
+/* details about the person on the right side */
 .all_content{
   grid-area: all_content;
   border: 1px solid #BECAD0;
 }
 
-
+/* configure footer */
 .footer{
   grid-area: footer; 
   background-color: #90A4BC;
@@ -68,14 +75,7 @@ body{
 
 }
 
-
-
-
-
-
-
-
-
+/* tabs for all content */
 .tab {
   overflow: hidden;
   border: 1px solid #ccc;
@@ -111,6 +111,7 @@ body{
   border-top: none;
 }
 
+/* configure navigation bar */
 .sidenav {
   height: 100%;
   width: 0;
@@ -134,7 +135,6 @@ body{
 }
 
 .sidenav a:hover {
-
   color: black;
 }
 
@@ -145,6 +145,14 @@ body{
   font-size: 36px;
   margin-left: 50px;
 }
+
+/* configure setting which uses overlay */
+.settings {
+  background-color: #f1f1f1;
+  padding: 20px;
+  justify-content: center;
+  margin: 250px;
+ } 
 
 #overlay {
     position: fixed;
