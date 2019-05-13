@@ -157,8 +157,8 @@ router.put('/interested', function (req, res) {
     if (req.user === undefined) {
         res.error();
     } else {
-        Member.findOneAndUpdate({ userName: req.user.userName }, { $push: { 'joinedEvents': req.body.eventID } }, function (err, res) {
-            console.log(res);
+        Member.findOneAndUpdate({ userName: req.user.userName }, { $push: { 'joinedEvents': req.body.id } }, function (err, result) {
+            res.send(result);
         });
     } 
 });
@@ -168,8 +168,8 @@ router.put('/notInterested', function (req, res) {
     if (req.user === undefined) {
         res.error();
     } else {
-        Member.findOneAndUpdate({ userName: req.user.userName }, { $pull: { 'joinedEvents': req.body.eventID } }, function (err, res) {
-            console.log(res);
+        Member.findOneAndUpdate({ userName: req.user.userName }, { $pull: { 'joinedEvents': req.body.id } }, function (err, result) {
+            res.send(result);
         });
     }
 });

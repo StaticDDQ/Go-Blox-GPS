@@ -165,13 +165,14 @@ router.put('/joinEvent', function (req, res) {
     if (req.user === undefined) {
         res.error();
     } else {
-        Event.findById(req.body.id, function (err, res) {
-            if (!res.joinedUsers.includes(req.user.userName)) {
+        Event.findById(req.body.id, function (err, result) {
+            if (!result.joinedUsers.includes(req.user.userName)) {
                 res.joinedUsers.push(req.user.userName);
-                res.save(function (err) {
+                result.save(function (err) {
                     if (err) throw err;
                 });
             }
+            res.send(result);
         });
     }
 });
@@ -181,7 +182,9 @@ router.put('/declineEvent', function (req, res) {
     if (req.user === undefined) {
         res.error();
     } else {
-        Event.findByIdAndUpdate(req.body.id, { $pull: { 'joinedUsers': req.user.userName } });
+        Event.findByIdAndUpdate(req.body.id, { $pull: { 'joinedUsers': req.user.userName } }, function (err, result) {
+            res.send(result)
+        });
     }
 });
 
