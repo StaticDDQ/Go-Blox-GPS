@@ -114,13 +114,14 @@ function upperCaseName(name) {
 }
 
 // update member
-router.put('/updatePassword/:userName', function (req, res) {
+router.put('/updatePassword', function (req, res) {
+
     req.checkBody('password', 'Password is required').notEmpty();
     req.checkBody('retype', 'Password does not match').equals(req.body.password);
     var error = req.validationErrors();
     if (!error) {
         Member.findOneAndUpdate(
-            { userName: req.params.userName }, { $set: { 'password': req.body.password } }, function (err, resp) {
+            { userName: req.user.userName }, { $set: { 'password': req.body.password } }, function (err, resp) {
                 if (err) throw err;
                 res.send(resp);
             });
@@ -143,9 +144,13 @@ router.delete('/deleteMember/:username', function (req, res) {
 });
 
 router.put('/interested', function (req, res) {
-    Member.findByOneAndUpdate({ userName: req.user.userName }, { $push: { 'joinedEvents': req.body.eventID } }, function (err, res) {
-        console.log(res);
-    });
+    if (req.user === undefined) {
+        res.error();
+    } else {
+        Member.findByOneAndUpdate({ userName: req.user.userName }, { $push: { 'joinedEvents': req.body.eventID } }, function (err, res) {
+            console.log(res);
+        });
+    } 
 });
 
 router.post('/storeInfo', function (req, res) {
