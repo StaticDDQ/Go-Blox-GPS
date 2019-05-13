@@ -72,6 +72,7 @@ html
           h3 Your bookmarks
           ul#interestedEvents
             
+            
       .footer
         p(style='color:white')
           | © 2019 Get People Socilaizing. All rights reserved. 
@@ -126,16 +127,19 @@ html
 
       $(document).ready(function(){
         var profile = !{JSON.stringify(user)};
-        var eventList = document.getElementById('interestedEvents');
         
         profile.joinedEvents.forEach(function(element){
-
             var eventID = {
                 id: element
             };
-
-            $.post('events/getEventById', eventID, function(data){
-                $('<li/>', {html: data}).appendTo(eventList);
+            
+            $.ajax({
+                url:'/events/getEventById',
+                type: 'post',
+                data: eventID,
+                success: function(data){
+                    $('<li/>', {html: data}).appendTo($('#interestedEvents'));
+                }
             });
         });
       });
