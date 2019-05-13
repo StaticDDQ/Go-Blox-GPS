@@ -30,18 +30,22 @@ router.post('/authenticate', function (req, res, next) {
 
 // load profile
 router.get('/profile/:user', function (req, res) {
-    var loginUser = {
-        userName: req.params.user
-    };
-    Member.findOne(loginUser, function(err, result){
-        if (err) throw err;
-        if (result) {
-            res.render('profile', { user: result });
-        }
-    });
-
+    if (req.user === undefined) {
+        res.end();
+    } else {
+        var loginUser = {
+            userName: req.params.user
+        };
+        Member.findOne(loginUser, function (err, result) {
+            if (err) throw err;
+            if (result) {
+                res.render('profile', { user: result });
+            }
+        });
+    }
 });
 
+// open login page
 router.get('/login', function (req, res) {
     res.render('login');
 });
@@ -60,6 +64,7 @@ router.get('/getFirstname/:firstname', function (req, res) {
     });
 });
 
+// open signup page
 router.get('/signup', function (req, res) {
     res.render('signup');
 });
@@ -109,21 +114,26 @@ router.post('/register', function (req, res) {
     }
 });
 
+// function to convert the first letter of the name to uppercase
 function upperCaseName(name) {
     return name.charAt(0).toUpperCase() + name.slice(1);
 }
 
 // update member
-router.put('/updatePassword/:userName', function (req, res) {
+router.put('/updatePassword', function (req, res) {
+
     req.checkBody('password', 'Password is required').notEmpty();
     req.checkBody('retype', 'Password does not match').equals(req.body.password);
+    req.checkBody('oldPwd', 'Old password does not match').equals(req.user.password);
     var error = req.validationErrors();
     if (!error) {
         Member.findOneAndUpdate(
-            { userName: req.params.userName }, { $set: { 'password': req.body.password } }, function (err, resp) {
+            { userName: req.user.userName }, { $set: { 'password': req.body.password } }, function (err, resp) {
                 if (err) throw err;
                 res.send(resp);
             });
+    } else {
+        res.send(null);
     }
 });
 
@@ -142,12 +152,29 @@ router.delete('/deleteMember/:username', function (req, res) {
         }); 
 });
 
+// indicate whether a user is interested in a event
 router.put('/interested', function (req, res) {
-    Member.findByOneAndUpdate({ userName: req.user.userName }, { $push: { 'joinedEvents': req.body.eventID } }, function (err, res) {
-        console.log(res);
-    });
+    if (req.user === undefined) {
+        res.error();
+    } else {
+        Member.findOneAndUpdate({ userName: req.user.userName }, { $push: { 'joinedEvents': req.body.id } }, function (err, result) {
+            res.send(result);
+        });
+    } 
 });
 
+// indicate whether a user is interested in a event
+router.put('/notInterested', function (req, res) {
+    if (req.user === undefined) {
+        res.error();
+    } else {
+        Member.findOneAndUpdate({ userName: req.user.userName }, { $pull: { 'joinedEvents': req.body.id } }, function (err, result) {
+            res.send(result);
+        });
+    }
+});
+
+// update user with the description and list of interested tags
 router.post('/storeInfo', function (req, res) {
     Member.findOneAndUpdate({ userName: req.user.userName }, { $set: { 'desc': req.body.description, 'interests': req.body.interest, 'firstTime': false } }, function (err, res) {
         console.log(res);

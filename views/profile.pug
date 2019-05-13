@@ -14,8 +14,7 @@ html
           a(href='/home') Home
           a(href='/about') About
           a(href='/events/findEvent') Events
-          a(href='#') Places
-          a(href='#') FAQ
+          a(href='/places') Places
           a(href='/events/createEvent') Create Event!
         img.logo(src='/logo.png', alt='GPS', width='50', height='50')
       .basic_profile
@@ -38,12 +37,19 @@ html
           button(onclick="openSettings()") Settings
         #overlay
             .settings
-                form(action='members/updatePassword/'+userName, method='PUT')
-                    input(type='text', name='password', value='New password')
-                    br
-                    input(type='password', name='retype', value='Retype password')
-                    br
-                    input(type='submit', value='Submit new password')
+              h3 Change Password:
+              br
+              p
+                | Old password:
+                input#oldpwd(type='password')
+                br
+                | New password:
+                input#pwd(type='text')
+                br
+                | Retype new password:
+                input#pwdTyped(type='password')
+                br
+                input#submitChanges(type='submit', value='Submit new password')
                 button(onclick='removeSettings()') X 
         // Tab content
         #Interests.tabcontent
@@ -84,6 +90,7 @@ html
           li
             a(href='#') Cookie Policy
     script.
+
       function openTab(evt, tabName) {
             
           // Declare all variables
@@ -132,6 +139,28 @@ html
 
             $.post('events/getEventById', eventID, function(data){
                 $('<li/>', {html: data}).appendTo(eventList);
+            });
+        });
+      });
+
+      $(function(){
+        $('#submitChanges').click(function(event){
+            event.preventDefault();
+            var formData = {
+                password: $('#pwd')[0].value,
+                retype: $('#pwdTyped')[0].value,
+                oldPwd: $('#oldpwd')[0].value
+            };
+
+            $.ajax({
+                url: '/members/updatePassword',
+                type: 'put',
+                data: formData
+            }).done(function(data){
+                if(data)
+                    alert("Password changed");
+                else
+                    alert("Incorrect input");
             });
         });
       });

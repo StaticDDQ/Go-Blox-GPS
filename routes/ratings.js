@@ -22,12 +22,4 @@ router.post('/addRating', function (req, res) {
     });
 });
 
-// get rating based on event ID
-router.get('/getRating/:eventID', function (req, res) {
-    Rating.findOne({ eventID: req.params.eventID }, function (err, resp) {
-        if (err) throw err;
-        res.send(resp);
-    });
-});
-
 module.exports = router;

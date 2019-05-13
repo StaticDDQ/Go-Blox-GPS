@@ -17,16 +17,16 @@ html(lang='en')
         span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Menu
         #mySidenav.sidenav
           a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
-          a(href='#') Home
-          a(href='#') About
-          a(href='#') Events
-          a(href='#') Places
-          a(href='#') FAQ
+          a(href='/home') Home
+          a(href='/about') About
+          a(href='/events/findEvent') Events
+          a(href='/places') Places
         img.logo(src= "/logo.png", alt='GPS', width='80', height='80')
 
+      .imageContent
+        img.main_img(src=event.pictures, alt='main_image')
+
       .main_content
-        .imageContent
-          img.main_img(src=event.pictures, alt='main_image') 
         .textContent
 
           h2 #{event.name}
@@ -35,27 +35,21 @@ html(lang='en')
           p <b>End Date:</b> #{event.endDate}
           p <b>Start Time:</b> #{event.startTime}
           p <b>End Time:</b> #{event.endTime}
-          p <b>Description:</b> 
+          p <b>Description:</b>
           p #{event.description}
           p.contacts <b>Contact Details:</b>
           p <b>Email:</b> #{event.email}
           p <b>Phone Number:</b> #{event.phone}
           p <b>Tags:</b> #{event.tags}
-          p <b>Website:</b> <i>insert website link here</i>
           br
           #join
             h3.join <b>Join?<b>
             button#yes Yes
             button#no No
             button#interested Interested
-      
-      //- .gallery
-      //-   h2 Gallery <i>create gallery</i>
-      //-   img(src='', alt='event_pic')
-      //-   img(src='', alt='event_pic2')
 
       .ratings
-        h2 Ratings:
+        h2 Add reviews:
         form#submitReview(action='../../ratings/addRating', method='post')
             div(class='stars', rating='3')
                 span(class='star rated', value='&nbsp;', onclick='setRating(event)')
@@ -80,7 +74,7 @@ html(lang='en')
                     p DESCRIPTION: #{rating.desc}
       .footer
         p(style='color:white')
-          | © 2019 Get People Socilaizing. All rights reserved. 
+          | © 2019 Get People Socilaizing. All rights reserved.
           a(href='page2.html')
         a(href='page2.html')
         ul(style='color:white')
@@ -164,6 +158,9 @@ html(lang='en')
                     data: eventID,
                     success: function(data){
                         alert("You are now joining this event");
+                    },
+                    error: function(){
+                        alert("Please log in!");
                     }
                 });
             });
@@ -179,6 +176,9 @@ html(lang='en')
                     data: eventID,
                     success: function(data){
                         alert("You are no longer joining this event");
+                    },
+                    error: function(){
+                        alert("Please log in!");
                     }
                 });
             });
@@ -194,8 +194,15 @@ html(lang='en')
                     data: eventID,
                     success: function(data){
                         alert("You are interested of this event");
+                        if($('#interested').html() === "Interested")
+                            $('#interested').html("Not interested");
+                        else
+                            $('#interested').html("Interested")
+                    },
+                    error: function(){
+                        alert("Please log in!");
                     }
                 });
             });
-        });    
+        });
 

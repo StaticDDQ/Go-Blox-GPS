@@ -15,11 +15,10 @@ html(lang='en')
         span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Menu
         #mySidenav.sidenav
           a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
-          a(href='#') Home
-          a(href='#') About
-          a(href='#') Events
-          a(href='#') Places
-          a(href='#') FAQ
+          a(href='/home') Home
+          a(href='/about') About
+          a(href='/events/findEvents') Events
+          a(href='/places') Places
         img.logo(src="/logo.png", alt='GPS', width='80', height='80')
       
       .searchBox
@@ -40,15 +39,17 @@ html(lang='en')
         if events
           .events
             each event in events
-              div#eachEvent(class='filtered ', name ='displayedEvents', tags=event.tags, onclick="window.location='http://goblox.herokuapp.com/events/getEvent/" + event._id + "'")
+              div#eachEvent(class='filtered ', name ='displayedEvents', tags=event.tags, onclick="window.location='http://localhost:3000/events/getEvent/" + event._id + "'")
                   .event_card
                     .event_title
                       h3 #{event.name}
                     .event_pic
                       img(src= event.pictures, alt='event_pic')
                     .event_desc
-                      p <b>Date:</b> #{event.date}
-                      p <b>Time:</b> #{event.date}
+                      p <b>Start Date:</b> #{event.startDate}
+                      p <b>End Date:</b> #{event.endDate}
+                      p <b>Start Time:</b> #{event.startTime}
+                      p <b>End Time:</b> #{event.endTime}
                       p <b>Location:</b> #{event.address}
                       p <b>Description:</b> #{event.description}
                     .event_tag
