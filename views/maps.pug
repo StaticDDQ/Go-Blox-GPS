@@ -1,32 +1,48 @@
 doctype html
 html
   head
-    title Home
-    link(rel='stylesheet', href='http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css')
-    script(src='http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js')
+    title Simple Leaflet Map
+    meta(charset='utf-8')
+    link(rel='stylesheet', href='http://cdn.leafletjs.com/leaflet-0.7/leaflet.css')
   body
     #map(style='width: 900px; height: 580px')
-    script(type="text/javascript").
-      // Creating map options
-      var mapOptions = {
-        //- center: auto,
-      center: [-37.814, 144.96332],
-      zoom: 10
-      }
-      // Creating a map object
-      var map = new L.map('map', mapOptions);
-      var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
-        // Adding layer to the map
-      map.addLayer(layer);
-    each evented in events
-      script(type="text/javascript").
-        var lat = parseFloat(evented.location[0].latitude);
-        var long = parseFloat(evented.location[0].longitude);
-        var marker = new L.Marker([lat,long]);
-        var customOptions = {
-          'maxWidth': '500',
-          'className' : 'custom'};
-        marker.bindPopup('Batman is here:  #{evented.name},\naddress: #{evented.address}', customOptions).openPopup();
+    script(src='http://cdn.leafletjs.com/leaflet-0.7/leaflet.js')
+    
+    script.
+      var map = L.map('map').setView([-37.814, 144.96332], 10);
+      mapLink =
+      '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+      L.tileLayer(
+      'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; ' + mapLink + ' Contributors',
+      maxZoom: 18,
+      }).addTo(map);
+    
+    script.
+      var planes1 = [!{events[0][0]},!{events[0][1]},!{events[0][2]}];
+      var planes2 = [!{events[1][0]},!{events[1][1]},!{events[1][2]}];
+
+      for evented in #{JSON.parse(events)}
+        console.log("Hellow");
+        var marker = new L.Marker([evented[1],evented[2]]);
+        marker.bindPopup(evented[0]);
         map.addLayer(marker);
+
+//- / Creating a map object
+//-   var map = new L.map('map', mapOptions);
+//-   var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+//-     // Adding layer to the map
+//-   map.addLayer(layer);
+//-   each evented in events
+//-   -
+//-     var lat = parseFloat(evented.location[0].latitude);
+//-     var long = parseFloat(evented.location[0].longitude);
+//-     var marker = new L.Marker([lat,long]);
+//-     var customOptions = {
+//-       'maxWidth': '500',
+//-       'className' : 'custom'};
+//-     marker.bindPopup('Batman is here:  #{evented.name},\naddress: #{evented.address}', customOptions).openPopup();
+//-     map.addLayer(marker);
       
+        
       
