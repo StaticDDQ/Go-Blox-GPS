@@ -48,11 +48,6 @@ html(lang='en')
             button#yes Yes
             button#no No
             button#interested Interested
-      
-      //- .gallery
-      //-   h2 Gallery <i>create gallery</i>
-      //-   img(src='', alt='event_pic')
-      //-   img(src='', alt='event_pic2')
 
       .ratings
         h2 Ratings:
@@ -200,6 +195,10 @@ html(lang='en')
                     data: eventID,
                     success: function(data){
                         alert("You are interested of this event");
+                        if($('#interested').html() === "Interested")
+                            $('#interested').html("Not interested");
+                        else
+                            $('#interested').html("Interested")
                     }, 
                     error: function(){
                         alert("Please log in!");

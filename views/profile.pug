@@ -38,10 +38,13 @@ html
           button(onclick="openSettings()") Settings
         #overlay
             .settings
-                | Password:
+                | Old password:
+                input#oldpwd(type='password')
+                br
+                | New password:
                 input#pwd(type='text')
                 br
-                | Retype password:
+                | Retype new password:
                 input#pwdTyped(type='password')
                 br
                 input#submitChanges(type='submit', value='Submit new password')
@@ -143,7 +146,8 @@ html
             event.preventDefault();
             var formData = {
                 password: $('#pwd')[0].value,
-                retype: $('#pwdTyped')[0].value
+                retype: $('#pwdTyped')[0].value,
+                oldPwd: $('#oldpwd')[0].value
             };
 
             $.ajax({
@@ -151,7 +155,10 @@ html
                 type: 'put',
                 data: formData
             }).done(function(data){
-                console.log(data);
+                if(data)
+                    alert("Password changed");
+                else
+                    alert("Incorrect input");
             });
         });
       });
