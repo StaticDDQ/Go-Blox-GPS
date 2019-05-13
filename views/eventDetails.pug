@@ -41,7 +41,6 @@ html(lang='en')
           p <b>Email:</b> #{event.email}
           p <b>Phone Number:</b> #{event.phone}
           p <b>Tags:</b> #{event.tags}
-          p <b>Website:</b> <i>insert website link here</i>
           br
           #join
             h3.join <b>Join?<b>
@@ -50,7 +49,7 @@ html(lang='en')
             button#interested Interested
 
       .ratings
-        h2 Ratings:
+        h2 Add reviews:
         form#submitReview(action='../../ratings/addRating', method='post')
             div(class='stars', rating='3')
                 span(class='star rated', value='&nbsp;', onclick='setRating(event)')
