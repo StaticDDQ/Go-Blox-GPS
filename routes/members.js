@@ -64,6 +64,7 @@ router.get('/getFirstname/:firstname', function (req, res) {
     });
 });
 
+// open signup page
 router.get('/signup', function (req, res) {
     res.render('signup');
 });
