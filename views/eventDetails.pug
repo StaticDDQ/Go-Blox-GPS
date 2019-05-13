@@ -164,6 +164,9 @@ html(lang='en')
                     data: eventID,
                     success: function(data){
                         alert("You are now joining this event");
+                    },
+                    error: function(){
+                        alert("Please log in!");
                     }
                 });
             });
@@ -179,6 +182,9 @@ html(lang='en')
                     data: eventID,
                     success: function(data){
                         alert("You are no longer joining this event");
+                    },
+                    error: function(){
+                        alert("Please log in!");
                     }
                 });
             });
@@ -194,6 +200,9 @@ html(lang='en')
                     data: eventID,
                     success: function(data){
                         alert("You are interested of this event");
+                    }, 
+                    error: function(){
+                        alert("Please log in!");
                     }
                 });
             });

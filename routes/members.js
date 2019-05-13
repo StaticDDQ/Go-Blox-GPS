@@ -144,9 +144,13 @@ router.delete('/deleteMember/:username', function (req, res) {
 });
 
 router.put('/interested', function (req, res) {
-    Member.findByOneAndUpdate({ userName: req.user.userName }, { $push: { 'joinedEvents': req.body.eventID } }, function (err, res) {
-        console.log(res);
-    });
+    if (req.user === undefined) {
+        res.error();
+    } else {
+        Member.findByOneAndUpdate({ userName: req.user.userName }, { $push: { 'joinedEvents': req.body.eventID } }, function (err, res) {
+            console.log(res);
+        });
+    } 
 });
 
 router.post('/storeInfo', function (req, res) {

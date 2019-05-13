@@ -98,7 +98,6 @@ router.get('/getEvent/:id', function (req, res) {
                 if (err) throw err;
                 
                 res.render('eventDetails', { event: event, ratings: result });
-                    
             });
         } else {
             res.render('notFound');
@@ -107,7 +106,11 @@ router.get('/getEvent/:id', function (req, res) {
 });
 
 router.get('/findEvent', function (req, res) {
-    res.render('loadEventsFirst');
+    if (req.user === undefined) {
+        res.end();
+    } else {
+        res.render('loadEventsFirst');
+    }
 })
 
 // get events by name
@@ -156,20 +159,26 @@ router.get('/getMap', function (req, res){
 });
 
 router.put('/joinEvent', function (req, res) {
-    
-    Event.findById(req.body.id, function (err, res) {
-        if (!res.joinedUsers.includes(req.user.userName)) {
-            res.joinedUsers.push(req.user.userName);
-            res.save(function (err) {
-                if (err) throw err;
-            });
-        }
-    });
+    if (req.user === undefined) {
+        res.error();
+    } else {
+        Event.findById(req.body.id, function (err, res) {
+            if (!res.joinedUsers.includes(req.user.userName)) {
+                res.joinedUsers.push(req.user.userName);
+                res.save(function (err) {
+                    if (err) throw err;
+                });
+            }
+        });
+    }
 });
 
 router.put('/declineEvent', function (req, res) {
-    
-    Event.findByIdAndUpdate(req.body.id, { $pull: { 'joinedUsers': req.user.userName } });
+    if (req.user === undefined) {
+        res.error();
+    } else {
+        Event.findByIdAndUpdate(req.body.id, { $pull: { 'joinedUsers': req.user.userName } });
+    }
 });
 
 router.post('/getEventById', function (req, res) {
