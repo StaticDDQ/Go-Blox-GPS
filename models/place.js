@@ -6,7 +6,7 @@ const placeSchema = new mongoose.Schema({
     "placeAddress": String,
     "placeDescription": String,
     "placePhone": String,
-    "placeTags": String,
+    "placeTags": [String],
     "pictures": String
 }, { versionKey: false });
 
