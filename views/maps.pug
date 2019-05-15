@@ -3,11 +3,13 @@ html
   head
     title Simple Leaflet Map
     meta(charset='utf-8')
-    link(rel='stylesheet', href='http://cdn.leafletjs.com/leaflet-0.7/leaflet.css')
+    link(rel='stylesheet',type='text/css', href='mappers.css')
+  //-link(rel='stylesheet', href='http://cdn.leafletjs.com/leaflet-0.7/leaflet.css')
   body
-    #map(style='width: 900px; height: 580px')
+    style
+      include ../public/css/mappers.css
+    #map(style='width: 190vh; height: 100vh;')
     script(src='http://cdn.leafletjs.com/leaflet-0.7/leaflet.js')
-    
     script.
       var map = L.map('map').setView([-37.814, 144.96332], 10);
       mapLink =
@@ -17,12 +19,13 @@ html
       attribution: '&copy; ' + mapLink + ' Contributors',
       maxZoom: 18,
       }).addTo(map);
-    
     each evented in events
       script.
         var marker = new L.Marker([#{evented.lat},#{evented.long}]);
         marker.bindPopup("#{evented.name}");
         map.addLayer(marker);
+    h1 gps.
+    h3 get people socialising.    
         
       
         
