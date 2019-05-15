@@ -32,7 +32,7 @@ var upload = multer({ storage: storage })
 
 // add places
 router.post('/addPlace', upload.single("pictures"), async function (req, res) {
-
+    console.log(req.body);
     // check each element for validity
     req.checkBody('placeName', 'Place name is required').notEmpty();
     req.checkBody('placeAddress', 'Address is required').notEmpty();
@@ -46,7 +46,7 @@ router.post('/addPlace', upload.single("pictures"), async function (req, res) {
 
     var error = req.validationErrors();
     if (!error) {
-        req.checkBody('tags', 'Require atleast 1 tag').notEmpty();
+        req.checkBody('placeTags', 'Require atleast 1 tag').notEmpty();
         error = req.validationErrors();
 
         if (!error) {
@@ -67,8 +67,7 @@ router.post('/addPlace', upload.single("pictures"), async function (req, res) {
             var addNewPlace = new Place(req.body);
             addNewPlace.save(function (err, place) {
                 if (err) throw err;
-                res.send(place)
-                // res.render('placeDetails', { event: event });
+                res.render('placeDetails', { place: place });
             });
         } else {
             res.render('createPlace', { errors: 'Require atleast 1 tag' });
@@ -80,7 +79,7 @@ router.post('/addPlace', upload.single("pictures"), async function (req, res) {
 });
 
 
-router.post('/createPlace', function (req, res) {
+router.get('/createPlace', function (req, res) {
     if (req.user === undefined)
         res.render('mustLogin');
     else
