@@ -37,7 +37,7 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
     req.checkBody('phone', 'Phone number is required').notEmpty();
 
     // get geo code
-    geocoder.geocode({address: req.body.address}, function(err,resp){
+    geocoder.geocode(req.body.address, function(err,resp){
         req.body.location = resp[0];
     });
 
