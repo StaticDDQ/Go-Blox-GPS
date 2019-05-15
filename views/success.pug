@@ -14,19 +14,19 @@ html
           a(href='/events/findEvent') Find Events
           a(href='/places') Places
           a(href='/events/createEvent') Create Event!
-       img.logo(src='/logo.png', alt='GPS', width='80', height='80')
-    h1
+          img.logo(src='/logo.png', alt='GPS', width='80', height='80')
+
     h1
       | Your account has been successfully verified!
       br
       |     Please, proceed to a login page.
     .btn
-      form(action='/login')
+      form(action='/members/login')
         button(type='submit') Log me in
     script.
       function openNav() {
-      document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("mySidenav").style.width = "250px";
       }
       function closeNav() {
-      document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("mySidenav").style.width = "0";
       }
