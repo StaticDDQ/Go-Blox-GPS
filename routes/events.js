@@ -47,27 +47,31 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
         error = req.validationErrors();
 
         if (!error) {
-            var reqURL;
+            var checkEventExists = await lookUpEvent(req.body.name);
 
-            await cloudinary.uploader.upload(req.file.path,
-                {
-                    eager: [
-                        { width: 0.5, crop: "scale" }]
-                },
-                function (error, result) {
-                    if (error) throw error;
+            if (!checkEventExists) {
+                var reqURL;
 
-                    reqURL = result.secure_url;
+                await cloudinary.uploader.upload(req.file.path,
+                    {
+                        eager: [
+                            { width: 0.5, crop: "scale" }]
+                    },
+                    function (error, result) {
+                        if (error) throw error;
 
+                        reqURL = result.secure_url;
+
+                    });
+                req.body.pictures = reqURL;
+                var addNewEvent = new Event(req.body);
+                addNewEvent['organizer'] = req.user.userName;
+                addNewEvent.save(function (err, event) {
+                    if (err) throw err;
+
+                    return res.redirect('/events/getEvent/' + event._id.toString());
                 });
-            req.body.pictures = reqURL;
-            var addNewEvent = new Event(req.body);
-            addNewEvent['organizer'] = req.user.userName;
-            addNewEvent.save(function (err, event) {
-                if (err) throw err;
- 
-                return res.redirect('/events/getEvent/'+event._id.toString());
-            });
+            }
         } else {
             res.render('createEvent', { errors: 'Require atleast 1 tag' });
         }
@@ -76,6 +80,12 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
         res.render('createEvent', { errors: 'Incorrect event creation' });
     }
 });
+
+async function lookUpEvent(eventName) {
+    var found = null;
+    found = await Event.findOne({ name: eventName });
+    return found;
+}
 
 router.get('/maps', function(req,res){
     Event.aggregate([{ $sample: { size: 2} }]).exec(function(err, resp){
@@ -117,7 +127,7 @@ router.get('/getEvent/:id', function (req, res) {
                     res.render('eventDetails', {
                         event: event,
                         ratings: result,
-                        isInterested: req.user.joinedEvents.includes(event._id.toString())
+                        isInterested: req.user.interestedEvents.includes(event.name)
                     });
             });
         } else {
@@ -187,7 +197,6 @@ router.put('/joinEvent', function (req, res) {
         Event.findById(req.body.id, function (err, result) {
             if (!result.joinedUsers.includes(req.user.userName)) {
                 result.joinedUsers.push(req.user.userName);
-                req.session.passport.user.joinedEvents.push(result.name);
                 result.save(function (err) {
                     if (err) throw err;
                 });
@@ -203,9 +212,7 @@ router.put('/declineEvent', function (req, res) {
         res.error();
     } else {
         Event.findByIdAndUpdate(req.body.id, { $pull: { 'joinedUsers': req.user.userName } }, function (err, result) {
-            _.remove(req.session.passport.user.joinedEvents, function (n) {
-                return n !== result.name;
-            });
+            if (err) throw err;
             res.send(result);
         });
     }
