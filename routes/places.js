@@ -94,7 +94,7 @@ router.get('/getPlace/:id', function (req, res) {
             Rating.find({ eventID: req.params.id }, function (err, result) {
                 if (err) throw err;
                 
-                res.render('eventDetails', { event: event, ratings: result });
+                res.render('placeDetails', { event: event, ratings: result });
             });
         } else {
             res.render('notFound');
