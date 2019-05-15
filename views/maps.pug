@@ -18,31 +18,12 @@ html
       maxZoom: 18,
       }).addTo(map);
     
-    script.
-      var planes1 = [!{events[0][0]},!{events[0][1]},!{events[0][2]}];
-      var planes2 = [!{events[1][0]},!{events[1][1]},!{events[1][2]}];
-
-      for evented in #{JSON.parse(events)}
-        console.log("Hellow");
-        var marker = new L.Marker([evented[1],evented[2]]);
-        marker.bindPopup(evented[0]);
+    each evented in events
+      script.
+        var marker = new L.Marker([#{evented.lat},#{evented.long}]);
+        marker.bindPopup("#{evented.name}");
         map.addLayer(marker);
-
-//- / Creating a map object
-//-   var map = new L.map('map', mapOptions);
-//-   var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
-//-     // Adding layer to the map
-//-   map.addLayer(layer);
-//-   each evented in events
-//-   -
-//-     var lat = parseFloat(evented.location[0].latitude);
-//-     var long = parseFloat(evented.location[0].longitude);
-//-     var marker = new L.Marker([lat,long]);
-//-     var customOptions = {
-//-       'maxWidth': '500',
-//-       'className' : 'custom'};
-//-     marker.bindPopup('Batman is here:  #{evented.name},\naddress: #{evented.address}', customOptions).openPopup();
-//-     map.addLayer(marker);
+        
       
         
       

@@ -3,6 +3,7 @@ html
     link(rel='stylesheet', type='text/css', href='css/home_map.css')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
   body
+    //- Main navigation menu
     .navbar
       span(style='font-size:30px;cursor:pointer;color:white', onclick='openNav()') ☰ Menu
       #mySidenav.sidenav
@@ -10,13 +11,17 @@ html
         a(href='/home') Home
         a(href='/about') About
       img.logo(src='logo.png', alt='GPS', width='80', height='80')
+    //- Title of the page
     h1 get people socialising.
+    //- Sign up button
     form(action='/members/signup')
       button(type='submit') sign up
+    //- Login button
     br
     form(action='members/login', method='get')
       button(type='submit') login
     script.
+      //- Navigation menu
       function openNav() {
       document.getElementById("mySidenav").style.width = "250px";
       }

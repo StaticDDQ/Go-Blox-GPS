@@ -24,9 +24,10 @@ html(lang='en')
           a(href='/events/createEvent') Create Event!
         img.logo(src= "/logo.png", alt='GPS', width='80', height='80')
 
+      //- Event picture displayed 
       .imageContent
         img.main_img(src=event.pictures, alt='main_image')
-
+        //- Description of the events
       .main_content
         .textContent
 
@@ -48,7 +49,7 @@ html(lang='en')
             button#yes Yes
             button#no No
             button#interested Interested
-
+        //- Ratings
       .ratings
         h2 Add reviews:
         form#submitReview(action='../../ratings/addRating', method='post')
@@ -65,15 +66,18 @@ html(lang='en')
             br
             input(type='submit', value='Submit review')
             ul#response
+      //- Reviews      
       .reviews
         h2 Reviews
         #addedRating
+        //- Displaying the review created by the user
         if ratings
             each rating in ratings
                 .rating_card
                     p USER: #{rating.userName}
                     p STARS: #{rating.stars}/5
                     p DESCRIPTION: #{rating.desc}
+      //- Footer              
       .footer
         p(style='color:white')
           | © 2019 Get People Socilaizing. All rights reserved.
@@ -88,15 +92,16 @@ html(lang='en')
             a(href='#') Terms of Service
           li
             a(href='#') Cookie Policy
+    
     script.
-
+        //- Navigation bar funtctions
         function openNav() {
             document.getElementById("mySidenav").style.width = "250px";
         }
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
         }
-
+        //- Rating 
         function setRating(event){
             let span = event.currentTarget;
             let stars = document.querySelectorAll('.star');
@@ -115,7 +120,7 @@ html(lang='en')
             });
             document.getElementById('stars').value = num;
         }
-
+        //- Review
         $(function(){
             $('#submitReview').submit(function(event) {
                 event.preventDefault();
@@ -150,7 +155,8 @@ html(lang='en')
                     addedRating.appendChild(ratingBox);
                 });
             });
-
+            //- Joining the event, Yes, No, Interested options
+            //- YES
             $('#yes').click(function(event){
                 event.preventDefault();
                 var eventID = {
@@ -168,7 +174,7 @@ html(lang='en')
                     }
                 });
             });
-
+            //- NO
             $('#no').click(function(event){
                 event.preventDefault();
                 var eventID = {
@@ -186,7 +192,7 @@ html(lang='en')
                     }
                 });
             });
-
+            //- INTERESTED
             $('#interested').click(function(event){
                 event.preventDefault();
                 var eventID = {

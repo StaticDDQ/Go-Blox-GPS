@@ -4,6 +4,7 @@ html
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
   body
     .grid
+      //-navigation bar
       .navbar
         span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Menu
         #mySidenav.sidenav
@@ -11,22 +12,24 @@ html
           a(href='/') Home
           a(href='/about') About
         img.logo(src='logo.png', alt='GPS', width='50', height='50')
+      //- about title
       .title
         h1 About
       .all_content
-        // Tab links
+        //- Tab links
         .tab
           button.tablinks(onclick="openTab(event, 'WhatGPS?')") What is GPS?
           button.tablinks(onclick="openTab(event, 'WhatWeDo')") What we do
-        // Tab content
+        //- Tab content
         .tabcontent(id='WhatGPS?')
           h1 What is GPS?
           p
             | A platform for students especially those who are new in Melbourne 
             br
-            |                 to discover events and places based on their interests and meet new people with likeminded values! :)
+            |to discover events and places based on their interests and meet new people with likeminded values! :)
         #WhatWeDo.tabcontent
           h1 What we do?
+      //- footer of the page
       .footer
         p(style='color:white')
           | © 2019 Get People Socilaizing. All rights reserved. 
@@ -41,4 +44,5 @@ html
             a(href='#') Terms of Service
           li
             a(href='#') Cookie Policy
+    //- same script with the profile page        
     script(src='js/profileEdit.js')
