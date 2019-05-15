@@ -16,14 +16,14 @@ html(lang='en')
       .navbar
         span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Menu
         #mySidenav.sidenav
-          a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
-          a(href='/members/userProfile') Go to Profile
-          a(href='/') Home
-          a(href='/about') About
-          a(href='/events/findEvent') Find Events
-          a(href='/places') Places
-          a(href='/events/createEvent') Create Event!
-        img.logo(src= "/logo.png", alt='GPS', width='80', height='80')
+            a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
+            a(href='/members/userProfile') Go to Profile
+            a(href='/') Home
+            a(href='/about') About
+            a(href='/events/findEvent') Find Events
+            a(href='/places') Places
+            a(href='/events/createEvent') Create Event!
+        img.logo(src= "/logo.png", alt='GPS', width='80', height='80', href='/members/userProfile')
 
       //- Event picture displayed 
       .imageContent
@@ -50,10 +50,10 @@ html(lang='en')
             button#yes Yes
             button#no No
             -
-                var intTxt = 'Interested';
-                if(){
-                    intTxt = 'Not interested';
-                }
+              var intTxt = 'Interested';
+              if(isInterested){
+                  intTxt = 'Not interested';
+              }
             input#interested(type='button', value=intTxt)
         //- Ratings
       .ratings
@@ -204,7 +204,7 @@ html(lang='en')
                 var eventID = {
                     id: $('#eventID')[0].value
                 }
-                if($('#interested')[0].value() === "Interested"){
+                if($('#interested')[0].value === "Interested"){
                     $.ajax({
                         url: '/members/interested',
                         type: 'PUT',

@@ -112,8 +112,8 @@ html
           h3 Your bookmarks
           ul
             if rating
-                each rate in rating
-                    li #{rate.eventName}
+                each event in user.joinedEvents
+                    li #{event}
 
       //- Footer
       .footer
