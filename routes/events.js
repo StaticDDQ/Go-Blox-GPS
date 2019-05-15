@@ -80,18 +80,20 @@ router.get('/maps', function(req,res){
     Event.aggregate([{ $sample: { size: 2} }]).exec(function(err, resp){
         if(err) throw err;
         var arrayed = []
-        //console.log(resp);
-        //console.log(resp[0].location);
         for (let i = 0; i < resp.length; i++){
-            let tmp = [];
-            tmp.push(resp[i].name);
-            tmp.push(resp[i].location[0].latitude);
-            tmp.push(resp[i].location[0].longitude);
-            arrayed.push(tmp)
+            var aEvent ={
+                name: resp[i].name,
+                lat: parseFloat(resp[i].location[0].latitude),
+                long: parseFloat(resp[i].location[0].longitude)
+            };
+
+            arrayed.push(aEvent);
+
+
             
         }
         
-        res.render('maps', {events: JSON.stringify(arrayed)});
+        res.render('maps', {events: arrayed});
     });
 });
 
