@@ -14,14 +14,16 @@ html
         a(href='/findEvents') Events
         a(href='/places') Places
       img.logo(src='/logo.png', alt='GPS', width='80', height='80')
-    h1
+    //- title of the page
     h1
       | Coming Soon!
       br
       |     feature will be implemented soon!
+    //- create button to return back to the homepage
     .btn
       form(action='/home')
         button(type='submit') Go back home
+    //- script for the navigation side bar    
     script.
       function openNav() {
       document.getElementById("mySidenav").style.width = "250px";
