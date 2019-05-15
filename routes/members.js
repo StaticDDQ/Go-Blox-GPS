@@ -239,7 +239,6 @@ router.put('/notInterested', function (req, res) {
 
 // update user with the description and list of interested tags
 router.post('/storeInfo', function (req, res) {
-    console.log(req.body);
     Member.findOneAndUpdate({ userName: req.user.userName }, { $set: { 'desc': req.body.description, 'interests': req.body.interest, 'firstTime': false } });
     res.redirect('/members/profile/' + req.user.userName);
 });
