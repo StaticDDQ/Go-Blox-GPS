@@ -39,14 +39,13 @@ app.get('*', function (req, res, next) {
     next();
 });
 
-// route to login page
-app.get('/', function (req, res) {
-    res.render('login');
-});
-
 // route to about page
 app.get('/about', function (req, res) {
-    res.render('about');
+    if (req.user === undefined)
+        res.render('about');
+    else {
+        res.render('userAbout');
+    }
 });
 
 // route to about page
@@ -55,8 +54,12 @@ app.get('/places', function (req, res) {
 });
 
 // route to about page
-app.get('/home', function (req, res) {
-    res.render('mapHome');
+app.get('/', function (req, res) {
+    if (req.user === undefined)
+        res.render('home');
+    else {
+        res.render('userHome');
+    }
 });
 
 app.use(express.static(path.join(__dirname, 'public')));

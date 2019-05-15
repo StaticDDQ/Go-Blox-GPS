@@ -12,6 +12,7 @@ const moment = require('moment');
 
 // Get member model
 let Member = require('../models/member');
+let Rating = require('../models/rating');
 
 // login as member
 router.post('/authenticate', function (req, res, next) {
@@ -43,7 +44,9 @@ router.get('/profile/:user', function (req, res) {
         Member.findOne(loginUser, function (err, result) {
             if (err) throw err;
             if (result) {
-                res.render('profile', { user: result });
+                Rating.find({ userName: result.userName }, function (err, userRatings) {
+                    res.render('profile', { user: result, rating: userRatings });
+                });
             }
         });
     }
@@ -123,7 +126,7 @@ router.post('/register', upload.single("display"), async function (req, res) {
                     reqURL = result.secure_url;
 
                 });
-            req.body.display = reqURL;
+            req.body['display'] = reqURL;
             console.log(req.body);
 
             mongooseController.addUser(req, res);

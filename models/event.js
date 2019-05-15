@@ -15,7 +15,7 @@ const eventsSchema = new mongoose.Schema({
     "pictures": String,
     "tags": [String],
     "joinedUsers": [String],
-    "location" : [Object]
+    "location": [Object]
 }, { versionKey: false });
 
 const Event = module.exports = mongoose.model('events', eventsSchema);
