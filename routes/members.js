@@ -38,7 +38,7 @@ router.post('/authenticate', function (req, res, next) {
 // easy access to user's own profile
 router.get('/userProfile', function (req, res) {
     if (req.user === undefined)
-        res.error();
+        res.render('mustLogin');
     else {
         Rating.find({ userName: req.user.userName }, function (err, userRatings) {
             if (err) throw err;
@@ -239,8 +239,10 @@ router.put('/notInterested', function (req, res) {
 
 // update user with the description and list of interested tags
 router.post('/storeInfo', function (req, res) {
-    Member.findOneAndUpdate({ userName: req.user.userName }, { $set: { 'desc': req.body.description, 'interests': req.body.interest, 'firstTime': false } });
-    res.redirect('/members/profile/' + req.user.userName);
+    console.log(req.body);
+    Member.findOneAndUpdate({ userName: req.user.userName }, { $set: { 'desc': req.body.description, 'interests': req.body.interests, 'firstTime': false } }, function (err, result) {
+        res.redirect('/members/userProfile');
+    }); 
 });
 
 // have current user follow another user
