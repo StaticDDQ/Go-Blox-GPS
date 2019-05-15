@@ -8,6 +8,6 @@ const placeSchema = new mongoose.Schema({
     "placePhone": String,
     "placeTags": [String],
     "pictures": String
-}, { versionKey: false });
+}, { versionKßey: false });
 
 const Place = module.exports = mongoose.model('places', placeSchema);
