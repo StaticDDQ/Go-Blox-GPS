@@ -20,9 +20,9 @@ html(lang='en')
             | Tags
           .searchBar
             input#input(type='text', placeholder='Search Tags')
-            input(type='button', value='Add tag', onclick='addTag()');
+            input(type='button', value='Add tag', onclick='addTag()')
 
-          #checked   
+            #checked   
 
             br
           //- add event desctiption
@@ -45,9 +45,10 @@ html(lang='en')
             if(tagValue.value.length > 0){
                 var tagLst = document.getElementById('checked');
 
-                var tag = document.createElement('textarea');
+                var tag = document.createElement('input');
+                tag.type = 'text';
                 tag.value = tagValue.value;
-                tag.name = 'tags';
+                tag.name = 'interest';
                 tag.readonly = true;
                 tag.onclick = function(){
                     tag.parentNode.removeChild(tag);
