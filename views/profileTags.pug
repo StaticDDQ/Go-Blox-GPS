@@ -37,12 +37,13 @@ html(lang='en')
             input(type="submit" value="Finish")
 
       script.
+        var tags = [];
 
         function addTag() {
 
             var tagValue = document.getElementById('input');
 
-            if(tagValue.value.length > 0){
+            if(tagValue.value.length > 0 && !tags.includes(tagValue.value)){
                 var tagLst = document.getElementById('checked');
 
                 var tag = document.createElement('input');
@@ -55,7 +56,8 @@ html(lang='en')
                 }
 
                 tagLst.appendChild(tag);
-                tagValue.value = "";
+
+                tags.push(tagValue.value);
             }
-            
+            tagValue.value = "";
         }

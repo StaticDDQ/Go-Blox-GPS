@@ -142,11 +142,13 @@ html(lang='en')
 
         previewFile();  //calls the function named previewFile()
 
+        var tags = [];
+
         function addTag() {
 
             var tagValue = document.getElementById('input');
 
-            if(tagValue.value.length > 0){
+            if(tagValue.value.length > 0 && !tags.includes(tagValue.value)){
                 var tagLst = document.getElementById('checked');
 
                 var tag = document.createElement('textarea');
@@ -158,8 +160,10 @@ html(lang='en')
                 }
 
                 tagLst.appendChild(tag);
-                tagValue.value = "";
+
+                tags.push(tagValue.value);
             }
+            tagValue.value = "";
         }
 
         //- make sure user agrees to terms and conditions

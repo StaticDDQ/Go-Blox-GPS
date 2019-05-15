@@ -42,13 +42,17 @@ router.get('/userProfile', function (req, res) {
     else {
         Rating.find({ userName: req.user.userName }, function (err, userRatings) {
             if (err) throw err;
-            Event.find({ organizer: req.user.userName }, function (err, eventsCreated) {
+            Event.find({ joinedUsers: req.user.userName }, function (err, eventsJoined) {
                 if (err) throw err;
-                res.render('profile', {
-                    user: req.user,
-                    rating: userRatings,
-                    eventsCreated: eventsCreated,
-                    notCurr: false
+                Event.find({ organizer: req.user.userName }, function (err, eventsCreated) {
+                    if (err) throw err;
+                    res.render('profile', {
+                        user: req.user,
+                        rating: userRatings,
+                        eventsJoined: eventsJoined,
+                        eventsCreated: eventsCreated,
+                        notCurr: false
+                    });
                 });
             });
         });
@@ -68,14 +72,18 @@ router.get('/profile/:user', function (req, res) {
             if (result) {
                 Rating.find({ userName: result.userName }, function (err, userRatings) {
                     if (err) throw err;
-                    Event.find({ organizer: result.userName }, function (err, eventsCreated) {
+                    Event.find({ joinedUsers: result.userName }, function (err, eventsJoined) {
                         if (err) throw err;
-                        res.render('profile', {
-                            user: result,
-                            rating: userRatings,
-                            eventsCreated: eventsCreated,
-                            notCurr: (result.userName !== req.user.userName),
-                            isFollowing: req.user.followedUsers.includes(result.userName)
+                        Event.find({ organizer: result.userName }, function (err, eventsCreated) {
+                            if (err) throw err;
+                            res.render('profile', {
+                                user: result,
+                                rating: userRatings,
+                                eventsCreated: eventsCreated,
+                                eventsJoined: eventsJoined,
+                                notCurr: (result.userName !== req.user.userName),
+                                isFollowing: req.user.followedUsers.includes(result.userName)
+                            });
                         });
                     });
                 });
@@ -146,12 +154,10 @@ router.post('/register', upload.single("display"), async function (req, res) {
         error = req.validationErrors();
         if (!error) {
             // add join date of user
-            req.body['firstTime'] = true;
             req.body['firstName'] = upperCaseName(req.body['firstName']);
             req.body['lastName'] = upperCaseName(req.body['lastName']);
             req.body['joined_date'] = moment().format('MMM Do YY');
             req.body['DOB'] = moment(req.body['DOB']).format('MMM Do YY');
-            req.body['active'] = false;
 
             var reqURL;
             await cloudinary.uploader.upload(req.file.path,
@@ -220,7 +226,14 @@ router.put('/interested', function (req, res) {
     if (req.user === undefined) {
         res.error();
     } else {
-        Member.findOneAndUpdate({ userName: req.user.userName }, { $push: { 'joinedEvents': req.body.id } }, function (err, result) {
+        Member.findOne({ userName: req.user.userName }, function (err, result) {
+            if (err) throw err;
+            if (!result.interestedEvents.includes(req.body.name)) {
+                result.interestedEvents.push(req.body.name);
+                result.save(function (err) {
+                    if (err) throw err;
+                });
+            }
             res.send(result);
         });
     } 
@@ -231,7 +244,7 @@ router.put('/notInterested', function (req, res) {
     if (req.user === undefined) {
         res.error();
     } else {
-        Member.findOneAndUpdate({ userName: req.user.userName }, { $pull: { 'joinedEvents': req.body.id } }, function (err, result) {
+        Member.findOneAndUpdate({ userName: req.user.userName }, { $pull: { 'interestedEvents': req.body.name } }, function (err, result) {
             res.send(result);
         });
     }
@@ -239,7 +252,6 @@ router.put('/notInterested', function (req, res) {
 
 // update user with the description and list of interested tags
 router.post('/storeInfo', function (req, res) {
-    console.log(req.body);
     Member.findOneAndUpdate({ userName: req.user.userName }, { $set: { 'desc': req.body.description, 'interests': req.body.interests, 'firstTime': false } }, function (err, result) {
         res.redirect('/members/userProfile');
     }); 

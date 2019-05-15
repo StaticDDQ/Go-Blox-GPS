@@ -201,15 +201,16 @@ html(lang='en')
             //- INTERESTED
             $('#interested').click(function(event){
                 event.preventDefault();
-                var eventID = {
-                    id: $('#eventID')[0].value
+                var eventName = {
+                    name: $('#eventName')[0].value
                 }
                 if($('#interested')[0].value === "Interested"){
                     $.ajax({
                         url: '/members/interested',
                         type: 'PUT',
-                        data: eventID,
+                        data: eventName,
                         success: function(data){
+                            console.log(data);
                             alert("You are interested in this event");
                             $('#interested').val('Not interested');
                         },
@@ -222,8 +223,9 @@ html(lang='en')
                     $.ajax({
                         url: '/members/notInterested',
                         type: 'PUT',
-                        data: eventID,
+                        data: eventName,
                         success: function(data){
+                            console.log(data);
                             alert("You are no longer interested in this event");
                             $('#interested').val('Interested')
                         },

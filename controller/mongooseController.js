@@ -26,20 +26,22 @@ var addUser = async function(req, res) {
                 "DOB": req.body.DOB,
                 "password": req.body.password,
                 "joined_date": req.body.joined_date,
-                "firstTime": req.body.firstTime,
+                "firstTime": true,
                 "desc": "",
                 "interests": [],
                 "display": req.body.display,
-                "followedUsers": req.body.followedUsers
+                "followedUsers": req.body.followedUsers,
+                "interestedEvents" : [],
+                "active": false
             });
 
             data.save(function (err, newMember) {
                 if (!err) {
-                    var link = "http://" + req.get('host') + "/members/verify?user=" + req.body.userName;
+                    var link = "http://" + req.get('host') + "/members/verify?user=" + newMember.userName;
 
                     let mailOption = {
                         from: 'officialgobloxs@gmail.com',
-                        to: req.body.email,
+                        to: newMember.email,
                         subject: 'Email confirmation from GoBlox',
                         html: "Here is a confirmation link for setting up your GPS account,<a href=" + link + "> Click here to verify</a>"
                     };

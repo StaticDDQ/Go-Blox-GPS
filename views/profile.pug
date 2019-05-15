@@ -81,10 +81,10 @@ html
             | #{user.desc}
         #Events.tabcontent
           h3 Past Events Attended
-              if user.joinedEvents
+              if eventsJoined
                   ul
-                      each event in user.joinedEvents
-                          li #{event}
+                      each event in eventsJoined
+                          li #{event.name}
           h3 Past Events Created
               if eventsCreated
                   ul
@@ -112,7 +112,7 @@ html
           h3 Your bookmarks
           ul
             if rating
-                each event in user.joinedEvents
+                each event in user.interestedEvents
                     li #{event}
 
       //- Footer
