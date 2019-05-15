@@ -100,7 +100,7 @@ router.get('/maps', function(req,res){
 //change back to post
 router.get('/createEvent', function (req, res) {
     if (req.user === undefined)
-        res.end();
+        res.render('mustLogin');
     else
         res.render('createEvent');
 });
@@ -123,7 +123,7 @@ router.get('/getEvent/:id', function (req, res) {
 
 router.get('/findEvent', function (req, res) {
     if (req.user === undefined) {
-        res.end();
+        res.render('mustLogin');
     } else {
         res.render('loadEventsFirst');
     }
