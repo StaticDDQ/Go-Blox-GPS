@@ -198,21 +198,35 @@ html(lang='en')
                 var eventID = {
                     id: $('#eventID')[0].value
                 }
-                $.ajax({
-                    url: '/members/interested',
-                    type: 'PUT',
-                    data: eventID,
-                    success: function(data){
-                        alert("You are interested of this event");
-                        if($('#interested').html() === "Interested")
+                if($('#interested').html() === "Interested"){
+                    $.ajax({
+                        url: '/members/interested',
+                        type: 'PUT',
+                        data: eventID,
+                        success: function(data){
+                            alert("You are interested in this event");
                             $('#interested').html("Not interested");
-                        else
+                        },
+                        error: function(){
+                            alert("Please log in!");
+                        }
+                    });
+                }
+                else {
+                    $.ajax({
+                        url: '/members/notInterested',
+                        type: 'PUT',
+                        data: eventID,
+                        success: function(data){
+                            alert("You are no longer interested in this event");
                             $('#interested').html("Interested")
-                    },
-                    error: function(){
-                        alert("Please log in!");
-                    }
-                });
+                        },
+                        error: function(){
+                            alert("Please log in!");
+                        }
+                    });
+                }
+                
             });
         });
 

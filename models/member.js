@@ -18,7 +18,8 @@ const memberSchema = new mongoose.Schema({
     "display": String,
     "desc": String,
     "interests": [String],
-    "firstTime": Boolean
+    "firstTime": Boolean,
+    "followedUsers": [String]
 }, { versionKey: false});
 
 const Member = module.exports = mongoose.model('members', memberSchema);

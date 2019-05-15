@@ -31,12 +31,15 @@ html
         h4 Username: #{user.userName}
         h4 Join Date: #{user.joined_date}
         h4 Date of Birth: #{user.DOB}
+        
+        if notCurr
+          input#followUser(type='submit', value='Follow', name=user.userName)
 
       //- display other contents about users in tabs
       .all_content
         // Tab links
         .tab
-          button.tablinks(onclick="openTab(event, 'Interests')") Interests
+          button.tablinks#start(onclick="openTab(event, 'Interests')") Interests
           button.tablinks(onclick="openTab(event, 'Events')") Events
           button.tablinks(onclick="openTab(event, 'Places')") Places
           button.tablinks(onclick="openTab(event, 'Friends')") Friends
@@ -73,13 +76,23 @@ html
             | #{user.desc}
         #Events.tabcontent
           h3 Past Events Attended
+              if user.joinedEvents
+                  ul
+                      each event in user.joinedEvents
+                          li #{event}
           h3 Past Events Created
+              if eventsCreated
+                  ul
+                      each event in eventsCreated
+                          li #{event.name}
         #Places.tabcontent
           h3 Places to go
           p Places went
         #Friends.tabcontent
           h3 Your friends:
-          p username: ...
+          if user.followedUsers
+            each friend in user.followedUsers
+                li #{friend}
         #Reviews.tabcontent
           h3 Your reviews
           ul
@@ -115,6 +128,8 @@ html
 
     //- Javascript codes
     script.
+      document.getElementById('start').click();
+
       function openTab(evt, tabName) {
 
           // Declare all variables
@@ -172,5 +187,34 @@ html
                 else
                     alert("Incorrect input");
             });
+        });
+
+        $('#followUser').click(function(event){
+            event.preventDefault();
+            var thisUser = {
+                username: $('#followUser')[0].name
+            };
+
+            if($('#followUser')[0].value === 'Follow'){
+                $.ajax({
+                    url: '/members/followUser',
+                    type: 'put',
+                    data: thisUser,
+                    success: function(data){
+                        console.log('123');
+                        $('#followUser').val('Unfollow');
+                    }
+                });
+            }
+            else {
+                $.ajax({
+                    url: '/members/unfollowUser',
+                    type: 'put',
+                    data: thisUser,
+                    success: function(data){
+                        $('#followUser').val('Follow');
+                    }
+                });
+            }
         });
       });

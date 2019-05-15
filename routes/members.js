@@ -13,6 +13,7 @@ const moment = require('moment');
 // Get member model
 let Member = require('../models/member');
 let Rating = require('../models/rating');
+let Event = require('../models/event');
 
 // login as member
 router.post('/authenticate', function (req, res, next) {
@@ -36,7 +37,7 @@ router.post('/authenticate', function (req, res, next) {
 // load profile
 router.get('/profile/:user', function (req, res) {
     if (req.user === undefined) {
-        res.end();
+        res.render('mustLogin');
     } else {
         var loginUser = {
             userName: req.params.user
@@ -45,7 +46,11 @@ router.get('/profile/:user', function (req, res) {
             if (err) throw err;
             if (result) {
                 Rating.find({ userName: result.userName }, function (err, userRatings) {
-                    res.render('profile', { user: result, rating: userRatings });
+                    if (err) throw err;
+                    Event.find({ organizer: result.userName }, function (err, eventsCreated) {
+                        if (err) throw err;
+                        res.render('profile', { user: result, rating: userRatings, eventsCreated: eventsCreated, notCurr: (result.userName !== req.user.userName) });
+                    });
                 });
             }
         });
@@ -54,7 +59,10 @@ router.get('/profile/:user', function (req, res) {
 
 // open login page
 router.get('/login', function (req, res) {
-    res.render('login');
+    if (req.user !== undefined)
+        res.redirect('/members/profile/' + req.user.userName);
+    else
+        res.render('login');
 });
 
 // logout active user
@@ -208,6 +216,22 @@ router.post('/storeInfo', function (req, res) {
         console.log(res);
     });
     res.redirect('/members/profile/' + req.user.userName);
+});
+
+// have current user follow another user
+router.put('/followUser', function (req, res) {
+    Member.findOneAndUpdate({ userName: req.user.userName }, {
+        $push: { 'followedUsers': req.body.username }}, function(err, result) {
+            res.send(result);
+        });
+});
+
+// unfollow a user
+router.put('/unfollowUser', function (req, res) {
+    Member.findOneAndUpdate({ userName: req.user.userName }, {
+        $pull: { 'followedUsers': req.body.username }}, function (err, result) {
+            res.send(result);
+        });
 });
 
 module.exports = router;

@@ -184,7 +184,8 @@ router.put('/joinEvent', function (req, res) {
     } else {
         Event.findById(req.body.id, function (err, result) {
             if (!result.joinedUsers.includes(req.user.userName)) {
-                res.joinedUsers.push(req.user.userName);
+                result.joinedUsers.push(req.user.userName);
+                req.session.passport.user.joinedEvents.push(result.name);
                 result.save(function (err) {
                     if (err) throw err;
                 });
@@ -200,6 +201,9 @@ router.put('/declineEvent', function (req, res) {
         res.error();
     } else {
         Event.findByIdAndUpdate(req.body.id, { $pull: { 'joinedUsers': req.user.userName } }, function (err, result) {
+            _.remove(req.session.passport.user.joinedEvents, function (n) {
+                return n !== result.name;
+            });
             res.send(result);
         });
     }

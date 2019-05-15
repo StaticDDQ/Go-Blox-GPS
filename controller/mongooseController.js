@@ -29,7 +29,8 @@ var addUser = async function(req, res) {
                 "firstTime": req.body.firstTime,
                 "desc": "",
                 "interests": [],
-                "display": req.body.display
+                "display": req.body.display,
+                "followedUsers": req.body.followedUsers
             });
 
             data.save(function (err, newMember) {
