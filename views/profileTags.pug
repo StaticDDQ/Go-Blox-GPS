@@ -19,7 +19,8 @@ html(lang='en')
           p
             | Tags
           .searchBar
-            input#input(type='text', placeholder='Search Tags', onkeydown='addTag(event)')
+            input#input(type='text', placeholder='Search Tags')
+            input(type='button', value='Add tag', onclick='addTag()');
 
           #checked   
 
@@ -37,24 +38,23 @@ html(lang='en')
 
       script.
 
-        function addTag(event) {
+        function addTag() {
 
-            if(event.keyCode === 9){
-                var tagValue = document.getElementById('input');
+            var tagValue = document.getElementById('input');
 
-                if(tagValue.value.length > 0){
-                    var tagLst = document.getElementById('checked');
+            if(tagValue.value.length > 0){
+                var tagLst = document.getElementById('checked');
 
-                    var tag = document.createElement('textarea');
-                    tag.value = tagValue.value;
-                    tag.name = 'tags';
-                    tag.readonly = true;
-                    tag.onclick = function(){
-                        tag.parentNode.removeChild(tag);
-                    }
-
-                    tagLst.appendChild(tag);
-                    tagValue.value = "";
+                var tag = document.createElement('textarea');
+                tag.value = tagValue.value;
+                tag.name = 'tags';
+                tag.readonly = true;
+                tag.onclick = function(){
+                    tag.parentNode.removeChild(tag);
                 }
+
+                tagLst.appendChild(tag);
+                tagValue.value = "";
             }
+            
         }
