@@ -8,7 +8,7 @@ html
       span(style='font-size:30px;cursor:pointer;color:white', onclick='openNav()') ☰ Menu
       #mySidenav.sidenav
         a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
-        a(href='/home') Home
+        a(href='/') Home
         a(href='/about') About
       img.logo(src='logo.png', alt='GPS', width='80', height='80')
     //- Title of the page
@@ -18,7 +18,7 @@ html
       button(type='submit') sign up
     //- Login button
     br
-    form(action='members/login', method='get')
+    form(action='/members/login', method='get')
       button(type='submit') login
     script.
       //- Navigation menu
