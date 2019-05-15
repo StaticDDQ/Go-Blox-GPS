@@ -28,13 +28,34 @@ router.post('/authenticate', function (req, res, next) {
             
             if (user.firstTime) {
                 return res.render('profileTags');
-            } else
-                return res.redirect('/members/profile/' + user.userName);
+            } else {
+                return res.redirect('/members/userProfile');
+            }
         });
     })(req, res,next);
 });
 
-// load profile
+// easy access to user's own profile
+router.get('/userProfile', function (req, res) {
+    if (req.user === undefined)
+        res.error();
+    else {
+        Rating.find({ userName: req.user.userName }, function (err, userRatings) {
+            if (err) throw err;
+            Event.find({ organizer: req.user.userName }, function (err, eventsCreated) {
+                if (err) throw err;
+                res.render('profile', {
+                    user: req.user,
+                    rating: userRatings,
+                    eventsCreated: eventsCreated,
+                    notCurr: false
+                });
+            });
+        });
+    }
+});
+
+// load profile of a certain user
 router.get('/profile/:user', function (req, res) {
     if (req.user === undefined) {
         res.render('mustLogin');
@@ -49,7 +70,13 @@ router.get('/profile/:user', function (req, res) {
                     if (err) throw err;
                     Event.find({ organizer: result.userName }, function (err, eventsCreated) {
                         if (err) throw err;
-                        res.render('profile', { user: result, rating: userRatings, eventsCreated: eventsCreated, notCurr: (result.userName !== req.user.userName) });
+                        res.render('profile', {
+                            user: result,
+                            rating: userRatings,
+                            eventsCreated: eventsCreated,
+                            notCurr: (result.userName !== req.user.userName),
+                            isFollowing: req.user.followedUsers.includes(result.userName)
+                        });
                     });
                 });
             }
@@ -60,7 +87,7 @@ router.get('/profile/:user', function (req, res) {
 // open login page
 router.get('/login', function (req, res) {
     if (req.user !== undefined)
-        res.redirect('/members/profile/' + req.user.userName);
+        res.redirect('/members/userProfile/');
     else
         res.render('login');
 });

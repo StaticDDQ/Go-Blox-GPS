@@ -88,10 +88,7 @@ router.get('/maps', function(req,res){
                 long: parseFloat(resp[i].location[0].longitude)
             };
 
-            arrayed.push(aEvent);
-
-
-            
+            arrayed.push(aEvent);        
         }
         
         res.render('maps', {events: arrayed});
@@ -117,7 +114,11 @@ router.get('/getEvent/:id', function (req, res) {
                 if (req.user !== undefined && event.organizer === req.user.userName)
                     res.render('ownerEventDetails', { event: event, ratings: result });
                 else
-                    res.render('eventDetails', { event: event, ratings: result });
+                    res.render('eventDetails', {
+                        event: event,
+                        ratings: result,
+                        isInterested: req.user.joinedEvents.includes(event._id.toString())
+                    });
             });
         } else {
             res.render('notFound');

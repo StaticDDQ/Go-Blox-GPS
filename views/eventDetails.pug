@@ -17,6 +17,7 @@ html(lang='en')
         span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Menu
         #mySidenav.sidenav
           a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
+          a(href='/members/userProfile') Go to Profile
           a(href='/') Home
           a(href='/about') About
           a(href='/events/findEvent') Find Events
@@ -48,7 +49,12 @@ html(lang='en')
             h3.join <b>Join?<b>
             button#yes Yes
             button#no No
-            button#interested Interested
+            -
+                var intTxt = 'Interested';
+                if(){
+                    intTxt = 'Not interested';
+                }
+            input#interested(type='button', value=intTxt)
         //- Ratings
       .ratings
         h2 Add reviews:
@@ -198,14 +204,14 @@ html(lang='en')
                 var eventID = {
                     id: $('#eventID')[0].value
                 }
-                if($('#interested').html() === "Interested"){
+                if($('#interested')[0].value() === "Interested"){
                     $.ajax({
                         url: '/members/interested',
                         type: 'PUT',
                         data: eventID,
                         success: function(data){
                             alert("You are interested in this event");
-                            $('#interested').html("Not interested");
+                            $('#interested').val('Not interested');
                         },
                         error: function(){
                             alert("Please log in!");
@@ -219,7 +225,7 @@ html(lang='en')
                         data: eventID,
                         success: function(data){
                             alert("You are no longer interested in this event");
-                            $('#interested').html("Interested")
+                            $('#interested').val('Interested')
                         },
                         error: function(){
                             alert("Please log in!");
