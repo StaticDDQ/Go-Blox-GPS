@@ -65,7 +65,8 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
             addNewEvent['organizer'] = req.user.userName;
             addNewEvent.save(function (err, event) {
                 if (err) throw err;
-                res.render('eventDetails', { event: event });
+ 
+                return res.redirect('/events/getEvent/'+event._id.toString());
             });
         } else {
             res.render('createEvent', { errors: 'Require atleast 1 tag' });
