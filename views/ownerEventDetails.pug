@@ -31,7 +31,7 @@ html(lang='en')
         .textContent
 
           h2 #{event.name}
-          p <b>Organised by:</b> #{event.organizer}
+          p <b>Organised by:</b> You
           p <b>Start Date:</b> #{event.startDate}
           p <b>End Date:</b> #{event.endDate}
           p <b>Start Time:</b> #{event.startTime}
@@ -43,28 +43,11 @@ html(lang='en')
           p <b>Phone Number:</b> #{event.phone}
           p <b>Tags:</b> #{event.tags}
           br
-          #join
-            h3.join <b>Join?<b>
-            button#yes Yes
-            button#no No
-            button#interested Interested
+          if event.joinedUsers
+            ul
+                each user in event.joinedUsers
+                    li #{user}
 
-      .ratings
-        h2 Add reviews:
-        form#submitReview(action='../../ratings/addRating', method='post')
-            div(class='stars', rating='3')
-                span(class='star rated', value='&nbsp;', onclick='setRating(event)')
-                span(class='star rated', value='&nbsp;', onclick='setRating(event)')
-                span(class='star rated', value='&nbsp;', onclick='setRating(event)')
-                span(class='star', value='&nbsp;', onclick='setRating(event)')
-                span(class='star', valie='&nbsp;', onclick='setRating(event)')
-            input#stars(type='hidden', value='3')
-            input#eventID(type='hidden', value=event._id)
-            input#eventName(type='hidden', value=event.name)
-            textarea#desc(name="description" cols="40" rows="5")
-            br
-            input(type='submit', value='Submit review')
-            ul#response
       .reviews
         h2 Reviews
         #addedRating
@@ -96,117 +79,4 @@ html(lang='en')
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
         }
-
-        function setRating(event){
-            let span = event.currentTarget;
-            let stars = document.querySelectorAll('.star');
-            let match = false;
-            let num = 0;
-            stars.forEach(function(star, index){
-                if(match){
-                    star.classList.remove('rated');
-                } else {
-                    star.classList.add('rated');
-                }
-                if(star == span){
-                    match = true;
-                    num = index + 1;
-                }
-            });
-            document.getElementById('stars').value = num;
-        }
-
-        $(function(){
-            $('#submitReview').submit(function(event) {
-                event.preventDefault();
-                var formData = {
-                    eventID: $('#eventID')[0].value,
-                    stars: $('#stars')[0].value,
-                    desc: $('#desc')[0].value,
-                    eventName: $('#eventName')[0].value
-                };
-
-                $.post('/ratings/addRating', formData, function(resp){
-                    var stringUser = JSON.stringify(resp.userName);
-                    var stringStars = JSON.stringify(resp.stars);
-                    var stringDesc = JSON.stringify(resp.desc);
-
-                    var addedRating = document.getElementById('addedRating');
-
-                    var ratingBox = document.createElement('div');
-                    ratingBox.className = 'rating_card';
-
-                    var userText = document.createElement('p');
-                    userText.innerHTML = stringUser;
-                    var starText = document.createElement('p');
-                    starText.innerHTML = stringStars;
-                    var descText = document.createElement('p');
-                    descText.innerHTML = stringDesc;
-
-                    ratingBox.appendChild(userText);
-                    ratingBox.appendChild(starText);
-                    ratingBox.appendChild(descText);
-
-                    addedRating.appendChild(ratingBox);
-                });
-            });
-
-            $('#yes').click(function(event){
-                event.preventDefault();
-                var eventID = {
-                    id: $('#eventID')[0].value
-                }
-                $.ajax({
-                    url: '/events/joinEvent',
-                    type: 'PUT',
-                    data: eventID,
-                    success: function(data){
-                        alert("You are now joining this event");
-                    },
-                    error: function(){
-                        alert("Please log in!");
-                    }
-                });
-            });
-
-            $('#no').click(function(event){
-                event.preventDefault();
-                var eventID = {
-                    id: $('#eventID')[0].value
-                }
-                $.ajax({
-                    url: '/events/declineEvent',
-                    type: 'PUT',
-                    data: eventID,
-                    success: function(data){
-                        alert("You are no longer joining this event");
-                    },
-                    error: function(){
-                        alert("Please log in!");
-                    }
-                });
-            });
-
-            $('#interested').click(function(event){
-                event.preventDefault();
-                var eventID = {
-                    id: $('#eventID')[0].value
-                }
-                $.ajax({
-                    url: '/members/interested',
-                    type: 'PUT',
-                    data: eventID,
-                    success: function(data){
-                        alert("You are interested of this event");
-                        if($('#interested').html() === "Interested")
-                            $('#interested').html("Not interested");
-                        else
-                            $('#interested').html("Interested")
-                    },
-                    error: function(){
-                        alert("Please log in!");
-                    }
-                });
-            });
-        });
 

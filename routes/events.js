@@ -37,7 +37,7 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
     req.checkBody('phone', 'Phone number is required').notEmpty();
 
     // get geo code
-    geocoder.geocode({address: req.body.address}, function(err,resp){
+    geocoder.geocode(req.body.address, function(err,resp){
         req.body.location = resp[0];
     });
 
@@ -100,7 +100,7 @@ router.get('/maps', function(req,res){
 //change back to post
 router.get('/createEvent', function (req, res) {
     if (req.user === undefined)
-        res.end();
+        res.render('mustLogin');
     else
         res.render('createEvent');
 });
@@ -112,8 +112,11 @@ router.get('/getEvent/:id', function (req, res) {
         if (event != null) {
             Rating.find({ eventID: req.params.id }, function (err, result) {
                 if (err) throw err;
-                
-                res.render('eventDetails', { event: event, ratings: result });
+
+                if (req.user !== undefined && event.organizer === req.user.userName)
+                    res.render('ownerEventDetails', { event: event, ratings: result });
+                else
+                    res.render('eventDetails', { event: event, ratings: result });
             });
         } else {
             res.render('notFound');
@@ -123,7 +126,7 @@ router.get('/getEvent/:id', function (req, res) {
 
 router.get('/findEvent', function (req, res) {
     if (req.user === undefined) {
-        res.end();
+        res.render('mustLogin');
     } else {
         res.render('loadEventsFirst');
     }
