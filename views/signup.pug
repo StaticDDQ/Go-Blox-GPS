@@ -11,7 +11,7 @@ html(lang='en')
     .gridContainer
       .box
         h1 SIGN UP
-        form(action='/members/register', method='post', onsubmit='return agreed()')
+        form(action='/members/register', method='post', enctype="multipart/form-data", onsubmit='return agreed()')
           p
             | #{error}
           .nameContainers
