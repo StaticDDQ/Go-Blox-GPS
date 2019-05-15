@@ -112,8 +112,11 @@ router.get('/getEvent/:id', function (req, res) {
         if (event != null) {
             Rating.find({ eventID: req.params.id }, function (err, result) {
                 if (err) throw err;
-                
-                res.render('eventDetails', { event: event, ratings: result });
+
+                if (req.user !== undefined && event.organizer === req.user.userName)
+                    res.render('ownerEventDetails', { event: event, ratings: result });
+                else
+                    res.render('eventDetails', { event: event, ratings: result });
             });
         } else {
             res.render('notFound');
