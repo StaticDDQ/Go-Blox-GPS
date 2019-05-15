@@ -67,8 +67,7 @@ router.post('/addPlace', upload.single("pictures"), async function (req, res) {
             var addNewPlace = new Place(req.body);
             addNewPlace.save(function (err, place) {
                 if (err) throw err;
-                res.send(place)
-                // res.render('placeDetails', { event: event });
+                res.render('placeDetails', { place: place });
             });
         } else {
             res.render('createPlace', { errors: 'Require atleast 1 tag' });
