@@ -43,7 +43,7 @@ html(lang='en')
         if events
           .events
             each event in events
-              div#eachEvent(class='filtered ', name ='displayedEvents', tags=event.tags, onclick="window.location='http://localhost:3000/events/getEvent/" + event._id + "'")
+              div#eachEvent(class='filtered ', name ='displayedEvents', tags=event.tags, onclick="window.location='http://goblox.herokuapp.com/events/getEvent/" + event._id + "'")
                   .event_card
                     .event_title
                       h3 #{event.name}
