@@ -48,7 +48,8 @@ html(lang='en')
           if event.joinedUsers
             ul
                 each user in event.joinedUsers
-                    li #{user}
+                    a(href='/members/profile/' + user)
+                        li #{user}
 
       .reviews
         h2 Reviews

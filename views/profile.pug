@@ -85,12 +85,14 @@ html
               if eventsJoined
                   ul
                       each event in eventsJoined
-                          li #{event.name}
+                          a(href='/events/getEvent/' + event._id)
+                              li #{event.name}
           h3 Past Events Created
               if eventsCreated
                   ul
-                      each event in eventsCreated
-                          li #{event.name}
+                      each userEvent in eventsCreated
+                          a(href='/events/getEvent/' + userEvent._id)
+                              li #{userEvent.name}
         #Places.tabcontent
           h3 Places to go
           p Places went
@@ -98,7 +100,8 @@ html
           h3 Your friends:
           if user.followedUsers
             each friend in user.followedUsers
-                li #{friend}
+                a(href='/profile/' + friend)
+                    li #{friend}
         #Reviews.tabcontent
           h3 Your reviews
           ul
@@ -112,7 +115,7 @@ html
         #Bookmarks.tabcontent
           h3 Your bookmarks
           ul
-            if rating
+            if user.interestedEvents
                 each event in user.interestedEvents
                     li #{event}
 
