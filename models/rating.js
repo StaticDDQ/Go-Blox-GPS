@@ -7,7 +7,7 @@ const reviewSchema = new mongoose.Schema({
     "stars": Number,
     "desc": String,
     "userName": String,
-    "datePublished": Date
+    "datePublished": String
 }, { versionKey: false });
 
 const Review = module.exports = mongoose.model('ratings', reviewSchema)
