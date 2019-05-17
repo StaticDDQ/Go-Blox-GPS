@@ -145,11 +145,11 @@ html(lang='en')
 
             var tagValue = document.getElementById('input');
 
-            if(tagValue.value.length > 0 && !tags.includes(tagValue.value)){
+            if(tagValue.value.length > 0 && !tags.includes(tagValue.value.toLowerCase())){
                 var tagLst = document.getElementById('checked');
 
                 var tag = document.createElement('textarea');
-                tag.value = tagValue.value;
+                tag.value = tagValue.value.toLowerCase();
                 tag.name = 'tags';
                 tag.readonly = true;
                 tag.onclick = function(){
@@ -158,7 +158,7 @@ html(lang='en')
 
                 tagLst.appendChild(tag);
 
-                tags.push(tagValue.value);
+                tags.push(tagValue.value.toLowerCase());
             }
             tagValue.value = "";
         }
