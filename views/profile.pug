@@ -25,7 +25,7 @@ html
       .basic_profile
         - source = user.display ? user.display : '/pictures/profile_icon.png'
         img.profile(src=user.display, alt='profile_picture')
-        //- img.profile(src='/pictures/profile_icon.png', alt='profile_picture')
+
         -var fullname = firstName + ' ' + lastName;
         h3 #{user.firstName} #{user.lastName}
         h4 Username: #{user.userName}
