@@ -34,11 +34,6 @@ require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('*', function (req, res, next) {
-    res.locals.user = req.user || null;
-    next();
-});
-
 // route to about page
 app.get('/about', function (req, res) {
     if (req.user === undefined)
@@ -77,4 +72,8 @@ app.use('/ratings', ratings);
 
 app.listen(port,function(){
     console.log("Listening to port "+ port);
+});
+
+app.get('*', function (req, res) {
+    res.render('notFound');
 });

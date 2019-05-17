@@ -7,9 +7,9 @@ html
       span(style='font-size:30px;cursor:pointer;color:white', onclick='openNav()') ☰ Menu
       #mySidenav.sidenav
         a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
-        a(href='/') Home
+        a(href='#') Home
         a(href='/about') About
-      img.logo(src='logo.png', alt='GPS', width='80', height='80')
+      img.logo(src= "/logo.png", alt='GPS', width='80', height='80')
     h1 get people socialising.
     form(action='/members/signup', method='get')
       button(type='submit') sign up

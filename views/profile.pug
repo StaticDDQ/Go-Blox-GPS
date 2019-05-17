@@ -13,19 +13,20 @@ html
         span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Menu
         #mySidenav.sidenav
           a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
-          a(href='/members/userProfile') ☺ #{user.userName}
+          a(href='#') ☺ #{user.userName}
           a(href='/') Home
           a(href='/about') About
           a(href='/events/findEvent') Find Events
           a(href='/places') Places
           a(href='/events/createEvent') Create Event!
-        img.logo(src='/logo.png', alt='GPS', width='50', height='50')
+        a(href='/') 
+            img.logo(src= "/logo.png", alt='GPS', width='80', height='80')
 
       //- contains basic profile info for user
       .basic_profile
         - source = user.display ? user.display : '/pictures/profile_icon.png'
         img.profile(src=user.display, alt='profile_picture')
-        //- img.profile(src='/pictures/profile_icon.png', alt='profile_picture')
+
         -var fullname = firstName + ' ' + lastName;
         h3 #{user.firstName} #{user.lastName}
         h4 Username: #{user.userName}
@@ -84,12 +85,14 @@ html
               if eventsJoined
                   ul
                       each event in eventsJoined
-                          li #{event.name}
+                          a(href='/events/getEvent/' + event._id)
+                              li #{event.name}
           h3 Past Events Created
               if eventsCreated
                   ul
-                      each event in eventsCreated
-                          li #{event.name}
+                      each userEvent in eventsCreated
+                          a(href='/events/getEvent/' + userEvent._id)
+                              li #{userEvent.name}
         #Places.tabcontent
           h3 Places to go
           p Places went
@@ -97,7 +100,8 @@ html
           h3 Your friends:
           if user.followedUsers
             each friend in user.followedUsers
-                li #{friend}
+                a(href='/profile/' + friend)
+                    li #{friend}
         #Reviews.tabcontent
           h3 Your reviews
           ul
@@ -111,7 +115,7 @@ html
         #Bookmarks.tabcontent
           h3 Your bookmarks
           ul
-            if rating
+            if user.interestedEvents
                 each event in user.interestedEvents
                     li #{event}
 
