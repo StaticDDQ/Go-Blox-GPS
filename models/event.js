@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 // events schema
 const eventsSchema = new mongoose.Schema({
-    "name",
+    "name": String,
     "startDate": String,
     "startTime": String,
     "endDate": String,
