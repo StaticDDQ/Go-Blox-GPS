@@ -4,6 +4,8 @@ html
     title Simple Leaflet Map
     meta(charset='utf-8')
     link(rel='stylesheet',type='text/css', href='mappers.css')
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans&display=swap', rel='stylesheet')
+
   //-link(rel='stylesheet', href='http://cdn.leafletjs.com/leaflet-0.7/leaflet.css')
   body
     style
@@ -24,9 +26,20 @@ html
         var marker = new L.Marker([#{evented.lat},#{evented.long}]);
         marker.bindPopup("#{evented.name}");
         map.addLayer(marker);
+     
     h1 gps.
-    h3 get people socialising.    
-        
-      
+    h3
+      |get people 
+      br
+      |socializing
+    h4
+      |A platform for students especially those who are new in Melbourne 
+      br
+      |to discover events and places based on their interests and 
+      br
+      |meet new people with likeminded values! :)
+
+    
+    
         
       

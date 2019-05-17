@@ -1,16 +1,47 @@
+body{
+	font-family: 'Open Sans', sans-serif;
+}
 h1{
-    color: blue;
+	color: black;
+	text-shadow: #333;
     position: absolute;
-    top: 10px;
-    left: 50px;
+    top: 50px;
+	left: 50px;
+	font-size: 30px;
+	font-weight: lighter;
 }
 
 h3{
-    color: blue;
+	color: black;
+	font-size: 52px;
+	font-weight: bold;
+	text-shadow: 0 5px 0 rgba(255, 255, 255, 0.4);
     position: absolute;
-    top: 50px;
+    top: 100px;
     left: 50px;
 }
+
+h4{
+	color: black;
+	font-size: 15px;
+	text-shadow: 0 5px 0 rgba(255, 255, 255, 0.4);
+    position: absolute;
+    top: 300px;
+	left: 50px;
+	font-weight: 100;
+}
+
+h5{
+	color: black;
+	font-size: 15px;
+	text-shadow: 0 5px 0 rgba(255, 255, 255, 0.4);
+    position: absolute;
+    top: 450px;
+	left: 50px;
+	font-weight: 100;
+	text-decoration: underline;
+}
+
 body{
     background-color: black;
     margin: 0px;
