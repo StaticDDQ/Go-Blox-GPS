@@ -23,7 +23,8 @@ html(lang='en')
             a(href='/events/findEvent') Find Events
             a(href='/places') Places
             a(href='/events/createEvent') Create Event!
-        img.logo(src= "/logo.png", alt='GPS', width='80', height='80', href='/members/userProfile')
+        a(href='/') 
+            img.logo(src= "/logo.png", alt='GPS', width='80', height='80')
 
       //- Event picture displayed 
       .imageContent
@@ -130,36 +131,38 @@ html(lang='en')
         $(function(){
             $('#submitReview').submit(function(event) {
                 event.preventDefault();
-                var formData = {
-                    eventID: $('#eventID')[0].value,
-                    stars: $('#stars')[0].value,
-                    desc: $('#desc')[0].value,
-                    eventName: $('#eventName')[0].value
-                };
+                if($('#desc')[0].value.length > 0){
+                    var formData = {
+                        eventID: $('#eventID')[0].value,
+                        stars: $('#stars')[0].value,
+                        desc: $('#desc')[0].value,
+                        eventName: $('#eventName')[0].value
+                    };
 
-                $.post('/ratings/addRating', formData, function(resp){
-                    var stringUser = JSON.stringify(resp.userName);
-                    var stringStars = JSON.stringify(resp.stars);
-                    var stringDesc = JSON.stringify(resp.desc);
+                    $.post('/ratings/addRating', formData, function(resp){
+                        var stringUser = JSON.stringify(resp.userName);
+                        var stringStars = JSON.stringify(resp.stars);
+                        var stringDesc = JSON.stringify(resp.desc);
 
-                    var addedRating = document.getElementById('addedRating');
+                        var addedRating = document.getElementById('addedRating');
 
-                    var ratingBox = document.createElement('div');
-                    ratingBox.className = 'rating_card';
+                        var ratingBox = document.createElement('div');
+                        ratingBox.className = 'rating_card';
 
-                    var userText = document.createElement('p');
-                    userText.innerHTML = stringUser;
-                    var starText = document.createElement('p');
-                    starText.innerHTML = stringStars;
-                    var descText = document.createElement('p');
-                    descText.innerHTML = stringDesc;
+                        var userText = document.createElement('p');
+                        userText.innerHTML = stringUser;
+                        var starText = document.createElement('p');
+                        starText.innerHTML = stringStars;
+                        var descText = document.createElement('p');
+                        descText.innerHTML = stringDesc;
 
-                    ratingBox.appendChild(userText);
-                    ratingBox.appendChild(starText);
-                    ratingBox.appendChild(descText);
+                        ratingBox.appendChild(userText);
+                        ratingBox.appendChild(starText);
+                        ratingBox.appendChild(descText);
 
-                    addedRating.appendChild(ratingBox);
-                });
+                        addedRating.appendChild(ratingBox);
+                    });
+                }
             });
             //- Joining the event, Yes, No, Interested options
             //- YES
