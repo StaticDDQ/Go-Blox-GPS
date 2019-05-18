@@ -191,6 +191,18 @@ html
       var user = !{JSON.stringify(user)};
       user.interests.forEach(function(element){
         tags.push(element);
+        var tag = document.createElement('input');
+        tag.type = 'text';
+        tag.value = element;
+        tag.name = 'interests';
+        tag.readonly = true;
+        tag.onclick = function(){
+            var index = tags.indexOf(element);
+            tags.splice(index,1);
+            tag.parentNode.removeChild(tag);
+        }
+
+        tagLst.appendChild(tag);
       });
 
       function removeSettings(){
@@ -238,10 +250,6 @@ html
           var pwd = document.getElementById('newPwd').value;
           var oldPwd = document.getElementById('oldPwd').value;
           var retypedPwd = document.getElementById('retype').value;
-
-          console.log(pwd);
-          console.log(oldPwd);
-          console.log(retypedPwd);
 
           if(pwd === retypedPwd && oldPwd === user.password)
             return true;
