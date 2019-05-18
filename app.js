@@ -11,6 +11,9 @@ const session = require('express-session');
 // use moment to format date and time
 app.locals.moment = require('moment');
 
+// models to use for sampling
+let Event = require('./models/event');
+
 var port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
@@ -51,7 +54,24 @@ app.get('/places', function (req, res) {
 // route to about page
 app.get('/', function (req, res) {
     if (req.user === undefined)
-        res.render('home');
+    Event.aggregate([{ $sample: { size: 5} }]).exec(function(err, resp){
+        if(err) throw err;
+        var arrayed = []
+        for (let i = 0; i < resp.length; i++){
+            var aEvent ={
+                name: resp[i].name,
+                lat: parseFloat(resp[i].location[0].latitude),
+                long: parseFloat(resp[i].location[0].longitude),
+                address: resp[i].address,
+                phone: resp[i].phone,
+                email: resp[i].email
+            };
+
+            arrayed.push(aEvent);        
+        }
+        
+        res.render('maps', {events: arrayed});
+    });
     else {
         res.render('userHome');
     }
