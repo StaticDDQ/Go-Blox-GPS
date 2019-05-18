@@ -153,6 +153,8 @@ html(lang='en')
                 tag.name = 'tags';
                 tag.readonly = true;
                 tag.onclick = function(){
+                    var index = tags.indexOf(tag.value.toLowerCase());
+                    tags.splice(index,1);
                     tag.parentNode.removeChild(tag);
                 }
 

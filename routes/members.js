@@ -182,16 +182,22 @@ router.post('/register', upload.single("display"), async function (req, res) {
     }
 });
 
-router.post('/updateImg', upload.single("display"), async function (req, res) {
-    
+router.post('/updateUser', upload.single("display"), async function (req, res) {
+
     await cloudinary.uploader.upload(req.file.path,
         function (error, result) {
             if (error) throw error;
 
             req.body['display'] = result.secure_url;
-
             Member.findOneAndUpdate(
-                { userName: req.user.userName }, { $set: { 'display': req.body.display } }, function (err, resp) {
+                { userName: req.user.userName }, {
+                    $set: {
+                        'display': req.body.display,
+                        'password': req.body.password,
+                        'interests': req.body.interests,
+                        'desc': req.body.desc
+                    }
+                }, function (err, resp) {
                     if (err) throw err;
                     res.redirect('/members/userProfile');
                 });
@@ -203,26 +209,6 @@ router.post('/updateImg', upload.single("display"), async function (req, res) {
 function upperCaseName(name) {
     return name.charAt(0).toUpperCase() + name.slice(1);
 }
-
-// update member
-router.put('/updatePassword', function (req, res) {
-
-    req.checkBody('password', 'Password is required').notEmpty();
-    req.checkBody('retype', 'Password does not match').equals(req.body.password);
-    req.checkBody('oldPwd', 'Old password does not match').equals(req.user.password);
-    var error = req.validationErrors();
-    if (!error) {
-        req.session.passport.user.password = req.body.password;
-        res.send(req.user);
-        Member.findOneAndUpdate(
-            { userName: req.user.userName }, { $set: { 'password': req.body.password } }, function (err, resp) {
-                if (err) throw err;
-                res.send(resp);
-            });
-    } else {
-        res.send(null);
-    }
-});
 
 // if user joined an event append the name (and maybe link) to the user's json
 router.put('/addEvent/:userName', function (req, res) {

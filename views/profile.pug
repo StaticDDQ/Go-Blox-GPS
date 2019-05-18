@@ -56,28 +56,35 @@ html
         //- settings tab allow users to change their info
         #overlay
             .settings
-              //- currently, only changing password is possible
-              h3 Change Password:
-              br
-              p
-                | Old password:
-                input#oldpwd(type='password')
+              form(action='/members/updateUser', method='post', enctype='multipart/form-data', onsubmit='return checkPwd()')
+                h1 Change interests:
+                  input#input(type='text', placeholder='Search Tags')
+                  input(type='button', value='Add tag', onclick='addTag()')
+
+                  #checked
+                h2 Change Description:
+                  input(type='text', placeholder= user.desc, name='desc')
+                //- currently, only changing password is possible
+                h3 Change Password:
                 br
-                | New password:
-                input#pwd(type='text')
-                br
-                | Retype new password:
-                input#pwdTyped(type='password')
-                br
-                input#submitChanges(type='submit', value='Submit new password')
-                button(onclick='removeSettings()') X
-              h4 Change Display Picture:
-                br
-                form(action='/members/updateImg', method='post', enctype='multipart/form-data')
-                    input#file-field(type='file', onchange='previewImage(event)', name='display')
-                    div#preview
-                    img#image-field(src='/pictures/profile_icon.png', width='150', height='150')
-                    input#changeImg(type='submit', value='Change Picture')
+                p
+                  | Old password:
+                  input#oldPwd(type='password', name='oldPwd')
+                  br
+                  | New password:
+                  input#newPwd(type='text', name='password')
+                  br
+                  | Retype new password:
+                  input#retype(type='password', name='retype')
+                  br
+                  
+                h4 Change Display Picture:
+                  input#file-field(type='file', onchange='previewImage(event)', name='display')
+                  div#preview
+                  img#image-field(src='/pictures/profile_icon.png', width='150', height='150')
+                
+                input(type='submit', value='Submit')
+              button(onclick='removeSettings()') X
 
         //- The rest of the tab contents
         // Tab content
@@ -179,8 +186,11 @@ html
         document.getElementById("overlay").style.display = "block";
       }
 
+      var tags = [];
+
       function removeSettings(){
         document.getElementById("overlay").style.display = "none";
+        tags = [];
       }
 
       function previewImage(event){
@@ -194,28 +204,50 @@ html
           reader.readAsDataURL(event.target.files[0]);
       }
 
+      function addTag() {
+
+          var tagValue = document.getElementById('input');
+
+          if(tagValue.value.length > 0 && !tags.includes(tagValue.value.toLowerCase())){
+              var tagLst = document.getElementById('checked');
+
+              var tag = document.createElement('input');
+              tag.type = 'text';
+              tag.value = tagValue.value.toLowerCase();
+              tag.name = 'interests';
+              tag.readonly = true;
+              tag.onclick = function(){
+                  var index = tags.indexOf(tag.value.toLowerCase());
+                  tags.splice(index,1);
+                  tag.parentNode.removeChild(tag);
+              }
+
+              tagLst.appendChild(tag);
+
+              tags.push(tagValue.value.toLowerCase());
+          }
+          tagValue.value = "";
+      }
+
+      function checkPwd(){
+          var pwd = document.getElementById('newPwd').value;
+          var oldPwd = document.getElementById('oldPwd').value;
+          var retypedPwd = document.getElementById('retype').value;
+          var user = !{JSON.stringify(user)};
+
+          console.log(pwd);
+          console.log(oldPwd);
+          console.log(retypedPwd);
+
+          if(pwd === retypedPwd && oldPwd === user.password)
+            return true;
+          
+          alert('Incorrect password input');
+          return false;
+      }
+
       //- Dynamic update function
       $(function(){
-        $('#submitChanges').click(function(event){
-            event.preventDefault();
-            var formData = {
-                password: $('#pwd')[0].value,
-                retype: $('#pwdTyped')[0].value,
-                oldPwd: $('#oldpwd')[0].value
-            };
-
-            $.ajax({
-                url: '/members/updatePassword',
-                type: 'put',
-                data: formData
-            }).done(function(data){
-                if(data)
-                    alert("Password changed");
-                else
-                    alert("Incorrect input");
-            });
-        });
-
         $('#followUser').click(function(event){
             event.preventDefault();
             var thisUser = {
