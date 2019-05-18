@@ -51,7 +51,8 @@ html
           button.tablinks(onclick="openTab(event, 'Friends')") Friends
           button.tablinks(onclick="openTab(event, 'Reviews')") Reviews
           button.tablinks(onclick="openTab(event, 'Bookmarks')") Bookmarks
-          button(onclick="openSettings()") Settings
+          if !notCurr
+            button(onclick="openSettings()") Settings
 
         //- settings tab allow users to change their info
         #overlay
@@ -187,6 +188,10 @@ html
       }
 
       var tags = [];
+      var user = !{JSON.stringify(user)};
+      user.interests.forEach(function(element){
+        tags.push(element);
+      });
 
       function removeSettings(){
         document.getElementById("overlay").style.display = "none";
@@ -233,7 +238,6 @@ html
           var pwd = document.getElementById('newPwd').value;
           var oldPwd = document.getElementById('oldPwd').value;
           var retypedPwd = document.getElementById('retype').value;
-          var user = !{JSON.stringify(user)};
 
           console.log(pwd);
           console.log(oldPwd);
