@@ -168,7 +168,6 @@ router.post('/register', upload.single("display"), async function (req, res) {
 
                 });
             req.body['display'] = reqURL;
-            console.log(req.body);
 
             mongooseController.addUser(req, res);
         } else {
@@ -181,6 +180,24 @@ router.post('/register', upload.single("display"), async function (req, res) {
             error: 'Incorrect signup.' 
         });
     }
+});
+
+router.post('/updateImg', upload.single("display"), async function (req, res) {
+    
+    await cloudinary.uploader.upload(req.file.path,
+        function (error, result) {
+            if (error) throw error;
+
+            req.body['display'] = result.secure_url;
+
+            Member.findOneAndUpdate(
+                { userName: req.user.userName }, { $set: { 'display': req.body.display } }, function (err, resp) {
+                    if (err) throw err;
+                    console.log(resp);
+                    res.redirect('/members/userProfile');
+                });
+
+        });
 });
 
 // function to convert the first letter of the name to uppercase
@@ -196,6 +213,8 @@ router.put('/updatePassword', function (req, res) {
     req.checkBody('oldPwd', 'Old password does not match').equals(req.user.password);
     var error = req.validationErrors();
     if (!error) {
+        req.session.passport.user.password = req.body.password;
+        res.send(req.user);
         Member.findOneAndUpdate(
             { userName: req.user.userName }, { $set: { 'password': req.body.password } }, function (err, resp) {
                 if (err) throw err;

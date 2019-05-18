@@ -71,6 +71,13 @@ html
                 br
                 input#submitChanges(type='submit', value='Submit new password')
                 button(onclick='removeSettings()') X
+              h4 Change Display Picture:
+                br
+                form(action='/members/updateImg', method='post', enctype='multipart/form-data')
+                    input#file-field(type='file', onchange='previewImage(event)', name='display')
+                    div#preview
+                    img#image-field(src='/pictures/profile_icon.png', width='150', height='150')
+                    input#changeImg(type='submit', value='Change Picture')
 
         //- The rest of the tab contents
         // Tab content
@@ -174,6 +181,17 @@ html
 
       function removeSettings(){
         document.getElementById("overlay").style.display = "none";
+      }
+
+      function previewImage(event){
+          var reader = new FileReader();
+          var imageField = document.getElementById("image-field")
+          reader.onload = function(){
+          if(reader.readyState == 2){
+              imageField.src = reader.result;
+              }
+          }
+          reader.readAsDataURL(event.target.files[0]);
       }
 
       //- Dynamic update function
