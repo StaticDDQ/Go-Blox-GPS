@@ -168,7 +168,6 @@ router.post('/register', upload.single("display"), async function (req, res) {
 
                 });
             req.body['display'] = reqURL;
-            console.log(req.body);
 
             mongooseController.addUser(req, res);
         } else {
@@ -183,28 +182,33 @@ router.post('/register', upload.single("display"), async function (req, res) {
     }
 });
 
+router.post('/updateUser', upload.single("display"), async function (req, res) {
+
+    await cloudinary.uploader.upload(req.file.path,
+        function (error, result) {
+            if (error) throw error;
+
+            req.body['display'] = result.secure_url;
+            Member.findOneAndUpdate(
+                { userName: req.user.userName }, {
+                    $set: {
+                        'display': req.body.display,
+                        'password': req.body.password,
+                        'interests': req.body.interests,
+                        'desc': req.body.desc
+                    }
+                }, function (err, resp) {
+                    if (err) throw err;
+                    res.redirect('/members/userProfile');
+                });
+
+        });
+});
+
 // function to convert the first letter of the name to uppercase
 function upperCaseName(name) {
     return name.charAt(0).toUpperCase() + name.slice(1);
 }
-
-// update member
-router.put('/updatePassword', function (req, res) {
-
-    req.checkBody('password', 'Password is required').notEmpty();
-    req.checkBody('retype', 'Password does not match').equals(req.body.password);
-    req.checkBody('oldPwd', 'Old password does not match').equals(req.user.password);
-    var error = req.validationErrors();
-    if (!error) {
-        Member.findOneAndUpdate(
-            { userName: req.user.userName }, { $set: { 'password': req.body.password } }, function (err, resp) {
-                if (err) throw err;
-                res.send(resp);
-            });
-    } else {
-        res.send(null);
-    }
-});
 
 // if user joined an event append the name (and maybe link) to the user's json
 router.put('/addEvent/:userName', function (req, res) {

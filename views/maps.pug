@@ -24,22 +24,15 @@ html
     each evented in events
       script.
         var marker = new L.Marker([#{evented.lat},#{evented.long}]);
-        marker.bindPopup("#{evented.name}");
+        marker.bindPopup("<h2>#{evented.name}</h2>Address: #{evented.address}<br/>Phone: #{evented.phone}<br/>Email: #{evented.email}");
         map.addLayer(marker);
      
     h1 gps.
-    h3
-      |get people 
-      br
-      |socializing
-    h4
-      |A platform for students especially those who are new in Melbourne 
-      br
-      |to discover events and places based on their interests and 
-      br
-      |meet new people with likeminded values! :)
-
-    
-    
+    h3 get people socialising.    
+        
+    form(action="/events/maps/search", method="post")
+      h2 D I S C O V E R
+      input(type="text", placeholder="searching...",name="search")
+      input(type="submit",value="SUBMIT")
         
       
