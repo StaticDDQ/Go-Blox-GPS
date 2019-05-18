@@ -21,9 +21,12 @@ html
     each evented in events
       script.
         var marker = new L.Marker([#{evented.lat},#{evented.long}]);
-        marker.bindPopup("#{evented.name}");
+        marker.bindPopup("<h1>#{evented.name}</h1>Address: #{evented.address}<br/>Phone: #{evented.phone}<br/>Email: #{evented.email}");
         map.addLayer(marker);
         
-      
+    form(action="/events/maps/search", method="post")
+      h2 D I S C O V E R
+      input(type="text", placeholder="searching...",name="search")
+      input(type="submit",value="SUBMIT")
         
       

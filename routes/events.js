@@ -8,6 +8,7 @@ var NodeGeoCoder = require("node-geocoder");
 
 // Get event model
 let Event = require('../models/event');
+let Places = require('../models/place');
 let Rating = require('../models/rating');
 
 // to show to get long and lat
@@ -38,6 +39,7 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
 
     // get geo code
     geocoder.geocode(req.body.address, function(err,resp){
+        if(resp.length <1) throw Error("No location found");
         req.body.location = resp[0];
     });
 
@@ -75,26 +77,74 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
         res.render('createEvent', { errors: 'Incorrect event creation' });
     }
 });
-
+// might become our home page
 router.get('/maps', function(req,res){
-    Event.aggregate([{ $sample: { size: 2} }]).exec(function(err, resp){
+    Event.aggregate([{ $sample: { size: 5} }]).exec(function(err, resp){
         if(err) throw err;
         var arrayed = []
         for (let i = 0; i < resp.length; i++){
             var aEvent ={
                 name: resp[i].name,
                 lat: parseFloat(resp[i].location[0].latitude),
-                long: parseFloat(resp[i].location[0].longitude)
+                long: parseFloat(resp[i].location[0].longitude),
+                address: resp[i].address,
+                phone: resp[i].phone,
+                email: resp[i].email
             };
 
             arrayed.push(aEvent);
-
-
-            
         }
         
         res.render('maps', {events: arrayed});
     });
+});
+
+// if want to search
+router.post('/maps/search', async function(req,res){
+    var arrayed = [];
+    await Event.find({
+        $or: [
+            {name: {$regex: req.body.search, $options: 'i' }},
+            {email: {$regex: req.body.search, $options: 'i' }},
+            {organizers: {$regex: req.body.search, $options: 'i' }}
+        ] }, function (err, resp) {
+        if (err) throw err;
+        for (let i = 0; i < resp.length; i++){
+            var aEvent = {
+                name: resp[i].name,
+                lat: parseFloat(resp[i].location[0].latitude),
+                long: parseFloat(resp[i].location[0].longitude),
+                address: resp[i].address,
+                phone: resp[i].phone,
+                email: resp[i].email
+            };
+
+            arrayed.push(aEvent);
+        };
+
+    });
+    await Places.find({
+        $or: [
+            {placeName: {$regex: req.body.search, $options: 'i' }}
+        ] }, function (err, resp) {
+        if (err) throw err;
+        for (let i = 0; i < resp.length; i++){
+            var aPlaces = {
+                name: resp[i].placeName,
+                lat: parseFloat(resp[i].location[0].latitude),
+                long: parseFloat(resp[i].location[0].longitude),
+                address: resp[i].placeAddress,
+                phone: resp[i].placePhone,
+                email: ''
+            };
+
+            arrayed.push(aPlaces);
+        };
+    
+    });
+    await console.log(arrayed);
+    await res.render('maps', {events: arrayed});
+
 });
 
 //change back to post
