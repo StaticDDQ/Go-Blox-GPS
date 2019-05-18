@@ -3,12 +3,13 @@
 /* general layout */
 * {
     padding: 0;
-    margin: 5px;;
+    margin: 0px;
 }
   
 body{
     font-family: "Quicksand";
     text-align: justify;
+    background-color: #f4f4f4;
 }
 
 p {
@@ -21,8 +22,14 @@ i {
   font-size: 14px;
 }
 
+.textContent h2{
+  font-weight: bolder;
+  font-size: 30px;
+}
 p.contacts {
   font-size: 20px;
+  padding-top: 50px;
+  color: #e15848;
 }
 
 /* configuring the grid */
@@ -44,7 +51,8 @@ p.contacts {
 /* configuring the navigation bar */
 .navbar{
     grid-area: navbar;
-    
+    padding-left: 20px;
+    padding-top: 20px;
 }
 
 .sidenav {
@@ -84,31 +92,39 @@ p.contacts {
 /* configuring logo */
 .logo{
     float: right;
+    padding-right: 20px;
+    padding-top: 15px;
 }
 
 /* configuring the image uploaded */
 .imageContent {
   grid-area: image_content;
+  background-color: white;
+  width: 50%;
   text-align: center;
   align-content: center;
-  margin-top: 10px;
-  margin-bottom: 20px;
   justify-self: center;
+  padding-left: 60px;
+  padding-right: 60px;
+  padding-top: 50px;
+  padding-bottom: 20px;
 }
 
 .main_img{
-  width: 50%;
+  width: 100%;
   height: auto;
-  border: solid black 1px;
 }
 
 /* configuring the text */
 .main_content{
     grid-area: main_content;
     width: 50%;
-    padding-bottom: 10px;
+    padding-bottom: 40px;
     align-content: center;
     justify-self: center;
+    background-color: white;
+    padding-left: 60px;
+    padding-right: 60px;
 }
 
 .text_content {
@@ -129,6 +145,27 @@ p.contacts {
 /* add reviews and ratings*/
 .reviews{
     grid-area: reviews;
+    width: 50%;
+    align-content: center;
+    justify-self: center;
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-bottom: 50px;
+    background-color: white;
+}
+.reviews h2{
+  text-decoration: underline;
+  color: #e15848;
+  font-size: 20px;
+}
+.rating_card{
+  background-color: white;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-top: 20px;
+  border: solid 1px #becad0;
+  border-radius: 8px;
 }
 
 .ratings{
@@ -139,12 +176,24 @@ p.contacts {
 .footer{
     grid-area: footer; 
     background-color: #90A4BC;
-  
+    padding-left: 5px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    margin-top: 50px;
   }
   
   .footer li{
     display: inline;
     text-decoration: none;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 20px;
+  }
+  
+  .footer p{
+    margin-left: 20px;
+    padding-left: 5px;
+    padding-bottom: 10px;
   }
   
   .footer a{
@@ -155,7 +204,7 @@ p.contacts {
   .footer li:hover,
   .footer li.sfHover,
   .footer li.current-menu-item {
-      border-bottom: solid 0.3px black;
+      border-bottom: solid 0.3px #ED7755;
   
   }
 
