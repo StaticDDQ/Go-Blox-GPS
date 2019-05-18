@@ -125,7 +125,8 @@ router.post('/maps/search', async function(req,res){
     });
     await Places.find({
         $or: [
-            {placeName: {$regex: req.body.search, $options: 'i' }}
+            {placeName: {$regex: req.body.search, $options: 'i' }},
+            {placeDescription: {$regex: req.body.search, $options: 'i' }}
         ] }, function (err, resp) {
         if (err) throw err;
         for (let i = 0; i < resp.length; i++){
