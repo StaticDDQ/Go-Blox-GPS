@@ -193,7 +193,6 @@ router.post('/updateImg', upload.single("display"), async function (req, res) {
             Member.findOneAndUpdate(
                 { userName: req.user.userName }, { $set: { 'display': req.body.display } }, function (err, resp) {
                     if (err) throw err;
-                    console.log(resp);
                     res.redirect('/members/userProfile');
                 });
 
