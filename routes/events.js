@@ -49,26 +49,31 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
         error = req.validationErrors();
 
         if (!error) {
-            var reqURL;
+            var checkEventExists = await lookUpEvent(req.body.name);
 
-            await cloudinary.uploader.upload(req.file.path,
-                {
-                    eager: [
-                        { width: 0.5, crop: "scale" }]
-                },
-                function (error, result) {
-                    if (error) throw error;
+            if (!checkEventExists) {
+                var reqURL;
 
-                    reqURL = result.secure_url;
+                await cloudinary.uploader.upload(req.file.path,
+                    {
+                        eager: [
+                            { width: 0.5, crop: "scale" }]
+                    },
+                    function (error, result) {
+                        if (error) throw error;
 
+                        reqURL = result.secure_url;
+
+                    });
+                req.body.pictures = reqURL;
+                var addNewEvent = new Event(req.body);
+                addNewEvent['organizer'] = req.user.userName;
+                addNewEvent.save(function (err, event) {
+                    if (err) throw err;
+
+                    return res.redirect('/events/getEvent/' + event._id.toString());
                 });
-            req.body.pictures = reqURL;
-            var addNewEvent = new Event(req.body);
-            addNewEvent['organizer'] = req.user.userName;
-            addNewEvent.save(function (err, event) {
-                if (err) throw err;
-                res.render('eventDetails', { event: event });
-            });
+            }
         } else {
             res.render('createEvent', { errors: 'Require atleast 1 tag' });
         }
@@ -77,7 +82,13 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
         res.render('createEvent', { errors: 'Incorrect event creation' });
     }
 });
-// might become our home page
+
+async function lookUpEvent(eventName) {
+    var found = null;
+    found = await Event.findOne({ name: eventName });
+    return found;
+}
+
 router.get('/maps', function(req,res){
     Event.aggregate([{ $sample: { size: 5} }]).exec(function(err, resp){
         if(err) throw err;
@@ -92,7 +103,7 @@ router.get('/maps', function(req,res){
                 email: resp[i].email
             };
 
-            arrayed.push(aEvent);
+            arrayed.push(aEvent);        
         }
         
         res.render('maps', {events: arrayed});
@@ -163,8 +174,15 @@ router.get('/getEvent/:id', function (req, res) {
         if (event != null) {
             Rating.find({ eventID: req.params.id }, function (err, result) {
                 if (err) throw err;
-                
-                res.render('eventDetails', { event: event, ratings: result });
+
+                if (req.user !== undefined && event.organizer === req.user.userName)
+                    res.render('ownerEventDetails', { event: event, ratings: result });
+                else
+                    res.render('eventDetails', {
+                        event: event,
+                        ratings: result,
+                        isInterested: req.user.interestedEvents.includes(event.name)
+                    });
             });
         } else {
             res.render('notFound');
@@ -232,7 +250,7 @@ router.put('/joinEvent', function (req, res) {
     } else {
         Event.findById(req.body.id, function (err, result) {
             if (!result.joinedUsers.includes(req.user.userName)) {
-                res.joinedUsers.push(req.user.userName);
+                result.joinedUsers.push(req.user.userName);
                 result.save(function (err) {
                     if (err) throw err;
                 });
@@ -248,6 +266,7 @@ router.put('/declineEvent', function (req, res) {
         res.error();
     } else {
         Event.findByIdAndUpdate(req.body.id, { $pull: { 'joinedUsers': req.user.userName } }, function (err, result) {
+            if (err) throw err;
             res.send(result);
         });
     }

@@ -20,9 +20,9 @@ html(lang='en')
             | Tags
           .searchBar
             input#input(type='text', placeholder='Search Tags')
-            input(type='button', value='Add tag', onclick='addTag()');
+            input(type='button', value='Add tag', onclick='addTag()')
 
-          #checked   
+            #checked   
 
             br
           //- add event desctiption
@@ -37,24 +37,27 @@ html(lang='en')
             input(type="submit" value="Finish")
 
       script.
+        var tags = [];
 
         function addTag() {
 
             var tagValue = document.getElementById('input');
 
-            if(tagValue.value.length > 0){
+            if(tagValue.value.length > 0 && !tags.includes(tagValue.value.toLowerCase())){
                 var tagLst = document.getElementById('checked');
 
-                var tag = document.createElement('textarea');
-                tag.value = tagValue.value;
-                tag.name = 'tags';
+                var tag = document.createElement('input');
+                tag.type = 'text';
+                tag.value = tagValue.value.toLowerCase();
+                tag.name = 'interests';
                 tag.readonly = true;
                 tag.onclick = function(){
                     tag.parentNode.removeChild(tag);
                 }
 
                 tagLst.appendChild(tag);
-                tagValue.value = "";
+
+                tags.push(tagValue.value.toLowerCase());
             }
-            
+            tagValue.value = "";
         }

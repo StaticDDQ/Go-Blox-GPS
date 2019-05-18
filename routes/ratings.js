@@ -14,7 +14,7 @@ router.post('/addRating', function (req, res) {
         desc: req.body.desc,
         userName: req.user.userName,
         eventName: req.body.eventName,
-        datePublished: moment().format('YYYY-MM-DD')
+        datePublished: moment().format('MMM Do YY')
     });
 
     addNewRating.save(function (err, ratings) {

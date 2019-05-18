@@ -13,12 +13,13 @@ const memberSchema = new mongoose.Schema({
     "DOB": String,
     "joined_date": String,
     "password": String,
-    "joinedEvents": [String],
+    "interestedEvents": [String],
     "active": Boolean,
     "display": String,
     "desc": String,
     "interests": [String],
-    "firstTime": Boolean
+    "firstTime": Boolean,
+    "followedUsers": [String]
 }, { versionKey: false});
 
 const Member = module.exports = mongoose.model('members', memberSchema);

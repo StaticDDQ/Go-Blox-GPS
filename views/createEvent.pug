@@ -85,10 +85,8 @@ html(lang='en')
           .uploadImage
             div
               input(type='file', onchange='previewFile()', name='pictures')
-              //- input(type='file', name='pictures', value='uploading_img', multiple=true, onchange='previewFile()')
 
             div#preview
-              //- img(src='', alt='Image preview...')
 
           //- Tag searching
           #bottom
@@ -113,7 +111,6 @@ html(lang='en')
       //- JS to preview the images uploaded
       script.
         function previewFile() {
-            //- var preview = document.querySelector('img'); //selects the query named img
             var previewbox = document.getElementById('preview'); // get image by ID
             var file = document.querySelector('input[type=file]').files[0]; //sames as here
 
@@ -142,15 +139,17 @@ html(lang='en')
 
         previewFile();  //calls the function named previewFile()
 
+        var tags = [];
+
         function addTag() {
 
             var tagValue = document.getElementById('input');
 
-            if(tagValue.value.length > 0){
+            if(tagValue.value.length > 0 && !tags.includes(tagValue.value.toLowerCase())){
                 var tagLst = document.getElementById('checked');
 
                 var tag = document.createElement('textarea');
-                tag.value = tagValue.value;
+                tag.value = tagValue.value.toLowerCase();
                 tag.name = 'tags';
                 tag.readonly = true;
                 tag.onclick = function(){
@@ -158,8 +157,10 @@ html(lang='en')
                 }
 
                 tagLst.appendChild(tag);
-                tagValue.value = "";
+
+                tags.push(tagValue.value.toLowerCase());
             }
+            tagValue.value = "";
         }
 
         //- make sure user agrees to terms and conditions

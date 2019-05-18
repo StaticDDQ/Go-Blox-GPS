@@ -13,6 +13,7 @@ const moment = require('moment');
 // Get member model
 let Member = require('../models/member');
 let Rating = require('../models/rating');
+let Event = require('../models/event');
 
 // login as member
 router.post('/authenticate', function (req, res, next) {
@@ -27,16 +28,41 @@ router.post('/authenticate', function (req, res, next) {
             
             if (user.firstTime) {
                 return res.render('profileTags');
-            } else
-                return res.redirect('/members/profile/' + user.userName);
+            } else {
+                return res.redirect('/members/userProfile');
+            }
         });
     })(req, res,next);
 });
 
-// load profile
+// easy access to user's own profile
+router.get('/userProfile', function (req, res) {
+    if (req.user === undefined)
+        res.render('mustLogin');
+    else {
+        Rating.find({ userName: req.user.userName }, function (err, userRatings) {
+            if (err) throw err;
+            Event.find({ joinedUsers: req.user.userName }, function (err, eventsJoined) {
+                if (err) throw err;
+                Event.find({ organizer: req.user.userName }, function (err, eventsCreated) {
+                    if (err) throw err;
+                    res.render('profile', {
+                        user: req.user,
+                        rating: userRatings,
+                        eventsJoined: eventsJoined,
+                        eventsCreated: eventsCreated,
+                        notCurr: false
+                    });
+                });
+            });
+        });
+    }
+});
+
+// load profile of a certain user
 router.get('/profile/:user', function (req, res) {
     if (req.user === undefined) {
-        res.end();
+        res.render('mustLogin');
     } else {
         var loginUser = {
             userName: req.params.user
@@ -45,7 +71,21 @@ router.get('/profile/:user', function (req, res) {
             if (err) throw err;
             if (result) {
                 Rating.find({ userName: result.userName }, function (err, userRatings) {
-                    res.render('profile', { user: result, rating: userRatings });
+                    if (err) throw err;
+                    Event.find({ joinedUsers: result.userName }, function (err, eventsJoined) {
+                        if (err) throw err;
+                        Event.find({ organizer: result.userName }, function (err, eventsCreated) {
+                            if (err) throw err;
+                            res.render('profile', {
+                                user: result,
+                                rating: userRatings,
+                                eventsCreated: eventsCreated,
+                                eventsJoined: eventsJoined,
+                                notCurr: (result.userName !== req.user.userName),
+                                isFollowing: req.user.followedUsers.includes(result.userName)
+                            });
+                        });
+                    });
                 });
             }
         });
@@ -54,7 +94,10 @@ router.get('/profile/:user', function (req, res) {
 
 // open login page
 router.get('/login', function (req, res) {
-    res.render('login');
+    if (req.user !== undefined)
+        res.redirect('/members/userProfile/');
+    else
+        res.render('login');
 });
 
 // logout active user
@@ -111,12 +154,10 @@ router.post('/register', upload.single("display"), async function (req, res) {
         error = req.validationErrors();
         if (!error) {
             // add join date of user
-            req.body['firstTime'] = true;
             req.body['firstName'] = upperCaseName(req.body['firstName']);
             req.body['lastName'] = upperCaseName(req.body['lastName']);
             req.body['joined_date'] = moment().format('MMM Do YY');
             req.body['DOB'] = moment(req.body['DOB']).format('MMM Do YY');
-            req.body['active'] = false;
 
             var reqURL;
             await cloudinary.uploader.upload(req.file.path,
@@ -127,7 +168,6 @@ router.post('/register', upload.single("display"), async function (req, res) {
 
                 });
             req.body['display'] = reqURL;
-            console.log(req.body);
 
             mongooseController.addUser(req, res);
         } else {
@@ -140,6 +180,23 @@ router.post('/register', upload.single("display"), async function (req, res) {
             error: 'Incorrect signup.' 
         });
     }
+});
+
+router.post('/updateImg', upload.single("display"), async function (req, res) {
+    
+    await cloudinary.uploader.upload(req.file.path,
+        function (error, result) {
+            if (error) throw error;
+
+            req.body['display'] = result.secure_url;
+
+            Member.findOneAndUpdate(
+                { userName: req.user.userName }, { $set: { 'display': req.body.display } }, function (err, resp) {
+                    if (err) throw err;
+                    res.redirect('/members/userProfile');
+                });
+
+        });
 });
 
 // function to convert the first letter of the name to uppercase
@@ -155,6 +212,8 @@ router.put('/updatePassword', function (req, res) {
     req.checkBody('oldPwd', 'Old password does not match').equals(req.user.password);
     var error = req.validationErrors();
     if (!error) {
+        req.session.passport.user.password = req.body.password;
+        res.send(req.user);
         Member.findOneAndUpdate(
             { userName: req.user.userName }, { $set: { 'password': req.body.password } }, function (err, resp) {
                 if (err) throw err;
@@ -185,7 +244,14 @@ router.put('/interested', function (req, res) {
     if (req.user === undefined) {
         res.error();
     } else {
-        Member.findOneAndUpdate({ userName: req.user.userName }, { $push: { 'joinedEvents': req.body.id } }, function (err, result) {
+        Member.findOne({ userName: req.user.userName }, function (err, result) {
+            if (err) throw err;
+            if (!result.interestedEvents.includes(req.body.name)) {
+                result.interestedEvents.push(req.body.name);
+                result.save(function (err) {
+                    if (err) throw err;
+                });
+            }
             res.send(result);
         });
     } 
@@ -196,7 +262,7 @@ router.put('/notInterested', function (req, res) {
     if (req.user === undefined) {
         res.error();
     } else {
-        Member.findOneAndUpdate({ userName: req.user.userName }, { $pull: { 'joinedEvents': req.body.id } }, function (err, result) {
+        Member.findOneAndUpdate({ userName: req.user.userName }, { $pull: { 'interestedEvents': req.body.name } }, function (err, result) {
             res.send(result);
         });
     }
@@ -204,10 +270,25 @@ router.put('/notInterested', function (req, res) {
 
 // update user with the description and list of interested tags
 router.post('/storeInfo', function (req, res) {
-    Member.findOneAndUpdate({ userName: req.user.userName }, { $set: { 'desc': req.body.description, 'interests': req.body.interest, 'firstTime': false } }, function (err, res) {
-        console.log(res);
-    });
-    res.redirect('/members/profile/' + req.user.userName);
+    Member.findOneAndUpdate({ userName: req.user.userName }, { $set: { 'desc': req.body.description, 'interests': req.body.interests, 'firstTime': false } }, function (err, result) {
+        res.redirect('/members/userProfile');
+    }); 
+});
+
+// have current user follow another user
+router.put('/followUser', function (req, res) {
+    Member.findOneAndUpdate({ userName: req.user.userName }, {
+        $push: { 'followedUsers': req.body.username }}, function(err, result) {
+            res.send(result);
+        });
+});
+
+// unfollow a user
+router.put('/unfollowUser', function (req, res) {
+    Member.findOneAndUpdate({ userName: req.user.userName }, {
+        $pull: { 'followedUsers': req.body.username }}, function (err, result) {
+            res.send(result);
+        });
 });
 
 module.exports = router;

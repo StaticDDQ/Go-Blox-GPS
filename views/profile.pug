@@ -19,25 +19,33 @@ html
           a(href='/events/findEvent') Find Events
           a(href='/places') Places
           a(href='/events/createEvent') Create Event!
-          a(href='/places/createPlace') Create Places!
-        img.logo(src='/logo.png', alt='GPS', width='50', height='50')
+        a(href='/') 
+            img.logo(src= "/logo.png", alt='GPS', width='80', height='80')
 
       //- contains basic profile info for user
       .basic_profile
         - source = user.display ? user.display : '/pictures/profile_icon.png'
         img.profile(src=user.display, alt='profile_picture')
-        //- img.profile(src='/pictures/profile_icon.png', alt='profile_picture')
+
         -var fullname = firstName + ' ' + lastName;
         h3 #{user.firstName} #{user.lastName}
         h4 Username: #{user.userName}
         h4 Join Date: #{user.joined_date}
         h4 Date of Birth: #{user.DOB}
+        
+        if notCurr
+          -
+            var followText = 'Follow';
+            if(isFollowing){
+                followText = 'Unfollow';
+            }
+          input#followUser(type='submit', value=followText, name=user.userName)
 
       //- display other contents about users in tabs
       .all_content
         // Tab links
         .tab
-          button.tablinks(onclick="openTab(event, 'Interests')") Interests
+          button.tablinks#start(onclick="openTab(event, 'Interests')") Interests
           button.tablinks(onclick="openTab(event, 'Events')") Events
           button.tablinks(onclick="openTab(event, 'Places')") Places
           button.tablinks(onclick="openTab(event, 'Friends')") Friends
@@ -63,6 +71,13 @@ html
                 br
                 input#submitChanges(type='submit', value='Submit new password')
                 button(onclick='removeSettings()') X
+              h4 Change Display Picture:
+                br
+                form(action='/members/updateImg', method='post', enctype='multipart/form-data')
+                    input#file-field(type='file', onchange='previewImage(event)', name='display')
+                    div#preview
+                    img#image-field(src='/pictures/profile_icon.png', width='150', height='150')
+                    input#changeImg(type='submit', value='Change Picture')
 
         //- The rest of the tab contents
         // Tab content
@@ -74,13 +89,26 @@ html
             | #{user.desc}
         #Events.tabcontent
           h3 Past Events Attended
+              if eventsJoined
+                  ul
+                      each event in eventsJoined
+                          a(href='/events/getEvent/' + event._id)
+                              li #{event.name}
           h3 Past Events Created
+              if eventsCreated
+                  ul
+                      each userEvent in eventsCreated
+                          a(href='/events/getEvent/' + userEvent._id)
+                              li #{userEvent.name}
         #Places.tabcontent
           h3 Places to go
           p Places went
         #Friends.tabcontent
           h3 Your friends:
-          p username: ...
+          if user.followedUsers
+            each friend in user.followedUsers
+                a(href='/profile/' + friend)
+                    li #{friend}
         #Reviews.tabcontent
           h3 Your reviews
           ul
@@ -94,9 +122,9 @@ html
         #Bookmarks.tabcontent
           h3 Your bookmarks
           ul
-            if rating
-                each rate in rating
-                    li #{rate.eventName}
+            if user.interestedEvents
+                each event in user.interestedEvents
+                    li #{event}
 
       //- Footer
       .footer
@@ -116,6 +144,8 @@ html
 
     //- Javascript codes
     script.
+      document.getElementById('start').click();
+
       function openTab(evt, tabName) {
 
           // Declare all variables
@@ -153,6 +183,17 @@ html
         document.getElementById("overlay").style.display = "none";
       }
 
+      function previewImage(event){
+          var reader = new FileReader();
+          var imageField = document.getElementById("image-field")
+          reader.onload = function(){
+          if(reader.readyState == 2){
+              imageField.src = reader.result;
+              }
+          }
+          reader.readAsDataURL(event.target.files[0]);
+      }
+
       //- Dynamic update function
       $(function(){
         $('#submitChanges').click(function(event){
@@ -173,5 +214,33 @@ html
                 else
                     alert("Incorrect input");
             });
+        });
+
+        $('#followUser').click(function(event){
+            event.preventDefault();
+            var thisUser = {
+                username: $('#followUser')[0].name
+            };
+
+            if($('#followUser')[0].value === 'Follow'){
+                $.ajax({
+                    url: '/members/followUser',
+                    type: 'put',
+                    data: thisUser,
+                    success: function(data){
+                        $('#followUser').val('Unfollow');
+                    }
+                });
+            }
+            else {
+                $.ajax({
+                    url: '/members/unfollowUser',
+                    type: 'put',
+                    data: thisUser,
+                    success: function(data){
+                        $('#followUser').val('Follow');
+                    }
+                });
+            }
         });
       });
