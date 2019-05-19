@@ -38,15 +38,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // route to about page
-app.get('/about', function (req, res) {
-    if (req.user === undefined)
-        res.render('about');
-    else {
-        res.render('userAbout');
-    }
-});
-
-// route to about page
 app.get('/places', function (req, res) {
     res.render('comingSoon');
 });
