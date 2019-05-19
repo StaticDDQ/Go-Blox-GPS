@@ -20,7 +20,7 @@ html
           a(href='/events/findEvent') Find Events
           a(href='/places') Places
           a(href='/events/createEvent') Create Event!
-        a(href='/') 
+        a(href='/')
             img.logo(src= "/logo.png", alt='GPS', width='80', height='80')
 
       //- contains basic profile info for user
@@ -33,7 +33,7 @@ html
         h4 Username: #{user.userName}
         h4 Join Date: #{user.joined_date}
         h4 Date of Birth: #{user.DOB}
-        
+
         if notCurr
           -
             var followText = 'Follow';
@@ -59,14 +59,20 @@ html
         #overlay
           .settings
             h1 Settings
-            form(action='/members/updateUser', method='post', enctype='multipart/form-data', onsubmit='return checkPwd()')
+            form(action='/members/updateUser', method='post', enctype='multipart/form-data')
               p Change interests:
                 input#input(type='text', placeholder='Search Tags')
                 input#xButton(type='button', value='Add tag', onclick='addTag()')
 
                 #checked
               p Change Description:
-                input(type='textarea', placeholder= user.desc, name='desc')
+                input(type='text', placeholder= user.desc, name='desc')
+                
+              h4 Change Display Picture:
+                input#file-field(type='file', onchange='previewImage(event)', name='display')
+                div#preview
+                img#image-field(src='/pictures/profile_icon.png', width='150', height='150')
+
               //- currently, only changing password is possible
               h3 Change Password:
               p
@@ -80,13 +86,10 @@ html
                 input#retype(type='password', name='retype')
                 br
                 
-              h4 Change Display Picture:
-                input#file-field(type='file', onchange='previewImage(event)', name='display')
-                div#preview
-                img#image-field(src='/pictures/profile_icon.png', width='150', height='150')
             .xButton
               input(type='submit', value='Submit')
               button(onclick='removeSettings()') Cancel
+
 
         //- The rest of the tab contents
         // Tab content
@@ -123,7 +126,7 @@ html
           ul
             if rating
                 each rate in rating
-                    li 
+                    li
                         p #{rate.eventName}
                         p #{rate.desc}
                         p You rated this event: #{rate.stars}/5
@@ -176,16 +179,16 @@ html
 
       //- Navigation bar functions
       function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
+          document.getElementById("mySidenav").style.width = "250px";
       }
 
       function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
+          document.getElementById("mySidenav").style.width = "0";
       }
 
       // Setting tab functions
       function openSettings(){
-        document.getElementById("overlay").style.display = "block";
+          document.getElementById("overlay").style.display = "block";
       }
 
       var tags = [];
@@ -193,32 +196,32 @@ html
       var tagLst = document.getElementById('checked');
 
       user.interests.forEach(function(element){
-        tags.push(element);
-        var tag = document.createElement('input');
-        tag.type = 'text';
-        tag.value = element;
-        tag.name = 'interests';
-        tag.readonly = true;
-        tag.onclick = function(){
-            var index = tags.indexOf(element);
-            tags.splice(index,1);
-            tag.parentNode.removeChild(tag);
-        }
+          tags.push(element);
+          var tag = document.createElement('input');
+          tag.type = 'text';
+          tag.value = element;
+          tag.name = 'interests';
+          tag.readonly = true;
+          tag.onclick = function(){
+              var index = tags.indexOf(element);
+              tags.splice(index,1);
+              tag.parentNode.removeChild(tag);
+          }
 
-        tagLst.appendChild(tag);
+          tagLst.appendChild(tag);
       });
 
       function removeSettings(){
-        document.getElementById("overlay").style.display = "none";
-        tags = [];
+          document.getElementById("overlay").style.display = "none";
+          tags = [];
       }
 
       function previewImage(event){
           var reader = new FileReader();
           var imageField = document.getElementById("image-field")
           reader.onload = function(){
-          if(reader.readyState == 2){
-              imageField.src = reader.result;
+              if(reader.readyState == 2){
+                  imageField.src = reader.result;
               }
           }
           reader.readAsDataURL(event.target.files[0]);
@@ -247,45 +250,59 @@ html
           tagValue.value = "";
       }
 
-      function checkPwd(){
-          var pwd = document.getElementById('newPwd').value;
-          var oldPwd = document.getElementById('oldPwd').value;
-          var retypedPwd = document.getElementById('retype').value;
-
-          if(pwd === retypedPwd && oldPwd === user.password)
-            return true;
-          
-          alert('Incorrect password input');
-          return false;
-      }
-
       //- Dynamic update function
       $(function(){
-        $('#followUser').click(function(event){
-            event.preventDefault();
-            var thisUser = {
-                username: $('#followUser')[0].name
-            };
 
-            if($('#followUser')[0].value === 'Follow'){
-                $.ajax({
-                    url: '/members/followUser',
-                    type: 'put',
-                    data: thisUser,
-                    success: function(data){
-                        $('#followUser').val('Unfollow');
-                    }
-                });
-            }
-            else {
-                $.ajax({
-                    url: '/members/unfollowUser',
-                    type: 'put',
-                    data: thisUser,
-                    success: function(data){
-                        $('#followUser').val('Follow');
-                    }
-                });
-            }
-        });
+          $('#followUser').click(function(event){
+              event.preventDefault();
+
+              var thisUser = {
+                  username: $('#followUser')[0].name
+              };
+
+              if($('#followUser')[0].value === 'Follow'){
+                  $.ajax({
+                      url: '/members/followUser',
+                      type: 'put',
+                      data: thisUser,
+                      success: function(data){
+                          $('#followUser').val('Unfollow');
+                      }
+                  });
+              }
+              else {
+                  $.ajax({
+                      url: '/members/unfollowUser',
+                      type: 'put',
+                      data: thisUser,
+                      success: function(data){
+                          $('#followUser').val('Follow');
+                      }
+                  });
+              }
+          });
+
+          //- Dynamic update function
+          $(function(){
+              $('#submitChanges').click(function(event){
+                  event.preventDefault();
+                  var formData = {
+                      password: $('#newPwd')[0].value,
+                      retype: $('#retype')[0].value,
+                      oldPwd: $('#oldPwd')[0].value
+                  };
+
+                  $.ajax({
+                      url: '/members/updatePassword',
+                      type: 'put',
+                      data: formData
+                  }).done(function(data){
+                      if(data)
+                          alert("Password changed");
+                      else
+                          alert("Incorrect input");
+                  });
+              });
+          });
       });
+
