@@ -162,18 +162,23 @@ router.post('/register', upload.single("display"), async function (req, res) {
             req.body['joined_date'] = moment().format('MMM Do YY');
             req.body['DOB'] = moment(req.body['DOB']).format('MMM Do YY');
 
-            var reqURL;
-            await cloudinary.uploader.upload(req.file.path,
-                function (error, result) {
-                    if (error) throw error;
-                    // reqURL = result.secure_url;
-                    reqURL = {
-                        public_id: result.public_id,
-                        url: result.secure_url
-                    }
+            var reqURL = {
+                public_id: '',
+                url: '/profile.png'
+            };
+            if (req.file !== undefined) {
+                await cloudinary.uploader.upload(req.file.path,
+                    function (error, result) {
+                        if (error) throw error;
+                        // reqURL = result.secure_url;
+                        reqURL = {
+                            public_id: result.public_id,
+                            url: result.secure_url
+                        }
 
-                });
-            console.log(reqURL);
+                    });
+            }
+            
             req.body['display'] = reqURL;
 
             mongooseController.addUser(req, res);
@@ -193,7 +198,7 @@ router.post('/register', upload.single("display"), async function (req, res) {
 router.post('/updateUser', upload.single("display"), async function (req, res) {
     
     var pic_delete_id;
-    Member.findOne({userName: req.user}, function(err, result){
+    Member.findOne({userName: req.user.userName}, function(err, result){
         pic_delete_id = result.display.public_id
     });
 
