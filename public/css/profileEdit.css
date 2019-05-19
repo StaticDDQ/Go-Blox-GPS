@@ -151,7 +151,7 @@ body{
   background-color: #f1f1f1;
   padding: 20px;
   justify-content: center;
-  margin: 250px;
+  margin: 100px;
  } 
 
 #overlay {
@@ -165,4 +165,39 @@ body{
     bottom: 0;
     background-color: rgba(0,0,0,0.5);
     z-index: 2;
+}
+
+input {
+  font-size: 12px;
+  width: 100px;
+  align-content: center;
+  font-family: 'Quicksand';
+}
+
+.xButton button, 
+.xButton input
+ {
+  height: 30px;
+  width: 70px;
+  padding: 2px; 
+  font-family: 'Quicksand';
+  font-size: 12px;
+  border: none;
+  border: .5px solid #707070;
+  border-radius: .4em;
+
+}
+.xButton {
+  text-align: left;
+  
+}
+
+.xButton button:hover,
+.xButton button.sfHover,
+.xButton button.current-menu-item,
+.xButton input:hover,
+.xButton input.sfHover,
+.xButton input.current-menu-item {
+  background-color: #f5bdab;
+  color:  rgb(255, 255, 255);
 }

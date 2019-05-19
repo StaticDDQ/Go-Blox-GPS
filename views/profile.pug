@@ -60,7 +60,8 @@ html
               form(action='/members/updateUser', method='post', enctype='multipart/form-data', onsubmit='return checkPwd()')
                 h1 Change interests:
                   input#input(type='text', placeholder='Search Tags')
-                  input(type='button', value='Add tag', onclick='addTag()')
+                  .xButton
+                    input(type='button', value='Add tag', onclick='addTag()')
 
                   #checked
                 h2 Change Description:
@@ -83,9 +84,9 @@ html
                   input#file-field(type='file', onchange='previewImage(event)', name='display')
                   div#preview
                   img#image-field(src='/pictures/profile_icon.png', width='150', height='150')
-                
+              .xButton
                 input(type='submit', value='Submit')
-              button(onclick='removeSettings()') X
+                button(onclick='removeSettings()') Cancel
 
         //- The rest of the tab contents
         // Tab content
