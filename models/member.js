@@ -15,7 +15,7 @@ const memberSchema = new mongoose.Schema({
     "password": String,
     "interestedEvents": [String],
     "active": Boolean,
-    "display": String,
+    "display":Object,
     "desc": String,
     "interests": [String],
     "firstTime": Boolean,

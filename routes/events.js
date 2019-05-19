@@ -89,27 +89,6 @@ async function lookUpEvent(eventName) {
     return found;
 }
 
-router.get('/maps', function(req,res){
-    Event.aggregate([{ $sample: { size: 5} }]).exec(function(err, resp){
-        if(err) throw err;
-        var arrayed = []
-        for (let i = 0; i < resp.length; i++){
-            var aEvent ={
-                name: resp[i].name,
-                lat: parseFloat(resp[i].location[0].latitude),
-                long: parseFloat(resp[i].location[0].longitude),
-                address: resp[i].address,
-                phone: resp[i].phone,
-                email: resp[i].email
-            };
-
-            arrayed.push(aEvent);        
-        }
-        
-        res.render('maps', {events: arrayed});
-    });
-});
-
 // if want to search
 router.post('/maps/search', async function(req,res){
     var arrayed = [];
@@ -117,9 +96,10 @@ router.post('/maps/search', async function(req,res){
         $or: [
             {name: {$regex: req.body.search, $options: 'i' }},
             {email: {$regex: req.body.search, $options: 'i' }},
-            {organizers: {$regex: req.body.search, $options: 'i' }}
+            {organizers: {$regex: req.body.search, $options: 'i' }},
+            {address: {$regex: req.body.search, $options: 'i' }}
         ] }, function (err, resp) {
-        if (err) throw err;
+
         for (let i = 0; i < resp.length; i++){
             var aEvent = {
                 name: resp[i].name,
@@ -129,6 +109,7 @@ router.post('/maps/search', async function(req,res){
                 phone: resp[i].phone,
                 email: resp[i].email
             };
+        
 
             arrayed.push(aEvent);
         };
@@ -137,7 +118,8 @@ router.post('/maps/search', async function(req,res){
     await Places.find({
         $or: [
             {placeName: {$regex: req.body.search, $options: 'i' }},
-            {placeDescription: {$regex: req.body.search, $options: 'i' }}
+            {placeDescription: {$regex: req.body.search, $options: 'i' }},
+            {placeAddress: {$regex: req.body.search, $options: 'i' }}
         ] }, function (err, resp) {
         if (err) throw err;
         for (let i = 0; i < resp.length; i++){

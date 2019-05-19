@@ -163,10 +163,14 @@ router.post('/register', upload.single("display"), async function (req, res) {
             await cloudinary.uploader.upload(req.file.path,
                 function (error, result) {
                     if (error) throw error;
-
-                    reqURL = result.secure_url;
+                    // reqURL = result.secure_url;
+                    reqURL = {
+                        public_id: result.public_id,
+                        url: result.secure_url
+                    }
 
                 });
+            console.log(reqURL);
             req.body['display'] = reqURL;
 
             mongooseController.addUser(req, res);
@@ -182,13 +186,24 @@ router.post('/register', upload.single("display"), async function (req, res) {
     }
 });
 
+/// TAKE NOTE HERE
 router.post('/updateUser', upload.single("display"), async function (req, res) {
+    
+    var pic_delete_id;
+    Member.findOne({userName: req.user}, function(err, result){
+        pic_delete_id = result.display.public_id
+    });
 
+    await cloudinary.uploader.destroy(pic_delete_id, function(err, result) {
+        if(err) throw err;
+    });
+
+    console.log(req);
     await cloudinary.uploader.upload(req.file.path,
         function (error, result) {
             if (error) throw error;
 
-            req.body['display'] = result.secure_url;
+            req.body['display'] = {id: result.public_id,url: result.secure_url};
             Member.findOneAndUpdate(
                 { userName: req.user.userName }, {
                     $set: {

@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title Simple Leaflet Map
+    title GO-BLOX: GET PEOPLE SOCIALISING!
     meta(charset='utf-8')
     link(rel='stylesheet',type='text/css', href='mappers.css')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans&display=swap', rel='stylesheet')
@@ -14,7 +14,7 @@ html
     #map(style='width: 190vh; height: 100vh;')
     script(src='http://cdn.leafletjs.com/leaflet-0.7/leaflet.js')
     script.
-      var map = L.map('map').setView([-37.814, 144.96332], 10);
+      var map = L.map('map').setView([-37.814, 144.96332], 13);
       mapLink =
       '<a href="http://openstreetmap.org">OpenStreetMap</a>';
       L.tileLayer(
@@ -25,7 +25,7 @@ html
     each evented in events
       script.
         var marker = new L.Marker([#{evented.lat},#{evented.long}]);
-        marker.bindPopup("<h2>#{evented.name}</h2>Address: #{evented.address}<br/>Phone: #{evented.phone}<br/>Email: #{evented.email}");
+        marker.bindPopup("<b>#{evented.name}</b></br>Address: #{evented.address}<br/>Phone: #{evented.phone}<br/>Email: #{evented.email}");
         map.addLayer(marker);
      
     h1 gps.
