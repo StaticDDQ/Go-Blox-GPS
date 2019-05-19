@@ -58,23 +58,28 @@ html
         //- settings tab allow users to change their info
         #overlay
           .settings
-            h1 Settings
             form(action='/members/updateUser', method='post', enctype='multipart/form-data')
-              p Change interests:
-                input#input(type='text', placeholder='Search Tags')
-                input#xButton(type='button', value='Add tag', onclick='addTag()')
+              .one
+                h2 Change Details:
+                p Change interests:
+                  input#input(type='text', placeholder='Search Tags')
+                  input#xButton(type='button', value='Add tag', onclick='addTag()')
 
-                #checked
-              p Change Description:
-                input(type='text', placeholder= user.desc, name='desc')
+                  #checked
+                p Change Description:
+                  input(type='text', placeholder= user.desc, name='desc')
+                  
+                h4 Change Display Picture:
+                  input#file-field(type='file', onchange='previewImage(event)', name='display')
+                  div#preview
+                  img#image-field(src='/pictures/profile_icon.png', width='150', height='150')
                 
-              h4 Change Display Picture:
-                input#file-field(type='file', onchange='previewImage(event)', name='display')
-                div#preview
-                img#image-field(src='/pictures/profile_icon.png', width='150', height='150')
+                //- change 
+                input#xButton2(type='submit', value='Change Details')
 
               //- currently, only changing password is possible
-              h3 Change Password:
+            .password
+              h2 Change Password:
               p
                 | Old password:
                 input#oldPwd(type='password', name='oldPwd')
@@ -85,10 +90,10 @@ html
                 | Retype new password:
                 input#retype(type='password', name='retype')
                 br
+                input#submitChanges(type='submit', value='Change Password')
                 
             .xButton
-              input(type='submit', value='Submit')
-              button(onclick='removeSettings()') Cancel
+              button#cancel(onclick='removeSettings()') Cancel
 
 
         //- The rest of the tab contents

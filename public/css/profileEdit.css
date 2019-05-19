@@ -39,7 +39,7 @@ body{
 }
 
 .profile{
-  border: 1px solid black;
+  border: 1px solid #f4f4f4;
   border-radius: 50%;
   height: 150px;
   width: 150px;
@@ -148,26 +148,42 @@ body{
 
 /* configure setting which uses overlay */
 .settings {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: 
+  "one password";
   background-color: #f1f1f1;
   padding: 20px;
   justify-content: center;
-  margin: 100px auto;
-  width: 50%;
+  margin: 10vh auto;
+  width: 50vmax;
+  height: auto;
   font-family: 'Roboto';
   color:  rgb(20, 20, 20);
 
  } 
 
- .settings h1 {
-   font-family: 'Quicksand';
-   font-style: italic;
-   color: #ED7755;
-   padding-bottom: 4px;
-   text-decoration: underline;
-
-   
+ .one {
+   grid-area: one;
+ }
+ .password {
+   grid-area: password;
  }
 
+ .settings h2 {
+   font-family: 'Quicksand';
+   font-style: bold;
+   color: #ED7755;
+   padding-bottom: 4px;
+
+ }
+ .settings img{
+  border: 1px solid #f4f4f4;
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+ }
 
 #overlay {
     position: absolute;
@@ -204,9 +220,26 @@ input#xButton
   border-radius: .4em;
 
 }
+
+input#submitChanges,
+input#xButton2 {
+  height: 30px;
+  width: 120px;
+  padding: 2px; 
+  font-family: 'Quicksand';
+  font-size: 12px;
+  border: none;
+  border: .5px solid #707070;
+  border-radius: .4em;
+
+}
 .xButton {
   text-align: left;
   
+}
+
+#cancel {
+  align-content: right;
 }
 .xButton button:hover,
 .xButton button.sfHover,
@@ -216,7 +249,13 @@ input#xButton
 .xButton input.current-menu-item,
 input#xButton:hover,
 input#xButton.sfHover,
-input#xButton.current-menu-item
+input#xButton.current-menu-item,
+input#xButton2:hover,
+input#xButton2.sfHover,
+input#xButton2.current-menu-item,
+input#submitChanges:hover,
+input#submitChanges.sfHover,
+input#submitChanges.current-menu-item
  {
   background-color: #ED7755;
   color:  rgb(255, 255, 255);
