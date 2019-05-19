@@ -148,10 +148,10 @@ html(lang='en')
             if(tagValue.value.length > 0 && !tags.includes(tagValue.value.toLowerCase())){
                 var tagLst = document.getElementById('checked');
 
-                var tag = document.createElement('textarea');
+                var tag = document.createElement('input');
+                tag.type = 'button';
                 tag.value = tagValue.value.toLowerCase();
                 tag.name = 'tags';
-                tag.readonly = true;
                 tag.onclick = function(){
                     var index = tags.indexOf(tag.value.toLowerCase());
                     tags.splice(index,1);

@@ -54,7 +54,18 @@ html(lang='en')
       .reviews
         h2 Reviews
         #addedRating
-        if ratings
+        if ratings.length > 0
+            - 
+                var avg = 0;
+                var counter = 0;
+                ratings.forEach(function(rating){
+                    avg += rating.stars;
+                    counter++;
+                });
+                avg /= counter;
+                avg = avg.toFixed(2);
+            p Average Ratings:
+            | #{avg}/5
             each rating in ratings
                 .rating_card
                     p USER: #{rating.userName}
