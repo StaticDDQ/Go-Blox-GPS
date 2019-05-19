@@ -14,7 +14,10 @@ html
         span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Menu
         #mySidenav.sidenav
           a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
-          a(href='#') ☺ #{user.userName}
+          if notCurr
+            a(href='/members/userProfile') Go to Profile
+          else
+            a(href='#') ☺ #{user.userName}
           a(href='/') Home
           a(href='/about') About
           a(href='/events/findEvent') Find Events
@@ -119,7 +122,7 @@ html
           h3 Your friends:
           if user.followedUsers
             each friend in user.followedUsers
-                a(href='/profile/' + friend)
+                a(href='members/profile/' + friend)
                     li #{friend}
         #Reviews.tabcontent
           h3 Your reviews
@@ -131,12 +134,6 @@ html
                         p #{rate.desc}
                         p You rated this event: #{rate.stars}/5
                         p Date reviewed: #{rate.datePublished}
-        #Bookmarks.tabcontent
-          h3 Your bookmarks
-          ul
-            if user.interestedEvents
-                each event in user.interestedEvents
-                    li #{event}
 
       //- Footer
       .footer

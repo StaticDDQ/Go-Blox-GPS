@@ -50,12 +50,6 @@ html(lang='en')
             h3.join <b>Join?<b>
             button#yes Yes
             button#no No
-            -
-              var intTxt = 'Interested';
-              if(isInterested){
-                  intTxt = 'Not interested';
-              }
-            input#interested(type='button', value=intTxt)
         //- Ratings
       .ratings
         h2 Add reviews:
@@ -91,7 +85,8 @@ html(lang='en')
             | #{avg}/5
             each rating in ratings
                 .rating_card
-                    p #{rating.userName}
+                    a(href='/members/profile/' + rating.userName)
+                        p #{rating.userName}
                     -   
                         var n = 1;
                         var leftover = 5 - rating.stars;
@@ -240,44 +235,6 @@ html(lang='en')
                         alert("Please log in!");
                     }
                 });
-            });
-            //- INTERESTED
-            $('#interested').click(function(event){
-                event.preventDefault();
-                var eventName = {
-                    name: $('#eventName')[0].value
-                }
-                if($('#interested')[0].value === "Interested"){
-                    $.ajax({
-                        url: '/members/interested',
-                        type: 'PUT',
-                        data: eventName,
-                        success: function(data){
-                            console.log(data);
-                            alert("You are interested in this event");
-                            $('#interested').val('Not interested');
-                        },
-                        error: function(){
-                            alert("Please log in!");
-                        }
-                    });
-                }
-                else {
-                    $.ajax({
-                        url: '/members/notInterested',
-                        type: 'PUT',
-                        data: eventName,
-                        success: function(data){
-                            console.log(data);
-                            alert("You are no longer interested in this event");
-                            $('#interested').val('Interested')
-                        },
-                        error: function(){
-                            alert("Please log in!");
-                        }
-                    });
-                }
-                
             });
         });
 

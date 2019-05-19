@@ -64,6 +64,9 @@ router.get('/profile/:user', function (req, res) {
     if (req.user === undefined) {
         res.render('mustLogin');
     } else {
+        if (req.params.user === req.user.userName) {
+            return res.redirect('/members/userProfile');
+        }
         var loginUser = {
             userName: req.params.user
         };
@@ -240,35 +243,6 @@ router.delete('/deleteMember/:username', function (req, res) {
             if (err) throw err;
             res.send(resp);
         }); 
-});
-
-// indicate whether a user is interested in a event
-router.put('/interested', function (req, res) {
-    if (req.user === undefined) {
-        res.error();
-    } else {
-        Member.findOne({ userName: req.user.userName }, function (err, result) {
-            if (err) throw err;
-            if (!result.interestedEvents.includes(req.body.name)) {
-                result.interestedEvents.push(req.body.name);
-                result.save(function (err) {
-                    if (err) throw err;
-                });
-            }
-            res.send(result);
-        });
-    } 
-});
-
-// indicate whether a user is interested in a event
-router.put('/notInterested', function (req, res) {
-    if (req.user === undefined) {
-        res.error();
-    } else {
-        Member.findOneAndUpdate({ userName: req.user.userName }, { $pull: { 'interestedEvents': req.body.name } }, function (err, result) {
-            res.send(result);
-        });
-    }
 });
 
 // update user with the description and list of interested tags

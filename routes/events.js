@@ -180,8 +180,7 @@ router.get('/getEvent/:id', function (req, res) {
                 else
                     res.render('eventDetails', {
                         event: event,
-                        ratings: result,
-                        isInterested: req.user.interestedEvents.includes(event.name)
+                        ratings: result
                     });
             });
         } else {
