@@ -6,7 +6,7 @@ const moment = require('moment')
 let Rating = require('../models/rating');
 
 // give rating
-router.post('/addRating', function (req, res) {
+router.put('/addRating', function (req, res) {
     // save the rating
     var addNewRating = new Rating({
         eventID: req.body.eventID,

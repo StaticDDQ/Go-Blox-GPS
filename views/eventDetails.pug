@@ -59,8 +59,7 @@ html(lang='en')
         //- Ratings
       .ratings
         h2 Add reviews:
-        form#submitReview(action='../../ratings/addRating', method='post')
-            div(class='stars', rating='3')
+            div#starRatings(class='stars', rating='3')
                 span(class='star rated', value='&nbsp;', onclick='setRating(event)')
                 span(class='star rated', value='&nbsp;', onclick='setRating(event)')
                 span(class='star rated', value='&nbsp;', onclick='setRating(event)')
@@ -71,7 +70,7 @@ html(lang='en')
             input#eventName(type='hidden', value=event.name)
             textarea#desc(name="description" cols="40" rows="5")
             br
-            input(type='submit', value='Submit review')
+            input#submitReview(type='button', value='Submit review')
             ul#response
       //- Reviews      
       .reviews
@@ -79,11 +78,30 @@ html(lang='en')
         #addedRating
         //- Displaying the review created by the user
         if ratings
+            - 
+                var avg = 0;
+                var counter = 0;
+                ratings.forEach(function(rating){
+                    avg += rating.stars;
+                    counter++;
+                });
+                avg /= counter;
+                avg = avg.toFixed(2);
+            p Average Ratings:
+            | #{avg}/5
             each rating in ratings
                 .rating_card
-                    p USER: #{rating.userName}
-                    p STARS: #{rating.stars}/5
-                    p DESCRIPTION: #{rating.desc}
+                    p #{rating.userName}
+                    -   
+                        var n = 1;
+                        var leftover = 5 - rating.stars;
+                    div(class='userStars')
+                        while n++ <= rating.stars
+                            span(class = 'starred rated', value='&nbsp')
+                        while leftover-- > 0
+                            span(class = 'starred', value='&nbsp')
+                    p DESCRIPTION: 
+                    | #{rating.desc}
       //- Footer              
       .footer
         p(style='color:white')
@@ -101,13 +119,17 @@ html(lang='en')
             a(href='#') Cookie Policy
     
     script.
+        document.getElementById('desc').value = '';
+
         //- Navigation bar funtctions
         function openNav() {
             document.getElementById("mySidenav").style.width = "250px";
         }
+
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
         }
+
         //- Rating 
         function setRating(event){
             let span = event.currentTarget;
@@ -127,9 +149,10 @@ html(lang='en')
             });
             document.getElementById('stars').value = num;
         }
+
         //- Review
         $(function(){
-            $('#submitReview').submit(function(event) {
+            $('#submitReview').click(function(event) {
                 event.preventDefault();
                 if($('#desc')[0].value.length > 0){
                     var formData = {
@@ -139,28 +162,45 @@ html(lang='en')
                         eventName: $('#eventName')[0].value
                     };
 
-                    $.post('/ratings/addRating', formData, function(resp){
-                        var stringUser = JSON.stringify(resp.userName);
-                        var stringStars = JSON.stringify(resp.stars);
-                        var stringDesc = JSON.stringify(resp.desc);
+                    $.ajax({
+                        url: '/ratings/addRating',
+                        type: 'put',
+                        data: formData,
+                        success: function(data){
 
-                        var addedRating = document.getElementById('addedRating');
+                            var addedRating = document.getElementById('addedRating');
 
-                        var ratingBox = document.createElement('div');
-                        ratingBox.className = 'rating_card';
+                            var ratingBox = document.createElement('div');
+                            ratingBox.className = 'rating_card';
 
-                        var userText = document.createElement('p');
-                        userText.innerHTML = stringUser;
-                        var starText = document.createElement('p');
-                        starText.innerHTML = stringStars;
-                        var descText = document.createElement('p');
-                        descText.innerHTML = stringDesc;
+                            var userText = document.createElement('p');
+                            userText.innerHTML = data.userName;
+                            userText.style.fontWeight = 'bold';
+                            ratingBox.appendChild(userText);
 
-                        ratingBox.appendChild(userText);
-                        ratingBox.appendChild(starText);
-                        ratingBox.appendChild(descText);
+                            for(let i = 0; i < 5; i++){
+                                var star = document.createElement('span');
+                                if(i+1 <= data.stars){    
+                                    star.className = 'starred rated';
+                                
+                                } else{
+                                    star.className = 'starred';
+                                }
+                                star.value = '&nbps';
 
-                        addedRating.appendChild(ratingBox);
+                                ratingBox.appendChild(star);
+                            }
+
+                            var descText = document.createElement('p');
+                            descText.innerHTML = "DESCRIPTION:\n" + data.desc;
+                            descText.style.fontWeight = 'bold';
+                            ratingBox.appendChild(descText);
+
+                            addedRating.appendChild(ratingBox);
+
+                            document.getElementById('desc').value = '';
+                        }
+                    
                     });
                 }
             });
