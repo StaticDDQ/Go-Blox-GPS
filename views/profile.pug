@@ -3,6 +3,7 @@ html
     include ../public/css/profileEdit.css
   head
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
+    link(href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto&display=swap", rel="stylesheet")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js")
   body
     //- configure layout with grid
@@ -56,28 +57,24 @@ html
 
         //- settings tab allow users to change their info
         #overlay
-            .settings
+          .settings
+            h1 Settings
+            form(action='/members/updateUser', method='post', enctype='multipart/form-data')
+              p Change interests:
+                input#input(type='text', placeholder='Search Tags')
+                input#xButton(type='button', value='Add tag', onclick='addTag()')
 
-              .updateProfile
-                form(action='/members/updateUser', method='post', enctype='multipart/form-data')
-                  h1 Change interests:
-                    input#input(type='text', placeholder='Search Tags')
-                    input(type='button', value='Add tag', onclick='addTag()')
-
-                    #checked
-                  h2 Change Description:
-                    input(type='text', placeholder= user.desc, name='desc')
-
-                  h3 Change Display Picture:
-                    input#file-field(type='file', onchange='previewImage(event)', name='display')
-                    div#preview
-                    img#image-field(src='/pictures/profile_icon.png', width='150', height='150')
-
-                  input(type='submit', value='Submit')
+                #checked
+              p Change Description:
+                input(type='text', placeholder= user.desc, name='desc')
+                
+              h4 Change Display Picture:
+                input#file-field(type='file', onchange='previewImage(event)', name='display')
+                div#preview
+                img#image-field(src='/pictures/profile_icon.png', width='150', height='150')
 
               //- currently, only changing password is possible
               h3 Change Password:
-              br
               p
                 | Old password:
                 input#oldPwd(type='password', name='oldPwd')
@@ -88,9 +85,11 @@ html
                 | Retype new password:
                 input#retype(type='password', name='retype')
                 br
-                input#submitChanges(type='submit', value='Submit')
+                
+            .xButton
+              input(type='submit', value='Submit')
+              button(onclick='removeSettings()') Cancel
 
-              button(onclick='removeSettings()') X
 
         //- The rest of the tab contents
         // Tab content
