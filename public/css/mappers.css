@@ -25,13 +25,13 @@ body{
 	text-align: right;
 }
 
-h1{
+h1 {
 	color: white;
-	/* position: absolute; */
+	position: absolute;
 	text-align: right;
-    top: 5vh;
+  top: 5vh;
 	right: 5vw;
-	font-size: 3vw;
+	font-size: 2.5vw;
 	font-weight: lighter;
 	
 }
@@ -40,7 +40,7 @@ h3{
 	color: white;
 	font-weight: bold;
 	text-align: right;
-    /* position: absolute; */
+  position: absolute;
 	top: 10vh;
 	right: 5vw;
 	font-size: 4vw;
@@ -50,8 +50,8 @@ h4{
 	color: white;
 	font-size: 1vw;
 	text-align: right;
-    /* position: absolute; */
-    top: 30vh;
+	position: absolute;
+	top: 30vh;
 	right: 5vw;
 	font-weight: 100;
 	text-align: right;
@@ -62,8 +62,8 @@ h2{
 	color: white;
 	font-size: 1vw;
 	text-align: right;
-    /* position: absolute; */
-    top: 50vh;
+	position: absolute;
+	top: 50vh;
 	right: 5vw;
 	font-weight: 100;
 	text-decoration: underline;
@@ -71,7 +71,7 @@ h2{
 }
 
 h5{
-	/* position: absolute; */
+	position: absolute;
 	text-align: right;
 	top: 65vh;
 	right: 5vw;
@@ -87,7 +87,7 @@ ul {
 	margin: 0;
 	padding: 0;
 	/* padding-right: 5vw; */
-	/* position: absolute; */
+	position: absolute;
 	top: 80vh;
 	right: 5vw;
 	text-decoration: none;
@@ -95,12 +95,15 @@ ul {
 	color: white;
 	padding-top: 5vh;
 	font-size: 1vw;
-  }
+
+	}
+	
 li{
 	display: inline;
-	padding-left: 15px;
+	padding-left: 1vw;
 	color: white;
 	font-size: 1vw;
+	/* float: right; */
 }
 a{
 	text-decoration: none;
@@ -112,7 +115,7 @@ a:hover{
 }
 .searching{
 	padding-top: 5vh;
-	/* position: absolute; */
+	position: absolute;
 	top: 60vh;
 	right: 5vw;
 }
@@ -133,7 +136,7 @@ form{
 
 input{
 	text-align: left;
-    /* position: absolute; */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;;
@@ -151,7 +154,7 @@ input{
     box-sizing: border-box;
     padding: 10px;
     width: 42.5px;
-	height: 42.5px;
+	  height: 42.5px;
     position: absolute;
     top: 0;
     right: 0;
@@ -207,6 +210,7 @@ body{
 .leaflet-container {
 	overflow: hidden;
 	-ms-touch-action: none;
+	touch-action: none;
 	}
 .leaflet-tile,
 .leaflet-marker-icon,

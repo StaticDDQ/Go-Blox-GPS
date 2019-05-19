@@ -312,3 +312,7 @@ textarea{
   .starred.rated::before {
       content: '\2605'
   }
+
+  #logout {
+    padding-top: 40vh;
+  }
