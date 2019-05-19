@@ -55,7 +55,22 @@ html(lang='en')
             .signUps
               | DOB:
               br
-              input(name='DOB', type='date')
+              -
+                var dateFormat = new Date();
+                var y = dateFormat.getFullYear();
+                var m = dateFormat.getMonth()+1;
+                var d = dateFormat.getDate();
+                var currDate = y + '-';
+                if(m < 10)
+                    currDate += '0'+ m + '-';
+                else
+                    currDate += m + '-';
+                if(d < 10)
+                    currDate += '0' + d;
+                else
+                    currDate += d;
+
+              input(name='DOB', type='date', min= "1900-00-00", max= currDate)
               br
             
             .uploadImage

@@ -23,17 +23,31 @@ html(lang='en')
               | Name of the event:
               br
               input(type='text', name='name')
+          -
+              var date = new Date();
+              var y = date.getFullYear();
+                var m = date.getMonth()+1;
+                var d = date.getDate();
+                var currDate = y + '-';
+                if(m < 10)
+                    currDate += '0'+ m + '-';
+                else
+                    currDate += m + '-';
+                if(d < 10)
+                    currDate += '0' + d;
+                else
+                    currDate += d;
           p
             .eventInputs
               | Start Date:
               br
-              input(type='date', name='startDate')
+              input#startDate(type='date', name='startDate', min=currDate)
           p
             //- End Date
             .eventInputs
               | End Date:
               br
-              input(type='date', name='endDate')
+              input#endDate(type='date', name='endDate', min=currDate)
           p
             //- Starting Time
             .eventInputs
@@ -149,9 +163,10 @@ html(lang='en')
                 var tagLst = document.getElementById('checked');
 
                 var tag = document.createElement('input');
-                tag.type = 'button';
+                tag.type = 'text';
                 tag.value = tagValue.value.toLowerCase();
                 tag.name = 'tags';
+                tag.readonly = true;
                 tag.onclick = function(){
                     var index = tags.indexOf(tag.value.toLowerCase());
                     tags.splice(index,1);
@@ -168,8 +183,17 @@ html(lang='en')
         //- make sure user agrees to terms and conditions
         function agreed(){
           var att = document.getElementById('agree');
+          
           if(!att.checked) {
             alert('You must agree to the terms and conditions');
+            return false;
+          }
+
+          var startDate = document.getElementById('startDate').value;
+          var endDate = document.getElementById('endDate').value;
+
+          if(endDate < startDate){
+            alert('Incorrect date input');
             return false;
           }
           return true;
