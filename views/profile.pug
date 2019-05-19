@@ -28,7 +28,7 @@ html
 
       //- contains basic profile info for user
       .basic_profile
-        - source = user.display.url != '' ? user.display.url : '/pictures/profile_icon.png'
+        - source = user.display.url != '' ? user.display.url : '/profile.png'
         img.profile(src=source, alt='profile_picture')
 
         -var fullname = firstName + ' ' + lastName;
