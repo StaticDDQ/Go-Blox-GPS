@@ -88,23 +88,27 @@ router.get('/createPlace', function (req, res) {
 
 // get place
 router.get('/getPlace/:id', function (req, res) {
-    Event.findById(req.params.id, function (err, event) {
+    Place.findById(req.params.id, function (err, place) {
         if (err) throw err;
-        if (event != null) {
-            Rating.find({ eventID: req.params.id }, function (err, result) {
-                if (err) throw err;
-                
-                res.render('placeDetails', { event: event, ratings: result });
-            });
+        if (place != null) {
+            res.render('placeDetails', { place: place});
         } else {
             res.render('notFound');
         }
     })
 });
-router.get('/getPlace/:placeName', function (req, res) {
-    Place.findOne({ placeName: req.params.placeName }, function (err, resp) {
+
+// get events by name
+router.post('/getPlaces', function (req, res) {
+    // find the event
+    Place.find({
+        $or: [
+            { placeName: { $regex: req.body.name, $options: 'i' } },
+            { placeAddress: { $regex: req.body.name, $options: 'i' } }
+        ]
+    }, function (err, resp) {
         if (err) throw err;
-        res.send(resp);
+        res.render('loadPlaces', { places: resp });
     });
 });
 

@@ -39,7 +39,7 @@ app.use(passport.session());
 
 // route to about page
 app.get('/places', function (req, res) {
-    res.render('comingSoon');
+    res.render('loadPlacesFirst');
 });
 
 // route to about page
