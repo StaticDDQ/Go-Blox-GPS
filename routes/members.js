@@ -25,7 +25,7 @@ router.post('/authenticate', function (req, res, next) {
 
         req.logIn(user, function (err) {
             if (err) return next(err);
-            
+
             if (user.firstTime) {
                 return res.render('profileTags');
             } else {
@@ -150,7 +150,7 @@ router.post('/register', upload.single("display"), async function (req, res) {
     req.checkBody('email', 'Email is not valid').isEmail();
     req.checkBody('DOB', 'Date of Birth is required').notEmpty();
     req.checkBody('password', 'Password is required').notEmpty();
-    
+
     var error = req.validationErrors();
     if (!error) {
         req.checkBody('password_confirm', 'Password does not match').equals(req.body.password);
@@ -178,7 +178,7 @@ router.post('/register', upload.single("display"), async function (req, res) {
 
                     });
             }
-            
+
             req.body['display'] = reqURL;
 
             mongooseController.addUser(req, res);
@@ -189,29 +189,33 @@ router.post('/register', upload.single("display"), async function (req, res) {
         }
     } else {
         res.render('signup', {
-            error: 'Incorrect signup.' 
+            error: 'Incorrect signup.'
         });
     }
 });
 
 /// TAKE NOTE HERE
 router.post('/updateUser', upload.single("display"), async function (req, res) {
-    
-    var pic_delete_id;
-    Member.findOne({userName: req.user.userName}, function(err, result){
-        pic_delete_id = result.display.public_id
+
+    await Member.findOne({userName: req.user.userName}, async function(err, result){
+        console.log("here");
+        console.log(result.display.public_id);
+        var pic_delete_id = result.display.public_id
+        await cloudinary.uploader.destroy(pic_delete_id, function(err, result) {
+            if(err) throw err;
+        });
     });
 
-    await cloudinary.uploader.destroy(pic_delete_id, function(err, result) {
-        if(err) throw err;
-    });
 
-    console.log(req);
     await cloudinary.uploader.upload(req.file.path,
         function (error, result) {
             if (error) throw error;
 
-            req.body['display'] = {id: result.public_id,url: result.secure_url};
+            req.body['display'] = {
+                id: result.public_id,
+                url: result.secure_url
+            };
+
             Member.findOneAndUpdate(
                 { userName: req.user.userName }, {
                     $set: {
@@ -262,14 +266,14 @@ router.delete('/deleteMember/:username', function (req, res) {
         { userName: req.params.username }, function (err, resp) {
             if (err) throw err;
             res.send(resp);
-        }); 
+        });
 });
 
 // update user with the description and list of interested tags
 router.post('/storeInfo', function (req, res) {
     Member.findOneAndUpdate({ userName: req.user.userName }, { $set: { 'desc': req.body.description, 'interests': req.body.interests, 'firstTime': false } }, function (err, result) {
         res.redirect('/members/userProfile');
-    }); 
+    });
 });
 
 // have current user follow another user

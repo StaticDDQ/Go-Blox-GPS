@@ -1,79 +1,120 @@
 body{
 	font-family: 'Open Sans', sans-serif;
 }
+.grid{
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	grid-template-rows: 1fr;
+	grid-template-areas: 
+	'mapping desc';
+}
+
+.mapping{
+	grid-area: 'mapping';
+	background-color: #ED7755;
+}
+
+#map {
+	height: 100vh;
+}
+
+.desc{
+	grid-area: 'desc';
+	background-color: #000000;
+	padding-right: 5vw;
+	text-align: right;
+}
+
 h1{
-	color: black;
-    position: absolute;
-    top: 50px;
-	left: 50px;
-	font-size: 30px;
+	color: white;
+	/* position: absolute; */
+	text-align: right;
+    top: 5vh;
+	right: 5vw;
+	font-size: 3vw;
 	font-weight: lighter;
+	
 }
 
 h3{
-	color: black;
-	font-size:45px;
+	color: white;
 	font-weight: bold;
-    position: absolute;
-    top: 100px;
-    left: 50px;
+	text-align: right;
+    /* position: absolute; */
+	top: 10vh;
+	right: 5vw;
+	font-size: 4vw;
 }
 
 h4{
-	color: black;
-	font-size: 15px;
-    position: absolute;
-    top: 260px;
-	left: 50px;
+	color: white;
+	font-size: 1vw;
+	text-align: right;
+    /* position: absolute; */
+    top: 30vh;
+	right: 5vw;
 	font-weight: 100;
+	text-align: right;
+	padding-top: 5vh;
 }
 
 h2{
-	color: black;
-	font-size: 15px;
-    position: absolute;
-    top: 400px;
-	left: 50px;
+	color: white;
+	font-size: 1vw;
+	text-align: right;
+    /* position: absolute; */
+    top: 50vh;
+	right: 5vw;
 	font-weight: 100;
 	text-decoration: underline;
+	padding-top: 5vh;
 }
 
 h5{
-	position: absolute;
-	top: 525px;
-	left: 50px;
-	color: black;
+	/* position: absolute; */
+	text-align: right;
+	top: 65vh;
+	right: 5vw;
+	color: white;
 	font-weight: bold;
-	font-size: 20px;
+	font-size: 2vw;
 	text-decoration: underline;
+	padding-top: 5vh;
 }
 
 ul {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
-	position: absolute;
-	top: 590px;
-	left: 50px;
+	/* padding-right: 5vw; */
+	/* position: absolute; */
+	top: 80vh;
+	right: 5vw;
 	text-decoration: none;
 	display: inline;
+	color: white;
+	padding-top: 5vh;
+	font-size: 1vw;
   }
 li{
 	display: inline;
 	padding-left: 15px;
+	color: white;
+	font-size: 1vw;
 }
 a{
 	text-decoration: none;
-	color: black;
+	color: white;
 }
 
 a:hover{
 	border-bottom: solid 2px #ED7755;
 }
 .searching{
-	position: absolute;
-	top: 470px;
-	left: 50px;
+	padding-top: 5vh;
+	/* position: absolute; */
+	top: 60vh;
+	right: 5vw;
 }
 form{
     position: relative;
@@ -92,7 +133,7 @@ form{
 
 input{
 	text-align: left;
-    position: absolute;
+    /* position: absolute; */
     top: 0;
     left: 0;
     width: 100%;;
@@ -110,7 +151,7 @@ input{
     box-sizing: border-box;
     padding: 10px;
     width: 42.5px;
-    height: 42.5px;
+	height: 42.5px;
     position: absolute;
     top: 0;
     right: 0;
