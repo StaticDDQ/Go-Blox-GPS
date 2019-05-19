@@ -57,34 +57,38 @@ html
         //- settings tab allow users to change their info
         #overlay
             .settings
-              form(action='/members/updateUser', method='post', enctype='multipart/form-data', onsubmit='return checkPwd()')
-                h1 Change interests:
-                  input#input(type='text', placeholder='Search Tags')
-                  input(type='button', value='Add tag', onclick='addTag()')
+              .updateProfile
+                form(action='/members/updateUser', method='post', enctype='multipart/form-data')
+                  h1 Change interests:
+                    input#input(type='text', placeholder='Search Tags')
+                    input(type='button', value='Add tag', onclick='addTag()')
 
-                  #checked
-                h2 Change Description:
-                  input(type='text', placeholder= user.desc, name='desc')
-                //- currently, only changing password is possible
-                h3 Change Password:
-                br
-                p
-                  | Old password:
-                  input#oldPwd(type='password', name='oldPwd')
-                  br
-                  | New password:
-                  input#newPwd(type='text', name='password')
-                  br
-                  | Retype new password:
-                  input#retype(type='password', name='retype')
-                  br
-                  
-                h4 Change Display Picture:
-                  input#file-field(type='file', onchange='previewImage(event)', name='display')
-                  div#preview
-                  img#image-field(src='/pictures/profile_icon.png', width='150', height='150')
+                    #checked
+                  h2 Change Description:
+                    input(type='text', placeholder= user.desc, name='desc')
+
+                  h3 Change Display Picture:
+                    input#file-field(type='file', onchange='previewImage(event)', name='display')
+                    div#preview
+                    img#image-field(src='/pictures/profile_icon.png', width='150', height='150')
                 
-                input(type='submit', value='Submit')
+                  input(type='submit', value='Submit')
+
+              //- currently, only changing password is possible
+              h3 Change Password:
+              br
+              p
+                | Old password:
+                input#oldPwd(type='password', name='oldPwd')
+                br
+                | New password:
+                input#newPwd(type='text', name='password')
+                br
+                | Retype new password:
+                input#retype(type='password', name='retype')
+                br
+                input#submitChanges(type='submit', value='Submit')
+
               button(onclick='removeSettings()') X
 
         //- The rest of the tab contents
@@ -175,16 +179,16 @@ html
 
       //- Navigation bar functions
       function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
+          document.getElementById("mySidenav").style.width = "250px";
       }
 
       function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
+          document.getElementById("mySidenav").style.width = "0";
       }
 
       // Setting tab functions
       function openSettings(){
-        document.getElementById("overlay").style.display = "block";
+          document.getElementById("overlay").style.display = "block";
       }
 
       var tags = [];
@@ -192,32 +196,32 @@ html
       var tagLst = document.getElementById('checked');
 
       user.interests.forEach(function(element){
-        tags.push(element);
-        var tag = document.createElement('input');
-        tag.type = 'text';
-        tag.value = element;
-        tag.name = 'interests';
-        tag.readonly = true;
-        tag.onclick = function(){
-            var index = tags.indexOf(element);
-            tags.splice(index,1);
-            tag.parentNode.removeChild(tag);
-        }
+          tags.push(element);
+          var tag = document.createElement('input');
+          tag.type = 'text';
+          tag.value = element;
+          tag.name = 'interests';
+          tag.readonly = true;
+          tag.onclick = function(){
+              var index = tags.indexOf(element);
+              tags.splice(index,1);
+              tag.parentNode.removeChild(tag);
+          }
 
-        tagLst.appendChild(tag);
+          tagLst.appendChild(tag);
       });
 
       function removeSettings(){
-        document.getElementById("overlay").style.display = "none";
-        tags = [];
+          document.getElementById("overlay").style.display = "none";
+          tags = [];
       }
 
       function previewImage(event){
           var reader = new FileReader();
           var imageField = document.getElementById("image-field")
           reader.onload = function(){
-          if(reader.readyState == 2){
-              imageField.src = reader.result;
+              if(reader.readyState == 2){
+                  imageField.src = reader.result;
               }
           }
           reader.readAsDataURL(event.target.files[0]);
@@ -246,45 +250,59 @@ html
           tagValue.value = "";
       }
 
-      function checkPwd(){
-          var pwd = document.getElementById('newPwd').value;
-          var oldPwd = document.getElementById('oldPwd').value;
-          var retypedPwd = document.getElementById('retype').value;
-
-          if(pwd === retypedPwd && oldPwd === user.password)
-            return true;
-          
-          alert('Incorrect password input');
-          return false;
-      }
-
       //- Dynamic update function
       $(function(){
-        $('#followUser').click(function(event){
-            event.preventDefault();
-            var thisUser = {
-                username: $('#followUser')[0].name
-            };
+                    
+          $('#followUser').click(function(event){
+              event.preventDefault();
+              
+              var thisUser = {
+                  username: $('#followUser')[0].name
+              };
 
-            if($('#followUser')[0].value === 'Follow'){
-                $.ajax({
-                    url: '/members/followUser',
-                    type: 'put',
-                    data: thisUser,
-                    success: function(data){
-                        $('#followUser').val('Unfollow');
-                    }
-                });
-            }
-            else {
-                $.ajax({
-                    url: '/members/unfollowUser',
-                    type: 'put',
-                    data: thisUser,
-                    success: function(data){
-                        $('#followUser').val('Follow');
-                    }
-                });
-            }
-        });
+              if($('#followUser')[0].value === 'Follow'){
+                  $.ajax({
+                      url: '/members/followUser',
+                      type: 'put',
+                      data: thisUser,
+                      success: function(data){
+                          $('#followUser').val('Unfollow');
+                      }
+                  });
+              }
+              else {
+                  $.ajax({
+                      url: '/members/unfollowUser',
+                      type: 'put',
+                      data: thisUser,
+                      success: function(data){
+                          $('#followUser').val('Follow');
+                      }
+                  });
+              }
+          });
+
+          //- Dynamic update function
+          $(function(){
+              $('#submitChanges').click(function(event){
+                  event.preventDefault();
+                  var formData = {
+                      password: $('#newPwd')[0].value,
+                      retype: $('#retype')[0].value,
+                      oldPwd: $('#oldPwd')[0].value
+                  };
+
+                  $.ajax({
+                      url: '/members/updatePassword',
+                      type: 'put',
+                      data: formData
+                  }).done(function(data){
+                      if(data)
+                          alert("Password changed");
+                      else
+                          alert("Incorrect input");
+                  });
+              });
+          });
       });
+    

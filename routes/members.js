@@ -193,7 +193,6 @@ router.post('/updateUser', upload.single("display"), async function (req, res) {
                 { userName: req.user.userName }, {
                     $set: {
                         'display': req.body.display,
-                        'password': req.body.password,
                         'interests': req.body.interests,
                         'desc': req.body.desc
                     }
@@ -203,6 +202,24 @@ router.post('/updateUser', upload.single("display"), async function (req, res) {
                 });
 
         });
+});
+
+router.put('/updatePassword', function (req, res) {
+    req.checkBody('password', 'Require password').notEmpty();
+    req.checkBody('oldPwd', 'Old password does not match').equals(req.user.password);
+    req.checkBody('retype', 'Does not match').equals(req.body.password);
+
+    var error = req.validationErrors();
+
+    if (!error) {
+        Member.findOneAndUpdate({ userName: req.user.userName }, {
+            $set: { 'password': req.body.password } }, function (err, result) {
+            if (err) throw err;
+            res.send(result);
+        });
+    } else {
+        res.send(null);
+    }
 });
 
 // function to convert the first letter of the name to uppercase
