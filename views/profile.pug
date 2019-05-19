@@ -3,6 +3,7 @@ html
     include ../public/css/profileEdit.css
   head
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
+    link(href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto&display=swap", rel="stylesheet")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js")
   body
     //- configure layout with grid
@@ -56,37 +57,36 @@ html
 
         //- settings tab allow users to change their info
         #overlay
-            .settings
-              form(action='/members/updateUser', method='post', enctype='multipart/form-data', onsubmit='return checkPwd()')
-                h1 Change interests:
-                  input#input(type='text', placeholder='Search Tags')
-                  .xButton
-                    input(type='button', value='Add tag', onclick='addTag()')
+          .settings
+            h1 Settings
+            form(action='/members/updateUser', method='post', enctype='multipart/form-data', onsubmit='return checkPwd()')
+              p Change interests:
+                input#input(type='text', placeholder='Search Tags')
+                input#xButton(type='button', value='Add tag', onclick='addTag()')
 
-                  #checked
-                h2 Change Description:
-                  input(type='text', placeholder= user.desc, name='desc')
-                //- currently, only changing password is possible
-                h3 Change Password:
+                #checked
+              p Change Description:
+                input(type='textarea', placeholder= user.desc, name='desc')
+              //- currently, only changing password is possible
+              h3 Change Password:
+              p
+                | Old password:
+                input#oldPwd(type='password', name='oldPwd')
                 br
-                p
-                  | Old password:
-                  input#oldPwd(type='password', name='oldPwd')
-                  br
-                  | New password:
-                  input#newPwd(type='text', name='password')
-                  br
-                  | Retype new password:
-                  input#retype(type='password', name='retype')
-                  br
-                  
-                h4 Change Display Picture:
-                  input#file-field(type='file', onchange='previewImage(event)', name='display')
-                  div#preview
-                  img#image-field(src='/pictures/profile_icon.png', width='150', height='150')
-              .xButton
-                input(type='submit', value='Submit')
-                button(onclick='removeSettings()') Cancel
+                | New password:
+                input#newPwd(type='text', name='password')
+                br
+                | Retype new password:
+                input#retype(type='password', name='retype')
+                br
+                
+              h4 Change Display Picture:
+                input#file-field(type='file', onchange='previewImage(event)', name='display')
+                div#preview
+                img#image-field(src='/pictures/profile_icon.png', width='150', height='150')
+            .xButton
+              input(type='submit', value='Submit')
+              button(onclick='removeSettings()') Cancel
 
         //- The rest of the tab contents
         // Tab content
