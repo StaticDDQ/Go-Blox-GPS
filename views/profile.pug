@@ -189,6 +189,8 @@ html
 
       var tags = [];
       var user = !{JSON.stringify(user)};
+      var tagLst = document.getElementById('checked');
+
       user.interests.forEach(function(element){
         tags.push(element);
         var tag = document.createElement('input');
@@ -226,8 +228,6 @@ html
           var tagValue = document.getElementById('input');
 
           if(tagValue.value.length > 0 && !tags.includes(tagValue.value.toLowerCase())){
-              var tagLst = document.getElementById('checked');
-
               var tag = document.createElement('input');
               tag.type = 'text';
               tag.value = tagValue.value.toLowerCase();
