@@ -39,7 +39,7 @@ body{
 }
 
 .profile{
-  border: 1px solid black;
+  border: 1px solid #f4f4f4;
   border-radius: 50%;
   height: 150px;
   width: 150px;
@@ -148,14 +148,46 @@ body{
 
 /* configure setting which uses overlay */
 .settings {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: 
+  "one password";
   background-color: #f1f1f1;
   padding: 20px;
   justify-content: center;
-  margin: 100px;
+  margin: 10vh auto;
+  width: 50vmax;
+  height: auto;
+  font-family: 'Roboto';
+  color:  rgb(20, 20, 20);
+
  } 
 
+ .one {
+   grid-area: one;
+ }
+ .password {
+   grid-area: password;
+ }
+
+ .settings h2 {
+   font-family: 'Quicksand';
+   font-style: bold;
+   color: #ED7755;
+   padding-bottom: 4px;
+
+ }
+ .settings img{
+  border: 1px solid #f4f4f4;
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+ }
+
 #overlay {
-    position: fixed;
+    position: absolute;
+    overflow: scroll;
     display: none;
     width: 100%;
     height: 100%;
@@ -163,7 +195,7 @@ body{
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: 2;
 }
 
@@ -175,10 +207,24 @@ input {
 }
 
 .xButton button, 
-.xButton input
+.xButton input,
+input#xButton
  {
   height: 30px;
   width: 70px;
+  padding: 2px; 
+  font-family: 'Quicksand';
+  font-size: 12px;
+  border: none;
+  border: .5px solid #707070;
+  border-radius: .4em;
+
+}
+
+input#submitChanges,
+input#xButton2 {
+  height: 30px;
+  width: 120px;
   padding: 2px; 
   font-family: 'Quicksand';
   font-size: 12px;
@@ -192,12 +238,25 @@ input {
   
 }
 
+#cancel {
+  align-content: right;
+}
 .xButton button:hover,
 .xButton button.sfHover,
 .xButton button.current-menu-item,
 .xButton input:hover,
 .xButton input.sfHover,
-.xButton input.current-menu-item {
-  background-color: #f5bdab;
+.xButton input.current-menu-item,
+input#xButton:hover,
+input#xButton.sfHover,
+input#xButton.current-menu-item,
+input#xButton2:hover,
+input#xButton2.sfHover,
+input#xButton2.current-menu-item,
+input#submitChanges:hover,
+input#submitChanges.sfHover,
+input#submitChanges.current-menu-item
+ {
+  background-color: #ED7755;
   color:  rgb(255, 255, 255);
 }

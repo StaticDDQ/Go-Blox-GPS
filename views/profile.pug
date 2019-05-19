@@ -3,6 +3,7 @@ html
     include ../public/css/profileEdit.css
   head
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
+    link(href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto&display=swap", rel="stylesheet")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js")
   body
     //- configure layout with grid
@@ -13,7 +14,10 @@ html
         span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Menu
         #mySidenav.sidenav
           a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
-          a(href='#') ☺ #{user.userName}
+          if notCurr
+            a(href='/members/userProfile') Go to Profile
+          else
+            a(href='#') ☺ #{user.userName}
           a(href='/') Home
           a(href='/about') About
           a(href='/events/findEvent') Find Events
@@ -24,8 +28,8 @@ html
 
       //- contains basic profile info for user
       .basic_profile
-        - source = user.display ? user.display : '/pictures/profile_icon.png'
-        img.profile(src=user.display, alt='profile_picture')
+        - source = user.display.url != '' ? user.display.url : '/profile.png'
+        img.profile(src=source, alt='profile_picture')
 
         -var fullname = firstName + ' ' + lastName;
         h3 #{user.firstName} #{user.lastName}
@@ -50,47 +54,49 @@ html
           button.tablinks(onclick="openTab(event, 'Places')") Places
           button.tablinks(onclick="openTab(event, 'Friends')") Friends
           button.tablinks(onclick="openTab(event, 'Reviews')") Reviews
-          button.tablinks(onclick="openTab(event, 'Bookmarks')") Bookmarks
           if !notCurr
             button(onclick="openSettings()") Settings
 
         //- settings tab allow users to change their info
         #overlay
-            .settings
+          .settings
+            form(action='/members/updateUser', method='post', enctype='multipart/form-data')
+              .one
+                h2 Change Details:
+                p Change interests:
+                  input#input(type='text', placeholder='Search Tags')
+                  input#xButton(type='button', value='Add tag', onclick='addTag()')
 
-              .updateProfile
-                form(action='/members/updateUser', method='post', enctype='multipart/form-data')
-                  h1 Change interests:
-                    input#input(type='text', placeholder='Search Tags')
-                    input(type='button', value='Add tag', onclick='addTag()')
-
-                    #checked
-                  h2 Change Description:
-                    input(type='text', placeholder= user.desc, name='desc')
-
-                  h3 Change Display Picture:
-                    input#file-field(type='file', onchange='previewImage(event)', name='display')
-                    div#preview
-                    img#image-field(src='/pictures/profile_icon.png', width='150', height='150')
-
-                  input(type='submit', value='Submit')
+                  #checked
+                p Change Description:
+                  input(type='text', placeholder= user.desc, name='desc')
+                  
+                h4 Change Display Picture:
+                  input#file-field(type='file', onchange='previewImage(event)', name='display')
+                  div#preview
+                  img#image-field(src='/pictures/profile_icon.png', width='150', height='150')
+                
+                //- change 
+                input#xButton2(type='submit', value='Change Details')
 
               //- currently, only changing password is possible
-              h3 Change Password:
-              br
+            .password
+              h2 Change Password:
               p
                 | Old password:
                 input#oldPwd(type='password', name='oldPwd')
                 br
                 | New password:
-                input#newPwd(type='text', name='password')
+                input#newPwd(type='password', name='password')
                 br
                 | Retype new password:
                 input#retype(type='password', name='retype')
                 br
-                input#submitChanges(type='submit', value='Submit')
+                input#submitChanges(type='submit', value='Change Password')
+                
+            .xButton
+              button#cancel(onclick='removeSettings()') Cancel
 
-              button(onclick='removeSettings()') X
 
         //- The rest of the tab contents
         // Tab content
@@ -120,7 +126,7 @@ html
           h3 Your friends:
           if user.followedUsers
             each friend in user.followedUsers
-                a(href='/profile/' + friend)
+                a(href='members/profile/' + friend)
                     li #{friend}
         #Reviews.tabcontent
           h3 Your reviews
@@ -132,12 +138,6 @@ html
                         p #{rate.desc}
                         p You rated this event: #{rate.stars}/5
                         p Date reviewed: #{rate.datePublished}
-        #Bookmarks.tabcontent
-          h3 Your bookmarks
-          ul
-            if user.interestedEvents
-                each event in user.interestedEvents
-                    li #{event}
 
       //- Footer
       .footer

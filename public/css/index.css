@@ -2,6 +2,7 @@
 * {
     margin: 0;
     padding: 0; 
+    
 }
 
 /* General body formatting */
@@ -9,8 +10,9 @@
 body {
     font-family: 'Quicksand';
     background-image: linear-gradient(to top right, #f5bdab, #90a4bc);
-    background-repeat: no-repeat;
-    background-size: cover;
+    /* background-repeat: no-repeat; */
+    height: 100%;
+    
 }
 
 /* Format Header */
