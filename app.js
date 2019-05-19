@@ -38,22 +38,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // route to about page
-app.get('/about', function (req, res) {
-    if (req.user === undefined)
-        res.render('about');
-    else {
-        res.render('userAbout');
-    }
-});
-
-// route to about page
 app.get('/places', function (req, res) {
-    res.render('comingSoon');
+    res.render('loadPlacesFirst');
 });
 
 // route to about page
 app.get('/', function (req, res) {
-    if (req.user === undefined)
     Event.aggregate([{ $sample: { size: 5} }]).exec(function(err, resp){
         if(err) throw err;
         var arrayed = []
@@ -69,12 +59,9 @@ app.get('/', function (req, res) {
 
             arrayed.push(aEvent);        
         }
-        
-        res.render('maps', {events: arrayed});
+
+        res.render('maps', { events: arrayed, isLoggedIn: req.user !== undefined });
     });
-    else {
-        res.render('userHome');
-    }
 });
 
 app.use(express.static(path.join(__dirname, 'public')));

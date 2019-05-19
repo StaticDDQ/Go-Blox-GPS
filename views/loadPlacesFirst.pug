@@ -7,9 +7,9 @@ html(lang='en')
     link(rel='stylesheet', href='../css/loadEvents.css', v='')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
-    title Search Events
+    title Search Places
   body
-    //- Loading a page to search events before showings all the events 
+    //- Loading a page to search places before showings all the places 
     .container
       //- Main navigation menu
       .navbar
@@ -18,17 +18,21 @@ html(lang='en')
           a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
           a(href='/members/userProfile') Go to Profile
           a(href='/') Home
-          a(href='#') Find Events
-          a(href='/places') Places
+          a(href='/events/findEvent') Find Events
+          a(href='/#') Places
           a(href='/events/createEvent') Create Event!
         a(href='/') 
             img.logo(src= "/logo.png", alt='GPS', width='80', height='80')
-      //- Searching the events
+      //- Searching the places
       .searchBox
-        h1 Find Events
-        form(action='/events/getEvents', method='post')
-          input.search(type='text', placeholder='Search Events', name='name')
+        h1 Find Places
+        form(action='/places/getPlaces', method='post')
+          input.search(type='text', placeholder='Search Places', name='name')
           input(type='submit', value='Find')
+      .createPlace
+        h2 Create a place
+        form(action='/places/createPlace', method='get')
+            input(type='submit', value='Create Place')
 
       //- Footer
       .footer

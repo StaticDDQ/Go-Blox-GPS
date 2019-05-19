@@ -45,6 +45,7 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
 
     var error = req.validationErrors();
     if (!error) {
+
         req.checkBody('tags', 'Require atleast 1 tag').notEmpty();
         error = req.validationErrors();
 

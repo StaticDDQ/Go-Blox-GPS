@@ -7,7 +7,7 @@ html(lang='en')
     link(rel='stylesheet', href='../css/loadEvents.css', v='')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
-    title Search Events
+    title Search Places
   body
     #loadPage
     .container
@@ -18,17 +18,16 @@ html(lang='en')
           a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
           a(href='/members/userProfile') Go to Profile
           a(href='/') Home
-          a(href='/about') About
           a(href='/events/findEvent') Find Events
           a(href='/places') Places
           a(href='/events/createEvent') Create Event!
         a(href='/') 
             img.logo(src= "/logo.png", alt='GPS', width='80', height='80')
-      //- Searchbar to find events
+      //- Searchbar to find places
       .searchBox
-        h1 Find Events
-        form(action='/events/getEvents', method='post')
-          input.search(type='text', placeholder='Search Events', name='name')
+        h1 Find Places
+        form(action='/places/getPlaces', method='post')
+          input.search(type='text', placeholder='Search Places', name='name')
           input(type='submit', value='Find')
 
       //- search for tags
@@ -37,27 +36,21 @@ html(lang='en')
         p Tags
         input#input(type='text', placeholder='Search Tags', name='name', onkeyup='addTag()')
         #filter
-      //- search for events and displaying the details of the events
+      //- search for places and displaying the details of the places
       .displayEvents
-        h2 Event Details
-        if events
+        h2 Place Details
+        if places
           .events
-            each event in events
-              div#eachEvent(class='filtered ', name ='displayedEvents', tags=event.tags, onclick="window.location='http://localhost:3000/events/getEvent/" + event._id + "'")
+            each place in places
+              div#eachEvent(class='filtered ', name ='displayedPlaces', tags=place.placeTags, onclick="window.location='http://localhost:3000/places/getPlace/" + place._id + "'")
                   .event_card
                     .event_title
-                      h3 #{event.name}
-                    .event_pic
-                      img(src= event.pictures, alt='event_pic')
+                      h3 #{place.placeName}
                     .event_desc
-                      p <b>Start Date:</b> #{event.startDate}
-                      p <b>End Date:</b> #{event.endDate}
-                      p <b>Start Time:</b> #{event.startTime}
-                      p <b>End Time:</b> #{event.endTime}
-                      p <b>Location:</b> #{event.address}
-                      p <b>Description:</b> #{event.description}
+                      p <b>Location:</b> #{place.placeAddress}
+                      p <b>Description:</b> #{place.placeDescription}
                     .event_tag
-                      p <b>Tags:</b> #{event.tags}
+                      p <b>Tags:</b> #{place.placeTags}
 
       //- Footer
       .footer
@@ -84,12 +77,10 @@ html(lang='en')
           document.getElementById("mySidenav").style.width = "0";
         }
 
-        // functionalities from the oldLoadEvents.pug
-
-        var events = !{JSON.stringify(events)};
+        var places = !{JSON.stringify(places)};
         var filter = document.getElementById('filter');
 
-        function loadTags(events) {
+        function loadTags(places) {
           let tags = [];
           var showAll = document.createElement('input');
           showAll.type = 'button';
@@ -99,16 +90,16 @@ html(lang='en')
           }
           filter.appendChild(showAll);
 
-          for (let i = 0; i < events.length; i++) {
-            for (let j = 0; j < events[i].tags.length; j++) {
-              if (!tags.includes(events[i].tags[j])) {
-                  tags.push(events[i].tags[j]);
+          for (let i = 0; i < places.length; i++) {
+            for (let j = 0; j < places[i].placeTags.length; j++) {
+              if (!tags.includes(places[i].placeTags[j])) {
+                  tags.push(places[i].placeTags[j]);
                   var btn = document.createElement('input');
                   btn.type = 'button';
                   btn.name = 'tagFilter';
-                  btn.value = events[i].tags[j];
+                  btn.value = places[i].placeTags[j];
                   btn.onclick = function(){
-                      filterOut(events[i].tags[j]);
+                      filterOut(places[i].placeTags[j]);
                   }
                   filter.appendChild(btn);
               }
@@ -117,22 +108,22 @@ html(lang='en')
           return tags;
         }
 
-        if(events.length > 0) {
-          loadTags(events);
+        if(places.length > 0) {
+          loadTags(places);
         }
 
         function filterOut(tag) {
-          var displayedEvents = document.getElementsByClassName('filtered');
-          for(let i = 0; i < displayedEvents.length; i++){
-            if(displayedEvents[i].getAttribute('tags').indexOf(tag) > -1 || tag === 'show all'){
+          var displayedPlaces = document.getElementsByClassName('filtered');
+          for(let i = 0; i < displayedPlaces.length; i++){
+            if(displayedPlaces[i].getAttribute('tags').indexOf(tag) > -1 || tag === 'show all'){
               
-              displayedEvents[i].style.display = 'block';
+              displayedPlaces[i].style.display = 'block';
             } else {
-              displayedEvents[i].style.display = 'none';
+              displayedPlaces[i].style.display = 'none';
             }
           }
         }
-        //- Adding Tags to the events
+        //- Adding Tags to the places
         function addTag() {
             
           var input, filter, tagDiv;
