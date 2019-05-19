@@ -14,7 +14,7 @@ const memberSchema = new mongoose.Schema({
     "joined_date": String,
     "password": String,
     "active": Boolean,
-    "display": String,
+    "display":Object,
     "desc": String,
     "interests": [String],
     "firstTime": Boolean,
