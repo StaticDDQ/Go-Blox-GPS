@@ -64,6 +64,9 @@ router.get('/profile/:user', function (req, res) {
     if (req.user === undefined) {
         res.render('mustLogin');
     } else {
+        if (req.params.user === req.user.userName) {
+            return res.redirect('/members/userProfile');
+        }
         var loginUser = {
             userName: req.params.user
         };
@@ -163,10 +166,14 @@ router.post('/register', upload.single("display"), async function (req, res) {
             await cloudinary.uploader.upload(req.file.path,
                 function (error, result) {
                     if (error) throw error;
-
-                    reqURL = result.secure_url;
+                    // reqURL = result.secure_url;
+                    reqURL = {
+                        public_id: result.public_id,
+                        url: result.secure_url
+                    }
 
                 });
+            console.log(reqURL);
             req.body['display'] = reqURL;
 
             mongooseController.addUser(req, res);
@@ -182,13 +189,24 @@ router.post('/register', upload.single("display"), async function (req, res) {
     }
 });
 
+/// TAKE NOTE HERE
 router.post('/updateUser', upload.single("display"), async function (req, res) {
+    
+    var pic_delete_id;
+    Member.findOne({userName: req.user}, function(err, result){
+        pic_delete_id = result.display.public_id
+    });
 
+    await cloudinary.uploader.destroy(pic_delete_id, function(err, result) {
+        if(err) throw err;
+    });
+
+    console.log(req);
     await cloudinary.uploader.upload(req.file.path,
         function (error, result) {
             if (error) throw error;
 
-            req.body['display'] = result.secure_url;
+            req.body['display'] = {id: result.public_id,url: result.secure_url};
             Member.findOneAndUpdate(
                 { userName: req.user.userName }, {
                     $set: {
@@ -240,35 +258,6 @@ router.delete('/deleteMember/:username', function (req, res) {
             if (err) throw err;
             res.send(resp);
         }); 
-});
-
-// indicate whether a user is interested in a event
-router.put('/interested', function (req, res) {
-    if (req.user === undefined) {
-        res.error();
-    } else {
-        Member.findOne({ userName: req.user.userName }, function (err, result) {
-            if (err) throw err;
-            if (!result.interestedEvents.includes(req.body.name)) {
-                result.interestedEvents.push(req.body.name);
-                result.save(function (err) {
-                    if (err) throw err;
-                });
-            }
-            res.send(result);
-        });
-    } 
-});
-
-// indicate whether a user is interested in a event
-router.put('/notInterested', function (req, res) {
-    if (req.user === undefined) {
-        res.error();
-    } else {
-        Member.findOneAndUpdate({ userName: req.user.userName }, { $pull: { 'interestedEvents': req.body.name } }, function (err, result) {
-            res.send(result);
-        });
-    }
 });
 
 // update user with the description and list of interested tags

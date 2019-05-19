@@ -14,7 +14,10 @@ html
         span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Menu
         #mySidenav.sidenav
           a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
-          a(href='#') ☺ #{user.userName}
+          if notCurr
+            a(href='/members/userProfile') Go to Profile
+          else
+            a(href='#') ☺ #{user.userName}
           a(href='/') Home
           a(href='/about') About
           a(href='/events/findEvent') Find Events
@@ -25,8 +28,8 @@ html
 
       //- contains basic profile info for user
       .basic_profile
-        - source = user.display ? user.display : '/pictures/profile_icon.png'
-        img.profile(src=user.display, alt='profile_picture')
+        - source = user.display.url != '' ? user.display.url : '/pictures/profile_icon.png'
+        img.profile(src=source, alt='profile_picture')
 
         -var fullname = firstName + ' ' + lastName;
         h3 #{user.firstName} #{user.lastName}
@@ -85,7 +88,7 @@ html
                 input#oldPwd(type='password', name='oldPwd')
                 br
                 | New password:
-                input#newPwd(type='text', name='password')
+                input#newPwd(type='password', name='password')
                 br
                 | Retype new password:
                 input#retype(type='password', name='retype')
@@ -124,7 +127,7 @@ html
           h3 Your friends:
           if user.followedUsers
             each friend in user.followedUsers
-                a(href='/profile/' + friend)
+                a(href='members/profile/' + friend)
                     li #{friend}
         #Reviews.tabcontent
           h3 Your reviews
@@ -136,12 +139,6 @@ html
                         p #{rate.desc}
                         p You rated this event: #{rate.stars}/5
                         p Date reviewed: #{rate.datePublished}
-        #Bookmarks.tabcontent
-          h3 Your bookmarks
-          ul
-            if user.interestedEvents
-                each event in user.interestedEvents
-                    li #{event}
 
       //- Footer
       .footer
