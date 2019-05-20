@@ -36,8 +36,8 @@ html
 
         -var fullname = firstName + ' ' + lastName;
         h3 #{user.firstName} #{user.lastName}
-        h4 Username: #{user.userName}
-        h4 Join Date: #{user.joined_date}
+        h4 @#{user.userName}
+        h4 Member since || #{user.joined_date}
         h4 Date of Birth: #{user.DOB}
 
         if notCurr
@@ -52,13 +52,13 @@ html
       .all_content
         // Tab links
         .tab
-          button.tablinks#start(onclick="openTab(event, 'Interests')") Interests
-          button.tablinks(onclick="openTab(event, 'Events')") Events
-          button.tablinks(onclick="openTab(event, 'Places')") Places
-          button.tablinks(onclick="openTab(event, 'Friends')") Friends
-          button.tablinks(onclick="openTab(event, 'Reviews')") Reviews
+          button.tablinks#start(onclick="openTab(event, 'Interests')") INTERESTS
+          button.tablinks(onclick="openTab(event, 'Events')") EVENTS
+          button.tablinks(onclick="openTab(event, 'Places')") PLACES
+          button.tablinks(onclick="openTab(event, 'Friends')") FRIENDS
+          button.tablinks(onclick="openTab(event, 'Reviews')") REVIEWS
           if !notCurr
-            button(onclick="openSettings()") Settings
+            button(onclick="openSettings()") SETTINGS
 
         //- settings tab allow users to change their info
         #overlay
@@ -114,27 +114,30 @@ html
           p
             | #{user.desc}
         #Events.tabcontent
-          h3 Events Attended
-              if eventsJoined
-                  ul
-                      each event in eventsJoined
-                          a(href='/events/getEvent/' + event._id)
-                              li #{event.name}
-          h3 Past Events Created
-              if eventsCreated
-                  ul
-                      each userEvent in eventsCreated
-                          a(href='/events/getEvent/' + userEvent._id)
-                              li #{userEvent.name}
+          .gridEvent
+            .attend
+              h3 Events Joined
+                  if eventsJoined
+                      ul
+                          each event in eventsJoined
+                              a(href='/events/getEvent/' + event._id)
+                                  li #{event.name}
+            .created
+              h3 Events Created
+                  if eventsCreated
+                      ul
+                          each userEvent in eventsCreated
+                              a(href='/events/getEvent/' + userEvent._id)
+                                  li #{userEvent.name}
         #Places.tabcontent
           h3 Places to go
           p Places went
         #Friends.tabcontent
-          h3 Your friends:
+          h3 Following
           if user.followedUsers
             each friend in user.followedUsers
                 a(href='/members/profile/' + friend)
-                    li #{friend}
+                    li @#{friend}
         #Reviews.tabcontent
           h3 Your reviews
             ul

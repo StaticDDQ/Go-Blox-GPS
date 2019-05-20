@@ -9,6 +9,10 @@
 body{
   font-family: "Quicksand";
   background-color: #f4f4f4;
+  /* background-image: linear-gradient(to bottom right, #e15848, #90a4bc); */
+  background-repeat:no-repeat;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 /* configure grid */
@@ -44,12 +48,15 @@ body{
   /* border: 1px solid #F5BDAB; */
   margin-left: 20px;
   padding-top: 10px;
-  background-color: white;
-  border-radius: 20px;
+  background-color: #ED7755;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-right: solid 2px #ED7755;
+  color: white;
 }
 
 .profile{
-  border: 2px solid #4f4f4f;
+  border: 2px solid white;
   border-radius: 50%;
   height: 11.5vw;
   width: 11.5vw;
@@ -58,6 +65,7 @@ body{
 
 .basic_profile h3{
   margin-top: 10px;
+  font-weight: bolder;
 }
 /* details about the person on the right side */
 .all_content{
@@ -65,8 +73,9 @@ body{
   /* border: 1px solid #BECAD0; */
   margin-right: 20px;
   background-color: white;
-  margin-left: 10px;
-  border-radius: 20px;
+  /* margin-left: 10px; */
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 /* configure footer */
@@ -109,9 +118,9 @@ body{
 /* tabs for all content */
 .tab {
   overflow: hidden;
-  border: 1px solid #ccc; 
+  /* border: 1px solid #ccc;  */
   /* background-color: #f1f1f1; */
-  border-top-left-radius: 20px;
+  /* border-top-left-radius: 20px; */
   border-top-right-radius: 20px;
   font-family: 'Quicksand';
 }
@@ -125,16 +134,19 @@ body{
   cursor: pointer;
   padding: 14px 16px;
   transition: 0.3s;
+  margin-left: 5px;
 }
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-  background-color: #ddd;
+  /* background-color: #ddd; */
+  border-bottom: solid 2px #E15848;
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
-  background-color: #ccc;
+  /* background-color: #ccc; */
+  border-bottom: solid 2px #E15848;
 }
 
 /* Style the tab content */
@@ -147,12 +159,65 @@ body{
 }
 
 /* Events tab */
+.gridEvent{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 1fr;
+  grid-template-areas: 
+  "attend created";
+}
+
+.attend{
+  grid-area: attend;
+  /* background-color: #ccc; */
+  border-right: solid 1px black;
+}
+
+.created{
+  grid-area: created;
+  /* background-color: #ccc; */
+  padding-left: 1vw;
+}
+
 #Events a{
-  color: #ED7755;
+  color: white;
   text-decoration: none;
   list-style-type: none;
   font-size: 15px;
 }
+
+#Events li{
+  border-radius: 20px;
+  padding: 5px;
+  margin-top: 1vh;
+  background-color: #ED7755;
+  background-image: linear-gradient(to left,#F5BDAB, #E15848 );
+  margin-right: 1vw;
+  width: 20vw;
+}
+
+#Events li:hover{
+  background-color:#d86141;
+  color: #4f4f4f;
+}
+
+/* Friends tab */
+#Friends a{
+  color: #d86141;
+  text-decoration: none;
+  list-style-type: none;
+  font-size: 1em;
+}
+
+#Friends li{
+  padding: 5px;
+  margin-top: 1vh;
+}
+
+#Friends li:hover{
+  color: #4f4f4f;
+}
+
 
 /* Interest tab */
 #Interests h3{
@@ -216,6 +281,7 @@ body{
   font-weight: bolder;
   font-size: 20px;
   text-decoration: underline;
+  color: #ED7755;
 }
 
 .eventDesc{
@@ -242,6 +308,7 @@ body{
   color: white;
   display: block;
   transition: 0.3s;
+  white-space: nowrap;
 }
 
 .sidenav a:hover {
