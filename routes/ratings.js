@@ -23,4 +23,12 @@ router.put('/addRating', function (req, res) {
     });
 });
 
+router.delete('/deleteRating/:id', function (req, res) {
+
+    Rating.findByIdAndDelete(req.params.id, function (err, result) {
+        if (err) throw err;
+        res.send(result);
+    });
+})
+
 module.exports = router;

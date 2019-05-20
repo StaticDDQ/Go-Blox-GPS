@@ -17,6 +17,7 @@ const memberSchema = new mongoose.Schema({
     "display":Object,
     "desc": String,
     "interests": [String],
+    "bookmark": [String],
     "firstTime": Boolean,
     "followedUsers": [String]
 }, { versionKey: false});

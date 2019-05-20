@@ -31,7 +31,11 @@ html(lang='en')
         form(action='/events/getEvents', method='post')
           input.search(type='text', placeholder='Search Events', name='name')
           input(type='submit', value='Find')
-
+      .filterSide
+        h3 Filter
+        p Tags
+        input#input(type='text', placeholder='Search Tags', name='name', onkeyup='addTag()')
+        #filter
       //- Footer
       .footer
         p(style='color:white')

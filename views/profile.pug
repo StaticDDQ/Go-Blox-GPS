@@ -50,6 +50,10 @@ html
 
       //- display other contents about users in tabs
       .all_content
+        form(action='/members/searchUser', method='post')
+            input(type='text', placeholder="Search user", name='username')
+            input(type='submit',value='Search')
+
         // Tab links
         .tab
           button.tablinks#start(onclick="openTab(event, 'Interests')") INTERESTS
@@ -131,7 +135,10 @@ html
                                   li #{userEvent.name}
         #Places.tabcontent
           h3 Places to go
-          p Places went
+          ul
+              if user.bookmark
+                  each place in user.bookmark
+                      li #{place}
         #Friends.tabcontent
           h3 Following
           if user.followedUsers
@@ -140,16 +147,18 @@ html
                     li @#{friend}
         #Reviews.tabcontent
           h3 Your reviews
-            ul
-              if rating
-                  each rate in rating
-                   #reviewCard
-                      li
-                          p.eventName #{rate.eventName} - #{rate.datePublished}
-                          p Rating: #{rate.stars}/5
-                          p.eventDesc Description: 
-                          p #{rate.desc}
-  
+
+          ul
+            if rating
+                each rate in rating
+                    #reviewCard
+                        li
+                            p.eventName #{rate.eventName} - #{rate.datePublished}
+                            p Rating: #{rate.stars}/5
+                            p.eventDesc Description:
+                            p #{rate.desc}
+                            input.deleteRating(type='button', value='X', id=rate._id.toString())
+
       //- Footer
       .footer
         p(style='color:white')
@@ -236,11 +245,10 @@ html
                   imageField.src = reader.result;
               }
           }
-          reader.readAsDataURL(event.target.files[0]);
+          reader.readAsDataURL(event.target.files[0] );
       }
 
       function addTag() {
-
           var tagValue = document.getElementById('input');
 
           if(tagValue.value.length > 0 && !tags.includes(tagValue.value.toLowerCase())){
@@ -294,26 +302,36 @@ html
               }
           });
 
-          //- Dynamic update function
-          $(function(){
-              $('#submitChanges').click(function(event){
-                  event.preventDefault();
-                  var formData = {
-                      password: $('#newPwd')[0].value,
-                      retype: $('#retype')[0].value,
-                      oldPwd: $('#oldPwd')[0].value
-                  };
+          $('#submitChanges').click(function(event){
+              event.preventDefault();
+              var formData = {
+                  password: $('#newPwd')[0].value,
+                  retype: $('#retype')[0].value,
+                  oldPwd: $('#oldPwd')[0].value
+              };
 
-                  $.ajax({
-                      url: '/members/updatePassword',
-                      type: 'put',
-                      data: formData
-                  }).done(function(data){
-                      if(data)
-                          alert("Password changed");
-                      else
-                          alert("Incorrect input");
-                  });
+              $.ajax({
+                  url: '/members/updatePassword',
+                  type: 'put',
+                  data: formData
+              }).done(function(data){
+                  if(data)
+                      alert("Password changed");
+                  else
+                      alert("Incorrect input");
+              });
+          });
+
+          $('.deleteRating').click(function(event){
+              event.preventDefault();
+
+              $.ajax({
+                  url: '/ratings/deleteRating/' + $(this)[0].id,
+                  type: 'delete',
+                  context: this,
+                  success: function(data){
+                    $(this).parents('li').remove();
+                  }
               });
           });
       });

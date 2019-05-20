@@ -299,6 +299,7 @@ body{
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
+  white-space: nowrap;
 }
 
 .sidenav a {
@@ -310,6 +311,8 @@ body{
   transition: 0.3s;
   white-space: nowrap;
 }
+
+.sidenav
 
 .sidenav a:hover {
   color: black;

@@ -90,7 +90,6 @@ html(lang='en')
       //- Reviews      
       .reviews
         h2 Reviews
-        #addedRating
         //- Displaying the review created by the user
         if ratings.length > 0
             - 
@@ -104,6 +103,10 @@ html(lang='en')
                 avg = avg.toFixed(2);
             p Average Ratings:
             | #{avg}/5
+        
+        #addedRating
+
+        if ratings.length > 0
             each rating in ratings
                 .rating_card
                     a(href='/members/profile/' + rating.userName)

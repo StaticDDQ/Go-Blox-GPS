@@ -306,17 +306,55 @@ router.post('/storeInfo', function (req, res) {
 // have current user follow another user
 router.put('/followUser', function (req, res) {
     Member.findOneAndUpdate({ userName: req.user.userName }, {
-        $push: { 'followedUsers': req.body.username }}, function(err, result) {
-            res.send(result);
-        });
+        $push: { 'followedUsers': req.body.username }
+    }, function (err, result) {
+        res.send(result);
+    });
 });
 
 // unfollow a user
 router.put('/unfollowUser', function (req, res) {
     Member.findOneAndUpdate({ userName: req.user.userName }, {
-        $pull: { 'followedUsers': req.body.username }}, function (err, result) {
-            res.send(result);
-        });
+        $pull: { 'followedUsers': req.body.username }
+    }, function (err, result) {
+        res.send(result);
+    });
+});
+
+// have current user bookmark a place
+router.put('/bookmark', function (req, res) {
+    Member.findOneAndUpdate({ userName: req.user.userName }, {
+        $push: { 'bookmark': req.body.name }
+    }, function (err, result) {
+        res.send(result);
+    });
+});
+
+// stop bookmarking a place
+router.put('/stopBookmark', function (req, res) {
+    Member.findOneAndUpdate({ userName: req.user.userName }, {
+        $pull: { 'bookmark': req.body.name }
+    }, function (err, result) {
+        res.send(result);
+    });
+});
+
+// look up a user with the closest regex from the input
+router.post('/searchUser', function (req, res) {
+    // find the event
+    Member.findOne({
+        $or: [
+            { userName: { $regex: req.body.username, $options: 'i' } },
+            { firstName: { $regex: req.body.username, $options: 'i' } },
+            { lastName: { $regex: req.body.username, $options: 'i' } }
+        ]
+    }, function (err, resp) {
+        if (err) throw err;
+        if (resp)
+            res.redirect('/members/profile/' + resp.userName);
+        else
+            res.render('notFound');
+    });
 });
 
 module.exports = router;

@@ -31,7 +31,8 @@ var addUser = async function(req, res) {
                 "interests": [],
                 "display": req.body.display,
                 "followedUsers": req.body.followedUsers,
-                "interestedEvents" : [],
+                "interestedEvents": [],
+                "bookmark": [],
                 "active": false
             });
 
