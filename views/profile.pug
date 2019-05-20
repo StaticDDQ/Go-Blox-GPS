@@ -50,6 +50,10 @@ html
 
       //- display other contents about users in tabs
       .all_content
+        form(action='/members/searchUser', method='post')
+            input(type='text', placeholder="Search user", name='username')
+            input(type='submit',value='Search')
+
         // Tab links
         .tab
           button.tablinks#start(onclick="openTab(event, 'Interests')") Interests

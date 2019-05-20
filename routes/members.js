@@ -339,4 +339,22 @@ router.put('/stopBookmark', function (req, res) {
     });
 });
 
+// look up a user with the closest regex from the input
+router.post('/searchUser', function (req, res) {
+    // find the event
+    Member.findOne({
+        $or: [
+            { userName: { $regex: req.body.username, $options: 'i' } },
+            { firstName: { $regex: req.body.username, $options: 'i' } },
+            { lastName: { $regex: req.body.username, $options: 'i' } }
+        ]
+    }, function (err, resp) {
+        if (err) throw err;
+        if (resp)
+            res.redirect('/members/profile/' + resp.userName);
+        else
+            res.render('notFound');
+    });
+});
+
 module.exports = router;

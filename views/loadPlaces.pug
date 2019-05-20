@@ -85,7 +85,7 @@ html(lang='en')
         var filter = document.getElementById('filter');
 
         function loadCategories(places) {
-          let places = [];
+          let placeLst = [];
           var showAll = document.createElement('input');
           showAll.type = 'button';
           showAll.value = 'Show All';
@@ -95,9 +95,8 @@ html(lang='en')
           filter.appendChild(showAll);
 
           for (let i = 0; i < places.length; i++) {
-            for (let j = 0; j < places[i].placeTags.length; j++) {
-              if (!tags.includes(places[i].placeTags[j])) {
-                  places.push(places[i].placeTags[j]);
+              if (!tags.includes(places[i].category)) {
+                  placeLst.push(places[i].category);
                   var btn = document.createElement('input');
                   btn.type = 'button';
                   btn.name = 'tagFilter';
@@ -107,19 +106,18 @@ html(lang='en')
                   }
                   filter.appendChild(btn);
               }
-            }
           }
-          return places;
+          return placeLst;
         }
 
         if(places.length > 0) {
           loadCategories(places);
         }
 
-        function filterOut(tag) {
+        function filterOut(cat) {
           var displayedPlaces = document.getElementsByClassName('filtered');
           for(let i = 0; i < displayedPlaces.length; i++){
-            if(displayedPlaces[i].getAttribute('category').indexOf(tag) > -1 || tag === 'show all'){
+            if(displayedPlaces[i].getAttribute('category') === cat > -1 || cat === 'show all'){
               
               displayedPlaces[i].style.display = 'block';
             } else {
