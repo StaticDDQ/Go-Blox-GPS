@@ -86,7 +86,6 @@ html(lang='en')
         }
 
         // functionalities from the oldLoadEvents.pug
-
         var events = !{JSON.stringify(events)};
         var filter = document.getElementById('filter');
 
@@ -126,7 +125,6 @@ html(lang='en')
           var displayedEvents = document.getElementsByClassName('filtered');
           for(let i = 0; i < displayedEvents.length; i++){
             if(displayedEvents[i].getAttribute('tags').indexOf(tag) > -1 || tag === 'show all'){
-              
               displayedEvents[i].style.display = 'block';
             } else {
               displayedEvents[i].style.display = 'none';

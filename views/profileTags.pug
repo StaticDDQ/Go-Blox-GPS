@@ -7,12 +7,13 @@ html(lang='en')
     link(rel='stylesheet', href='../css/profileTags.css', v='')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js")
 
   body
     .gridContainer
       .box
         form(action='/members/storeInfo', method='post')
-          h1 Select your Interests!
+          h1 Add Your Interests!
           p
               | #{errors}
 
@@ -21,25 +22,27 @@ html(lang='en')
             | Tags
           .searchBar
             input#input(type='text', placeholder='Search Tags')
-            input(type='button', value='Add tag', onclick='addTag()')
-
-            #checked   
-
+            input#but(type='button', value='Add tag', onclick='addTag()')
             br
+
+          br
+          #checked
+          br
           //- add event desctiption
           p
             .eventInputs  
               | Descriptions: 
               br
               input(type='text', name="description" cols="40" rows="5")
-
+          br
           //- submit
           #overlay
               .submitBtns
-                p Are you sure?
+                p Are you sure you are done?
+                br
                 input(type='submit', value="Yes")
-                input(type='button', value="No", onclick='removePopup()')
-      input(type='button', value="Finish", onclick='openPopup()')
+                input#no(type='button', value="No", onclick='removePopup()')
+          input#but(type='button', value="Finish", onclick='openPopup()')
 
       script.
         var tags = [];
@@ -48,7 +51,8 @@ html(lang='en')
 
             var tagValue = document.getElementById('input');
 
-            if(tagValue.value.length > 0 && !tags.includes(tagValue.value.toLowerCase())){
+            if(tagValue.value.length > 0 && tagValue.value.length <= 20 
+                && !tags.includes(tagValue.value.toLowerCase())){
                 var tagLst = document.getElementById('checked');
 
                 var tag = document.createElement('input');
@@ -76,5 +80,11 @@ html(lang='en')
 
         function removePopup(){
             document.getElementById("overlay").style.display = "none";
-            tags = [];
         }
+
+        $('form input').keydown(function (e) {
+            if (e.keyCode == 13) {
+                e.preventDefault();
+                return false;
+            }
+        });
