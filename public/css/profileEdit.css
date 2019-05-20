@@ -67,6 +67,15 @@ body{
   margin-top: 10px;
   font-weight: bolder;
 }
+
+#followUser{
+  padding: 5px;
+  border: none;
+}
+
+#followUser:hover{
+  background-color: #F5BDAB;
+}
 /* details about the person on the right side */
 .all_content{
   grid-area: all_content;
@@ -209,15 +218,38 @@ body{
   font-size: 1em;
 }
 
-#Friends li{
+#Friends a{
   padding: 5px;
   margin-top: 1vh;
 }
 
-#Friends li:hover{
+#Friends a:hover{
   color: #4f4f4f;
 }
 
+#Friends form{
+  margin-bottom: 10px;
+}
+#Friends input[type=text]{
+  width: 20%;
+  padding: 5px;
+  margin-right: 0px;
+  border: none;
+}
+
+#Friends input[type=submit]{
+  width: 10%;
+  padding: 5px;
+  background-color: #ED7755;
+  color: white;
+  margin-left: 0px;
+  border: solid 1px #ED7755;
+}
+
+#Friends input[type=submit]:hover{
+  background-color: #d86141;
+  border: solid 1px #ED7755;
+}
 
 /* Interest tab */
 #Interests h3{
@@ -287,6 +319,18 @@ body{
 .eventDesc{
   font-weight: bold;
 }
+
+.deleteRating{
+  border: none;
+  color: #707070;
+  font-size: 20px;
+}
+
+.deleteRating:hover{
+  color: #333333;
+  font-size: 20px;
+}
+
 /* configure navigation bar */
 .sidenav {
   height: 100%;

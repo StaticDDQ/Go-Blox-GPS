@@ -50,9 +50,6 @@ html
 
       //- display other contents about users in tabs
       .all_content
-        form(action='/members/searchUser', method='post')
-            input(type='text', placeholder="Search user", name='username')
-            input(type='submit',value='Search')
 
         // Tab links
         .tab
@@ -140,6 +137,9 @@ html
                   each place in user.bookmark
                       li #{place}
         #Friends.tabcontent
+          form(action='/members/searchUser', method='post')
+            input(type='text', placeholder="Search user...", name='username')
+            input(type='submit',value='Search')
           h3 Following
           if user.followedUsers
             each friend in user.followedUsers
@@ -153,11 +153,13 @@ html
                 each rate in rating
                     #reviewCard
                         li
-                            p.eventName #{rate.eventName} - #{rate.datePublished}
+                            p.eventName
+                              |#{rate.eventName} - #{rate.datePublished} 
+                              span 
+                              input.deleteRating(type='button', value='X', id=rate._id.toString())
                             p Rating: #{rate.stars}/5
                             p.eventDesc Description:
                             p #{rate.desc}
-                            input.deleteRating(type='button', value='X', id=rate._id.toString())
 
       //- Footer
       .footer
