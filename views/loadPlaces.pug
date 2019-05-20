@@ -35,8 +35,8 @@ html(lang='en')
       //- search for tags
       .filterSide
         h3 Filter
-        p Tags
-        input#input(type='text', placeholder='Search Tags', name='name', onkeyup='addTag()')
+        p Category
+        input#input(type='text', placeholder='Search Category', name='name', onkeyup='addCategory()')
         #filter
       //- search for places and displaying the details of the places
       .displayEvents
@@ -44,7 +44,7 @@ html(lang='en')
         if places
           .events
             each place in places
-              div#eachEvent(class='filtered ', name ='displayedPlaces', tags=place.placeTags, onclick="window.location='http://localhost:3000/places/getPlace/" + place._id + "'")
+              div(class='filtered ', name ='displayedPlaces', category=place.category, onclick="window.location='http://localhost:3000/places/getPlace/" + place._id + "'")
                   .event_card
                     .event_title
                       h3 #{place.placeName}
@@ -82,8 +82,8 @@ html(lang='en')
         var places = !{JSON.stringify(places)};
         var filter = document.getElementById('filter');
 
-        function loadTags(places) {
-          let tags = [];
+        function loadCategories(places) {
+          let places = [];
           var showAll = document.createElement('input');
           showAll.type = 'button';
           showAll.value = 'Show All';
@@ -95,7 +95,7 @@ html(lang='en')
           for (let i = 0; i < places.length; i++) {
             for (let j = 0; j < places[i].placeTags.length; j++) {
               if (!tags.includes(places[i].placeTags[j])) {
-                  tags.push(places[i].placeTags[j]);
+                  places.push(places[i].placeTags[j]);
                   var btn = document.createElement('input');
                   btn.type = 'button';
                   btn.name = 'tagFilter';
@@ -107,17 +107,17 @@ html(lang='en')
               }
             }
           }
-          return tags;
+          return places;
         }
 
         if(places.length > 0) {
-          loadTags(places);
+          loadCategories(places);
         }
 
         function filterOut(tag) {
           var displayedPlaces = document.getElementsByClassName('filtered');
           for(let i = 0; i < displayedPlaces.length; i++){
-            if(displayedPlaces[i].getAttribute('tags').indexOf(tag) > -1 || tag === 'show all'){
+            if(displayedPlaces[i].getAttribute('category').indexOf(tag) > -1 || tag === 'show all'){
               
               displayedPlaces[i].style.display = 'block';
             } else {
@@ -125,8 +125,9 @@ html(lang='en')
             }
           }
         }
+
         //- Adding Tags to the places
-        function addTag() {
+        function addCategory() {
             
           var input, filter, tagDiv;
           input = document.getElementById('input');

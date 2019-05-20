@@ -127,7 +127,10 @@ html
                               li #{userEvent.name}
         #Places.tabcontent
           h3 Places to go
-          p Places went
+          ul
+              if user.bookmark
+                  each place in user.bookmark
+                      li #{place}
         #Friends.tabcontent
           h3 Your friends:
           if user.followedUsers
@@ -144,6 +147,7 @@ html
                         p #{rate.desc}
                         p You rated this event: #{rate.stars}/5
                         p Date reviewed: #{rate.datePublished}
+                        input.deleteRating(type='button', value='X', id=rate._id.toString())
 
       //- Footer
       .footer
@@ -231,11 +235,10 @@ html
                   imageField.src = reader.result;
               }
           }
-          reader.readAsDataURL(event.target.files[0]);
+          reader.readAsDataURL(event.target.files[0] );
       }
 
       function addTag() {
-
           var tagValue = document.getElementById('input');
 
           if(tagValue.value.length > 0 && !tags.includes(tagValue.value.toLowerCase())){
@@ -289,26 +292,36 @@ html
               }
           });
 
-          //- Dynamic update function
-          $(function(){
-              $('#submitChanges').click(function(event){
-                  event.preventDefault();
-                  var formData = {
-                      password: $('#newPwd')[0].value,
-                      retype: $('#retype')[0].value,
-                      oldPwd: $('#oldPwd')[0].value
-                  };
+          $('#submitChanges').click(function(event){
+              event.preventDefault();
+              var formData = {
+                  password: $('#newPwd')[0].value,
+                  retype: $('#retype')[0].value,
+                  oldPwd: $('#oldPwd')[0].value
+              };
 
-                  $.ajax({
-                      url: '/members/updatePassword',
-                      type: 'put',
-                      data: formData
-                  }).done(function(data){
-                      if(data)
-                          alert("Password changed");
-                      else
-                          alert("Incorrect input");
-                  });
+              $.ajax({
+                  url: '/members/updatePassword',
+                  type: 'put',
+                  data: formData
+              }).done(function(data){
+                  if(data)
+                      alert("Password changed");
+                  else
+                      alert("Incorrect input");
+              });
+          });
+
+          $('.deleteRating').click(function(event){
+              event.preventDefault();
+
+              $.ajax({
+                  url: '/ratings/deleteRating/' + $(this)[0].id,
+                  type: 'delete',
+                  context: this,
+                  success: function(data){
+                    $(this).parents('li').remove();
+                  }
               });
           });
       });

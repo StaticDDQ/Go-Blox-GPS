@@ -21,12 +21,13 @@ var storage = multer.diskStorage({
         cb(null, file.originalname + '-' + Date.now())
     }
 });
+
 // FOR REFERENCES
 // "placeName": String,
 // "placeAddress": String,
 // "placeDescription": String,
 // "placePhone": String,
-// "placeTags": String,
+// "category": String,
 // "pictures": String
 var upload = multer({ storage: storage })
 
@@ -46,7 +47,7 @@ router.post('/addPlace', upload.single("pictures"), async function (req, res) {
 
     var error = req.validationErrors();
     if (!error) {
-        req.checkBody('placeTags', 'Require atleast 1 tag').notEmpty();
+        req.checkBody('category', 'Require atleast 1 tag').notEmpty();
         error = req.validationErrors();
 
         if (!error) {
@@ -70,7 +71,7 @@ router.post('/addPlace', upload.single("pictures"), async function (req, res) {
                 res.render('placeDetails', { place: place });
             });
         } else {
-            res.render('createPlace', { errors: 'Require atleast 1 tag' });
+            res.render('createPlace', { errors: 'Require a category' });
         }
 
     } else {
@@ -91,7 +92,10 @@ router.get('/getPlace/:id', function (req, res) {
     Place.findById(req.params.id, function (err, place) {
         if (err) throw err;
         if (place != null) {
-            res.render('placeDetails', { place: place});
+            res.render('placeDetails', {
+                place: place,
+                isBookmarked: req.user.bookmark.includes(place.placeName)
+            });
         } else {
             res.render('notFound');
         }
@@ -110,23 +114,6 @@ router.post('/getPlaces', function (req, res) {
         if (err) throw err;
         res.render('loadPlaces', { places: resp });
     });
-});
-
-// update places
-router.put('/updatePlace/:placeName', function (req, res) {
-    Place.findOneAndUpdate(
-        { placeName: req.params.placeName }, { $set: req.body }, function (err, resp) { //callback functions
-            res.send(resp);
-        });
-});
-
-// delete places
-router.delete('/deletePlace/:placeName', function (req, res) {
-    Place.findOneAndDelete(
-        { placeName: req.params.placeName }, function (err, resp) {
-            if (err) throw err;
-            res.send(resp);
-        }); 
 });
 
 module.exports = router;
