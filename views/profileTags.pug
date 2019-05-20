@@ -7,6 +7,7 @@ html(lang='en')
     link(rel='stylesheet', href='../css/profileTags.css', v='')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js")
 
   body
     .gridContainer
@@ -78,3 +79,10 @@ html(lang='en')
         function removePopup(){
             document.getElementById("overlay").style.display = "none";
         }
+
+        $('form input').keydown(function (e) {
+            if (e.keyCode == 13) {
+                e.preventDefault();
+                return false;
+            }
+        });
