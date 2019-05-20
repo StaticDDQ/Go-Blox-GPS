@@ -103,12 +103,15 @@ html
         // Tab content
         #Interests.tabcontent
           h3 Your Interests:
-          p #{user.interests}
-          h3 Some description about you:
+          ul
+            each interest in user.interests
+              li #{interest}
+          #des
+            h3 Some description about you:
           p
             | #{user.desc}
         #Events.tabcontent
-          h3 Past Events Attended
+          h3 Event joined
               if eventsJoined
                   ul
                       each event in eventsJoined
