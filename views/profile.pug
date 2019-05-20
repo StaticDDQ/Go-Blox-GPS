@@ -133,7 +133,7 @@ html
           h3 Your friends:
           if user.followedUsers
             each friend in user.followedUsers
-                a(href='members/profile/' + friend)
+                a(href='/members/profile/' + friend)
                     li #{friend}
         #Reviews.tabcontent
           h3 Your reviews
