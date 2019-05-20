@@ -119,14 +119,35 @@ input, textarea {
   margin-left: 50px;
 }
 
-
-
 .searchBar input {
     width: 10vw;
     padding-top: 20px;
     padding-bottom: 20px;
+    /* margin: 1vw auto; */
     align-content: center;
     font-family: 'Quicksand';
+}
+
+input#but {
+
+    width: 10vw;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-family: 'Quicksand';
+    font-size: 1vw;
+    border: none;
+    border: .5px solid #707070;
+    border-radius: .4em;
+    overflow: hidden;
+
+}
+
+input#but:hover,
+input#but.sfHover,
+input#but.current-menu-item
+ {
+  background-color: #ED7755;
+  color:  rgb(255, 255, 255);
 }
 
 .bottom button {
@@ -160,31 +181,6 @@ input, textarea {
 
  /* Create Event button configuration */
 
-.createEventButton input {
-    height: 6vh;
-    width: 11vw;
-    padding: 10px 10px 10px 10px; 
-    font-family: 'Quicksand';
-    font-size: 1.2vw;
-    border: none;
-    border: .5px solid #707070;
-    border-radius: .4em;
-    
-}
-
-.createEventButton {
-    
-    text-align: left;
-    padding-top: 20px;
-}
-
-.createEventButton input:hover,
-.createEventButton input.sfHover,
-.createEventButton input.current-menu-item {
-    background-color: #f5bdab;
-    color:  rgb(255, 255, 255);
-}
-
 /* Configuring inputs */
 
 .eventInputs {
@@ -213,22 +209,10 @@ input, textarea {
     padding-top: 10px;
 }
 
-/* Configuring list elements */
-
-li input {
-    padding: .5em;
-    width: 2vw;
-}
-
-li {
-    text-align: left;
-    padding-top: 10px;
-    padding-right: 10px;
-    font-size: 2vw;
-    list-style: none;
-}
-
 #overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    background-attachment: fixed;
+    background-position: center;
     position: absolute;
     overflow: scroll;
     display: none;
@@ -238,6 +222,53 @@ li {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    
     z-index: 2;
+}
+
+.submitBtns {
+    /* display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: 
+    "one password"; */
+    background-color: #f1f1f1;
+    padding: 20px;
+    justify-content: center;
+    margin: 33.5vh auto;
+    width: 40vmax;
+    height: auto;
+    font-family: 'Quicksand';
+    color:  rgb(20, 20, 20);
+    border-radius: .7em;
+
+}
+
+.submitBtns p {
+    text-align: center;
+}
+
+.submitBtns input {
+    height: 6vh;
+    width: 11vw;
+    padding: 10px; 
+    margin-right: 2vw;
+    font-family: 'Quicksand';
+    font-size: 1.2vw;
+    border: .5px solid #707070;
+    border-radius: .4em;
+    
+}
+
+.submitBtns input:hover,
+.submitBtns input.sfHover,
+.submitBtns input.current-menu-item {
+    background-color: #f5bdab;
+    color:  rgb(255, 255, 255);
+}
+.submitBtns input#no:hover,
+.submitBtns input#no.sfHover,
+.submitBtns input#no.current-menu-item {
+    background-color: #ED7755;
+    color:  rgb(255, 255, 255);
 }
