@@ -150,6 +150,7 @@ router.post('/register', upload.single("display"), async function (req, res) {
     req.checkBody('email', 'Email is not valid').isEmail();
     req.checkBody('DOB', 'Date of Birth is required').notEmpty();
     req.checkBody('password', 'Password is required').notEmpty();
+    req.checkBody('display', 'A display picture is required').notEmpty();
 
     var error = req.validationErrors();
     if (!error) {
@@ -162,10 +163,7 @@ router.post('/register', upload.single("display"), async function (req, res) {
             req.body['joined_date'] = moment().format('MMM Do YY');
             req.body['DOB'] = moment(req.body['DOB']).format('MMM Do YY');
 
-            var reqURL = {
-                public_id: '',
-                url: '/profile.png'
-            };
+            var reqURL;
             if (req.file !== undefined) {
                 await cloudinary.uploader.upload(req.file.path,
                     function (error, result) {
@@ -177,6 +175,11 @@ router.post('/register', upload.single("display"), async function (req, res) {
                         }
 
                     });
+            } else{
+                reqURL = {
+                    public_id: '',
+                    url: '../views/profile.png'
+                };
             }
 
             req.body['display'] = reqURL;
@@ -198,24 +201,29 @@ router.post('/register', upload.single("display"), async function (req, res) {
 router.post('/updateUser', upload.single("display"), async function (req, res) {
 
     await Member.findOne({userName: req.user.userName}, async function(err, result){
-        console.log("here");
-        console.log(result.display.public_id);
-        var pic_delete_id = result.display.public_id
-        await cloudinary.uploader.destroy(pic_delete_id, function(err, result) {
-            if(err) throw err;
-        });
+        var pic_delete_id = result.display.id
+        console.log(result);
+        if(pic_delete_id !== undefined){
+            await cloudinary.uploader.destroy(pic_delete_id, function(err, result) {
+                if(err) throw err;
+            });
+        }
     });
-
-
+    if(req.file !== undefined){
     await cloudinary.uploader.upload(req.file.path,
         function (error, result) {
-            if (error) throw error;
+            if (error) {
+                req.body['display'] = {
+                public_id: '',
+                url: '../views/profile.png'
+                }; 
+            }else {
 
             req.body['display'] = {
-                id: result.public_id,
+                public_id: result.public_id,
                 url: result.secure_url
             };
-
+        }
             Member.findOneAndUpdate(
                 { userName: req.user.userName }, {
                     $set: {
@@ -229,6 +237,24 @@ router.post('/updateUser', upload.single("display"), async function (req, res) {
                 });
 
         });
+    } else {
+            req.body['display'] = {
+                public_id: '',
+                url: '../views/profile.png'
+                }; 
+            Member.findOneAndUpdate(
+                { userName: req.user.userName }, {
+                    $set: {
+                        'display': req.body.display,
+                        'interests': req.body.interests,
+                        'desc': req.body.desc
+                    }
+                }, function (err, resp) {
+                    if (err) throw err;
+                    res.redirect('/members/userProfile');
+                });
+
+        }
 });
 
 router.put('/updatePassword', function (req, res) {

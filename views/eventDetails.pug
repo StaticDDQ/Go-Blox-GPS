@@ -47,10 +47,30 @@ html(lang='en')
           p <b>Phone Number:</b> #{event.phone}
           p <b>Tags:</b> #{event.tags}
           br
-          #join
-            h3.join <b>Join?<b>
-            button#yes Yes
-            button#no No
+          -
+              var canJoin = true;
+              var date = new Date();
+              var y = event.endDate.slice(0,4);
+              if(y < date.getFullYear()) {
+                  canJoin = false;
+              }
+              var m = event.endDate.slice(5,7);
+              if(m < date.getMonth()+1) {
+                  canJoin = false;
+              }
+              var d = event.endDate.slice(8,10);
+              if(d < date.getDate()) {
+                  canJoin = false;
+              }
+
+          if canJoin
+            #join
+              h3.join <b>Join?<b>
+              button#yes Yes
+              button#no No
+          else
+            p
+            | This event has passed!
         //- Ratings
       .ratings
         h2 Add reviews:

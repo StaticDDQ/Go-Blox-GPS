@@ -12,8 +12,7 @@ html(lang='en')
       .box
         h1 SIGN UP
         form(action='/members/register', method='post', enctype="multipart/form-data", onsubmit='return agreed()')
-          p
-            | #{error}
+          p #{error} 
           .nameContainers
             .comp
               .signUpsFirstName

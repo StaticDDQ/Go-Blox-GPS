@@ -4,9 +4,10 @@ html(lang='en')
     title Profile Tags
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial scale=1.0')
-    link(rel='stylesheet', href='../css/createEvent.css', v='')
+    link(rel='stylesheet', href='../css/profileTags.css', v='')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+
   body
     .gridContainer
       .box
@@ -33,8 +34,12 @@ html(lang='en')
               input(type='text', name="description" cols="40" rows="5")
 
           //- submit
-          .createEventButton
-            input(type="submit" value="Finish")
+          #overlay
+              .submitBtns
+                p Are you sure?
+                input(type='submit', value="Yes")
+                input(type='button', value="No", onclick='removePopup()')
+      input(type='button', value="Finish", onclick='openPopup()')
 
       script.
         var tags = [];
@@ -62,4 +67,14 @@ html(lang='en')
                 tags.push(tagValue.value.toLowerCase());
             }
             tagValue.value = "";
+        }
+
+        // Setting tab functions
+        function openPopup(){
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function removePopup(){
+            document.getElementById("overlay").style.display = "none";
+            tags = [];
         }
