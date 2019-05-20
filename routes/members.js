@@ -202,7 +202,6 @@ router.post('/updateUser', upload.single("display"), async function (req, res) {
 
     await Member.findOne({userName: req.user.userName}, async function(err, result){
         var pic_delete_id = result.display.id
-        console.log(result);
         if(pic_delete_id !== undefined){
             await cloudinary.uploader.destroy(pic_delete_id, function(err, result) {
                 if(err) throw err;
@@ -212,10 +211,11 @@ router.post('/updateUser', upload.single("display"), async function (req, res) {
     if(req.file !== undefined){
     await cloudinary.uploader.upload(req.file.path,
         function (error, result) {
-            if (error) {
+
+            if (result.public_id === '') {
                 req.body['display'] = {
                 public_id: '',
-                url: '../views/profile.png'
+                url: ''
                 }; 
             }else {
 
