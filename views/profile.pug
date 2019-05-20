@@ -29,8 +29,7 @@ html
 
       //- contains basic profile info for user
       .basic_profile
-        - source = user.display.url != '' ? user.display.url : '/profile.png'
-        img.profile(src=source, alt='profile_picture')
+        img.profile(src=user.display.url, onerror="this.src='profile.png", alt='No profile')
 
         -var fullname = firstName + ' ' + lastName;
         h3 #{user.firstName} #{user.lastName}
@@ -103,8 +102,11 @@ html
         // Tab content
         #Interests.tabcontent
           h3 Your Interests:
-          p #{user.interests}
-          h3 Some description about you:
+          ul
+            each interest in user.interests
+              li #{interest}
+          #des
+            h3 Some description about you:
           p
             | #{user.desc}
         #Events.tabcontent
