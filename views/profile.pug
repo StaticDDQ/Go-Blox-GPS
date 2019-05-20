@@ -29,8 +29,7 @@ html
 
       //- contains basic profile info for user
       .basic_profile
-        - 
-            console.log(user.display);
+        -
             var source = user.display.public_id !== '' ? user.display.url : '/profilePic.png'
 
         img.profile(src= source, alt='profile_picture')
@@ -74,13 +73,13 @@ html
                   #checked
                 p Change Description:
                   input(type='text', placeholder= user.desc, name='desc')
-                  
+
                 h4 Change Display Picture:
                   input#file-field(type='file', onchange='previewImage(event)', name='display')
                   div#preview
                   img#image-field(src='/pictures/profile_icon.png', width='150', height='150')
-                
-                //- change 
+
+                //- change
                 input#xButton2(type='submit', value='Change Details')
 
               //- currently, only changing password is possible
@@ -97,7 +96,7 @@ html
                 input#retype(type='password', name='retype')
                 br
                 input#submitChanges(type='submit', value='Change Password')
-                
+
             .xButton
               button#cancel(onclick='removeSettings()') Cancel
 

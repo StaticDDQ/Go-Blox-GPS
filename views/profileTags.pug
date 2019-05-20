@@ -13,7 +13,7 @@ html(lang='en')
     .gridContainer
       .box
         form(action='/members/storeInfo', method='post')
-          h1 Select your Interests!
+          h1 Add Your Interests!
           p
               | #{errors}
 
@@ -22,25 +22,27 @@ html(lang='en')
             | Tags
           .searchBar
             input#input(type='text', placeholder='Search Tags')
-            input(type='button', value='Add tag', onclick='addTag()')
-
-            #checked   
-
+            input#but(type='button', value='Add tag', onclick='addTag()')
             br
+
+          br
+          #checked
+          br
           //- add event desctiption
           p
             .eventInputs  
               | Descriptions: 
               br
               input(type='text', name="description" cols="40" rows="5")
-
+          br
           //- submit
           #overlay
               .submitBtns
-                p Are you sure?
+                p Are you sure you are done?
+                br
                 input(type='submit', value="Yes")
-                input(type='button', value="No", onclick='removePopup()')
-      input(type='button', value="Finish", onclick='openPopup()')
+                input#no(type='button', value="No", onclick='removePopup()')
+          input#but(type='button', value="Finish", onclick='openPopup()')
 
       script.
         var tags = [];
