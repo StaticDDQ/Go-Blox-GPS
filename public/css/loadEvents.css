@@ -230,3 +230,7 @@ button{
       border-bottom: solid 0.3px #ED7755;
   
   }
+
+  #logout {
+    padding-top: 40vh;
+  }

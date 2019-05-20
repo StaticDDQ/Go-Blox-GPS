@@ -9,6 +9,17 @@ html(lang='en')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
   body
     .gridContainer
+      .navbar
+        span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Menu
+        #mySidenav.sidenav
+          a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
+          a(href='/members/userProfile') Go to Profile
+          a(href='/') Home
+          a(href='/events/findEvent') Find Events
+          a(href='/#') Places
+          a(href='/events/createEvent') Create Event!
+          a(href='/places/createPlace') Create Place!
+          a#logout(href='/members/logout') Logout :(
       .box
         form(action='/places/addPlace', method='POST', enctype="multipart/form-data", onsubmit='return agreed()')
           //- title of the page
@@ -45,7 +56,7 @@ html(lang='en')
           //- Event gallery (not yet implemented)
           p#topic
             br
-            b Gallery
+            b Upload Image
 
           //- uploading profile picture
           .uploadImage
@@ -61,9 +72,9 @@ html(lang='en')
             p
               | Tags
             .searchBar
-
-            input#input(type='text', placeholder='Search Tags')
-            input(type='button', value='Add tag', onclick='addTag()')
+              input#input(type='text', placeholder='Search Tags')
+              br
+              input(type='button', value='Add tag', onclick='addTag()')
 
             #checked
 
@@ -74,10 +85,18 @@ html(lang='en')
               br
             //- Button to submit the new event created
             .createEventButton
-              input(type="submit" value="Create Event")
+              input(type="submit" value="Create Place")
 
       //- JS to preview the images uploaded
       script.
+        //- Navigation bar funtctions
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
         function previewFile() {
             //- var preview = document.querySelector('img'); //selects the query named img
             var previewbox = document.getElementById('preview'); // get image by ID

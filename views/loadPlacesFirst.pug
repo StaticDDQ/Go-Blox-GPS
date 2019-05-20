@@ -21,6 +21,8 @@ html(lang='en')
           a(href='/events/findEvent') Find Events
           a(href='/#') Places
           a(href='/events/createEvent') Create Event!
+          a(href='/places/createPlace') Create Place!
+          a#logout(href='/members/logout') Logout :(
         a(href='/') 
             img.logo(src= "/logo.png", alt='GPS', width='80', height='80')
       //- Searching the places
@@ -29,10 +31,10 @@ html(lang='en')
         form(action='/places/getPlaces', method='post')
           input.search(type='text', placeholder='Search Places', name='name')
           input(type='submit', value='Find')
-      .createPlace
-        h2 Create a place
-        form(action='/places/createPlace', method='get')
-            input(type='submit', value='Create Place')
+      //- .createPlace
+      //-   h2 Create a place
+      //-   form(action='/places/createPlace', method='get')
+      //-       input(type='submit', value='Create Place')
 
       //- Footer
       .footer

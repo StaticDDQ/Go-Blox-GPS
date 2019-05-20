@@ -146,6 +146,10 @@ body{
   margin-left: 50px;
 }
 
+#logout {
+  padding-top: 40vh;
+}
+
 /* configure setting which uses overlay */
 .settings {
   display: grid;
