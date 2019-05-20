@@ -48,6 +48,8 @@ html(lang='en')
                   .event_card
                     .event_title
                       h3 #{place.placeName}
+                    .event_pic
+                      img(src= place.pictures, alt='place_pic')
                     .event_desc
                       p <b>Location:</b> #{place.placeAddress}
                       p <b>Description:</b> #{place.placeDescription}

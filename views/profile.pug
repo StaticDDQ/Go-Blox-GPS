@@ -105,9 +105,10 @@ html
         // Tab content
         #Interests.tabcontent
           h3 Your Interests:
-          ul
-            each interest in user.interests
-              li #{interest}
+          #interest_tag
+            ul
+              each interest in user.interests
+                li #{interest}
           #des
             h3 Some description about you:
           p
@@ -139,15 +140,17 @@ html
                     li #{friend}
         #Reviews.tabcontent
           h3 Your reviews
+
           ul
             if rating
                 each rate in rating
-                    li
-                        p #{rate.eventName}
-                        p #{rate.desc}
-                        p You rated this event: #{rate.stars}/5
-                        p Date reviewed: #{rate.datePublished}
-                        input.deleteRating(type='button', value='X', id=rate._id.toString())
+                    #reviewCard
+                        li
+                            p.eventName #{rate.eventName} - #{rate.datePublished}
+                            p Rating: #{rate.stars}/5
+                            p.eventDesc Description:
+                            p #{rate.desc}
+                            input.deleteRating(type='button', value='X', id=rate._id.toString())
 
       //- Footer
       .footer
