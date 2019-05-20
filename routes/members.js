@@ -178,7 +178,7 @@ router.post('/register', upload.single("display"), async function (req, res) {
             } else{
                 reqURL = {
                     public_id: '',
-                    url: '../views/profile.png'
+                    url: ''
                 };
             }
 
@@ -199,6 +199,7 @@ router.post('/register', upload.single("display"), async function (req, res) {
 
 /// TAKE NOTE HERE
 router.post('/updateUser', upload.single("display"), async function (req, res) {
+    
 
     await Member.findOne({userName: req.user.userName}, async function(err, result){
         var pic_delete_id = result.display.id
@@ -215,7 +216,7 @@ router.post('/updateUser', upload.single("display"), async function (req, res) {
             if (error) {
                 req.body['display'] = {
                 public_id: '',
-                url: '../views/profile.png'
+                url: ''
                 }; 
             }else {
 
@@ -240,7 +241,7 @@ router.post('/updateUser', upload.single("display"), async function (req, res) {
     } else {
             req.body['display'] = {
                 public_id: '',
-                url: '../views/profile.png'
+                url: ''
                 }; 
             Member.findOneAndUpdate(
                 { userName: req.user.userName }, {
