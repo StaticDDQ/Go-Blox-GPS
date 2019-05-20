@@ -15,7 +15,7 @@ body{
 .grid{
   display: grid;
   height: 100%;
-  grid-template-columns: 0.3fr 1fr;
+  grid-template-columns: 20% 80%;
   grid-template-rows: 0.3fr 2fr 0.3fr;
   grid-template-areas: 
   "navbar navbar"
@@ -51,8 +51,8 @@ body{
 .profile{
   border: 2px solid #4f4f4f;
   border-radius: 50%;
-  height: 150px;
-  width: 150px;
+  height: 11.5vw;
+  width: 11.5vw;
   padding: 5px;
 }
 
@@ -159,7 +159,25 @@ body{
   margin-bottom: 10px;
 }
 
-#Interests li{
+#Interest {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+  "interest_tag"
+  "des"
+}
+
+#interest_tag{
+  grid-area: interest_tag;
+  word-break: break-all;
+  width: 100%;
+  height: auto;
+  padding-bottom: 5px;
+  margin-right: 10px;
+}
+
+#interest_tag li{
   list-style-type: none;
   border: solid 1px #707070;
   display: inline;
@@ -169,11 +187,39 @@ body{
   padding-right: 5px;
   font-size: 15px;
   color:black;
-  
+  line-height: 1.8em;
 }
 
-#des{
+#des {
+  grid-area: des;
   margin-top: 20px;
+}
+
+/* reviews tab */
+#reviewCard{
+  list-style-type: none;
+  border-bottom: solid 1px #4f4f4f;
+  width: 100%;
+  
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+#Reviews li{
+  padding-left: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 15px;
+}
+
+.eventName{
+  font-weight: bolder;
+  font-size: 20px;
+  text-decoration: underline;
+}
+
+.eventDesc{
+  font-weight: bold;
 }
 /* configure navigation bar */
 .sidenav {
@@ -267,11 +313,13 @@ body{
     z-index: 2;
 }
 
+
 input {
   font-size: 12px;
   width: 100px;
   align-content: center;
   font-family: 'Quicksand';
+  margin: 5px;
 }
 
 .xButton button, 
@@ -286,6 +334,7 @@ input#xButton
   border: none;
   border: .5px solid #707070;
   border-radius: .4em;
+  margin: 5px;
 
 }
 
@@ -299,7 +348,7 @@ input#xButton2 {
   border: none;
   border: .5px solid #707070;
   border-radius: .4em;
-
+  margin: 5px;
 }
 .xButton {
   text-align: left;
