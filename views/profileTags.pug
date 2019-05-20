@@ -48,7 +48,8 @@ html(lang='en')
 
             var tagValue = document.getElementById('input');
 
-            if(tagValue.value.length > 0 && !tags.includes(tagValue.value.toLowerCase())){
+            if(tagValue.value.length > 0 && tagValue.value.length <= 20 
+                && !tags.includes(tagValue.value.toLowerCase())){
                 var tagLst = document.getElementById('checked');
 
                 var tag = document.createElement('input');
