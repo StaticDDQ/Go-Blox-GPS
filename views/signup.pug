@@ -83,9 +83,13 @@ html(lang='en')
             .agree
               input#agree(type="checkbox")
               | I agree to the terms and conditions
-          .signUpButton
-            input.btn.btn-primary(type='submit', value='Sign Up')
-            br
+          //- submit
+          #overlay
+              .submitBtns
+                p Are you sure?
+                input(type='submit', value="Yes")
+                input(type='button', value="No", onclick='removePopup()')
+        input(type='button', value="Sign in!", onclick='openPopup()')
         br
         form(action='/members/login', method='get')
           .loginButton
@@ -109,4 +113,13 @@ html(lang='en')
           }
       }
       reader.readAsDataURL(event.target.files[0]);
+    }
+
+    // Setting tab functions
+    function openPopup(){
+        document.getElementById("overlay").style.display = "block";
+    }
+
+    function removePopup(){
+        document.getElementById("overlay").style.display = "none";
     }
