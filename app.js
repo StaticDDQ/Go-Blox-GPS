@@ -48,7 +48,8 @@ app.get('/', function (req, res) {
         if(err) throw err;
         var arrayed = []
         for (let i = 0; i < resp.length; i++){
-            var aEvent ={
+            var aEvent = {
+                id: resp[i]._id,
                 name: resp[i].name,
                 lat: parseFloat(resp[i].location[0].latitude),
                 long: parseFloat(resp[i].location[0].longitude),
@@ -59,7 +60,7 @@ app.get('/', function (req, res) {
 
             arrayed.push(aEvent);        
         }
-
+        
         res.render('maps', { events: arrayed, isLoggedIn: req.user !== undefined });
     });
 });

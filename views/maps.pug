@@ -26,18 +26,15 @@ html
           }).addTo(map);
         if events
             each evented in events
-              //- a(href='/events/getEvent/' + evented._id)
               script.
                 var marker = new L.Marker([#{evented.lat},#{evented.long}]);
+                
                 marker.bindPopup("<b>#{evented.name}</b><br/>Address: #{evented.address}<br/>Phone: #{evented.phone}<br/>Email: #{evented.email}");
                 map.addLayer(marker);
-                var evented = !{JSON.stringify(evented)};
                 marker.on('dblclick', function onClick(e){
-                  window.location.href = '/events/getEvent/' + #{evented._id}
+                  window.location.href = '/events/getEvent/#{evented.id}'
                 });
 
-                //- function onClick(evented) {
-                //- }
       .desc
         h1 gps.
         h3
