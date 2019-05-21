@@ -1,7 +1,7 @@
 doctype html
 html(lang='en')
   head
-    title Create Event
+    title Create Place
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial scale=1.0')
     link(rel='stylesheet', href='../css/createEvent.css', v='')
@@ -65,18 +65,69 @@ html(lang='en')
 
             div#preview
 
-          //- Tag searching
+          //- Select one category for your place
           #bottom
-            p
-              | Tags
-            .searchBar
-              input#input(type='text', placeholder='Search Tags')
-              br
-              input(type='button', value='Add tag', onclick='addTag()')
-
-            #checked
-
+            p#cat Categories
+            label.categories
+              | Food Places
+              input(type='radio', name='category', value='food') 
+              span.checkmark
+            label.categories
+              | Shopping
+              input(type='radio', name='category', value='shopping')
+              span.checkmark 
+            label.categories
+              input(type='radio', name='category', value='education')
+              span.checkmark
+              |  Education
+            label.categories
+              input(type='radio', name='category', value='health')
+              span.checkmark
+              |  Health
+            label.categories
+              input(type='radio', name='category', value='entertainment')
+              span.checkmark
+              |  Entertainment
+            label.categories
+              input(type='radio', name='category', value='night')
+              span.checkmark
+              |  Night Life
+            label.categories
+              input(type='radio', name='category', value='nature')
+              span.checkmark
+              |  Nature
+            label.categories
+              input(type='radio', name='category', value='art')
+              span.checkmark
+              |  Art
+            label.categories
+              input(type='radio', name='category', value='sports')
+              span.checkmark
+              |  Sports
+            label.categories
+              input(type='radio', name='category', value='music')
+              span.checkmark
+              |  Music
+            label.categories
+              input(type='radio', name='category', value='recreation')
+              span.checkmark
+              |  Recreation
+            label.categories
+              input(type='radio', name='category', value='religious')
+              span.checkmark
+              |  Religious
+            label.categories
+              input(type='radio', name='category', value='uncategorized')
+              span.checkmark
+              |  Uncategorized
             br
+            //- //- tags changed to categories
+            //- .searchBar
+            //-   input#input(type='text', placeholder='Search Tags')
+            //-   br
+            //-   input(type='button', value='Add tag', onclick='addTag()')
+
+            //- #checked
             .agree
               input#agree(type='checkbox', value='agreed')
               |  I agree to the terms and conditions
