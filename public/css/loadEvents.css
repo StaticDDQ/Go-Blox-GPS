@@ -38,47 +38,6 @@ body {
     "footer footer";
 }
 
-/* configure navigation bar */
-.navbar{
-    grid-area: navbar;
-    padding-left: 20px;
-    padding-top: 20px;
-}   
-
-.sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #ED7755;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-}
-
-.sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: white;
-    display: block;
-    transition: 0.3s;
-}
-
-.sidenav a:hover {
-    color: black;
-}
-
-.sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-}
-
 /* configure header elements */
 .logo{
     float: right;
@@ -243,8 +202,4 @@ button{
   .footer li.current-menu-item {
       border-bottom: solid 0.3px #ED7755;
   
-  }
-
-  #logout {
-    padding-top: 40vh;
   }

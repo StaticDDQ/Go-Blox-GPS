@@ -85,13 +85,16 @@ html(lang='en')
             .agree
               input#agree(type="checkbox")
               | I agree to the terms and conditions
+          
           //- submit
           #overlay
               .submitBtns
                 p Are you sure?
+                br
                 input(type='submit', value="Yes")
-                input(type='button', value="No", onclick='removePopup()')
-        input(type='button', value="Sign in!", onclick='openPopup()')
+                input#no(type='button', value="No", onclick='removePopup()')
+        .signUpButton
+          input(type='button', value="Sign in!", onclick='openPopup()')
         br
         form(action='/members/login', method='get')
           .loginButton
