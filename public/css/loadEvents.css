@@ -39,11 +39,6 @@ body {
 }
 
 /* configure header elements */
-.logo{
-    float: right;
-    padding-right: 20px;
-    padding-top: 15px;
-}
 
 .searchBox{
     grid-area: searchBox;
