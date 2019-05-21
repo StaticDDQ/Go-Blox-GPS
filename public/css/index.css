@@ -1,58 +1,145 @@
-/* VARIABES */
+/* For index, about */
+* {
+    margin: 0;
+    padding: 0; 
+    
+}
+
+/* General body formatting */
 
 body {
-    background-image: url("https://media.istockphoto.com/photos/like-getting-together-with-my-friends-picture-id869988382");
-    
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: lightsalmon;
+    font-family: 'Quicksand';
     background-image: linear-gradient(to top right, #f5bdab, #90a4bc);
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-repeat:no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    /* -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; */
+    /* background-repeat: no-repeat; */
+    /* height: 100%; */
+    
 }
+
+ /* configuring the grid styles */
+
+.gridContainer {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "container";
+
+ }
+
+.container {
+    grid-area: container;
+    text-align: center;
+    background-color: rgb(255,249,248);
+    border: solid 1px rgb(214,201,201);
+    border-radius: .7em;
+    padding: 100px;
+    align-content: center;
+    width: 20vw;
+    margin: 100px auto;
+    box-shadow: 0px 2px 2px 0px rgba(53, 53, 53, 0.75);
+}
+
+/* Format Header */
 
 h1 {
     font-size: 40px;
-    letter-spacing: 2px;
     font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 2px;
+    padding-bottom: 10vh;
+    color: #647a94;
 }
+
+/* Formatting the input boxes */
 
 p {
     font-size: 20px;
 }
 
 button {
-    width: 340px;
-    height: 50px;
+    width: 34vw;
+    height: 5vh;
 }
 
 input {
     font-size: 20px;
-    width: 300px;
-    padding: 20px;
-    /* gedein size of input gimana caranya huhu */
+    width: 16vw;
+    padding: 2vw;
+    align-content: center;
+    font-family: 'Quicksand';
+}
+
+/* Login Elements */
+
+.logins input {
+    background: none;
+    border: none;
+    border-bottom: 1px solid #707070;
+    padding: 20px 20px 10px 20px;
+    
 }
 
 .logins {
-    padding: 10px 10px 10px 10px;
+    padding: 10px;
 }
 
+/* Login button */
+
+.loginButton input {
+    height: 6vh;
+    width: 9vw;
+    padding: 10px; 
+    font-family: 'Quicksand';
+    font-size: 1.1vw;
+    border: none;
+    border: .5px solid #707070;
+    border-radius: .4em;
+
+}
 .loginButton {
-    
-    height: 50px;
-    padding: 10px 10px 10px 10px; 
-    margin: 0 auto;
+    text-align: left;
+    padding-left: 1vw;
+    padding-top: 2vh;
+}
+
+.loginButton input:hover,
+.loginButton input.sfHover,
+.loginButton input.current-menu-item {
+    background-color: #f5bdab;
+    color:  rgb(255, 255, 255);
+}
+
+/* Sign up button */
+
+.signUpButton input {
+    height: 5vh;
+    width: 10vw;
+    font-size: 1.1vw;
+    padding: 5px; 
+    color: #555555;
+    font-family: 'Quicksand';
+    background: none;
+    border: none;
+    text-align: left;
     
 }
 
-.container {
-    display: block;
-    text-align: center;
-    background-color: rgb(255,249,248);
-    border: solid 1px rgb(214,201,201);
-    box-shadow: 1px 1px 0px 0px #13232f;
-    height: 500px;
-    width: 800px;
-    padding: 30px;
-    align-content: center;
-    margin: 100px auto;
+.signUpButton {
+    text-align: left;
+    padding-left: 1vw;
+    padding-top: 2vh;
 }
+
+.signUpButton input:hover,
+.signUpButton input.sfHover,
+.signUpButton input.current-menu-item {
+    background: none;
+    border-bottom: .1em solid #f5bdab;
+}
+

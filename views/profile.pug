@@ -1,0 +1,340 @@
+html
+  style
+    include ../public/css/profileEdit.css
+  head
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
+    link(href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto&display=swap", rel="stylesheet")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js")
+  body
+    //- configure layout with grid
+    .grid
+      //- add navigation bar with links to relevant pages
+      .navbar
+        span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Menu
+        #mySidenav.sidenav
+          a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
+          if notCurr
+            a(href='/members/userProfile') Go to Profile
+          else
+            a(href='#') ☺ #{user.userName}
+          a(href='/') Home
+          a(href='/events/findEvent') Find Events
+          a(href='/places') Places
+          a(href='/events/createEvent') Create Event!
+          a(href='/places/createPlace') Create Place!
+          a#logout(href='/members/logout') Logout :(
+
+        a(href='/')
+            img.logo(src= "/logo.png", alt='GPS', width='80', height='80')
+
+      //- contains basic profile info for user
+      .basic_profile
+        -
+            var source = user.display.public_id !== '' ? user.display.url : '/profilePic.png'
+
+        img.profile(src= source, alt='profile_picture')
+
+        -var fullname = firstName + ' ' + lastName;
+        h3 #{user.firstName} #{user.lastName}
+        h4 @#{user.userName}
+        h4 Member since || #{user.joined_date}
+        h4 Date of Birth: #{user.DOB}
+
+        if notCurr
+          -
+            var followText = 'Follow';
+            if(isFollowing){
+                followText = 'Unfollow';
+            }
+          input#followUser(type='submit', value=followText, name=user.userName)
+
+      //- display other contents about users in tabs
+      .all_content
+
+        // Tab links
+        .tab
+          button.tablinks#start(onclick="openTab(event, 'Interests')") INTERESTS
+          button.tablinks(onclick="openTab(event, 'Events')") EVENTS
+          button.tablinks(onclick="openTab(event, 'Places')") PLACES
+          button.tablinks(onclick="openTab(event, 'Friends')") FRIENDS
+          button.tablinks(onclick="openTab(event, 'Reviews')") REVIEWS
+          if !notCurr
+            button(onclick="openSettings()") SETTINGS
+
+        //- settings tab allow users to change their info
+        #overlay
+          .settings
+            form(action='/members/updateUser', method='post', enctype='multipart/form-data')
+              .one
+                h2 Change Details:
+                p Change interests:
+                  input#input(type='text', placeholder='Search Tags')
+                  input#xButton(type='button', value='Add tag', onclick='addTag()')
+
+                  #checked
+                p Change Description:
+                  input(type='text', placeholder= user.desc, name='desc')
+
+                h4 Change Display Picture:
+                  input#file-field(type='file', onchange='previewImage(event)', name='display')
+                  div#preview
+                  img#image-field(src='/pictures/profile_icon.png', width='150', height='150')
+
+                //- change
+                input#xButton2(type='submit', value='Change Details')
+
+              //- currently, only changing password is possible
+            .password
+              h2 Change Password:
+              p
+                | Old password:
+                input#oldPwd(type='password', name='oldPwd')
+                br
+                | New password:
+                input#newPwd(type='password', name='password')
+                br
+                | Retype new password:
+                input#retype(type='password', name='retype')
+                br
+                input#submitChanges(type='submit', value='Change Password')
+
+            .xButton
+              button#cancel(onclick='removeSettings()') Cancel
+
+
+        //- The rest of the tab contents
+        // Tab content
+        #Interests.tabcontent
+          h3 Your Interests:
+          #interest_tag
+            ul
+              each interest in user.interests
+                li #{interest}
+          #des
+            h3 Some description about you:
+          p
+            | #{user.desc}
+        #Events.tabcontent
+          .gridEvent
+            .attend
+              h3 Events Joined
+                  if eventsJoined
+                      ul
+                          each event in eventsJoined
+                              a(href='/events/getEvent/' + event._id)
+                                  li #{event.name}
+            .created
+              h3 Events Created
+                  if eventsCreated
+                      ul
+                          each userEvent in eventsCreated
+                              a(href='/events/getEvent/' + userEvent._id)
+                                  li #{userEvent.name}
+        #Places.tabcontent
+          h3 Places to go
+          ul
+              if user.bookmark
+                  each place in user.bookmark
+                      li #{place}
+        #Friends.tabcontent
+          form(action='/members/searchUser', method='post')
+            input(type='text', placeholder="Search user...", name='username')
+            input(type='submit',value='Search')
+          h3 Following
+          if user.followedUsers
+            each friend in user.followedUsers
+                a(href='/members/profile/' + friend)
+                    li @#{friend}
+        #Reviews.tabcontent
+          h3 Your reviews
+
+          ul
+            if rating
+                each rate in rating
+                    #reviewCard
+                        li
+                            p.eventName
+                              |#{rate.eventName} - #{rate.datePublished} 
+                              span 
+                              input.deleteRating(type='button', value='X', id=rate._id.toString())
+                            p Rating: #{rate.stars}/5
+                            p.eventDesc Description:
+                            p #{rate.desc}
+
+      //- Footer
+      .footer
+        p(style='color:white')
+          | © 2019 Get People Socilaizing. All rights reserved.
+          a(href='page2.html')
+        a(href='page2.html')
+        ul(style='color:white')
+          a(href='page2.html')
+          li
+            a(href='page2.html')
+            a(href='#') Privacy Policy
+          li
+            a(href='#') Terms of Service
+          li
+            a(href='#') Cookie Policy
+
+    //- Javascript codes
+    script.
+      document.getElementById('start').click();
+
+      function openTab(evt, tabName) {
+
+          // Declare all variables
+          var i, tabcontent, tablinks;
+          // Get all elements with class="tabcontent" and hide them
+          tabcontent = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+          }
+          // Get all elements with class="tablinks" and remove the class "active"
+          tablinks = document.getElementsByClassName("tablinks");
+          for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+          }
+          // Show the current tab, and add an "active" class to the button that opened the tab
+          document.getElementById(tabName).style.display = "block";
+          evt.currentTarget.className += " active";
+      }
+
+      //- Navigation bar functions
+      function openNav() {
+          document.getElementById("mySidenav").style.width = "250px";
+      }
+
+      function closeNav() {
+          document.getElementById("mySidenav").style.width = "0";
+      }
+
+      // Setting tab functions
+      function openSettings(){
+          document.getElementById("overlay").style.display = "block";
+      }
+
+      var tags = [];
+      var user = !{JSON.stringify(user)};
+      var tagLst = document.getElementById('checked');
+
+      user.interests.forEach(function(element){
+          tags.push(element);
+          var tag = document.createElement('input');
+          tag.type = 'text';
+          tag.value = element;
+          tag.name = 'interests';
+          tag.readonly = true;
+          tag.onclick = function(){
+              var index = tags.indexOf(element);
+              tags.splice(index,1);
+              tag.parentNode.removeChild(tag);
+          }
+
+          tagLst.appendChild(tag);
+      });
+
+      function removeSettings(){
+          document.getElementById("overlay").style.display = "none";
+          tags = [];
+      }
+
+      function previewImage(event){
+          var reader = new FileReader();
+          var imageField = document.getElementById("image-field")
+          reader.onload = function(){
+              if(reader.readyState == 2){
+                  imageField.src = reader.result;
+              }
+          }
+          reader.readAsDataURL(event.target.files[0] );
+      }
+
+      function addTag() {
+          var tagValue = document.getElementById('input');
+
+          if(tagValue.value.length > 0 && !tags.includes(tagValue.value.toLowerCase())){
+              var tag = document.createElement('input');
+              tag.type = 'text';
+              tag.value = tagValue.value.toLowerCase();
+              tag.name = 'interests';
+              tag.readonly = true;
+              tag.onclick = function(){
+                  var index = tags.indexOf(tag.value.toLowerCase());
+                  tags.splice(index,1);
+                  tag.parentNode.removeChild(tag);
+              }
+
+              tagLst.appendChild(tag);
+
+              tags.push(tagValue.value.toLowerCase());
+          }
+          tagValue.value = "";
+      }
+
+      //- Dynamic update function
+      $(function(){
+
+          $('#followUser').click(function(event){
+              event.preventDefault();
+
+              var thisUser = {
+                  username: $('#followUser')[0].name
+              };
+
+              if($('#followUser')[0].value === 'Follow'){
+                  $.ajax({
+                      url: '/members/followUser',
+                      type: 'put',
+                      data: thisUser,
+                      success: function(data){
+                          $('#followUser').val('Unfollow');
+                      }
+                  });
+              }
+              else {
+                  $.ajax({
+                      url: '/members/unfollowUser',
+                      type: 'put',
+                      data: thisUser,
+                      success: function(data){
+                          $('#followUser').val('Follow');
+                      }
+                  });
+              }
+          });
+
+          $('#submitChanges').click(function(event){
+              event.preventDefault();
+              var formData = {
+                  password: $('#newPwd')[0].value,
+                  retype: $('#retype')[0].value,
+                  oldPwd: $('#oldPwd')[0].value
+              };
+
+              $.ajax({
+                  url: '/members/updatePassword',
+                  type: 'put',
+                  data: formData
+              }).done(function(data){
+                  if(data)
+                      alert("Password changed");
+                  else
+                      alert("Incorrect input");
+              });
+          });
+
+          $('.deleteRating').click(function(event){
+              event.preventDefault();
+
+              $.ajax({
+                  url: '/ratings/deleteRating/' + $(this)[0].id,
+                  type: 'delete',
+                  context: this,
+                  success: function(data){
+                    $(this).parents('li').remove();
+                  }
+              });
+          });
+      });
+

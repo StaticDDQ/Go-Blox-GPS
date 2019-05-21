@@ -1,0 +1,58 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
+    link(rel='stylesheet', href='../css/loadEvents.css', v='')
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+    title Search Places
+  body
+    //- Loading a page to search places before showings all the places 
+    .container_first
+      //- Main navigation menu
+      .navbar
+        span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Menu
+        #mySidenav.sidenav
+          a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
+          a(href='/members/userProfile') Go to Profile
+          a(href='/') Home
+          a(href='/events/findEvent') Find Events
+          a(href='/#') Places
+          a(href='/events/createEvent') Create Event!
+          a(href='/places/createPlace') Create Place!
+          a#logout(href='/members/logout') Logout :(
+        a(href='/') 
+            img.logo(src= "/logo.png", alt='GPS', width='80', height='80')
+      //- Searching the places
+      .searchBox
+        h1 Find Places
+        form(action='/places/getPlaces', method='post')
+          input.search(type='text', placeholder='Search Places', name='name')
+          input(type='submit', value='Find')
+
+      //- Footer
+      .footer
+        p(style='color:white')
+          | © 2019 Get People Socilaizing. All rights reserved. 
+          a(href='page2.html')
+        a(href='page2.html')
+        ul(style='color:white')
+          a(href='page2.html')
+          li
+            a(href='page2.html')
+            a(href='#') Privacy Policy
+          li
+            a(href='#') Terms of Service
+          li
+            a(href='#') Cookie Policy
+
+    script.
+        // Side Navigation Bar
+        function openNav() {
+          document.getElementById("mySidenav").style.width = "250px";
+        }
+        function closeNav() {
+          document.getElementById("mySidenav").style.width = "0";
+        }

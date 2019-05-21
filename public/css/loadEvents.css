@@ -1,0 +1,250 @@
+/* CSS FILE FOR loadEvents.pug */
+/* configure main layout */
+* {
+    padding: 0;
+    margin: 0px;
+}
+
+body {
+    font-family: 'Quicksand';
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #f4f4f4;
+}
+
+/* configure the grid */
+.container {
+    display: grid;
+    grid-template-columns: 0.3fr 1fr;
+    /* grid-template-rows: 0.005fr .05fr 5fr 0.1fr; */
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "navbar navbar"
+    "searchBox searchBox"
+    "filterSide displayEvents"
+    "footer footer";
+}
+
+/* container for the search events/search places */
+.container_first {
+    display: grid;
+    grid-template-columns: 0.3fr 1fr;
+    grid-template-rows: 0.005fr .05fr 2.5fr 0.1fr;
+    /* grid-template-rows: auto; */
+    grid-template-areas: 
+    "navbar navbar"
+    "searchBox searchBox"
+    "filterSide displayEvents"
+    "footer footer";
+}
+
+/* configure navigation bar */
+.navbar{
+    grid-area: navbar;
+    padding-left: 20px;
+    padding-top: 20px;
+}   
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #ED7755;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: black;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* configure header elements */
+.logo{
+    float: right;
+    padding-right: 20px;
+    padding-top: 15px;
+}
+
+.searchBox{
+    grid-area: searchBox;
+    max-height: 500px;
+    text-align: center;
+    padding-bottom: 50px;
+}
+
+.searchBox h1{
+   padding-bottom: 10px;
+   font-size: 45px;
+   font-weight: bolder;
+   color: #e15848;
+}
+
+.search{
+    width: 400px;
+    font-size: 15px;
+}
+
+button{
+    margin-left: 10px;
+    font-size: 15px;
+}
+.filterSide{
+    grid-area: filterSide;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+.filterSide h3{
+    font-size: 25px;
+}
+
+.filterSide p{
+    padding-bottom: 10px;
+    padding-top: 5px;
+}
+#input{
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.button{
+    background-color: #90A4BC;
+}
+
+/* layout to show the events */
+.displayEvents{
+    grid-area: displayEvents;
+    display: grid;
+    grid-template-rows: auto;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+.displayEvents h2{
+    margin-bottom: 5px;
+    font-weight: bolder;
+    font-size: 25px;
+}
+
+.event_card{
+    display: grid;
+    grid-template-columns: 0.4fr 0.6fr;
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "event_title event_title"
+    "event_pic event_desc"
+    "event_tag event_tag";
+    border: 1px solid #becad0;
+    border-radius: 4px;
+    text-decoration: none;
+    overflow: hidden;
+    transition: all 0.2s ease-out;
+    padding-left: 20px;
+    padding-top: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background-color: white;
+}
+
+.event_card:hover {
+  top: -2px;
+  box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+  border: 1px solid #cccccc;
+  transition: all 0.2s ease-out;
+  cursor: pointer;
+}
+
+.event_title{
+    grid-area: event_title;
+    padding-bottom: 20px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.event_pic{
+    grid-area: event_pic;
+    padding-right: 10px;
+}
+
+.event_pic img {
+    width: 100%;
+    height: auto;
+}
+
+.event_desc{
+    grid-area: event_desc;
+    padding-bottom: 10px;
+    padding-right: 10px;
+}
+
+.event_desc p{
+    padding-bottom: 5px;
+}
+
+.event_tag{
+    grid-area: event_tag;
+    padding-bottom: 10px;
+}
+
+/* configure footer */
+.footer{
+    grid-area: footer; 
+    background-color: #90A4BC;
+    padding-left: 5px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    margin-top: 50px;
+    border-top: solid 8px #becad0;
+  }
+  
+  .footer li{
+    display: inline;
+    text-decoration: none;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 20px;
+  }
+
+  .footer p{
+    margin-left: 20px;
+    padding-left: 5px;
+    padding-bottom: 10px;
+  }
+
+  .footer a{
+    text-decoration: none;
+    color: white;
+  }
+  
+  .footer li:hover,
+  .footer li.sfHover,
+  .footer li.current-menu-item {
+      border-bottom: solid 0.3px #ED7755;
+  
+  }
+
+  #logout {
+    padding-top: 40vh;
+  }

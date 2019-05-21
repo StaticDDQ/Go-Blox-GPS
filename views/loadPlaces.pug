@@ -1,0 +1,144 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
+    link(rel='stylesheet', href='../css/loadEvents.css', v='')
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+    title Search Places
+  body
+    #loadPage
+    .container
+      //- Navigation menu
+      .navbar
+        span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Menu
+        #mySidenav.sidenav
+          a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
+          a(href='/members/userProfile') Go to Profile
+          a(href='/') Home
+          a(href='/events/findEvent') Find Events
+          a(href='/places') Places
+          a(href='/events/createEvent') Create Event!
+          a(href='/places/createPlace') Create Place!
+          a#logout(href='/members/logout') Logout :(
+        a(href='/') 
+            img.logo(src= "/logo.png", alt='GPS', width='80', height='80')
+      //- Searchbar to find places
+      .searchBox
+        h1 Find Places
+        form(action='/places/getPlaces', method='post')
+          input.search(type='text', placeholder='Search Places', name='name')
+          input(type='submit', value='Find')
+
+      //- search for tags
+      .filterSide
+        h3 Filter
+        p Category
+        input#input(type='text', placeholder='Search Category', name='name', onkeyup='addCategory()')
+        #filter
+      //- search for places and displaying the details of the places
+      .displayEvents
+        h2 Place Details
+        if places
+          .events
+            each place in places
+              div(class='filtered ', name ='displayedPlaces', category=place.category, onclick="window.location='http://localhost:3000/places/getPlace/" + place._id + "'")
+                  .event_card
+                    .event_title
+                      h3 #{place.placeName}
+                    .event_pic
+                      img(src= place.pictures, alt='place_pic')
+                    .event_desc
+                      p <b>Location:</b> #{place.placeAddress}
+                      p <b>Description:</b> #{place.placeDescription}
+                    .event_tag
+                      p <b>Tags:</b> #{place.placeTags}
+
+      //- Footer
+      .footer
+        p(style='color:white')
+          | © 2019 Get People Socilaizing. All rights reserved. 
+          a(href='page2.html')
+        a(href='page2.html')
+        ul(style='color:white')
+          a(href='page2.html')
+          li
+            a(href='page2.html')
+            a(href='#') Privacy Policy
+          li
+            a(href='#') Terms of Service
+          li
+            a(href='#') Cookie Policy
+
+    script.
+        // Side Navigation Bar
+        function openNav() {
+          document.getElementById("mySidenav").style.width = "250px";
+        }
+        function closeNav() {
+          document.getElementById("mySidenav").style.width = "0";
+        }
+
+        var places = !{JSON.stringify(places)};
+        var filter = document.getElementById('filter');
+
+        function loadCategories(places) {
+          let placeLst = [];
+          var showAll = document.createElement('input');
+          showAll.type = 'button';
+          showAll.value = 'Show All';
+          showAll.onclick = function(){
+              filterOut('show all');
+          }
+          filter.appendChild(showAll);
+
+          for (let i = 0; i < places.length; i++) {
+              if (!tags.includes(places[i].category)) {
+                  placeLst.push(places[i].category);
+                  var btn = document.createElement('input');
+                  btn.type = 'button';
+                  btn.name = 'tagFilter';
+                  btn.value = places[i].placeTags[j];
+                  btn.onclick = function(){
+                      filterOut(places[i].placeTags[j]);
+                  }
+                  filter.appendChild(btn);
+              }
+          }
+          return placeLst;
+        }
+
+        if(places.length > 0) {
+          loadCategories(places);
+        }
+
+        function filterOut(cat) {
+          var displayedPlaces = document.getElementsByClassName('filtered');
+          for(let i = 0; i < displayedPlaces.length; i++){
+            if(displayedPlaces[i].getAttribute('category') === cat > -1 || cat === 'show all'){
+              
+              displayedPlaces[i].style.display = 'block';
+            } else {
+              displayedPlaces[i].style.display = 'none';
+            }
+          }
+        }
+
+        //- Adding Tags to the places
+        function addCategory() {
+            
+          var input, filter, tagDiv;
+          input = document.getElementById('input');
+          filter = input.value.toUpperCase();
+          
+          tagDiv = document.getElementsByName('tagFilter');
+          tagDiv.forEach(function(element) {
+            if(element.value.toUpperCase().indexOf(filter) > -1 && filter.length > 0 || filter.length === 0){
+                element.style.visibility = 'visible';
+            } else {
+                element.style.visibility = 'hidden';
+            }
+          });
+        }

@@ -1,30 +1,106 @@
 const express = require('express');
 const router = express.Router();
-const database = require('../db');
 const mongooseController = require('../controller/mongooseController');
 const passport = require('passport');
+const multer = require('multer');
+const path = require('path');
+var cloudinary = require('cloudinary').v2;
+var cloudConfig = require("../config/cloudinary");
 
 // used to get current date to record when user is created
 const moment = require('moment');
 
 // Get member model
 let Member = require('../models/member');
-
-var currentLogin = database.members[0];
+let Rating = require('../models/rating');
+let Event = require('../models/event');
 
 // login as member
-router.post('/login', function (req, res, next) {
+router.post('/authenticate', function (req, res, next) {
     // successful log in will launch the user's profile
-    passport.authenticate('local', {
-        successRedirect: '/members/profile',
-        failWithError: true
+    passport.authenticate('local', function (err, user, info) {
+        if (err) return next(err);
+        if (!user) return res.render('login', { error: 'Incorrect username or password' });
+        if (!user.active) return res.render('login', { error: 'User is not active' });
+
+        req.logIn(user, function (err) {
+            if (err) return next(err);
+
+            if (user.firstTime) {
+                return res.render('profileTags');
+            } else {
+                return res.redirect('/members/userProfile');
+            }
+        });
     })(req, res,next);
-    currentLogin = req.body;
 });
 
-// load profile
-router.get('/profile', function (req, res) {
-    res.render('../public/views/profile.pug', currentLogin);
+// easy access to user's own profile
+router.get('/userProfile', function (req, res) {
+    if (req.user === undefined)
+        res.render('mustLogin');
+    else {
+        Rating.find({ userName: req.user.userName }, function (err, userRatings) {
+            if (err) throw err;
+            Event.find({ joinedUsers: req.user.userName }, function (err, eventsJoined) {
+                if (err) throw err;
+                Event.find({ organizer: req.user.userName }, function (err, eventsCreated) {
+                    if (err) throw err;
+                    res.render('profile', {
+                        user: req.user,
+                        rating: userRatings,
+                        eventsJoined: eventsJoined,
+                        eventsCreated: eventsCreated,
+                        notCurr: false
+                    });
+                });
+            });
+        });
+    }
+});
+
+// load profile of a certain user
+router.get('/profile/:user', function (req, res) {
+    if (req.user === undefined) {
+        res.render('mustLogin');
+    } else {
+        if (req.params.user === req.user.userName) {
+            return res.redirect('/members/userProfile');
+        }
+        var loginUser = {
+            userName: req.params.user
+        };
+        Member.findOne(loginUser, function (err, result) {
+            if (err) throw err;
+            if (result) {
+                Rating.find({ userName: result.userName }, function (err, userRatings) {
+                    if (err) throw err;
+                    Event.find({ joinedUsers: result.userName }, function (err, eventsJoined) {
+                        if (err) throw err;
+                        Event.find({ organizer: result.userName }, function (err, eventsCreated) {
+                            if (err) throw err;
+                            res.render('profile', {
+                                user: result,
+                                rating: userRatings,
+                                eventsCreated: eventsCreated,
+                                eventsJoined: eventsJoined,
+                                notCurr: (result.userName !== req.user.userName),
+                                isFollowing: req.user.followedUsers.includes(result.userName)
+                            });
+                        });
+                    });
+                });
+            }
+        });
+    }
+});
+
+// open login page
+router.get('/login', function (req, res) {
+    if (req.user !== undefined)
+        res.redirect('/members/userProfile/');
+    else
+        res.render('login');
 });
 
 // logout active user
@@ -35,18 +111,36 @@ router.get('/logout', function (req, res) {
 
 // get member (get from mockup database)
 router.get('/getFirstname/:firstname', function (req, res) {
-    for (let i = 0; i < database.members.length; i++) {
-        if (req.params.firstname === database.members[i].firstName) {
-            res.send(database.members[i]);
-            break;
-        }
-    }
+    Member.findOne({ firstName: req.params.firstname }, function (err, resp) {
+        if (err) throw err;
+        res.send(resp);
+    });
+});
+
+// open signup page
+router.get('/signup', function (req, res) {
+    res.render('signup');
+});
+
+router.get('/verify', function (req, res) {
+    Member.findOneAndUpdate({ userName: req.query.user }, { $set: { active: true } }, function (err, user) {
+        if (err) throw err;
+        res.render('success');
+    });
 });
 
 // register as member
-router.post('/register', function (req, res) {
 
-    console.log(req.body);
+// setting up storage to upload media
+var storage = multer.diskStorage({
+    filename: function (req, file, cb) {
+        cb(null, file.originalname + '-' + Date.now())
+    }
+});
+
+var upload = multer({ storage: storage });
+
+router.post('/register', upload.single("display"), async function (req, res) {
 
     // check each element for validity
     req.checkBody('firstName', 'First name is required').notEmpty();
@@ -56,36 +150,211 @@ router.post('/register', function (req, res) {
     req.checkBody('email', 'Email is not valid').isEmail();
     req.checkBody('DOB', 'Date of Birth is required').notEmpty();
     req.checkBody('password', 'Password is required').notEmpty();
-    req.checkBody('password_confirm', 'Password does not match').equals(req.body.password);
+    req.checkBody('display', 'A display picture is required').notEmpty();
 
     var error = req.validationErrors();
     if (!error) {
-        // add join date of user
-        req.body['joined_date'] = moment().format('YYYY-MM-DD');
+        req.checkBody('password_confirm', 'Password does not match').equals(req.body.password);
+        error = req.validationErrors();
+        if (!error) {
+            // add join date of user
+            req.body['firstName'] = upperCaseName(req.body['firstName']);
+            req.body['lastName'] = upperCaseName(req.body['lastName']);
+            req.body['joined_date'] = moment().format('MMM Do YY');
+            req.body['DOB'] = moment(req.body['DOB']).format('MMM Do YY');
 
-        mongooseController.addUser(req, res);
+            var reqURL;
+            if (req.file !== undefined) {
+                await cloudinary.uploader.upload(req.file.path,
+                    function (error, result) {
+                        if (error) throw error;
+                        // reqURL = result.secure_url;
+                        reqURL = {
+                            public_id: result.public_id,
+                            url: result.secure_url
+                        }
+
+                    });
+            } else{
+                reqURL = {
+                    public_id: '',
+                    url: ''
+                };
+            }
+
+            req.body['display'] = reqURL;
+
+            mongooseController.addUser(req, res);
+        } else {
+            res.render('signup', {
+                error: 'Password does not match.'
+            });
+        }
     } else {
-        console.log("Failed to register");
-    }
-})
-
-// update member
-router.put('/updateMember/:userName', function (req, res) {
-    Member.findOneAndUpdate(
-        { userName: req.params.userName }, { $set: req.body }, function (err, resp) {
-            res.send(resp);
+        res.render('signup', {
+            error: 'Incorrect signup.'
         });
-})
+    }
+});
+
+/// TAKE NOTE HERE
+router.post('/updateUser', upload.single("display"), async function (req, res) {
+    
+
+    await Member.findOne({userName: req.user.userName}, async function(err, result){
+        var pic_delete_id = result.display.id
+        if(pic_delete_id !== undefined){
+            await cloudinary.uploader.destroy(pic_delete_id, function(err, result) {
+                if(err) throw err;
+            });
+        }
+    });
+    if(req.file !== undefined){
+    await cloudinary.uploader.upload(req.file.path,
+        function (error, result) {
+
+            if (result.public_id === '') {
+                req.body['display'] = {
+                public_id: '',
+                url: ''
+                }; 
+            }else {
+
+            req.body['display'] = {
+                public_id: result.public_id,
+                url: result.secure_url
+            };
+        }
+            Member.findOneAndUpdate(
+                { userName: req.user.userName }, {
+                    $set: {
+                        'display': req.body.display,
+                        'interests': req.body.interests,
+                        'desc': req.body.desc
+                    }
+                }, function (err, resp) {
+                    if (err) throw err;
+                    res.redirect('/members/userProfile');
+                });
+
+        });
+    } else {
+            req.body['display'] = {
+                public_id: '',
+                url: ''
+                }; 
+            Member.findOneAndUpdate(
+                { userName: req.user.userName }, {
+                    $set: {
+                        'display': req.body.display,
+                        'interests': req.body.interests,
+                        'desc': req.body.desc
+                    }
+                }, function (err, resp) {
+                    if (err) throw err;
+                    res.redirect('/members/userProfile');
+                });
+
+        }
+});
+
+router.put('/updatePassword', function (req, res) {
+    req.checkBody('password', 'Require password').notEmpty();
+    req.checkBody('oldPwd', 'Old password does not match').equals(req.user.password);
+    req.checkBody('retype', 'Does not match').equals(req.body.password);
+
+    var error = req.validationErrors();
+
+    if (!error) {
+        Member.findOneAndUpdate({ userName: req.user.userName }, {
+            $set: { 'password': req.body.password } }, function (err, result) {
+            if (err) throw err;
+            res.send(result);
+        });
+    } else {
+        res.send(null);
+    }
+});
+
+// function to convert the first letter of the name to uppercase
+function upperCaseName(name) {
+    return name.charAt(0).toUpperCase() + name.slice(1);
+}
+
+// if user joined an event append the name (and maybe link) to the user's json
+router.put('/addEvent/:userName', function (req, res) {
+    Member.findOneAndUpdate({ userName: req.params.userName }, { $push: { joinedEvents : req.body.eventName} });
+});
 
 // delete member
 router.delete('/deleteMember/:username', function (req, res) {
-    for (let i = 0; i < database.events.length; i++) {
-        if (req.params.username === database.members[i].userName) {
-            res.send(database.members[i]);
-            database.members.splice(i);
-            break;
-        }
-    }
+
+    Member.findOneAndDelete(
+        { userName: req.params.username }, function (err, resp) {
+            if (err) throw err;
+            res.send(resp);
+        });
+});
+
+// update user with the description and list of interested tags
+router.post('/storeInfo', function (req, res) {
+    Member.findOneAndUpdate({ userName: req.user.userName }, { $set: { 'desc': req.body.description, 'interests': req.body.interests, 'firstTime': false } }, function (err, result) {
+        res.redirect('/members/userProfile');
+    });
+});
+
+// have current user follow another user
+router.put('/followUser', function (req, res) {
+    Member.findOneAndUpdate({ userName: req.user.userName }, {
+        $push: { 'followedUsers': req.body.username }
+    }, function (err, result) {
+        res.send(result);
+    });
+});
+
+// unfollow a user
+router.put('/unfollowUser', function (req, res) {
+    Member.findOneAndUpdate({ userName: req.user.userName }, {
+        $pull: { 'followedUsers': req.body.username }
+    }, function (err, result) {
+        res.send(result);
+    });
+});
+
+// have current user bookmark a place
+router.put('/bookmark', function (req, res) {
+    Member.findOneAndUpdate({ userName: req.user.userName }, {
+        $push: { 'bookmark': req.body.name }
+    }, function (err, result) {
+        res.send(result);
+    });
+});
+
+// stop bookmarking a place
+router.put('/stopBookmark', function (req, res) {
+    Member.findOneAndUpdate({ userName: req.user.userName }, {
+        $pull: { 'bookmark': req.body.name }
+    }, function (err, result) {
+        res.send(result);
+    });
+});
+
+// look up a user with the closest regex from the input
+router.post('/searchUser', function (req, res) {
+    // find the event
+    Member.findOne({
+        $or: [
+            { userName: { $regex: req.body.username, $options: 'i' } },
+            { firstName: { $regex: req.body.username, $options: 'i' } },
+            { lastName: { $regex: req.body.username, $options: 'i' } }
+        ]
+    }, function (err, resp) {
+        if (err) throw err;
+        if (resp)
+            res.redirect('/members/profile/' + resp.userName);
+        else
+            res.render('notFound');
+    });
 });
 
 module.exports = router;

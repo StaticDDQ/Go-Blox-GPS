@@ -16,7 +16,7 @@ module.exports = function (passport) {
             }
                 
             if (user.password === password)
-                return done(null, user);
+                return done(null, user, { message: 'User found!' });
             else
                 return done(null, false);
         });

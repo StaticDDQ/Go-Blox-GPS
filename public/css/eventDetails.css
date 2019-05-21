@@ -1,0 +1,313 @@
+/* CSS FILE FOR eventDetails.css */
+
+/* general layout */
+* {
+    padding: 0;
+    margin: 0px;
+}
+  
+body{
+    font-family: "Quicksand";
+    text-align: justify;
+    background-color: #f4f4f4;
+}
+
+p {
+  padding-top: 5px;
+}
+
+
+.textContent h2{
+  font-weight: bolder;
+  font-size: 30px;
+}
+p.contacts {
+  font-size: 20px;
+  padding-top: 50px;
+  color: #e15848;
+}
+
+/* configuring the grid */
+.grid{
+    display: grid;
+    height: 100%;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "navbar"
+    "image_content"
+    "main_content"
+    "gallery"
+    "ratings"
+    "reviews"
+    "footer";
+}
+
+/* configuring the navigation bar */
+.navbar{
+    grid-area: navbar;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #ED7755;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
+  
+.sidenav a:hover {
+  color: black;
+}
+  
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* configuring logo */
+.logo{
+    float: right;
+    padding-right: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+/* configuring the image uploaded */
+.imageContent {
+  grid-area: image_content;
+  background-color: white;
+  width: 50%;
+  text-align: center;
+  align-content: center;
+  justify-self: center;
+  padding-left: 60px;
+  padding-right: 60px;
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+.main_img{
+  width: 100%;
+  height: auto;
+}
+
+/* configuring the text */
+.main_content{
+    grid-area: main_content;
+    width: 50%;
+    padding-bottom: 40px;
+    align-content: center;
+    justify-self: center;
+    background-color: white;
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+.text_content {
+  text-align: left;
+    
+}
+
+/* configure join event buttons */
+.join{
+    display: inline-block;
+}
+
+/* configure gallery */
+/* .gallery{
+    grid-area: gallery;
+} */
+
+#yes{
+  width: 50px;
+  font-size: 15px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-left: 10px;
+  border: solid 1px rgb(206, 91, 66);
+  background-color: #ED7755;
+  color: white;
+}
+#yes:hover{
+  background-color: rgb(206, 91, 66);
+  border-color:rgb(206, 91, 66);
+  color: white;
+}
+#no{
+  width: 50px;
+  font-size: 15px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border: solid 1px rgb(206, 91, 66);
+  background-color: #ED7755;
+  color: white;
+}
+#no:hover{
+  background-color: rgb(206, 91, 66);
+  border-color:rgb(206, 91, 66);
+  color: white;
+}
+#interested{
+  width: 100px;
+  font-size: 15px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border: solid 1px rgb(206, 91, 66);
+  background-color: #ED7755;
+  color: white;
+}
+#interested:hover{
+  background-color: rgb(206, 91, 66);
+  border-color:rgb(206, 91, 66);
+  color: white;
+}
+/* add reviews and ratings*/
+.reviews{
+    grid-area: reviews;
+    width: 50%;
+    align-content: center;
+    justify-self: center;
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-bottom: 50px;
+    background-color: white;
+}
+.reviews h2{
+  text-decoration: underline;
+  color: #e15848;
+  font-size: 20px;
+}
+
+textarea{
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 100px;
+  border-radius: 5px;
+  font-size: 12px;
+  border: solid 2px #90A4BC;
+}
+.rating_card{
+  background-color: white;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-top: 20px;
+  border: solid 2px #becad0;
+  border-radius: 8px;
+}
+
+.ratings{
+  grid-area: ratings;
+  width: 50%;
+  align-content: center;
+  justify-self: center;
+  padding-left: 60px;
+  padding-right: 60px;
+  padding-bottom: 50px;
+  background-color: white;
+}
+.ratings input[type=submit]{
+  border-color: #ED7755;
+  padding: 5px 5px 5px 5px;
+  margin-top: 5px;
+  border-radius: 20px;
+  background-color: #ED7755;
+  color: white;
+}
+
+.ratings input[type=submit]:hover{
+  background-color: rgb(206, 91, 66);
+  border-color:rgb(206, 91, 66);
+  padding: 5px 5px 5px 5px;
+  color: white;
+}
+/* configure footer */
+.footer{
+    grid-area: footer; 
+    background-color: #90A4BC;
+    padding-left: 5px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    margin-top: 50px;
+    border-top: solid 8px #becad0;
+  }
+  
+  .footer li{
+    display: inline;
+    text-decoration: none;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 20px;
+  }
+  
+  .footer p{
+    margin-left: 20px;
+    padding-left: 5px;
+    padding-bottom: 10px;
+  }
+  
+  .footer a{
+    text-decoration: none;
+    color: white;
+  }
+  
+  .footer li:hover,
+  .footer li.sfHover,
+  .footer li.current-menu-item {
+      border-bottom: solid 0.3px #ED7755;
+  
+  }
+
+  /* add rating stars */
+
+  .star{
+      color: goldenrod;
+      font-size: 2.0rem;
+  }
+
+  .star::before{
+      content:'\2606';
+      cursor: pointer;
+  }
+
+  .star.rated::before{
+      content:'\2605'
+  }
+
+  .starred {
+      color: goldenrod;
+      font-size: 2.0rem;
+  }
+
+  .starred::before {
+      content: '\2606';
+      cursor: pointer;
+  }
+
+  .starred.rated::before {
+      content: '\2605'
+  }
+
+  #logout {
+    padding-top: 40vh;
+  }

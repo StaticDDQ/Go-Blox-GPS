@@ -1,0 +1,493 @@
+/* CSS FILE FOR profile.pug */
+
+/* main layout */
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body{
+  font-family: "Quicksand";
+  background-color: #f4f4f4;
+  /* background-image: linear-gradient(to bottom right, #e15848, #90a4bc); */
+  background-repeat:no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* configure grid */
+.grid{
+  display: grid;
+  height: 100%;
+  grid-template-columns: 20% 80%;
+  grid-template-rows: 0.3fr 2fr 0.3fr;
+  grid-template-areas: 
+  "navbar navbar"
+  "basic_profile all_content"
+  "footer footer";
+}
+
+/* header */
+.navbar{
+  grid-area: navbar;
+  padding-left: 20px;
+  padding-top: 20px;
+}
+
+.logo{
+  float: right;
+  padding-right: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+/* profile sidebar */
+.basic_profile{
+  grid-area: basic_profile;
+  text-align: center;
+  /* border: 1px solid #F5BDAB; */
+  margin-left: 20px;
+  padding-top: 10px;
+  background-color: #ED7755;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-right: solid 2px #ED7755;
+  color: white;
+}
+
+.profile{
+  border: 2px solid white;
+  border-radius: 50%;
+  height: 11.5vw;
+  width: 11.5vw;
+  padding: 5px;
+}
+
+.basic_profile h3{
+  margin-top: 10px;
+  font-weight: bolder;
+}
+
+#followUser{
+  padding: 5px;
+  border: none;
+}
+
+#followUser:hover{
+  background-color: #F5BDAB;
+}
+/* details about the person on the right side */
+.all_content{
+  grid-area: all_content;
+  /* border: 1px solid #BECAD0; */
+  margin-right: 20px;
+  background-color: white;
+  /* margin-left: 10px; */
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+/* configure footer */
+.footer{
+  grid-area: footer; 
+  background-color: #90A4BC;
+  padding-left: 5px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  margin-top: 50px;
+  border-top: solid 8px #becad0;
+}
+
+.footer p{
+  margin-left: 20px;
+  padding-left: 5px;
+  padding-bottom: 10px;
+}
+
+.footer li{
+  display: inline;
+  text-decoration: none;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-left: 20px;
+}
+
+.footer a{
+  text-decoration: none;
+  color: white;
+}
+
+.footer li:hover,
+.footer li.sfHover,
+.footer li.current-menu-item {
+    background-color: black;
+
+}
+
+/* tabs for all content */
+.tab {
+  overflow: hidden;
+  /* border: 1px solid #ccc;  */
+  /* background-color: #f1f1f1; */
+  /* border-top-left-radius: 20px; */
+  border-top-right-radius: 20px;
+  font-family: 'Quicksand';
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  margin-left: 5px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  /* background-color: #ddd; */
+  border-bottom: solid 2px #E15848;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  /* background-color: #ccc; */
+  border-bottom: solid 2px #E15848;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  color: #333333;
+  border-top: none;
+  padding-top: 10px;
+}
+
+/* Events tab */
+.gridEvent{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 1fr;
+  grid-template-areas: 
+  "attend created";
+}
+
+.attend{
+  grid-area: attend;
+  /* background-color: #ccc; */
+  border-right: solid 1px black;
+}
+
+.created{
+  grid-area: created;
+  /* background-color: #ccc; */
+  padding-left: 1vw;
+}
+
+#Events a{
+  color: white;
+  text-decoration: none;
+  list-style-type: none;
+  font-size: 15px;
+}
+
+#Events li{
+  border-radius: 20px;
+  padding: 5px;
+  margin-top: 1vh;
+  background-color: #ED7755;
+  background-image: linear-gradient(to left,#F5BDAB, #E15848 );
+  margin-right: 1vw;
+  width: 20vw;
+}
+
+#Events li:hover{
+  background-color:#d86141;
+  color: #4f4f4f;
+}
+
+/* Friends tab */
+#Friends a{
+  color: #d86141;
+  text-decoration: none;
+  list-style-type: none;
+  font-size: 1em;
+}
+
+#Friends a{
+  padding: 5px;
+  margin-top: 1vh;
+}
+
+#Friends a:hover{
+  color: #4f4f4f;
+}
+
+#Friends form{
+  margin-bottom: 10px;
+}
+#Friends input[type=text]{
+  width: 20%;
+  padding: 5px;
+  margin-right: 0px;
+  border: none;
+}
+
+#Friends input[type=submit]{
+  width: 10%;
+  padding: 5px;
+  background-color: #ED7755;
+  color: white;
+  margin-left: 0px;
+  border: solid 1px #ED7755;
+}
+
+#Friends input[type=submit]:hover{
+  background-color: #d86141;
+  border: solid 1px #ED7755;
+}
+
+/* Interest tab */
+#Interests h3{
+  margin-bottom: 10px;
+}
+
+#Interest {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+  "interest_tag"
+  "des"
+}
+
+#interest_tag{
+  grid-area: interest_tag;
+  word-break: break-all;
+  width: 100%;
+  height: auto;
+  padding-bottom: 5px;
+  margin-right: 10px;
+}
+
+#interest_tag li{
+  list-style-type: none;
+  border: solid 1px #707070;
+  display: inline;
+  margin-right: 10px;
+  border-radius: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 15px;
+  color:black;
+  line-height: 1.8em;
+}
+
+#des {
+  grid-area: des;
+  margin-top: 20px;
+}
+
+/* reviews tab */
+#reviewCard{
+  list-style-type: none;
+  border-bottom: solid 1px #4f4f4f;
+  width: 100%;
+  
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+#Reviews li{
+  padding-left: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 15px;
+}
+
+.eventName{
+  font-weight: bolder;
+  font-size: 20px;
+  text-decoration: underline;
+  color: #ED7755;
+}
+
+.eventDesc{
+  font-weight: bold;
+}
+
+.deleteRating{
+  border: none;
+  color: #707070;
+  font-size: 20px;
+}
+
+.deleteRating:hover{
+  color: #333333;
+  font-size: 20px;
+}
+
+/* configure navigation bar */
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #ED7755;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  white-space: nowrap;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+  white-space: nowrap;
+}
+
+.sidenav
+
+.sidenav a:hover {
+  color: black;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+#logout {
+  margin-top: 40vh;
+}
+
+/* configure setting which uses overlay */
+.settings {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: 
+  "one password";
+  background-color: #f1f1f1;
+  padding: 20px;
+  justify-content: center;
+  margin: 10vh auto;
+  width: 50vmax;
+  height: auto;
+  font-family: 'Roboto';
+  color:  rgb(20, 20, 20);
+
+ } 
+
+ .one {
+   grid-area: one;
+ }
+ .password {
+   grid-area: password;
+ }
+
+ .settings h2 {
+   font-family: 'Quicksand';
+   font-style: bold;
+   color: #ED7755;
+   padding-bottom: 4px;
+
+ }
+ .settings img{
+  border: 1px solid #f4f4f4;
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+ }
+
+#overlay {
+    position: absolute;
+    overflow: scroll;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+}
+
+
+input {
+  font-size: 12px;
+  width: 100px;
+  align-content: center;
+  font-family: 'Quicksand';
+  margin: 5px;
+}
+
+.xButton button, 
+.xButton input,
+input#xButton
+ {
+  height: 30px;
+  width: 70px;
+  padding: 2px; 
+  font-family: 'Quicksand';
+  font-size: 12px;
+  border: none;
+  border: .5px solid #707070;
+  border-radius: .4em;
+  margin: 5px;
+
+}
+
+input#submitChanges,
+input#xButton2 {
+  height: 30px;
+  width: 120px;
+  padding: 2px; 
+  font-family: 'Quicksand';
+  font-size: 12px;
+  border: none;
+  border: .5px solid #707070;
+  border-radius: .4em;
+  margin: 5px;
+}
+.xButton {
+  text-align: left;
+  
+}
+
+#cancel {
+  align-content: right;
+}
+.xButton button:hover,
+.xButton button.sfHover,
+.xButton button.current-menu-item,
+.xButton input:hover,
+.xButton input.sfHover,
+.xButton input.current-menu-item,
+input#xButton:hover,
+input#xButton.sfHover,
+input#xButton.current-menu-item,
+input#xButton2:hover,
+input#xButton2.sfHover,
+input#xButton2.current-menu-item,
+input#submitChanges:hover,
+input#submitChanges.sfHover,
+input#submitChanges.current-menu-item
+ {
+  background-color: #ED7755;
+  color:  rgb(255, 255, 255);
+}

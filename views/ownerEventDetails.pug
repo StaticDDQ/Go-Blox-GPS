@@ -1,0 +1,97 @@
+doctype html
+html(lang='en')
+  head
+    title Create Event
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    style
+      include ../public/css/eventDetails.css
+    //- link(rel='stylesheet', href='../css/eventDetails.css', type='text/css')
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js")
+
+  body
+    .grid
+      .navbar
+        span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Menu
+        #mySidenav.sidenav
+          a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
+          a(href='/members/userProfile') Go to profile
+          a(href='/') Home
+          a(href='/events/findEvent') Find Events
+          a(href='/places') Places
+          a(href='/events/createEvent') Create Event!
+          a(href='/places/createPlace') Create Place!
+          a#logout(href='/members/logout') Logout :(
+        a(href='/') 
+            img.logo(src= "/logo.png", alt='GPS', width='80', height='80')
+
+      .imageContent
+        img.main_img(src=event.pictures, alt='main_image')
+
+      .main_content
+        .textContent
+
+          h2 #{event.name}
+          p <b>Organised by:</b> You
+          p <b>Start Date:</b> #{event.startDate}
+          p <b>End Date:</b> #{event.endDate}
+          p <b>Start Time:</b> #{event.startTime}
+          p <b>End Time:</b> #{event.endTime}
+          p <b>Description:</b>
+          p #{event.description}
+          p.contacts <b>Contact Details:</b>
+          p <b>Email:</b> #{event.email}
+          p <b>Phone Number:</b> #{event.phone}
+          p <b>Tags:</b> #{event.tags}
+          br
+          if event.joinedUsers
+            ul
+                each user in event.joinedUsers
+                    a(href='/members/profile/' + user)
+                        li #{user}
+
+      .reviews
+        h2 Reviews
+        #addedRating
+        if ratings.length > 0
+            - 
+                var avg = 0;
+                var counter = 0;
+                ratings.forEach(function(rating){
+                    avg += rating.stars;
+                    counter++;
+                });
+                avg /= counter;
+                avg = avg.toFixed(2);
+            p Average Ratings:
+            | #{avg}/5
+            each rating in ratings
+                .rating_card
+                    p USER: #{rating.userName}
+                    p STARS: #{rating.stars}/5
+                    p DESCRIPTION: #{rating.desc}
+      .footer
+        p(style='color:white')
+          | © 2019 Get People Socilaizing. All rights reserved.
+          a(href='page2.html')
+        a(href='page2.html')
+        ul(style='color:white')
+          a(href='page2.html')
+          li
+            a(href='page2.html')
+            a(href='#') Privacy Policy
+          li
+            a(href='#') Terms of Service
+          li
+            a(href='#') Cookie Policy
+    script.
+
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+

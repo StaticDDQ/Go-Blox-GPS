@@ -1,38 +1,246 @@
+/* CSS FOR signup.pug */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Formatting the general look */
+
+body {
+    color:#333;
+    font-family: 'Quicksand';
+    background-image: linear-gradient(to bottom right, #e15848, #90a4bc);
+    background-repeat:no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    /* -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; */
+}
+
+/* Grid container configuration */
+
+.gridContainer {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "box";
+
+ }
+
+.box {
+    grid-area: box;
+    text-align: center;
+    background-color: rgb(255,249,248);
+    border: solid 1px rgb(214,201,201);
+    border-radius: .7em;
+    padding: 3vw;
+    width: 40vw;
+    margin: 100px auto;
+    box-shadow: 0px 2px 2px 0px rgba(53, 53, 53, 0.75);
+}
 
 form {
     color: rgb(236,118,85);
-    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+}
+
+/* Formatting the input boxes */
+
+p {
+    text-align: left;
+}
+
+input {
+    font-size: 14px;
+    width: 200px;
+    padding: 20px;
+    align-content: center;
+    font-family: 'Quicksand';
 
 }
+
+/* Formatting header */
 
 h1 {
-    color: black;
-    font-family: 'Helvetica';
-    font-style: italic;
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 2px;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    color: #647a94;
 }
 
-div {
-    /*background-image: url("../assets/communit-group.png");*/
-    background-repeat: no-repeat;
-    background-size: cover;
+.uploadImage input{
+    width: 20vw;
+}
+
+.uploadImage img {
+    width: 15vw;
+    height: 15vw;
+}
+
+.signUps {
+    padding-top: 10px;
+    text-align: left;
+}
+
+.signUps input {
+    padding: 10px;
+    width: 37.5vw;
+    padding: 1vw;    
+    margin-top: 6px;
+}
+
+/* Configuring terms and conditions */
+
+.agree input {
+    padding: .5em;
+    width: 20px;
 
 }
 
-.box {
-    display: block;
-    background-color: rgb(255,249,248);
-    border: solid 1px rgb(214,201,201);
-    /*background-color: #fff4f0*/
-    height: 500px;
-    width: 600px;
-    padding: 30px;
-    align-content: center;
+.agree {
+    text-align: left;
+    padding-top: 10px;
+}
+
+
+.nameContainers {
+    display: grid;
+    grid-template-areas: 
+    "firstname lastname";
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 3vw;
+}
+
+/* Entering first and last name */
+
+.signUpsFirstName {
+    grid-area: firstname;
+    text-align: left;
+}
+
+.signUpsFirstName input {
+    width: 16vw;
+    padding: 1vw;
+    margin-top: 6px;
+}
+
+.signUpsLastName {
+    grid-area: lastname;
+    text-align: left;
+}
+
+.signUpsLastName input {
+    width: 16vw;    
+    padding: 1vw;
+    margin-top: 6px;
+}
+
+/* Sign Up Button*/
+
+.signUpButton input {
+    height: 6vh;
+    width: 9vw;
+    padding: 10px;
+    font-family: 'Quicksand';
+    font-size: 1.1vw;
+    border: none;
+    border: .5px solid #707070;
+    border-radius: .4em;
+
+}
+.signUpButton {
+    text-align: left;
+    padding-top: 20px;
+}
+
+.signUpButton input:hover,
+.signUpButton input.sfHover,
+.signUpButton input.current-menu-item {
+    background-color: #f5bdab;
+    color:  rgb(255, 255, 255);
+}
+
+/* Login button configuration */
+
+.loginButton input {
+    height: 5vh;
+    width: 12vw;
+    font-size: 1.1vw;
+    padding: 5px; 
+    color: #555555;
+    font-family: 'Quicksand';
+    background: none;
+    border: none;
+    text-align: left;
+
+}
+
+.loginButton {
+    text-align: left;
+    padding-bottom: 40px
+}
+
+.loginButton input:hover,
+.loginButton input.sfHover,
+.loginButton input.current-menu-item {
+    background: none;
+    border-bottom: .1em solid #f5bdab;
+}
+
+/* hover over forms */
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: black;
+    color: #fff;
     text-align: center;
-    margin: 100px auto;
+    border-radius: 6px;
+    padding: 5px;
+    margin: 5px;
+    font-size: 10px;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+
+  .tooltip .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    right: 100%; /* To the left of the tooltip */
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
+  }
+
+#overlay {
+    position: absolute;
     overflow: scroll;
-
-}
-
-body {
-    background-image: linear-gradient(to bottom right, #e15848, #90a4bc);
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
 }

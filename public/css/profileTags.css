@@ -1,0 +1,274 @@
+/* CSS FILE FOR createEvent.pug */
+
+
+/* General body formatting */
+
+* {
+    margin: 0;
+    padding: 0; 
+}
+
+body{
+    color:#333;
+    font-family: 'Quicksand';
+    background-image: linear-gradient(to top right, #f5bdab, #90a4bc); 
+    background-repeat:no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    /* -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; */
+}
+
+/* Configure grid */
+
+.gridContainer {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "navbar"
+    "box";
+    justify-items: stretch;
+    align-items: stretch;
+ }
+
+.box {
+    grid-area: box;
+    text-align: center;
+    align-content: center;
+    background-color: rgb(255,249,248);
+    border: solid 1px rgb(214,201,201);
+    border-radius: .7em;
+    padding: 50px;
+    width: 36vw;
+    height: auto;
+    margin: 100px auto;
+    /* max-height: auto; */
+    box-shadow: 0px 2px 2px 0px rgba(53, 53, 53, 0.75);
+}
+
+/* Format Header */
+h1 {
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 2px;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    color: #647a94;
+}
+
+form {
+    color: rgb(236,118,85);
+    font-size: 20px;
+
+}
+
+/* Formatting the input boxes */
+p {
+    text-align: left;
+}
+
+input, textarea {
+    font-size: 14px;
+    width: 200px;
+    padding: 20px;
+    align-content: center;
+    font-family: 'Quicksand';
+}
+
+.navbar{
+    grid-area: navbar;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #ED7755;
+  overflow-x: hidden;
+  /* transition: 0.5s; */
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+  
+}
+  
+.sidenav a:hover {
+  color: black;
+}
+  
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.searchBar input {
+    width: 10vw;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    /* margin: 1vw auto; */
+    align-content: center;
+    font-family: 'Quicksand';
+}
+
+input#but {
+
+    width: 10vw;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-family: 'Quicksand';
+    font-size: 1vw;
+    border: none;
+    border: .5px solid #707070;
+    border-radius: .4em;
+    overflow: hidden;
+
+}
+
+input#but:hover,
+input#but.sfHover,
+input#but.current-menu-item
+ {
+  background-color: #ED7755;
+  color:  rgb(255, 255, 255);
+}
+
+.bottom button {
+    background-color: transparent;
+    border: 1px solid #2196F3;
+    padding: .5rem 1rem;
+    cursor: pointer;
+    border-radius: .25rem;
+  }
+
+ .uploadImage {
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     width: auto;
+ }
+
+ ul#wrapper{
+     list-style: none;
+     display: inline-block;
+ }
+
+ li{
+     float:left;
+     text-align:center;
+     visibility:hidden;
+ }
+
+ a {
+     text-decoration:none;
+ }
+
+ /* Create Event button configuration */
+
+/* Configuring inputs */
+
+.eventInputs {
+    padding-top: 10px;
+    text-align: left;  
+}
+
+/* Changed input to text area. */
+
+.eventInputs input, textarea {
+    padding: 10px;
+    width: 35vw;
+    margin-top: 6px;
+    resize:vertical;
+}
+/* Configuring terms and conditions */
+
+.agree input {
+    padding: .5em;
+    width: 2vw;
+
+}
+
+.agree {
+    text-align: left;
+    padding-top: 10px;
+}
+
+#overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    background-attachment: fixed;
+    background-position: center;
+    position: absolute;
+    overflow: scroll;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    
+    z-index: 2;
+}
+
+.submitBtns {
+    /* display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: 
+    "one password"; */
+    background-color: #f1f1f1;
+    padding: 20px;
+    justify-content: center;
+    margin: 33.5vh auto;
+    width: 40vmax;
+    height: auto;
+    font-family: 'Quicksand';
+    color:  rgb(20, 20, 20);
+    border-radius: .7em;
+
+}
+
+.submitBtns p {
+    text-align: center;
+}
+
+.submitBtns input {
+    height: 6vh;
+    width: 11vw;
+    padding: 10px; 
+    margin-right: 2vw;
+    font-family: 'Quicksand';
+    font-size: 1.2vw;
+    border: .5px solid #707070;
+    border-radius: .4em;
+    
+}
+
+.submitBtns input:hover,
+.submitBtns input.sfHover,
+.submitBtns input.current-menu-item {
+    background-color: #f5bdab;
+    color:  rgb(255, 255, 255);
+}
+.submitBtns input#no:hover,
+.submitBtns input#no.sfHover,
+.submitBtns input#no.current-menu-item {
+    background-color: #ED7755;
+    color:  rgb(255, 255, 255);
+}

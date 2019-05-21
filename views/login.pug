@@ -1,0 +1,28 @@
+doctype html
+html(lang='en')
+  head
+    title Login Page
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial scale=1.0')
+    link(rel='stylesheet', href='../css/index.css')
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+
+  body
+  .gridContainer
+    //- Login form
+    .container
+      form(action='/members/authenticate', method='post')
+          h1 LOGIN
+          h4 #{error}
+          .logins
+            input(title='Please Enter Your username', name='username', type='text', placeholder='Username')
+            br
+          .logins
+            input(title='password', name='password', type='password', placeholder='Password')
+            br
+          .loginButton
+            input(type='submit', value='Log in')
+      form(action='/members/signup', method='get')
+          .signUpButton
+            input(type='submit', value='Create an account')

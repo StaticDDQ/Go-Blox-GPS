@@ -1,0 +1,142 @@
+/* CSS FILE FOR about.pug */
+
+/* general layout */
+* {
+  padding: 0;
+  margin: 5px;;
+}
+
+body{
+  font-family: "Quicksand";
+}
+
+/* configuring the grid */
+.grid{
+  display: grid;
+  height: 100%;
+  grid-template-columns: auto;
+  grid-template-rows: 0.3fr 0.3fr 2.3fr 0.3fr;
+  grid-template-areas: 
+  "navbar navbar"
+  "title title"
+  "all_content all_content"
+  "footer footer";
+}
+
+/* configuring the header */
+.navbar{
+  grid-area: navbar;
+}
+
+.logo{
+  float: right;
+}
+
+.title {
+  grid-area: title;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+.all_content{
+  grid-area: all_content;
+  border: 1px solid #BECAD0;
+}
+
+/* configuring the footer */
+.footer{
+  grid-area: footer; 
+  background-color: #90A4BC;
+
+}
+
+.footer li{
+  display: inline;
+  text-decoration: none;
+}
+
+.footer a{
+  text-decoration: none;
+  color: white;
+}
+
+.footer li:hover,
+.footer li.sfHover,
+.footer li.current-menu-item {
+    background-color: black;
+
+}
+
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+
+  border-top: none;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #ED7755;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+
+  color: black;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+#logout {
+  padding-top: 40vh;
+}

@@ -10,9 +10,16 @@ const memberSchema = new mongoose.Schema({
         unique: true
     },
     "email": String,
-    "DOB": Date,
-    "joined_date": Date,
-    "password": String
-}, { versionKey: false });
+    "DOB": String,
+    "joined_date": String,
+    "password": String,
+    "active": Boolean,
+    "display":Object,
+    "desc": String,
+    "interests": [String],
+    "bookmark": [String],
+    "firstTime": Boolean,
+    "followedUsers": [String]
+}, { versionKey: false});
 
 const Member = module.exports = mongoose.model('members', memberSchema);

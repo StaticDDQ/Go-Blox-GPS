@@ -1,0 +1,67 @@
+doctype html
+html
+  head
+    title GO-BLOX: GET PEOPLE SOCIALISING!
+    meta(charset='utf-8')
+    link(rel='stylesheet',type='text/css', href='mappers.css')
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans&display=swap', rel='stylesheet')
+    link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.3.1/css/all.css')
+
+  //-link(rel='stylesheet', href='http://cdn.leafletjs.com/leaflet-0.7/leaflet.css')
+  body
+    style
+      include ../public/css/mappers.css
+    .grid
+      .mapping  
+        #map
+        script(src='http://cdn.leafletjs.com/leaflet-0.7/leaflet.js')
+        script.
+          var map = L.map('map').setView([-37.814, 144.96332], 12);
+          mapLink =
+          '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+          L.tileLayer(
+          'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; ' + mapLink + ' Contributors',
+          maxZoom: 18,
+          }).addTo(map);
+        if events
+            each evented in events
+              script.
+                var marker = new L.Marker([#{evented.lat},#{evented.long}]);
+                marker.bindPopup("<b>#{evented.name}</b><br/>Address: #{evented.address}<br/>Phone: #{evented.phone}<br/>Email: #{evented.email}");
+                map.addLayer(marker);
+      .desc
+        h1 gps.
+        h3
+          |get people
+          br
+          |socializing  
+        h4
+          br
+          |A platform for students especially those 
+          br
+          |who are new in Melbourne 
+          br
+          |to discover events and places 
+          br
+          |based on their interests and 
+          br
+          |meet new people with likeminded values! :)  
+          h2 D I S C O V E R
+          .searching
+            form(action="/events/maps/search", method="post")
+              input(type="search", placeholder="search...",name="search")
+              button.i.fa.fa-search(type='submit')
+          h5 DISCOVER MORE!
+          if !isLoggedIn
+              ul
+                li
+                  a(href='/members/signup') SIGN UP
+                li
+                  a(href='/members/login') LOGIN
+
+          else 
+            ul
+              li
+                  a(href='/members/login') Go to your page
+
