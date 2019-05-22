@@ -9,7 +9,7 @@ html(lang='en')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
   body
     .gridContainer
-      include include/navbar.pug
+      include includes/navbar.pug
       .box
         form(action='/places/addPlace', method='POST', enctype="multipart/form-data", onsubmit='return agreed()')
           //- title of the page
