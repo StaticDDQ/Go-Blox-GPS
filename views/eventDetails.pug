@@ -23,7 +23,8 @@ html(lang='en')
         .textContent
 
           h2 #{event.name}
-          p <b>Organised by:</b> #{event.organizer}
+          a(href='/members/profile/'+event.organizer)
+            p <b>Organised by:</b> #{event.organizer}
           p <b>Start Date:</b> #{event.startDate}
           p <b>End Date:</b> #{event.endDate}
           p <b>Start Time:</b> #{event.startTime}
