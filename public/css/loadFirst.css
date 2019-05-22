@@ -1,0 +1,166 @@
+/* CSS FILE FOR loadEvents.pug */
+/* configure main layout */
+* {
+    padding: 0;
+    margin: 0px;
+}
+
+body {
+    font-family: 'Quicksand';
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #f4f4f4;
+}
+
+/* configure the grid */
+
+
+/* container for the search events/search places */
+.container_first {
+    display: grid;
+    grid-template-rows: 0.3fr 1fr 0.3fr;
+    width: 100vw;
+    height: 100vh;
+    /* grid-template-rows: auto; */
+    grid-template-areas: 
+    "navbar"
+    "searchBox"
+    "footer";
+}
+
+/* configure navigation bar */
+.navbar{
+    grid-area: navbar;
+    padding-left: 20px;
+    padding-top: 20px;
+}   
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #ED7755;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: black;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* configure header elements */
+.logo{
+    float: right;
+    padding-right: 20px;
+    padding-top: 15px;
+}
+
+.searchBox{
+    grid-area: searchBox;
+    max-height: 500px;
+    text-align: center;
+    padding-bottom: 50px;
+    margin-left: 10vw;
+    margin-right: 10vw;
+}
+
+.searchBox h1{
+   padding-bottom: 5vh;
+   font-size: 2em;
+   font-weight: bolder;
+   color: #e15848;
+}
+
+.search{
+   border: none;
+   width: 70%;
+   height: auto;
+   font-size: 1em;
+   padding: 5px;
+   border-radius: 10px;
+}
+
+.searchBox input[type=text]:hover{
+    border-color: #a0a0a0 #b9b9b9 #b9b9b9 #b9b9b9;
+}
+
+.search:focus{
+    border-color:#4d90fe;
+}
+
+.searchBox input[type=submit]{
+    border: none;
+    font-size: 1em;
+    padding: 5px;
+    border-radius: 10px;
+    margin-top: 3vh;
+}
+
+.searchBox input[type=submit]:hover{
+    color: #ED7755;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+/* configure footer */
+.footer{
+    grid-area: footer; 
+    background-color: #90A4BC;
+    padding-left: 5px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    margin-top: 50px;
+    border-top: solid 8px #becad0;
+  }
+  
+  .footer li{
+    display: inline;
+    text-decoration: none;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 20px;
+  }
+
+  .footer p{
+    margin-left: 20px;
+    padding-left: 5px;
+    padding-bottom: 10px;
+  }
+
+  .footer a{
+    text-decoration: none;
+    color: white;
+  }
+  
+  .footer li:hover,
+  .footer li.sfHover,
+  .footer li.current-menu-item {
+      border-bottom: solid 0.3px #ED7755;
+  
+  }
+
+  #logout {
+    padding-top: 40vh;
+  }
