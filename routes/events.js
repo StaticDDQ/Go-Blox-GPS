@@ -101,13 +101,15 @@ router.post('/maps/search', async function(req,res){
 
         for (let i = 0; i < resp.length; i++){
             var aEvent = {
+                id: resp[i]._id,
                 name: resp[i].name,
                 organizer: resp[i].organizer,
                 lat: parseFloat(resp[i].location[0].latitude),
                 long: parseFloat(resp[i].location[0].longitude),
                 address: resp[i].address,
                 phone: resp[i].phone,
-                email: resp[i].email
+                email: resp[i].email,
+                pictures: resp[i].pictures
             };
         
 
@@ -115,6 +117,7 @@ router.post('/maps/search', async function(req,res){
         };
 
     });
+    var placeArr = []
     await Places.find({
         $or: [
             {placeName: {$regex: req.body.search, $options: 'i' }},
@@ -124,20 +127,20 @@ router.post('/maps/search', async function(req,res){
         if (err) throw err;
         for (let i = 0; i < resp.length; i++){
             var aPlaces = {
+                id: resp[i]._id,
                 name: resp[i].placeName,
                 lat: parseFloat(resp[i].location[0].latitude),
                 long: parseFloat(resp[i].location[0].longitude),
                 address: resp[i].placeAddress,
                 phone: resp[i].placePhone,
-                email: ''
+                pictures: resp[i].pictures
             };
 
-            arrayed.push(aPlaces);
+            placeArr.push(aPlaces);
         };
     
     });
-    await console.log(arrayed);
-    await res.render('maps', {events: arrayed});
+    await res.render('maps', {events: arrayed, places: placeArr, isLoggedIn: req.user !== undefined });
 
 });
 

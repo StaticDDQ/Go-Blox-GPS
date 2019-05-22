@@ -13,6 +13,7 @@ app.locals.moment = require('moment');
 
 // models to use for sampling
 let Event = require('./models/event');
+let Places = require('./models/place');
 
 var port = process.env.PORT || 3000;
 
@@ -69,8 +70,26 @@ app.get('/', function (req, res) {
             arrayed.push(aEvent);        
         }
         
-        res.render('maps', { events: arrayed, isLoggedIn: req.user !== undefined });
-    });
+        Places.aggregate([{ $sample: { size: 5} }]).exec(function(err, resp){
+            if (err) throw err;
+            var placeArr = [];
+            for (let i = 0; i < resp.length; i++){
+                var aPlaces = {
+                    id: resp[i]._id,
+                    name: resp[i].placeName,
+                    lat: parseFloat(resp[i].location[0].latitude),
+                    long: parseFloat(resp[i].location[0].longitude),
+                    address: resp[i].placeAddress,
+                    phone: resp[i].placePhone,
+                    pictures: resp[i].pictures
+                };
+    
+                placeArr.push(aPlaces);
+            };
+            res.render('maps', { events: arrayed, places: placeArr, isLoggedIn: req.user !== undefined });
+        });
+    });    
+
 });
 
 app.use(express.static(path.join(__dirname, 'public')));

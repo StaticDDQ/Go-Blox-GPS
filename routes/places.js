@@ -94,7 +94,7 @@ router.get('/getPlace/:id', function (req, res) {
         if (place != null) {
             res.render('placeDetails', {
                 place: place,
-                isBookmarked: req.user.bookmark.includes(place.placeName)
+                isBookmarked: req.user !== undefined && req.user.bookmark.includes(place.placeName)
             });
         } else {
             res.render('notFound');
