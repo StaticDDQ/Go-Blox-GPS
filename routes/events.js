@@ -178,7 +178,26 @@ router.get('/findEvent', function (req, res) {
     if (req.user === undefined) {
         res.redirect('/');
     } else {
-        res.render('loadEventsFirst');
+        Event.find({}).exec(function(err, resp){
+            if(err) throw err;
+            var arrayed = []
+            for (let i = 0; i < resp.length; i++){
+                var aEvent = {
+                    id: resp[i]._id,
+                    name: resp[i].name,
+                    lat: parseFloat(resp[i].location[0].latitude),
+                    long: parseFloat(resp[i].location[0].longitude),
+                    address: resp[i].address,
+                    phone: resp[i].phone,
+                    email: resp[i].email,
+                    pictures: resp[i].pictures
+                };
+    
+                arrayed.push(aEvent);      
+            }
+            
+            res.render('loadEventsFirst', { events: arrayed });
+        });
     }
 })
 
@@ -192,7 +211,28 @@ router.post('/getEvents', function (req, res) {
             {organizers: {$regex: req.body.name, $options: 'i' }}
         ] }, function (err, resp) {
         if (err) throw err;
-        res.render('loadEvents', { events : resp});
+        var arrayed = []
+        for (let i = 0; i < resp.length; i++){
+            var aEvent = {
+                id: resp[i]._id,
+                name: resp[i].name,
+                lat: parseFloat(resp[i].location[0].latitude),
+                long: parseFloat(resp[i].location[0].longitude),
+                address: resp[i].address,
+                phone: resp[i].phone,
+                email: resp[i].email,
+                startDate: resp[i].startDate,
+                endDate: resp[i].endDate,
+                startTime: resp[i].startTime,
+                endTime: resp[i].endTime,
+                description: resp[i].description,
+                pictures: resp[i].pictures,
+                tags: resp[i].tags
+            };
+
+            arrayed.push(aEvent);      
+        }
+        res.render('loadEvents', { events : arrayed});
     });
 });
 

@@ -21,6 +21,7 @@ body {
     grid-template-areas: 
     "navbar navbar"
     "searchBox searchBox"
+    "mapping mapping"
     "filterSide displayEvents"
     "footer footer";
 }
@@ -29,7 +30,7 @@ body {
 .container_first {
     display: grid;
     grid-template-columns: 0.3fr 1fr;
-    grid-template-rows: 0.005fr .05fr 2.5fr 0.1fr;
+    /* grid-template-rows: 0.005fr .05fr 2.5fr 0.1fr; */
     /* grid-template-rows: auto; */
     grid-template-areas: 
     "navbar navbar"
@@ -40,14 +41,14 @@ body {
 
 /* configure header elements */
 
-.searchBox{
+.searching{
     grid-area: searchBox;
     max-height: 500px;
     text-align: center;
     padding-bottom: 50px;
 }
 
-.searchBox h1{
+.searching h1{
    padding-bottom: 10px;
    font-size: 45px;
    font-weight: bolder;
@@ -63,6 +64,21 @@ button{
     margin-left: 10px;
     font-size: 15px;
 }
+
+/* configure the map */
+.mapping{
+	grid-area: mapping;
+	background-color: inherit;
+}
+
+#map {
+    height: 400px;
+    width: 50%;
+    margin: 20px;
+    float: right;
+
+}
+
 .filterSide{
     grid-area: filterSide;
     padding-left: 20px;

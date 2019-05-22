@@ -5,22 +5,27 @@ html(lang='en')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(http-equiv='X-UA-Compatible', content='ie=edge')
     link(rel='stylesheet', href='../css/loadFirst.css', v='')
+    //- link(rel='stylesheet', href='../css/leaflet.css', v='')
+    //- link(rel='stylesheet', href='http://cdn.leafletjs.com/leaflet-0.7/leaflet.css')
+    
+    //- link(rel='stylesheet',type='text/css', href='mappers.css')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
     title Search Events
   body
     //- Loading a page to search events before showings all the events 
     .container_first
-      
       //- Main navigation menu
       include includes/navbar.pug
       //- Searching the events
-      .searchBox
-        h1 Find Events
+      include includes/mapOnly.pug
+
+      .searching
         form(action='/events/getEvents', method='post')
           input.search(type='text', placeholder='Search events...', name='name')
-        input(type='submit', value='Find')  
+          input(type='submit', value='Find')  
         #filter
+        
       //- Footer
       .footer
         p(style='color:white')

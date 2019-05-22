@@ -18,74 +18,32 @@ body {
 /* container for the search events/search places */
 .container_first {
     display: grid;
-    grid-template-rows: 0.3fr 1fr 0.3fr;
+    grid-template-rows: auto;
+    grid-template-columns: auto;
     width: 100vw;
     height: 100vh;
+    /* grid-template-columns: 0.3fr 1fr; */
+    grid-template-rows: 0.005fr .05fr 2.5fr 0.1fr;
+    /* grid-template-rows: auto; */
     /* grid-template-rows: auto; */
     grid-template-areas: 
     "navbar"
     "searchBox"
+    "mapping"
     "footer";
 }
 
-/* configure navigation bar */
-.navbar{
-    grid-area: navbar;
-    padding-left: 20px;
-    padding-top: 20px;
-}   
-
-.sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #ED7755;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-}
-
-.sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: white;
-    display: block;
-    transition: 0.3s;
-}
-
-.sidenav a:hover {
-    color: black;
-}
-
-.sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-}
-
-/* configure header elements */
-.logo{
-    float: right;
-    padding-right: 20px;
-    padding-top: 15px;
-}
-
-.searchBox{
+.searching{
     grid-area: searchBox;
-    max-height: 500px;
+    max-height: 200px;
     text-align: center;
     padding-bottom: 50px;
     margin-left: 10vw;
     margin-right: 10vw;
+    position: sticky;
 }
 
-.searchBox h1{
+.searching h1{
    padding-bottom: 5vh;
    font-size: 2em;
    font-weight: bolder;
@@ -101,15 +59,15 @@ body {
    border-radius: 10px;
 }
 
-.searchBox input[type=text]:hover{
+.searching input[type=text]:hover{
     border-color: #a0a0a0 #b9b9b9 #b9b9b9 #b9b9b9;
 }
 
-.search:focus{
+.searching:focus{
     border-color:#4d90fe;
 }
 
-.searchBox input[type=submit]{
+.searching input[type=submit]{
     border: none;
     font-size: 1em;
     padding: 5px;
@@ -117,8 +75,21 @@ body {
     margin-top: 3vh;
 }
 
-.searchBox input[type=submit]:hover{
+.searching input[type=submit]:hover{
     color: #ED7755;
+}
+
+/* configure the map */
+.mapping{
+	grid-area: mapping;
+	background-color: inherit;
+}
+
+#map {
+    height: 400px;
+    width: 50%;
+    margin: 20px;
+
 }
 
 textarea:focus, input:focus{
@@ -159,8 +130,4 @@ textarea:focus, input:focus{
   .footer li.current-menu-item {
       border-bottom: solid 0.3px #ED7755;
   
-  }
-
-  #logout {
-    padding-top: 40vh;
   }

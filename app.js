@@ -48,6 +48,7 @@ app.get('/places', function (req, res) {
 
 // route to about page
 app.get('/', function (req, res) {
+    
     Event.aggregate([{ $sample: { size: 5} }]).exec(function(err, resp){
         if(err) throw err;
         var arrayed = []
@@ -59,7 +60,8 @@ app.get('/', function (req, res) {
                 long: parseFloat(resp[i].location[0].longitude),
                 address: resp[i].address,
                 phone: resp[i].phone,
-                email: resp[i].email
+                email: resp[i].email,
+                pictures: resp[i].pictures
             };
 
             arrayed.push(aEvent);        

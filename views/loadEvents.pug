@@ -14,8 +14,11 @@ html(lang='en')
     .container
       //- Navigation menu
       include includes/navbar.pug
+      //- Navigation menu
+      include includes/mapOnly.pug
+      mapOnly.pug
       //- Searchbar to find events
-      .searchBox
+      .searching
         h1 Find Events
         form(action='/events/getEvents', method='post')
           input.search(type='text', placeholder='Search Events', name='name')
