@@ -7,7 +7,7 @@
 }
 
 body{
-  font-family: "Quicksand";
+  font-family: "Heebo";
   background-color: #f4f4f4;
   /* background-image: linear-gradient(to bottom right, #e15848, #90a4bc); */
   background-repeat:no-repeat;
@@ -19,7 +19,7 @@ body{
 .grid{
   display: grid;
   height: 100%;
-  grid-template-columns: 20% 80%;
+  grid-template-columns: 30% 70%;
   grid-template-rows: 0.3fr 2fr 0.3fr;
   grid-template-areas: 
   "navbar navbar"
@@ -27,32 +27,28 @@ body{
   "footer footer";
 }
 
-/* header */
-.navbar{
-  grid-area: navbar;
-  padding-left: 20px;
-  padding-top: 20px;
-}
-
-.logo{
-  float: right;
-  padding-right: 20px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-}
-
 /* profile sidebar */
 .basic_profile{
   grid-area: basic_profile;
   text-align: center;
   /* border: 1px solid #F5BDAB; */
-  margin-left: 20px;
+  margin-left: 40px;
   padding-top: 10px;
-  background-color: #ED7755;
+  /* background-color: rgb(236, 229, 227); */
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
-  border-right: solid 2px #ED7755;
-  color: white;
+  border-right: solid 2px  #F5BDAB;
+  color: #f4f4f4;
+  box-shadow: #4f4f4f;
+  background-image: linear-gradient(to bottom right, #e15848, #5d8eca);
+  background-repeat:no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 40px;
+}
+
+.basic_profile h3 {
+  font-family: 'Quicksand';
 }
 
 .profile{
@@ -80,7 +76,8 @@ body{
 .all_content{
   grid-area: all_content;
   /* border: 1px solid #BECAD0; */
-  margin-right: 20px;
+  margin-right: 40px;
+  padding: 20px;
   background-color: white;
   /* margin-left: 10px; */
   border-top-right-radius: 20px;
@@ -189,25 +186,33 @@ body{
 }
 
 #Events a{
-  color: white;
+  color: rgb(53, 53, 53);
   text-decoration: none;
   list-style-type: none;
   font-size: 15px;
+
 }
 
 #Events li{
   border-radius: 20px;
-  padding: 5px;
+  padding: 10px;
   margin-top: 1vh;
-  background-color: #ED7755;
-  background-image: linear-gradient(to left,#F5BDAB, #E15848 );
+  background: rgb(224, 224, 224);
+  /* background: linear-gradient(90deg, rgba(175,88,140,1) 0%, rgba(255,130,101,1) 100%); */
+  /* background-image: linear-gradient(to bottom right, #e15848, #5d8eca); */
+
+  /* background-image: linear-gradient(to left,#F5BDAB, #E15848 ); */
   margin-right: 1vw;
   width: 20vw;
 }
 
 #Events li:hover{
-  background-color:#d86141;
-  color: #4f4f4f;
+  /* background: rgb(175,88,140); */
+  background: rgb(175,88,140);
+  background: linear-gradient(90deg, rgba(175,88,140,1) 49%, rgba(255,130,101,1) 100%);
+  /* background-color:#d86141; */
+  color: white;
+  /* color: #4f4f4f; */
 }
 
 /* Friends tab */
@@ -329,49 +334,6 @@ body{
 .deleteRating:hover{
   color: #333333;
   font-size: 20px;
-}
-
-/* configure navigation bar */
-.sidenav {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #ED7755;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-  white-space: nowrap;
-}
-
-.sidenav a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: white;
-  display: block;
-  transition: 0.3s;
-  white-space: nowrap;
-}
-
-.sidenav
-
-.sidenav a:hover {
-  color: black;
-}
-
-.sidenav .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-}
-
-#logout {
-  margin-top: 40vh;
 }
 
 /* configure setting which uses overlay */
