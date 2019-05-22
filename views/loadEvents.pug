@@ -29,7 +29,6 @@ html(lang='en')
       include includes/mapOnly.pug
         .filterSide
           h3 Filter
-          p Tags
           input#input(type='text', placeholder='Search Tags', name='name', onkeyup='addTag()')
           #filter
       //- Searchbar to find events
@@ -47,7 +46,7 @@ html(lang='en')
         if events
           .events
             each event in events
-              div#eachEvent(class='filtered ', name ='displayedEvents', tags=event.tags, onclick="window.location='http://localhost:3000/events/getEvent/" + event._id + "'")
+              div#eachEvent(class='filtered ', name ='displayedEvents', tags=event.tags, onclick="window.location='http://localhost:3000/events/getEvent/" + event.id + "'")
                   .event_card
                     .event_title
                       h3 #{event.name}
@@ -59,7 +58,9 @@ html(lang='en')
                       p <b>Start Time:</b> #{event.startTime}
                       p <b>End Time:</b> #{event.endTime}
                       p <b>Location:</b> #{event.address}
-                      p <b>Description:</b> #{event.description}
+                      br
+                      p <b>Description:</b> 
+                      | #{event.description}
                     .event_tag
                       p <b>Tags:</b> #{event.tags}
 

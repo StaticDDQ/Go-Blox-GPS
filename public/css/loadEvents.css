@@ -15,8 +15,8 @@ body {
 /* configure the grid */
 .container {
     display: grid;
-    grid-template-columns: 1fr 1fr .9fr;
-    grid-template-rows: .00000001fr 1fr .0000001fr;
+    grid-template-columns: 0.8fr 2.5fr .2fr;
+    grid-template-rows: 0fr 0fr 0fr;
     width: 100%;
     height: 100%;
     grid-template-areas: 
@@ -48,7 +48,6 @@ body {
 }
 
 .search{
-   border: none;
    width: 70%;
    height: auto;
    font-size: 1em;
@@ -66,7 +65,6 @@ body {
 }
 
 .searching input[type=submit]{
-    border: none;
     font-size: 1em;
     padding: 5px;
     border-radius: 10px;
@@ -97,6 +95,7 @@ button{
     margin: 20px;
     margin-top: 30px;
     border-radius: 5px;
+    z-index:1;
 }
 
 .filterSide{
@@ -123,8 +122,6 @@ button{
 
 /* layout to show the events */
 .displayEvents{
-    grid-area: displayEvents;
-    overflow: scroll;
     display: grid;
     grid-template-rows: auto;
     padding-right: 20px;
@@ -139,11 +136,11 @@ button{
 
 .event_card{
     display: grid;
-    grid-template-columns: 0.4fr 0.6fr;
+    grid-template-columns: 2.4fr 4.6fr;
     grid-template-rows: auto;
     grid-template-areas: 
-    "event_title event_title"
-    "event_pic event_desc"
+    "event_pic event_title"
+    "event_desc event_desc"
     "event_tag event_tag";
     border: 1px solid #becad0;
     border-radius: 4px;
@@ -170,11 +167,14 @@ button{
     padding-bottom: 20px;
     font-weight: bold;
     font-size: 20px;
+    margin-right:auto;
+    overflow:auto;
 }
 
 .event_pic{
     grid-area: event_pic;
     padding-right: 10px;
+    padding-bottom: 10px;
 }
 
 .event_pic img {
@@ -185,7 +185,8 @@ button{
 .event_desc{
     grid-area: event_desc;
     padding-bottom: 10px;
-    padding-right: 10px;
+    padding-right: 20px;
+    text-align: justify;
 }
 
 .event_desc p{
