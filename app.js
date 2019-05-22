@@ -39,7 +39,11 @@ app.use(passport.session());
 
 // route to about page
 app.get('/places', function (req, res) {
-    res.render('loadPlacesFirst');
+    if (req.user !== undefined)
+        res.render('loadPlacesFirst');
+    else {
+        res.redirect('/');
+    }
 });
 
 // route to about page

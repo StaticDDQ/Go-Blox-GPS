@@ -147,7 +147,7 @@ router.post('/maps/search', async function(req,res){
 //change back to post
 router.get('/createEvent', function (req, res) {
     if (req.user === undefined)
-        res.render('mustLogin');
+        res.redirect('/');
     else
         res.render('createEvent');
 });
@@ -176,7 +176,7 @@ router.get('/getEvent/:id', function (req, res) {
 
 router.get('/findEvent', function (req, res) {
     if (req.user === undefined) {
-        res.render('mustLogin');
+        res.redirect('/');
     } else {
         res.render('loadEventsFirst');
     }

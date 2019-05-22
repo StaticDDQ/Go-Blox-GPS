@@ -82,7 +82,7 @@ router.post('/addPlace', upload.single("pictures"), async function (req, res) {
 
 router.get('/createPlace', function (req, res) {
     if (req.user === undefined)
-        res.render('mustLogin');
+        res.redirect('/');
     else
         res.render('createPlace');
 });
@@ -102,18 +102,38 @@ router.get('/getPlace/:id', function (req, res) {
     })
 });
 
-// get events by name
+// get places by name
 router.post('/getPlaces', function (req, res) {
-    // find the event
-    Place.find({
-        $or: [
-            { placeName: { $regex: req.body.name, $options: 'i' } },
-            { placeAddress: { $regex: req.body.name, $options: 'i' } }
-        ]
-    }, function (err, resp) {
-        if (err) throw err;
-        res.render('loadPlaces', { places: resp });
-    });
+    if (req.user !== undefined) {
+        Place.find({
+            $or: [
+                { placeName: { $regex: req.body.name, $options: 'i' } },
+                { placeAddress: { $regex: req.body.name, $options: 'i' } }
+            ]
+        }, function (err, resp) {
+            if (err) throw err;
+            res.render('loadPlaces', { places: resp });
+        });
+    }
+    else {
+        res.render('mustLogin');
+    }
+});
+
+// get events by name
+router.post('/getPlacesByCategory/', function (req, res) {
+    if (req.user !== undefined) {
+        // find the event
+        Place.find({
+            category: req.body.category
+        }, function (err, resp) {
+            if (err) throw err;
+            res.render('loadPlaces', { places: resp });
+        });
+    }
+    else {
+        res.render('mustLogin');
+    }
 });
 
 module.exports = router;

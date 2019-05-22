@@ -4,7 +4,7 @@ html(lang='en')
     meta(charset='UTF-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(http-equiv='X-UA-Compatible', content='ie=edge')
-    link(rel='stylesheet', href='../css/loadEvents.css', v='')
+    link(rel='stylesheet', href='../css/loadPlaces.css', v='')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
     title Search Places
@@ -19,6 +19,20 @@ html(lang='en')
         form(action='/places/getPlaces', method='post')
           input.search(type='text', placeholder='Search Places', name='name')
           input(type='submit', value='Find')
+      .searchCategory
+        -
+            var categories = ['Food', 'Shopping', 'Education', 'Health', 'Entertainment',
+            'Night', 'Nature', 'Art', 'Sports', 'Music', 'Recreation', 'Religious',
+            'Uncategorized'];
+
+        h2 Find by category
+        div(class="dropdown")
+            button(class="dropBtn") Dropdown
+            div(class="dropdown-content")
+                each cat in categories
+                    form(action='/places/getPlacesByCategory/', method='post')
+                        input(type='hidden', name='category', value= cat)
+                        input(type='submit', value=cat)
 
       //- Footer
       .footer
