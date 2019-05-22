@@ -100,12 +100,13 @@ router.post('/maps/search', async function(req,res){
             {name: {$regex: req.body.search, $options: 'i' }},
             {email: {$regex: req.body.search, $options: 'i' }},
             {organizers: {$regex: req.body.search, $options: 'i' }},
-            {address: {$regex: req.body.search, $options: 'i' }}
+            {address: {$regex: req.body.search, $options: 'i' }},
         ] }, function (err, resp) {
 
         for (let i = 0; i < resp.length; i++){
             var aEvent = {
                 name: resp[i].name,
+                organizer: resp[i].organizer,
                 lat: parseFloat(resp[i].location[0].latitude),
                 long: parseFloat(resp[i].location[0].longitude),
                 address: resp[i].address,
