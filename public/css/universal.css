@@ -15,6 +15,8 @@
   padding-top: 20px;
   padding-bottom: 20px;
   z-index:2;
+  position: sticky;
+  top: 0;
  }
 
 .sidenav {
@@ -56,10 +58,8 @@
 
 /* configuring logo */
 .logo{
-  float: right;
-  padding-right: 20px;
-  padding-top: 5px;
-  padding-bottom: 20px;
+  padding: 5px;
+  padding-top: 15px;
 }
 
 #logout {

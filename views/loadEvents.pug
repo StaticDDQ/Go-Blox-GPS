@@ -32,8 +32,9 @@ html(lang='en')
           input#input(type='text', placeholder='Search Tags', name='name', onkeyup='addTag()')
           #filter
       //- Searchbar to find events
-      a.logo(href='/') 
-        img(src= "/logo.png", alt='GPS', width='60', height='60')
+      .logo
+        a(href='/') 
+            img(src= "/logo.png", alt='GPS', width='60', height='60')
       .searching
         form(action='/events/getEvents', method='post')
           input.search(type='text', placeholder='Search Events', name='name')
