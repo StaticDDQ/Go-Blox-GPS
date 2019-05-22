@@ -54,7 +54,7 @@ html(lang='en')
                       p <b>Location:</b> #{place.placeAddress}
                       p <b>Description:</b> #{place.placeDescription}
                     .event_tag
-                      p <b>Tags:</b> #{place.placeTags}
+                      p <b>Cateogory:</b> #{place.category}
 
       //- Footer
       .footer
@@ -95,12 +95,12 @@ html(lang='en')
           filter.appendChild(showAll);
 
           for (let i = 0; i < places.length; i++) {
-              if (!tags.includes(places[i].category)) {
+              if(!placeLst.includes(places[i].category)){
                   placeLst.push(places[i].category);
                   var btn = document.createElement('input');
                   btn.type = 'button';
                   btn.name = 'tagFilter';
-                  btn.value = places[i].placeTags[j];
+                  btn.value = places[i].category;
                   btn.onclick = function(){
                       filterOut(places[i].placeTags[j]);
                   }
