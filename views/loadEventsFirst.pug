@@ -14,18 +14,12 @@ html(lang='en')
       
       //- Main navigation menu
       include includes/navbar.pug
-      
       //- Searching the events
       .searchBox
         h1 Find Events
         form(action='/events/getEvents', method='post')
           input.search(type='text', placeholder='Search Events', name='name')
           input(type='submit', value='Find')
-      .filterSide
-        h3 Filter
-        p Tags
-        input#input(type='text', placeholder='Search Tags', name='name', onkeyup='addTag()')
-        #filter
       //- Footer
       .footer
         p(style='color:white')
