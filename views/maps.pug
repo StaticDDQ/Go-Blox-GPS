@@ -4,7 +4,9 @@ html
     title GO-BLOX: GET PEOPLE SOCIALISING!
     meta(charset='utf-8')
     link(rel='stylesheet',type='text/css', href='mappers.css')
-    link(href='https://fonts.googleapis.com/css?family=Open+Sans&display=swap', rel='stylesheet')
+    link(href="https://fonts.googleapis.com/css?family=Heebo:300&display=swap", rel="stylesheet")
+    link(href='https://fonts.googleapis.com/css?family=Pacifico&display=swap', rel='stylesheet')
+
     link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.3.1/css/all.css')
 
   //-link(rel='stylesheet', href='http://cdn.leafletjs.com/leaflet-0.7/leaflet.css')
@@ -51,7 +53,7 @@ html
         h3
           |get people
           br
-          |socializing  
+          |socializing.
         h4
           br
           |A platform for students especially those 
@@ -68,8 +70,9 @@ html
             form(action="/events/maps/search", method="post")
               input(type="search", placeholder="search...",name="search")
               button.i.fa.fa-search(type='submit')
-          h5 DISCOVER MORE!
+          
           if !isLoggedIn
+              h5 DISCOVER MORE!
               ul
                 li
                   a(href='/members/signup') SIGN UP
@@ -79,5 +82,5 @@ html
           else 
             ul
               li
-                  a(href='/members/login') Go to your page
+                a#page(href='/members/login') Go to your page
 
