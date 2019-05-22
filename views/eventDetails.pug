@@ -6,6 +6,7 @@ html(lang='en')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     style
       include ../public/css/eventDetails.css
+      include ../public/css/universal.css
     //- link(rel='stylesheet', href='../css/eventDetails.css', type='text/css')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
@@ -13,20 +14,7 @@ html(lang='en')
 
   body
     .grid
-      .navbar
-        span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Menu
-        #mySidenav.sidenav
-            a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
-            a(href='/members/userProfile') Go to Profile
-            a(href='/') Home
-            a(href='/events/findEvent') Find Events
-            a(href='/places') Places
-            a(href='/events/createEvent') Create Event!
-            a(href='/places/createPlace') Create Place!
-            a#logout(href='/members/logout') Logout :(
-        a(href='/') 
-            img.logo(src= "/logo.png", alt='GPS', width='80', height='80')
-
+      include includes/navbar.pug
       //- Event picture displayed 
       .imageContent
         img.main_img(src=event.pictures, alt='main_image')

@@ -1,7 +1,7 @@
 /* CSS FOR THE HOME PAGE */
 
 body{
-	font-family: 'Open Sans', sans-serif;
+	font-family: "Heebo";
 }
 .grid{
 	display: grid;
@@ -39,6 +39,7 @@ h1 {
 }
 
 h3{
+	font-family: 'Pacifico', cursive;
 	color: white;
 	font-weight: bold;
 	text-align: right;
@@ -187,6 +188,10 @@ button[type=submit]{
 body{
     background-color: black;
     margin: 0px;
+}
+
+a#page {
+	font-size: 24px;
 }
 
 /* required styles */
