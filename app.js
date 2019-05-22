@@ -56,6 +56,8 @@ app.get('/', function (req, res) {
             var aEvent = {
                 id: resp[i]._id,
                 name: resp[i].name,
+                organizer: resp[i].organizer,
+                description: resp[i].description,
                 lat: parseFloat(resp[i].location[0].latitude),
                 long: parseFloat(resp[i].location[0].longitude),
                 address: resp[i].address,

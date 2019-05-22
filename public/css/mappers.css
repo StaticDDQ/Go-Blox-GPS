@@ -21,8 +21,9 @@ body{
 }
 
 .desc{
-	grid-area: desc;
-	background-color: #000000;
+	grid-area: 'desc';
+	/* background-color: #eeeae5; */
+	background-color:black;
 	padding-right: 5vw;
 	text-align: right;
 }
@@ -31,27 +32,27 @@ h1 {
 	color: white;
 	position: absolute;
 	text-align: right;
-  top: 5vh;
+ 	top: 5vh;
 	right: 5vw;
 	font-size: 2.5vw;
-	font-weight: lighter;
-	
 }
 
 h3{
-	font-family: 'Pacifico', cursive;
+	font-family: 'Abril Fatface', cursive;
+	font-weight: lighter;
 	color: white;
-	font-weight: bold;
 	text-align: right;
-  position: absolute;
+  	position: absolute;
 	top: 10vh;
 	right: 5vw;
-	font-size: 4vw;
+	font-size: 4.3vw;
+	color: #e15848;
+	letter-spacing: 1px;;
 }
 
 h4{
 	color: white;
-	font-size: 1vw;
+	font-size: 1.2vw;
 	text-align: right;
 	position: absolute;
 	top: 30vh;
@@ -62,15 +63,15 @@ h4{
 }
 
 h2{
-	color: white;
-	font-size: 1vw;
+	color: #a7c4e8;
+	font-size: 1.3vw;
 	text-align: right;
 	position: absolute;
 	top: 50vh;
 	right: 5vw;
-	font-weight: 100;
-	text-decoration: underline;
-	padding-top: 5vh;
+	font-weight: bolder;
+	/* text-decoration: underline; */
+	padding-top: 8vh;
 }
 
 h5{
@@ -80,9 +81,10 @@ h5{
 	right: 5vw;
 	color: white;
 	font-weight: bold;
-	font-size: 2vw;
+	font-size: 1.3vw;
 	text-decoration: underline;
-	padding-top: 5vh;
+	padding-top: 8vh;
+	letter-spacing: 2px;
 }
 
 ul {
@@ -105,7 +107,7 @@ li{
 	display: inline;
 	padding-left: 1vw;
 	color: white;
-	font-size: 1vw;
+	font-size: 1.3vw;
 	/* float: right; */
 }
 a{
@@ -113,11 +115,11 @@ a{
 	color: white;
 }
 
-a:hover{
-	border-bottom: solid 2px #ED7755;
+.more a:hover{
+	border-bottom: solid 1px #ED7755;
 }
 .searching{
-	padding-top: 5vh;
+	padding-top: 8vh;
 	position: absolute;
 	top: 60vh;
 	right: 5vw;
@@ -127,7 +129,7 @@ form{
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    transition: width 0.5s ease-in-out;
+    transition: width 0.8s ease-in-out;
     width: 50px;
     height: 50px;
     background: white;
@@ -157,7 +159,7 @@ input{
     box-sizing: border-box;
     padding: 10px;
     width: 42.5px;
-	  height: 42.5px;
+	height: 42.5px;
     position: absolute;
     top: 0;
     right: 0;
@@ -165,7 +167,7 @@ input{
     color: #07051a;
     text-align: center;
     font-size: 1.2em;
-    transition: width 0.5s ease-in-out;
+    transition: width 0.8s ease-in-out;
 }
 
 form:hover{
@@ -191,7 +193,7 @@ body{
 }
 
 a#page {
-	font-size: 24px;
+	font-size: 1.5vw;
 }
 
 /* required styles */
