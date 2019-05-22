@@ -35,9 +35,7 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
     req.checkBody('email', 'Email is required').notEmpty();
     req.checkBody('email', 'Email is not valid').isEmail();
     req.checkBody('description', 'Description is required').notEmpty();
-    req.checkBody('phone', 'Phone number is required').notEmpty();
     req.checkBody('pictures','Photo required').notEmpty();
-    
 
     // get geo code
     geocoder.geocode(req.body.address, function(err,resp){
@@ -52,31 +50,29 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
         error = req.validationErrors();
 
         if (!error) {
-            var checkEventExists = await lookUpEvent(req.body.name);
 
-            if (!checkEventExists) {
-                var reqURL;
+            var reqURL;
 
-                await cloudinary.uploader.upload(req.file.path,
-                    {
-                        eager: [
-                            { width: 0.5, crop: "scale" }]
-                    },
-                    function (error, result) {
-                        if (error) throw error;
+            await cloudinary.uploader.upload(req.file.path,
+                {
+                    eager: [
+                        { width: 0.5, crop: "scale" }]
+                },
+                function (error, result) {
+                    if (error) throw error;
 
-                        reqURL = result.secure_url;
+                    reqURL = result.secure_url;
 
-                    });
-                req.body.pictures = reqURL;
-                var addNewEvent = new Event(req.body);
-                addNewEvent['organizer'] = req.user.userName;
-                addNewEvent.save(function (err, event) {
-                    if (err) throw err;
-
-                    return res.redirect('/events/getEvent/' + event._id.toString());
                 });
-            }
+            req.body.pictures = reqURL;
+            var addNewEvent = new Event(req.body);
+            addNewEvent['organizer'] = req.user.userName;
+            addNewEvent.save(function (err, event) {
+                if (err) throw err;
+
+                return res.redirect('/events/getEvent/' + event._id.toString());
+            });
+            
         } else {
             res.render('createEvent', { errors: 'Require atleast 1 tag' });
         }
