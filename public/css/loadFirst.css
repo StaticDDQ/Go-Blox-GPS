@@ -9,7 +9,13 @@ body {
     font-family: 'Quicksand';
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: #f4f4f4;
+    background-color: black;
+    background: rgb(213,221,232);
+    background: linear-gradient(167deg, rgba(213,221,232,1) 0%, #ffc7bb 65%);
+    /* background-image: linear-gradient(to bottom right, #e15848 50%, #5d8eca 100%);
+    background: #ff836c; */
+    /* background: linear-gradient(170deg, rgba(255,208,181,1) 0%, rgba(238,180,192,1) 100%);
+    background: rgb(255,208,181); */
 }
 
 /* configure the grid */
@@ -22,32 +28,25 @@ body {
     grid-template-columns: auto;
     width: 100vw;
     height: 100vh;
-    /* grid-template-columns: 0.3fr 1fr; */
     grid-template-rows: 0.005fr .05fr 2.5fr 0.1fr;
-    /* grid-template-rows: auto; */
-    /* grid-template-rows: auto; */
     grid-template-areas: 
-    "navbar"
-    "searchBox"
-    "mapping"
-    "footer";
+    "navbar searchBox logo"
+    "mapping mapping mapping"
+    "footer footer footer";
 }
 
 .searching{
     grid-area: searchBox;
     max-height: 200px;
     text-align: center;
-    padding-bottom: 50px;
+    padding: 10px;
     margin-left: 10vw;
     margin-right: 10vw;
-    position: sticky;
 }
 
-.searching h1{
-   padding-bottom: 5vh;
-   font-size: 2em;
-   font-weight: bolder;
+::placeholder{
    color: #e15848;
+   font-style: italic;
 }
 
 .search{
@@ -56,7 +55,8 @@ body {
    height: auto;
    font-size: 1em;
    padding: 5px;
-   border-radius: 10px;
+   margin: 10px;
+   border-radius: 7px;
 }
 
 .searching input[type=text]:hover{
@@ -82,13 +82,17 @@ body {
 /* configure the map */
 .mapping{
 	grid-area: mapping;
-	background-color: inherit;
+    background-color: inherit;
+    text-align: center;
 }
 
 #map {
-    height: 400px;
-    width: 50%;
-    margin: 20px;
+    height: 600px;
+    width: 70%;
+    margin: 10px;
+    display: inline-block;
+    border-radius: 5px;
+    border-style: double;
 
 }
 

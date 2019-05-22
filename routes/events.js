@@ -214,7 +214,7 @@ router.post('/getEvents', function (req, res) {
         var arrayed = []
         for (let i = 0; i < resp.length; i++){
             var aEvent = {
-                id: resp[i]._id,
+                id: resp[i].id,
                 name: resp[i].name,
                 lat: parseFloat(resp[i].location[0].latitude),
                 long: parseFloat(resp[i].location[0].longitude),
