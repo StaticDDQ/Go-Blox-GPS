@@ -1,0 +1,38 @@
+//- Pug file for the map which can be reused anywhere
+link(rel='stylesheet', href='../css/leaflet.css', v='')
+
+.mapping  
+  #map
+  script(src='http://cdn.leafletjs.com/leaflet-0.7/leaflet.js')
+  script.
+    var map = L.map('map').setView([-37.814, 144.96332], 12);
+    mapLink =
+    '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+    L.tileLayer(
+    'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; ' + mapLink + ' Contributors',
+    maxZoom: 18,
+    }).addTo(map);
+  //- Display markers for events
+  if events
+      each evented in events
+        script.
+          var marker = new L.Marker([#{evented.lat},#{evented.long}]);
+          
+          marker.bindPopup(
+            "<div id='antos'><div class='anto'><img src=#{evented.pictures} style='width: 100px; height: 100px; object-fit: cover'/></div><div class='anto2' style='position: relative'><b>#{evented.name}</b><br/>Address: #{evented.address}<br/>Phone: #{evented.phone}<br/>Email: #{evented.email}</div></div>");
+          map.addLayer(marker);
+          marker.on('dblclick', function onClick(e){
+            window.location.href = '/events/getEvent/#{evented.id}'
+          });
+  //- Display markers for places (Jansen pls work on the backend)
+  if places
+      each place in places
+        script.
+          var marker_place = new L.Marker([#{evented.lat},#{evented.long}]);
+          marker_place.bindPopup("<b>#{place.name}</b><br/>Address: #{place.address}<br/>Phone: #{place.phone}<br/>Email: #{place.email}");
+          map.addLayer(marker_place);
+          marker_place.on('dblclick', function onClick(e){
+            window.location.href = '/places/getPlace/#{place.id}'
+          });
+
