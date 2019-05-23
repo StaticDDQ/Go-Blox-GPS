@@ -4,9 +4,10 @@ html(lang='en')
     meta(charset='UTF-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(http-equiv='X-UA-Compatible', content='ie=edge')
-    link(rel='stylesheet', href='../css/loadPlaces.css', type='text/css')
+    link(rel='stylesheet', href='../css/loadPlaceNew.css', type='text/css')
     style
-      include ../public/css/loadPlaces.css
+      include ../public/css/loadPlaceNew.css
+      include ../public/css/universal.css
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
     title Search Places
@@ -15,22 +16,22 @@ html(lang='en')
     .container
       //- Navigation menu
       include includes/navbar.pug
+      //- include map
+      include includes/mapOnly.pug
+        //- search for tags
+        .filterSide
+          h3 Filter
+          p Category
+          input#input(type='text', placeholder='Search Category', name='name', onkeyup='addCategory()')
+          #filter
       //- Searchbar to find places
-      .searchBox
-        h1 Find Places
+      .searching
         form(action='/places/getPlaces', method='post')
           input.search(type='text', placeholder='Search Places', name='name')
           input(type='submit', value='Find')
-
-      //- search for tags
-      .filterSide
-        h3 Filter
-        p Category
-        input#input(type='text', placeholder='Search Category', name='name', onkeyup='addCategory()')
-        #filter
+          
       //- search for places and displaying the details of the places
       .displayEvents
-        h2 Place Details
         if places
           .events
             each place in places

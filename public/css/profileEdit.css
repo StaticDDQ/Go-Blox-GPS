@@ -24,6 +24,13 @@ body{
     grid-template-areas: "navbar navbar logo" "basic_profile all_content all_content" "footer footer footer";
 }
 
+.logo {
+  grid-area: logo;
+  float: right;
+  padding: 5px;
+  float: right;
+}
+
 /* profile sidebar */
 .basic_profile{
   grid-area: basic_profile;

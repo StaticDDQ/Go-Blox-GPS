@@ -59,9 +59,8 @@
 /* configuring logo */
 .logo{
   grid-area: logo;
-  float: right;
-  padding: 5px;
-  padding-top: 22px;
+  text-align: right;  
+  padding: 10px;
   float: right;
 }
 
