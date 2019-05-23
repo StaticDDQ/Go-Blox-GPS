@@ -7,11 +7,8 @@ html
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
   body
     .grid
-        .navbar
-            span(style='font-size:30px;cursor:pointer;color:white', onclick='openNav()') ☰ Menu
-            #mySidenav.sidenav
-                a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
-                a(href='/') Home
+        //- Navigation menu
+        include includes/navbarNonUser.pug
         .logo
             a(href='/') 
                 img(src= "/logo.png", alt='GPS', width='80', height='80')

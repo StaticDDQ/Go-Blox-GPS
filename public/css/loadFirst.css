@@ -25,11 +25,8 @@ body {
 .container_first {
     display: grid;
     grid-template-rows: auto;
-    grid-template-columns: .4fr 1fr .4fr;
-    grid-template-areas: 
-    "navbar searchBox logo"
-    "mapping mapping mapping"
-    "footer footer footer";
+    grid-template-columns: .2fr 1fr 0.15fr;
+    grid-template-areas: "navbar searchBox logo" "mapping mapping mapping" "footer footer footer";
 }
 
 .searching {
