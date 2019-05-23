@@ -2,10 +2,10 @@
 /* This file is used to contain css that are continuously reused in different pages
    which includes:
    - Navigation bar
-   - 
+   -
  */
 
- /* Navigation Bar 
+ /* Navigation Bar
     used for: createEvent.css, eventDetails.css, loadEvents.css, profileEdit.css
  */
 
@@ -14,7 +14,7 @@
   padding-left: 20px;
   padding-top: 20px;
   padding-bottom: 20px;
-  z-index:2;
+  z-index:1002;
   position: sticky;
   top: 0;
  }
@@ -31,7 +31,7 @@
   transition: 0.5s;
   padding-top: 60px;
   white-space: nowrap;
-  
+
 }
 
 .sidenav a {
@@ -58,6 +58,8 @@
 
 /* configuring logo */
 .logo{
+  grid-area: logo;
+  float: right;
   padding: 5px;
   padding-top: 22px;
   float: right;
