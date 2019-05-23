@@ -40,8 +40,26 @@ app.use(passport.session());
 
 // route to about page
 app.get('/places', function (req, res) {
-    if (req.user !== undefined)
-        res.render('loadPlacesFirst');
+    if (req.user !== undefined) {
+        Places.find({}).exec(function (err, resp) {
+            if (err) throw err;
+            var placeArr = [];
+            for (let i = 0; i < resp.length; i++) {
+                var aPlaces = {
+                    id: resp[i]._id,
+                    name: resp[i].placeName,
+                    lat: parseFloat(resp[i].location[0].latitude),
+                    long: parseFloat(resp[i].location[0].longitude),
+                    address: resp[i].placeAddress,
+                    phone: resp[i].placePhone,
+                    pictures: resp[i].pictures
+                };
+
+                placeArr.push(aPlaces);
+            };
+            res.render('loadPlacesFirst', {places: placeArr});
+        });
+    }
     else {
         res.redirect('/');
     }
