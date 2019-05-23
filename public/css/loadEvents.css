@@ -29,7 +29,7 @@ body {
 
 /* configure header elements */
 
-.searching{
+.searching {
     grid-area: searchBox;
     display: inline-block;
     max-height: 200px;
