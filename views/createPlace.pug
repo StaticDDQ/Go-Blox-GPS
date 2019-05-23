@@ -1,210 +1,210 @@
 doctype html
 html(lang='en')
-  head
-    title Create Place
-    meta(charset='utf-8')
-    meta(name='viewport', content='width=device-width, initial scale=1.0')
-    link(rel='stylesheet', href='../css/createEvent.css', v='')
-    link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
-    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js")
+	head
+		title Create Place
+		meta(charset='utf-8')
+		meta(name='viewport', content='width=device-width, initial scale=1.0')
+		link(rel='stylesheet', href='../css/createEvent.css', v='')
+		link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
+		link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js")
 
-  body
-    .gridContainer
-      include includes/navbar.pug
-      .box
-        form(action='/places/addPlace', method='POST', enctype="multipart/form-data", onsubmit='return agreed()')
-          //- title of the page
-          h1 Create Place
-          //- check if there are errors when creating events
-          p
-              | #{errors}
-          //- Input boxes for the events
-          p
-            //- Event Name
-            .eventInputs
-              | Name of the place:
-              br
-              input(type='text', name='placeName')
-          p
-            //- Location of the event
-            .eventInputs
-              | Address:
-              br
-              input(type='text', name='placeAddress')
-          p
-            //- Description of the event
-            .eventInputs
-              | Descriptions:
-              br
-              textarea(name="placeDescription" cols="40" rows="5")
-          p
-            //- Location of the event
-            .eventInputs
-              | Phone:
-              br
-              input(type='text', name='placePhone')
+	body
+		.gridContainer
+			include includes/navbar.pug
+			.box
+				form(action='/places/addPlace', method='POST', enctype="multipart/form-data", onsubmit='return agreed()')
+					//- title of the page
+					h1 Create Place
+					//- check if there are errors when creating events
+					p
+							| #{errors}
+					//- Input boxes for the events
+					p
+						//- Event Name
+						.eventInputs
+							| Name of the place:
+							br
+							input(type='text', name='placeName')
+					p
+						//- Location of the event
+						.eventInputs
+							| Address:
+							br
+							input(type='text', name='placeAddress')
+					p
+						//- Description of the event
+						.eventInputs
+							| Descriptions:
+							br
+							textarea(name="placeDescription" cols="40" rows="5")
+					p
+						//- Location of the event
+						.eventInputs
+							| Phone:
+							br
+							input(type='text', name='placePhone')
 
-          //- Event gallery (not yet implemented)
-          p#topic
-            br
-            b Upload Image
+					//- Event gallery (not yet implemented)
+					p#topic
+						br
+						b Upload Image
 
-          //- uploading profile picture
-          .uploadImage
-            div
-              input(type='file', onchange='previewFile()', name='pictures')
+					//- uploading profile picture
+					.uploadImage
+						div
+							input(type='file', onchange='previewFile()', name='pictures')
 
-            div#preview
+						div#preview
 
-          //- Select one category for your place
-          #bottom
-            p#cat Categories
-            label.categories
-              | Food Places
-              input(type='radio', name='category', value='Food') 
-              span.checkmark
-            label.categories
-              | Shopping
-              input(type='radio', name='category', value='Shopping')
-              span.checkmark 
-            label.categories
-              input(type='radio', name='category', value='Education')
-              span.checkmark
-              |  Education
-            label.categories
-              input(type='radio', name='category', value='Health')
-              span.checkmark
-              |  Health
-            label.categories
-              input(type='radio', name='category', value='Entertainment')
-              span.checkmark
-              |  Entertainment
-            label.categories
-              input(type='radio', name='category', value='Night')
-              span.checkmark
-              |  Night Life
-            label.categories
-              input(type='radio', name='category', value='Nature')
-              span.checkmark
-              |  Nature
-            label.categories
-              input(type='radio', name='category', value='Art')
-              span.checkmark
-              |  Art
-            label.categories
-              input(type='radio', name='category', value='Sports')
-              span.checkmark
-              |  Sports
-            label.categories
-              input(type='radio', name='category', value='Music')
-              span.checkmark
-              |  Music
-            label.categories
-              input(type='radio', name='category', value='Recreation')
-              span.checkmark
-              |  Recreation
-            label.categories
-              input(type='radio', name='category', value='Religious')
-              span.checkmark
-              |  Religious
-            label.categories
-              input(type='radio', name='category', value='Uncategorized')
-              span.checkmark
-              |  Uncategorized
-            br
-            //- //- tags changed to categories
-            //- .searchBar
-            //-   input#input(type='text', placeholder='Search Tags')
-            //-   br
-            //-   input(type='button', value='Add tag', onclick='addTag()')
+					//- Select one category for your place
+					#bottom
+						p#cat Categories
+						label.categories
+							| Food Places
+							input(type='radio', name='category', value='Food')
+							span.checkmark
+						label.categories
+							| Shopping
+							input(type='radio', name='category', value='Shopping')
+							span.checkmark
+						label.categories
+							input(type='radio', name='category', value='Education')
+							span.checkmark
+							|  Education
+						label.categories
+							input(type='radio', name='category', value='Health')
+							span.checkmark
+							|  Health
+						label.categories
+							input(type='radio', name='category', value='Entertainment')
+							span.checkmark
+							|  Entertainment
+						label.categories
+							input(type='radio', name='category', value='Night')
+							span.checkmark
+							|  Night Life
+						label.categories
+							input(type='radio', name='category', value='Nature')
+							span.checkmark
+							|  Nature
+						label.categories
+							input(type='radio', name='category', value='Art')
+							span.checkmark
+							|  Art
+						label.categories
+							input(type='radio', name='category', value='Sports')
+							span.checkmark
+							|  Sports
+						label.categories
+							input(type='radio', name='category', value='Music')
+							span.checkmark
+							|  Music
+						label.categories
+							input(type='radio', name='category', value='Recreation')
+							span.checkmark
+							|  Recreation
+						label.categories
+							input(type='radio', name='category', value='Religious')
+							span.checkmark
+							|  Religious
+						label.categories
+							input(type='radio', name='category', value='Uncategorized')
+							span.checkmark
+							|  Uncategorized
+						br
+						//- //- tags changed to categories
+						//- .searchBar
+						//-   input#input(type='text', placeholder='Search Tags')
+						//-   br
+						//-   input(type='button', value='Add tag', onclick='addTag()')
 
-            //- #checked
-            .agree
-              input#agree(type='checkbox', value='agreed')
-              |  I agree to the terms and conditions
-              br
-            //- Button to submit the new event created
-            .createEventButton
-              input(type="submit" value="Create Place")
+						//- #checked
+						.agree
+							input#agree(type='checkbox', value='agreed')
+							|  I agree to the terms and conditions
+							br
+						//- Button to submit the new event created
+						.createEventButton
+							input(type="submit" value="Create Place")
 
-      //- JS to preview the images uploaded
-      script.
-        //- Navigation bar funtctions
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "250px";
-        }
+			//- JS to preview the images uploaded
+			script.
+				//- Navigation bar funtctions
+				function openNav() {
+						document.getElementById("mySidenav").style.width = "250px";
+				}
 
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-        }
-        function previewFile() {
-            //- var preview = document.querySelector('img'); //selects the query named img
-            var previewbox = document.getElementById('preview'); // get image by ID
-            var file = document.querySelector('input[type=file]').files[0]; //sames as here
+				function closeNav() {
+						document.getElementById("mySidenav").style.width = "0";
+				}
+				function previewFile() {
+						//- var preview = document.querySelector('img'); //selects the query named img
+						var previewbox = document.getElementById('preview'); // get image by ID
+						var file = document.querySelector('input[type=file]').files[0]; //sames as here
 
-            //- upload image
-            var reader = new FileReader();
-            reader.onloadend = function () {
+						//- upload image
+						var reader = new FileReader();
+						reader.onloadend = function () {
 
-              //- resize the image
-              let imgX = document.createElement("IMG");
+							//- resize the image
+							let imgX = document.createElement("IMG");
 
-              imgX.setAttribute("src", reader.result);
-              imgX.setAttribute("style", "width: 100%;");
+							imgX.setAttribute("src", reader.result);
+							imgX.setAttribute("style", "width: 100%;");
 
-              //- allow user to upload multiple images
-              previewbox.appendChild(imgX);
+							//- allow user to upload multiple images
+							previewbox.appendChild(imgX);
 
-            }
+						}
 
-            if (file) {
-                reader.readAsDataURL(file); //reads the data as a UR
+						if (file) {
+								reader.readAsDataURL(file); //reads the data as a UR
 
-            } else {
-                preview.src = "";
-            }
-        }
+						} else {
+								preview.src = "";
+						}
+				}
 
-        previewFile();  //calls the function named previewFile()
+				previewFile();  //calls the function named previewFile()
 
-        function addTag() {
+				function addTag() {
 
-            var tagValue = document.getElementById('input');
+						var tagValue = document.getElementById('input');
 
-            if(tagValue.value.length > 0){
-                var tagLst = document.getElementById('checked');
+						if(tagValue.value.length > 0){
+								var tagLst = document.getElementById('checked');
 
-                var tag = document.createElement('textarea');
-                tag.value = tagValue.value;
-                tag.name = 'placeTags';
-                tag.readonly = true;
-                tag.onclick = function(){
-                    tag.parentNode.removeChild(tag);
-                }
+								var tag = document.createElement('textarea');
+								tag.value = tagValue.value;
+								tag.name = 'placeTags';
+								tag.readonly = true;
+								tag.onclick = function(){
+										tag.parentNode.removeChild(tag);
+								}
 
-                tagLst.appendChild(tag);
-                tagValue.value = "";
-            }
-        }
+								tagLst.appendChild(tag);
+								tagValue.value = "";
+						}
+				}
 
-        //- make sure user agrees to terms and conditions
-        function agreed(){
-          var att = document.getElementById('agree');
-          if(!att.checked) {
-            alert('You must agree to the terms and conditions');
-            return false;
-          }
-          return true;
-        }
+				//- make sure user agrees to terms and conditions
+				function agreed(){
+					var att = document.getElementById('agree');
+					if(!att.checked) {
+						alert('You must agree to the terms and conditions');
+						return false;
+					}
+					return true;
+				}
 
-        jQuery(function() {
-          $("form").submit(function() {
-		        // submit more than once return false
-		        $(this).submit(function() {
-			        return false;
-		        });
-		        // submit once return true
-		        return true;
-	        });
-        });
+				jQuery(function() {
+					$("form").submit(function() {
+						// submit more than once return false
+						$(this).submit(function() {
+							return false;
+						});
+						// submit once return true
+						return true;
+					});
+				});

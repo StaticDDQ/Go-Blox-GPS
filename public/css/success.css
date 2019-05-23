@@ -3,8 +3,22 @@
 /* Configure main layout */
 * {
     padding: 0;
-    margin: 0px;;
-}  
+    margin: 0px;
+}
+
+/* configure grid */
+.grid {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 0.5fr 2fr 0.275fr;
+    grid-template-rows: 0.25fr 1fr 0fr;
+    grid-template-areas: "navbar navbar logo" "content content content";
+}
+
+.content {
+    grid-area: content;
+}
+
 body{
     font-family: "Quicksand";
     margin:0;
@@ -15,50 +29,6 @@ body{
 }
 p {
   padding-top: 5px;
-}
-
-/* configure navigation bar */
-.navbar{
-    grid-area: navbar;
-    margin: 5px;
-}.sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #ED7755;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-  }
-  
-  .sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: white;
-    display: block;
-    transition: 0.3s;
-  }
-  
-  .sidenav a:hover {
-  
-    color: black;
-  }
-  
-  .sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-  }
-
-.logo{
-    float: right;
-    margin: 5px;
 }
 
 /* configure main content */
@@ -72,7 +42,6 @@ h1{
 }
 
 button{
-    size: 30px;
     padding: 10px;
     display: block;
     text-align: center;
@@ -93,5 +62,5 @@ button:hover{
 
 .btn{
     background-color: black;
-    padding-bottom: 150px;
+    padding-bottom: 50px;
 }
