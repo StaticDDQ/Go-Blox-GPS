@@ -47,10 +47,10 @@ app.get('/places', function (req, res) {
             for (let i = 0; i < resp.length; i++) {
                 var aPlaces = {
                     id: resp[i]._id,
-                    name: resp[i].placeName,
+                    placeName: resp[i].placeName,
                     lat: parseFloat(resp[i].location[0].latitude),
                     long: parseFloat(resp[i].location[0].longitude),
-                    address: resp[i].placeAddress,
+                    placeAddress: resp[i].placeAddress,
                     phone: resp[i].placePhone,
                     pictures: resp[i].pictures
                 };
@@ -94,10 +94,10 @@ app.get('/', function (req, res) {
             for (let i = 0; i < resp.length; i++){
                 var aPlaces = {
                     id: resp[i]._id,
-                    name: resp[i].placeName,
+                    placeName: resp[i].placeName,
                     lat: parseFloat(resp[i].location[0].latitude),
                     long: parseFloat(resp[i].location[0].longitude),
-                    address: resp[i].placeAddress,
+                    placeAddress: resp[i].placeAddress,
                     phone: resp[i].placePhone,
                     pictures: resp[i].pictures
                 };
