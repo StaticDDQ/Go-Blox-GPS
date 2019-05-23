@@ -1,0 +1,227 @@
+/* CSS FILE FOR loadEvents.pug */
+/* configure main layout */
+* {
+    padding: 0;
+    margin: 0px;
+}
+
+body {
+    font-family: 'Quicksand';
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #f4f4f4;
+}
+
+/* configure the grid */
+.container {
+    display: grid;
+    grid-template-columns: 0fr 1fr 0fr;
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "navbar searchBox logo"
+    "mapping displayEvents displayEvents"
+    "footer footer footer";
+}
+
+/* container for the search events/search places */
+
+/* configure header elements */
+
+.searching {
+    grid-area: searchBox;
+    display: inline-block;
+    max-height: 200px;
+    text-align: center;
+    padding: 10px;
+}
+
+::placeholder{
+   color: #e15848;
+   font-style: italic;
+}
+
+.search{
+   width: 70%;
+   height: auto;
+   font-size: 1em;
+   padding: 5px;
+   margin: 10px;
+   border-radius: 7px;
+}
+
+.searching input[type=text]:hover{
+    border-color: #a0a0a0 #b9b9b9 #b9b9b9 #b9b9b9;
+}
+
+.searching:focus{
+    border-color:#4d90fe;
+}
+
+.searching input[type=submit]{
+    font-size: 1em;
+    padding: 5px;
+    border-radius: 10px;
+    margin-top: 3vh;
+}
+
+.searching input[type=submit]:hover{
+    color: #ED7755;
+}
+
+button{
+    margin-left: 10px;
+    font-size: 15px;
+}  
+
+/* configure the map */
+.mapping{
+	grid-area: mapping;
+    background-color: inherit;
+    height: 0;
+    position: sticky;
+    top: 85px;
+}
+
+#map {
+    height: 250px;
+    width: 250px;
+    margin: 20px;
+    margin-top: 30px;
+    border-radius: 5px;
+    z-index:1;
+}
+
+.filterSide{
+    grid-area: filterSide;
+    padding-left: 20px;
+}
+
+.filterSide h3{
+    font-size: 25px;
+}
+
+.filterSide p{
+    padding-bottom: 10px;
+    padding-top: 5px;
+}
+#input{
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.button{
+    background-color: #90A4BC;
+}
+
+/* layout to show the events */
+.displayEvents{
+    display: grid;
+    grid-template-rows: auto;
+}
+
+.displayEvents h2{
+    margin-bottom: 5px;
+    font-weight: bolder;
+    font-size: 25px;
+}
+
+.event_card{
+    display: grid;
+    grid-template-columns: 2.4fr 4.6fr;
+    grid-template-rows: .4fr 2fr .1fr;
+    grid-template-areas: 
+    "event_title event_title"
+    "event_pic event_desc"
+    "event_tag event_tag";
+    border: 1px solid #becad0;
+    border-radius: 4px;
+    text-decoration: none;
+    overflow: hidden;
+    transition: all 0.2s ease-out;
+    padding-left: 20px;
+    padding-top: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background-color: white;
+}
+
+.event_card:hover {
+  top: -2px;
+  box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+  border: 1px solid #cccccc;
+  transition: all 0.2s ease-out;
+  cursor: pointer;
+}
+
+.event_title{
+    grid-area: event_title;
+    padding-bottom: 20px;
+    font-weight: bold;
+    font-size: 20px;
+    margin-right:auto;
+    overflow:auto;
+}
+
+.event_pic{
+    grid-area: event_pic;
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+
+.event_pic img {
+    width: 100%;
+    height: auto;
+}
+
+.event_desc{
+    grid-area: event_desc;
+    padding-bottom: 10px;
+    padding-right: 20px;
+    text-align: justify;
+}
+
+.event_desc p{
+    padding-bottom: 5px;
+}
+
+.event_tag{
+    grid-area: event_tag;
+    padding-bottom: 10px;
+}
+
+/* configure footer */
+.footer{
+    grid-area: footer; 
+    background-color: #90A4BC;
+    padding-left: 5px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    margin-top: 50px;
+    border-top: solid 8px #becad0;
+  }
+  
+.footer li{
+display: inline;
+text-decoration: none;
+padding-left: 5px;
+padding-right: 5px;
+margin-left: 20px;
+}
+
+.footer p{
+margin-left: 20px;
+padding-left: 5px;
+padding-bottom: 10px;
+}
+
+.footer a{
+text-decoration: none;
+color: white;
+}
+
+.footer li:hover,
+.footer li.sfHover,
+.footer li.current-menu-item {
+    border-bottom: solid 0.3px #ED7755;
+
+}
