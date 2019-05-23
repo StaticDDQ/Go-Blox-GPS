@@ -33,7 +33,6 @@ var upload = multer({ storage: storage })
 
 // add places
 router.post('/addPlace', upload.single("pictures"), async function (req, res) {
-    console.log(req.body);
     // check each element for validity
     req.checkBody('placeName', 'Place name is required').notEmpty();
     req.checkBody('placeAddress', 'Address is required').notEmpty();
