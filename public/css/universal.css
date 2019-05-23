@@ -59,7 +59,8 @@
 /* configuring logo */
 .logo{
   padding: 5px;
-  padding-top: 15px;
+  padding-top: 22px;
+  float: right;
 }
 
 #logout {

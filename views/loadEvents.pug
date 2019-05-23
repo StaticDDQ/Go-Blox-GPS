@@ -5,7 +5,6 @@ html(lang='en')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(http-equiv='X-UA-Compatible', content='ie=edge')
     link(rel='stylesheet', href='../css/loadEvents.css', v='')
-    link(rel='stylesheet', href='../css/universal.css', v='')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
     title Search Events
@@ -13,17 +12,7 @@ html(lang='en')
     #loadPage
     .container
       //- Navigation menu
-      .navbar
-        span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Menu
-        #mySidenav.sidenav
-          a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
-          a(href='/members/userProfile') Go to Profile
-          a(href='/') Home
-          a(href='/events/findEvent') Find Events
-          a(href='/places') Find Places
-          a(href='/events/createEvent') Create Event!
-          a(href='/places/createPlace') Create Place!
-          a#logout(href='/members/logout') Logout :(
+      include includes/navbar.pug
     
       //- Navigation menu
       include includes/mapOnly.pug
@@ -31,10 +20,8 @@ html(lang='en')
           h3 Filter
           input#input(type='text', placeholder='Search Tags', name='name', onkeyup='addTag()')
           #filter
+      
       //- Searchbar to find events
-      .logo
-        a(href='/') 
-            img(src= "/logo.png", alt='GPS', width='60', height='60')
       .searching
         form(action='/events/getEvents', method='post')
           input.search(type='text', placeholder='Search Events', name='name')
@@ -47,7 +34,8 @@ html(lang='en')
         if events
           .events
             each event in events
-              div#eachEvent(class='filtered ', name ='displayedEvents', tags=event.tags, onclick="window.location='http://localhost:3000/events/getEvent/" + event.id + "'")
+               
+              div#eachEvent(class='filtered ', name ='displayedEvents', tags=event.tags, onclick="window.location.href='/events/getEvent/" + event.id + "'")
                   .event_card
                     .event_title
                       h3 #{event.name}

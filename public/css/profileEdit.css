@@ -16,15 +16,12 @@ body{
 }
 
 /* configure grid */
-.grid{
-  display: grid;
-  height: 100%;
-  grid-template-columns: 30% 70%;
-  grid-template-rows: 0.3fr 2fr 0.3fr;
-  grid-template-areas: 
-  "navbar navbar"
-  "basic_profile all_content"
-  "footer footer";
+.grid {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 0.2fr 2fr 0.3fr;
+    grid-template-rows: 0.25fr 1fr 0fr;
+    grid-template-areas: "navbar navbar logo" "basic_profile all_content all_content" "footer footer footer";
 }
 
 /* profile sidebar */

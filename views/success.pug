@@ -3,23 +3,26 @@ html
     include ../public/css/success.css
   head
     link(rel='stylesheet', type='text/css', href='css/success.css')
+    link(rel='stylesheet', href='../css/universal.css', v='')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
   body
-    .navbar
-      span(style='font-size:30px;cursor:pointer;color:white', onclick='openNav()') ☰ Menu
-      #mySidenav.sidenav
-        a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
-        a(href='/') Home
-        a(href='/') 
-            img.logo(src= "/logo.png", alt='GPS', width='80', height='80')
-
-    h1
-      | Your account has been successfully verified!
-      br
-      |     Please, proceed to a login page.
-    .btn
-      form(action='/members/login')
-        button(type='submit') Log me in
+    .grid
+        .navbar
+            span(style='font-size:30px;cursor:pointer;color:white', onclick='openNav()') ☰ Menu
+            #mySidenav.sidenav
+                a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
+                a(href='/') Home
+        .logo
+            a(href='/') 
+                img(src= "/logo.png", alt='GPS', width='80', height='80')
+        .content
+            h1
+              | Your account has been successfully verified!
+              br
+              |     Please, proceed to a login page.
+            .btn
+                form(action='/members/login')
+                    button(type='submit') Log me in
     script.
       function openNav() {
         document.getElementById("mySidenav").style.width = "250px";

@@ -27,19 +27,18 @@ p.contacts {
 }
 
 /* configuring the grid */
-.grid{
+.grid {
     display: grid;
     height: 100%;
-    grid-template-columns: auto;
+    grid-template-columns: 0.5fr 2fr 0fr;
     grid-template-rows: auto;
     grid-template-areas: 
-    "navbar"
-    "image_content"
-    "main_content"
-    "gallery"
-    "ratings"
-    "reviews"
-    "footer";
+        "navbar navbar logo" 
+        "image_content image_content image_content" 
+        "main_content main_content main_content" 
+        "ratings ratings ratings" 
+        "reviews reviews reviews" 
+        "footer footer footer";
 }
 
 /* configuring the image uploaded */
