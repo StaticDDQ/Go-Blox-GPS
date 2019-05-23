@@ -13,7 +13,7 @@ body {
     background: rgb(213,221,232);
     background: linear-gradient(167deg, rgba(213,221,232,1) 0%, #ffc7bb 65%);
 }
-
+/* RAISSAAAAAAAAAA */
 /* configure the grid */
 
 
@@ -22,12 +22,10 @@ body {
     display: grid;
     /* grid-template-rows: 0.2fr 1fr 0fr;
     grid-template-columns: .2fr 1fr 0.15fr; */
-    grid-template-rows: auto;
+    grid-template-rows: 0fr 1fr 0fr;
     grid-template-columns: .2fr 1fr .2fr;
-    grid-template-areas: 
-    "navbar searchBox logo" 
-    "searchCategory mapping logo" 
-    "footer footer footer";
+    grid-template-areas: "navbar searchBox logo" "searchCategory mapping logo" "footer footer footer";
+    height: 100vh;
 }
 
 /* filter side */

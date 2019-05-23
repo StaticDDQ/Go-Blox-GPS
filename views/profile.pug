@@ -109,14 +109,16 @@ html
         // Tab content
         #Interests.tabcontent
           h3 Your Interests:
-          #interest_tag
-            ul
-              each interest in user.interests
-                li #{interest}
+          if user.interests
+              #interest_tag
+                ul
+                  each interest in user.interests
+                    li #{interest}
           #des
             h3 Some description about you:
-          p
-            | #{user.desc}
+          if user.desc
+              p
+                | #{user.desc}
         #Events.tabcontent
           .gridEvent
             .attend

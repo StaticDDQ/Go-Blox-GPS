@@ -90,6 +90,8 @@ router.get('/profile/:user', function (req, res) {
                         });
                     });
                 });
+            } else {
+                res.render('notFound');
             }
         });
     }
