@@ -32,7 +32,7 @@ style
         script.
           var marker_place = new L.Marker([#{place.lat},#{place.long}]);
           marker_place.bindPopup(
-            "<div id='antos'><div class='anto'><img src=#{place.pictures} style='width: 100px; height: 100px; object-fit: cover'/></div><div class='anto2' style='position: relative'><b>#{place.placeName}</b><br/>Address: #{place.placeAddress}<br/>Phone: #{place.phone}</div></div>");
+            "<div id='antos'><div class='anto'><img src=#{place.pictures} style='width: 100px; height: 100px; object-fit: cover'/></div><div class='anto2' style='position: relative'><a href=\'/places/getPlace/#{place.id}\'><b>#{place.placeName}</b></a><br/>Address: #{place.placeAddress}<br/>Phone: #{place.phone}</div></div>");
           map.addLayer(marker_place);
           marker_place.on('dblclick', function onClick(e){
             window.location.href = '/places/getPlace/#{place.id}'
