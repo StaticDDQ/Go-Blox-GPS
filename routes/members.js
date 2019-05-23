@@ -143,7 +143,10 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 router.post('/register', upload.single("display"), async function (req, res) {
-
+    req.body.display= {
+        public_id: '',
+        url: req.file.filename
+    };
     // check each element for validity
     req.checkBody('firstName', 'First name is required').notEmpty();
     req.checkBody('lastName', 'Last name is required').notEmpty();
