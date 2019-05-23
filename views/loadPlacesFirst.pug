@@ -5,6 +5,9 @@ html(lang='en')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(http-equiv='X-UA-Compatible', content='ie=edge')
     link(rel='stylesheet', href='../css/loadPlaces.css', v='')
+    style 
+      include ../public/css/loadPlaces.css
+    link(href="https://fonts.googleapis.com/css?family=Heebo:300&display=swap", rel="stylesheet")
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
     title Search Places
@@ -13,12 +16,15 @@ html(lang='en')
     .container_first
       //- Main navigation menu
       include includes/navbar.pug
+      //- Use map
+      include includes/mapOnly.pug
+
       //- Searching the places
-      .searchBox
-        h1 Find Places
+      .searching
         form(action='/places/getPlaces', method='post')
           input.search(type='text', placeholder='Search Places', name='name')
           input(type='submit', value='Find')
+      
       .searchCategory
         -
             var categories = ['Food', 'Shopping', 'Education', 'Health', 'Entertainment',
@@ -26,9 +32,9 @@ html(lang='en')
             'Uncategorized'];
 
         h2 Find by category
-        div(class="dropdown")
-            button(class="dropBtn") Dropdown
-            div(class="dropdown-content")
+        .dropdown
+            button.dropBtn Dropdown
+            .dropdown-content
                 each cat in categories
                     form(action='/places/getPlacesByCategory/', method='post')
                         input(type='hidden', name='category', value= cat)
