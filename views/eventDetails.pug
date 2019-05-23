@@ -44,11 +44,11 @@ html(lang='en')
                   canJoin = false;
               }
               var m = event.endDate.slice(5,7);
-              if(m < date.getMonth()+1) {
+              if(y === date.getFullYear() && m < date.getMonth()+1) {
                   canJoin = false;
               }
               var d = event.endDate.slice(8,10);
-              if(d < date.getDate()) {
+              if(y === date.getFullYear() && m === date.getMonth()+1 && d < date.getDate()) {
                   canJoin = false;
               }
 
