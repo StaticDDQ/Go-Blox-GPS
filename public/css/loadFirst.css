@@ -25,23 +25,19 @@ body {
 .container_first {
     display: grid;
     grid-template-rows: auto;
-    grid-template-columns: auto;
-    width: 100vw;
-    height: 100vh;
-    grid-template-rows: 0.005fr .05fr 2.5fr 0.1fr;
+    grid-template-columns: .4fr 1fr .4fr;
     grid-template-areas: 
     "navbar searchBox logo"
     "mapping mapping mapping"
     "footer footer footer";
 }
 
-.searching{
+.searching {
     grid-area: searchBox;
+    display: inline-block;
     max-height: 200px;
     text-align: center;
     padding: 10px;
-    margin-left: 10vw;
-    margin-right: 10vw;
 }
 
 ::placeholder{
@@ -50,7 +46,6 @@ body {
 }
 
 .search{
-   border: none;
    width: 70%;
    height: auto;
    font-size: 1em;
@@ -68,7 +63,6 @@ body {
 }
 
 .searching input[type=submit]{
-    border: none;
     font-size: 1em;
     padding: 5px;
     border-radius: 10px;
@@ -79,6 +73,11 @@ body {
     color: #ED7755;
 }
 
+button{
+    margin-left: 10px;
+    font-size: 15px;
+}  
+
 /* configure the map */
 .mapping{
 	grid-area: mapping;
@@ -88,8 +87,8 @@ body {
 
 #map {
     height: 600px;
-    width: 70%;
-    margin: 10px;
+    width: 60%;
+    margin: 20px;
     display: inline-block;
     border-radius: 5px;
     border-style: double;

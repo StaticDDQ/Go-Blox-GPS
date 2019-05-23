@@ -14,7 +14,7 @@
   padding-left: 20px;
   padding-top: 20px;
   padding-bottom: 20px;
-  z-index:2;
+  z-index:1002;
   position: sticky;
   top: 0;
  }
@@ -58,8 +58,9 @@
 
 /* configuring logo */
 .logo{
+  grid-area: logo;
+  float: right;
   padding: 5px;
-  padding-top: 15px;
 }
 
 #logout {
