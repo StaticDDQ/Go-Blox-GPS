@@ -1,0 +1,250 @@
+/* CSS FILE FOR loadEvents.pug */
+/* configure main layout */
+* {
+    padding: 0;
+    margin: 0px;
+}
+
+body {
+    font-family: 'Heebo';
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: black;
+    background: rgb(213,221,232);
+    background: linear-gradient(167deg, rgba(213,221,232,1) 0%, #ffc7bb 65%);
+}
+/* RAISSAAAAAAAAAA */
+/* configure the grid */
+
+
+/* container for the search events/search places */
+.container_first {
+    display: grid;
+    /* grid-template-rows: 0.2fr 1fr 0fr;
+    grid-template-columns: .2fr 1fr 0.15fr; */
+    grid-template-rows: 0fr 1fr 0fr;
+    grid-template-columns: .2fr 1fr .2fr;
+    grid-template-areas: "navbar searchBox logo" "searchCategory mapping logo" "footer footer footer";
+    height: 100vh;
+}
+
+/* filter side */
+.filterSide{
+    grid-area: filterSide;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+.filterSide h3{
+    font-size: 25px;
+}
+
+.filterSide p{
+    padding-bottom: 10px;
+    padding-top: 5px;
+}
+#input{
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.button{
+    background-color: #90A4BC;
+}
+
+/* Search category */
+.searchCategory {
+    /* text-align: center; */
+    justify-content: center;
+    display: inline-block;
+    position: sticky;
+    top: 70px;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+.searchCategory h2 {
+    /* text-align: center; */
+    font-size: 20px;
+    justify-content: center;
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 10px;
+    position: sticky;
+    top: 70px;
+}
+
+/* Drop down button */
+button.dropBtn {
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 3px;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 10px;
+    position: sticky;
+    top: 130px;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 3px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content form {
+    color: black;
+    padding: 4px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content input {
+    color: black;
+    background: none;
+    /* padding: 16px; */
+    font-size: 16px;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.dropdown-content input:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content input:hover {
+    /* background-color: #ddd; */
+    border-bottom: black;
+    border-bottom: solid;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropBtn {
+    background-color: #e15848;
+} 
+
+/* Search bar */
+.searching {
+    grid-area: searchBox;
+    display: inline-block;
+    max-height: 200px;
+    text-align: center;
+    padding: 10px;
+}
+
+::placeholder{
+   color: #e15848;
+   font-style: italic;
+}
+
+.search{
+   width: 70%;
+   height: auto;
+   font-size: 1em;
+   padding: 5px;
+   margin: 10px;
+   border-radius: 7px;
+}
+
+.searching input[type=text]:hover{
+    border-color: #a0a0a0 #b9b9b9 #b9b9b9 #b9b9b9;
+}
+
+.searching:focus{
+    border-color:#4d90fe;
+}
+
+.searching input[type=submit]{
+    font-size: 1em;
+    padding: 5px;
+    border-radius: 10px;
+    margin-top: 3vh;
+}
+
+.searching input[type=submit]:hover{
+    color: #ED7755;
+}
+
+/* configure the map */
+.mapping{
+	grid-area: mapping;
+    background-color: inherit;
+    text-align: center;
+}
+
+#map {
+    height: 600px;
+    width: 100%;
+    margin: 20px;
+    display: inline-block;
+    border-radius: 5px;
+    border-style: double;
+
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+/* configure footer */
+.footer{
+    grid-area: footer; 
+    background-color: #90A4BC;
+    padding-left: 5px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    border-top: solid 8px #becad0;           /* Footer height */
+  }
+  
+  .footer li{
+    display: inline;
+    text-decoration: none;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 20px;
+  }
+
+  .footer p{
+    margin-left: 20px;
+    padding-left: 5px;
+    padding-bottom: 10px;
+  }
+
+  .footer a{
+    text-decoration: none;
+    color: white;
+  }
+  
+  .footer li:hover,
+  .footer li.sfHover,
+  .footer li.current-menu-item {
+      border-bottom: solid 0.3px #ED7755;
+  
+  }
+
+  .logo {
+    grid-area: logo;
+    float: right;
+}

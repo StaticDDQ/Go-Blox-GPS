@@ -38,7 +38,7 @@ router.post('/authenticate', function (req, res, next) {
 // easy access to user's own profile
 router.get('/userProfile', function (req, res) {
     if (req.user === undefined)
-        res.render('mustLogin');
+        res.redirect('/');
     else {
         Rating.find({ userName: req.user.userName }, function (err, userRatings) {
             if (err) throw err;
@@ -90,6 +90,8 @@ router.get('/profile/:user', function (req, res) {
                         });
                     });
                 });
+            } else {
+                res.render('notFound');
             }
         });
     }

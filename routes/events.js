@@ -28,16 +28,15 @@ var upload = multer({ storage: storage })
 
 // add event
 router.post('/addEvent', upload.single("pictures"), async function (req, res) {
-
+    req.body.pictures = req.file.filename;
+    console.log(req.body);
     // check each element for validity
     req.checkBody('name', 'Event name is required').notEmpty();
     req.checkBody('address', 'Address is required').notEmpty();
     req.checkBody('email', 'Email is required').notEmpty();
     req.checkBody('email', 'Email is not valid').isEmail();
     req.checkBody('description', 'Description is required').notEmpty();
-    req.checkBody('phone', 'Phone number is required').notEmpty();
     req.checkBody('pictures','Photo required').notEmpty();
-    
 
     // get geo code
     geocoder.geocode(req.body.address, function(err,resp){
@@ -52,31 +51,29 @@ router.post('/addEvent', upload.single("pictures"), async function (req, res) {
         error = req.validationErrors();
 
         if (!error) {
-            var checkEventExists = await lookUpEvent(req.body.name);
 
-            if (!checkEventExists) {
-                var reqURL;
+            var reqURL;
 
-                await cloudinary.uploader.upload(req.file.path,
-                    {
-                        eager: [
-                            { width: 0.5, crop: "scale" }]
-                    },
-                    function (error, result) {
-                        if (error) throw error;
+            await cloudinary.uploader.upload(req.file.path,
+                {
+                    eager: [
+                        { width: 0.5, crop: "scale" }]
+                },
+                function (error, result) {
+                    if (error) throw error;
 
-                        reqURL = result.secure_url;
+                    reqURL = result.secure_url;
 
-                    });
-                req.body.pictures = reqURL;
-                var addNewEvent = new Event(req.body);
-                addNewEvent['organizer'] = req.user.userName;
-                addNewEvent.save(function (err, event) {
-                    if (err) throw err;
-
-                    return res.redirect('/events/getEvent/' + event._id.toString());
                 });
-            }
+            req.body.pictures = reqURL;
+            var addNewEvent = new Event(req.body);
+            addNewEvent['organizer'] = req.user.userName;
+            addNewEvent.save(function (err, event) {
+                if (err) throw err;
+
+                return res.redirect('/events/getEvent/' + event._id.toString());
+            });
+            
         } else {
             res.render('createEvent', { errors: 'Require atleast 1 tag' });
         }
@@ -100,17 +97,20 @@ router.post('/maps/search', async function(req,res){
             {name: {$regex: req.body.search, $options: 'i' }},
             {email: {$regex: req.body.search, $options: 'i' }},
             {organizers: {$regex: req.body.search, $options: 'i' }},
-            {address: {$regex: req.body.search, $options: 'i' }}
+            {address: {$regex: req.body.search, $options: 'i' }},
         ] }, function (err, resp) {
 
         for (let i = 0; i < resp.length; i++){
             var aEvent = {
+                id: resp[i]._id,
                 name: resp[i].name,
+                organizer: resp[i].organizer,
                 lat: parseFloat(resp[i].location[0].latitude),
                 long: parseFloat(resp[i].location[0].longitude),
                 address: resp[i].address,
                 phone: resp[i].phone,
-                email: resp[i].email
+                email: resp[i].email,
+                pictures: resp[i].pictures
             };
         
 
@@ -118,6 +118,7 @@ router.post('/maps/search', async function(req,res){
         };
 
     });
+    var placeArr = []
     await Places.find({
         $or: [
             {placeName: {$regex: req.body.search, $options: 'i' }},
@@ -127,27 +128,27 @@ router.post('/maps/search', async function(req,res){
         if (err) throw err;
         for (let i = 0; i < resp.length; i++){
             var aPlaces = {
+                id: resp[i]._id,
                 name: resp[i].placeName,
                 lat: parseFloat(resp[i].location[0].latitude),
                 long: parseFloat(resp[i].location[0].longitude),
                 address: resp[i].placeAddress,
                 phone: resp[i].placePhone,
-                email: ''
+                pictures: resp[i].pictures
             };
 
-            arrayed.push(aPlaces);
+            placeArr.push(aPlaces);
         };
     
     });
-    await console.log(arrayed);
-    await res.render('maps', {events: arrayed});
+    await res.render('maps', {events: arrayed, places: placeArr, isLoggedIn: req.user !== undefined });
 
 });
 
 //change back to post
 router.get('/createEvent', function (req, res) {
     if (req.user === undefined)
-        res.render('mustLogin');
+        res.redirect('/');
     else
         res.render('createEvent');
 });
@@ -176,9 +177,28 @@ router.get('/getEvent/:id', function (req, res) {
 
 router.get('/findEvent', function (req, res) {
     if (req.user === undefined) {
-        res.render('mustLogin');
+        res.redirect('/');
     } else {
-        res.render('loadEventsFirst');
+        Event.find({}).exec(function(err, resp){
+            if(err) throw err;
+            var arrayed = []
+            for (let i = 0; i < resp.length; i++){
+                var aEvent = {
+                    id: resp[i]._id,
+                    name: resp[i].name,
+                    lat: parseFloat(resp[i].location[0].latitude),
+                    long: parseFloat(resp[i].location[0].longitude),
+                    address: resp[i].address,
+                    phone: resp[i].phone,
+                    email: resp[i].email,
+                    pictures: resp[i].pictures
+                };
+    
+                arrayed.push(aEvent);      
+            }
+            
+            res.render('loadEventsFirst', { events: arrayed });
+        });
     }
 })
 
@@ -192,7 +212,28 @@ router.post('/getEvents', function (req, res) {
             {organizers: {$regex: req.body.name, $options: 'i' }}
         ] }, function (err, resp) {
         if (err) throw err;
-        res.render('loadEvents', { events : resp});
+        var arrayed = []
+        for (let i = 0; i < resp.length; i++){
+            var aEvent = {
+                id: resp[i].id,
+                name: resp[i].name,
+                lat: parseFloat(resp[i].location[0].latitude),
+                long: parseFloat(resp[i].location[0].longitude),
+                address: resp[i].address,
+                phone: resp[i].phone,
+                email: resp[i].email,
+                startDate: resp[i].startDate,
+                endDate: resp[i].endDate,
+                startTime: resp[i].startTime,
+                endTime: resp[i].endTime,
+                description: resp[i].description,
+                pictures: resp[i].pictures,
+                tags: resp[i].tags
+            };
+
+            arrayed.push(aEvent);      
+        }
+        res.render('loadEvents', { events : arrayed});
     });
 });
 

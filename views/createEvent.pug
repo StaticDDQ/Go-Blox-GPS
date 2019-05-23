@@ -1,222 +1,227 @@
 doctype html
 html(lang='en')
-  head
-    title Create Event
-    meta(charset='utf-8')
-    meta(name='viewport', content='width=device-width, initial scale=1.0')
-    link(rel='stylesheet', href='../css/createEvent.css', v='')
-    link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
-  body
-    .gridContainer
-      .navbar
-        span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Menu
-        #mySidenav.sidenav
-          a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
-          a(href='/members/userProfile') Go to Profile
-          a(href='/') Home
-          a(href='/events/findEvent') Find Events
-          a(href='/#') Places
-          a(href='/events/createEvent') Create Event!
-          a(href='/places/createPlace') Create Place!
-          a#logout(href='/members/logout') Logout :(
-      .box
-        form(action='/events/addEvent', method='POST', enctype="multipart/form-data", onsubmit='return agreed()')
-          //- title of the page
-          h1 Create Event
-          //- check if there are errors when creating events
-          p
-              | #{errors}
-          //- Input boxes for the events
-          p
-            //- Event Name
-            .eventInputs
-              | Name of the event:
-              br
-              input(type='text', name='name')
-          -
-              var date = new Date();
-              var y = date.getFullYear();
-                var m = date.getMonth()+1;
-                var d = date.getDate();
-                var currDate = y + '-';
-                if(m < 10)
-                    currDate += '0'+ m + '-';
-                else
-                    currDate += m + '-';
-                if(d < 10)
-                    currDate += '0' + d;
-                else
-                    currDate += d;
-          p
-            .eventInputs
-              | Start Date:
-              br
-              input#startDate(type='date', name='startDate', min=currDate)
-          p
-            //- End Date
-            .eventInputs
-              | End Date:
-              br
-              input#endDate(type='date', name='endDate', min=currDate)
-          p
-            //- Starting Time
-            .eventInputs
-              | Start Time:
-              br
-              input(type='time', name='startTime')
-          p
-            //- Ending Time
-            .eventInputs
-              | End Time:
-              br
-              input(type='time', name='endTime')
-          p
-            //- Location of the event
-            .eventInputs
-              | Location:
-              br
-              input(type='text', name='address')
-          p
-            //- Contact Information of the event
-            .eventInputs
-              #topic Contact:
-              br
-          p
-            //- Email of the PIC
-            .eventInputs
-              | Email:
-              br
-              input(type='email', name='email')
-          p
-            //- Phone number of the PIC
-            .eventInputs
-              | Phone number:
-              br
-              input(type='text', name='phone')
-          p
-            //- Description of the event
-            .eventInputs
-              | Descriptions:
-              br
-              textarea(name="description" cols="40" rows="5")
+	head
+		title Create Event
+		meta(charset='utf-8')
+		meta(name='viewport', content='width=device-width, initial scale=1.0')
+		//- import css style for this page
+		link(rel='stylesheet', href='../css/createEvent.css', v='')
+		link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
+		link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js")
 
-          //- Event gallery (not yet implemented)
-          p#topic
-            br
-            b Upload Image
+	body
+		//- format page inside a grid
+		.gridContainer
 
-          //- uploading profile picture
-          .uploadImage
-            div
-              input(type='file', onchange='previewFile()', name='pictures')
+			//- import navigation bar from another pug file
+			include includes/navbar.pug
+			.box
+				form(action='/events/addEvent', method='POST', enctype="multipart/form-data", onsubmit='return agreed()')
+					//- title of the page
+					h1 Create Event
+					//- check if there are errors when creating events
+					p
+							| #{errors}
+					//- Input boxes for the events
+					p
+						//- Event Name
+						.eventInputs
+							| Name of the event:
+							br
+							input(type='text', name='name')
+					-
+							var date = new Date();
+							var y = date.getFullYear();
+								var m = date.getMonth()+1;
+								var d = date.getDate();
+								var currDate = y + '-';
+								if(m < 10)
+										currDate += '0'+ m + '-';
+								else
+										currDate += m + '-';
+								if(d < 10)
+										currDate += '0' + d;
+								else
+										currDate += d;
+					p
+						.eventInputs
+							| Start Date:
+							br
+							input#startDate(type='date', name='startDate', min=currDate)
+					p
+						//- End Date
+						.eventInputs
+							| End Date:
+							br
+							input#endDate(type='date', name='endDate', min=currDate)
+					p
+						//- Starting Time
+						.eventInputs
+							| Start Time:
+							br
+							input(type='time', name='startTime')
+					p
+						//- Ending Time
+						.eventInputs
+							| End Time:
+							br
+							input(type='time', name='endTime')
+					p
+						//- Location of the event
+						.eventInputs
+							| Location:
+							br
+							input(type='text', name='address')
+					p
+						//- Contact Information of the event
+						.eventInputs
+							#topic Contact:
+							br
+					p
+						//- Email of the PIC
+						.eventInputs
+							| Email:
+							br
+							input(type='email', name='email')
+					p
+						//- Phone number of the PIC
+						.eventInputs
+							| Phone number:
+							br
+							input(type='text', name='phone')
+					p
+						//- Description of the event
+						.eventInputs
+							| Descriptions:
+							br
+							textarea(name="description" cols="40" rows="5")
 
-            div#preview
+					//- Event gallery (not yet implemented)
+					p#topic
+						br
+						b Upload Image
 
-          //- Tag searching
-          #bottom
-            p
-              | Tags
-            .searchBar
-              input#input(type='text', placeholder='Search Tags')
-              br
-              input(type='button', value='Add tag', onclick='addTag()')
+					//- uploading profile picture
+					.uploadImage
+						div
+							input(type='file', onchange='previewFile()', name='pictures')
 
-            #checked
+						div#preview
 
-            br
-            .agree
-              input#agree(type='checkbox', value='agreed')
-              |  I agree to the terms and conditions
-              br
-            //- Button to submit the new event created
-            .createEventButton
-              input(type="submit" value="Create Event")
+					//- Tag searching
+					#bottom
+						p
+							| Tags
+						.searchBar
+							input#input(type='text', placeholder='Search Tags')
+							br
+							input(type='button', value='Add tag', onclick='addTag()')
 
-      //- JS to preview the images uploaded
-      script.
-        //- Navigation bar funtctions
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "250px";
-        }
+						#checked
 
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-        }
-       
-        // function for uploading and previewing image
-        function previewFile() {
-            var previewbox = document.getElementById('preview'); // get image by ID
-            var file = document.querySelector('input[type=file]').files[0]; //sames as here
+						br
+						.agree
+							input#agree(type='checkbox', value='agreed')
+							|  I agree to the terms and conditions
+							br
+						//- Button to submit the new event created
+						.createEventButton
+							input(type="submit" value="Create Event")
 
-            //- upload image
-            var reader = new FileReader();
-            reader.onloadend = function () {
+			//- JS to preview the images uploaded
+			script.
+				//- Navigation bar funtctions
+				function openNav() {
+						document.getElementById("mySidenav").style.width = "250px";
+				}
 
-              //- resize the image
-              let imgX = document.createElement("IMG");
+				function closeNav() {
+						document.getElementById("mySidenav").style.width = "0";
+				}
 
-              imgX.setAttribute("src", reader.result);
-              imgX.setAttribute("style", "width: 100%;");
+				// function for uploading and previewing image
+				function previewFile() {
+						var previewbox = document.getElementById('preview'); // get image by ID
+						var file = document.querySelector('input[type=file]').files[0]; //sames as here
 
-              //- allow user to upload multiple images
-              previewbox.appendChild(imgX);
+						//- upload image
+						var reader = new FileReader();
+						reader.onloadend = function () {
 
-            }
+							//- resize the image
+							let imgX = document.createElement("IMG");
 
-            if (file) {
-                reader.readAsDataURL(file); //reads the data as a UR
+							imgX.setAttribute("src", reader.result);
+							imgX.setAttribute("style", "width: 100%;");
 
-            } else {
-                preview.src = "";
-            }
-        }
+							//- allow user to upload multiple images
+							previewbox.appendChild(imgX);
 
-        previewFile();  //calls the function named previewFile()
+						}
 
-        var tags = [];
+						if (file) {
+								reader.readAsDataURL(file); //reads the data as a UR
 
-        // function to create tags
-        function addTag() {
+						} else {
+								preview.src = "";
+						}
+				}
 
-            var tagValue = document.getElementById('input');
+				previewFile();  //calls the function named previewFile()
 
-            if(tagValue.value.length > 0 && !tags.includes(tagValue.value.toLowerCase())){
-                var tagLst = document.getElementById('checked');
+				var tags = [];
 
-                var tag = document.createElement('input');
-                tag.type = 'text';
-                tag.value = tagValue.value.toLowerCase();
-                tag.name = 'tags';
-                tag.readonly = true;
-                tag.onclick = function(){
-                    var index = tags.indexOf(tag.value.toLowerCase());
-                    tags.splice(index,1);
-                    tag.parentNode.removeChild(tag);
-                }
+				// function to create tags
+				function addTag() {
 
-                tagLst.appendChild(tag);
+						var tagValue = document.getElementById('input');
 
-                tags.push(tagValue.value.toLowerCase());
-            }
-            tagValue.value = "";
-        }
+						if(tagValue.value.length > 0 && !tags.includes(tagValue.value.toLowerCase())){
+								var tagLst = document.getElementById('checked');
 
-        //- make sure user agrees to terms and conditions
-        function agreed(){
-          var att = document.getElementById('agree');
-          
-          if(!att.checked) {
-            alert('You must agree to the terms and conditions');
-            return false;
-          }
+								var tag = document.createElement('input');
+								tag.type = 'text';
+								tag.value = tagValue.value.toLowerCase();
+								tag.name = 'tags';
+								tag.readonly = true;
+								tag.onclick = function(){
+										var index = tags.indexOf(tag.value.toLowerCase());
+										tags.splice(index,1);
+										tag.parentNode.removeChild(tag);
+								}
 
-          var startDate = document.getElementById('startDate').value;
-          var endDate = document.getElementById('endDate').value;
+								tagLst.appendChild(tag);
 
-          if(endDate < startDate){
-            alert('Incorrect date input');
-            return false;
-          }
-          return true;
-        }
+								tags.push(tagValue.value.toLowerCase());
+						}
+						tagValue.value = "";
+				}
+
+				//- make sure user agrees to terms and conditions
+				function agreed(){
+					var att = document.getElementById('agree');
+
+					if(!att.checked) {
+						alert('You must agree to the terms and conditions');
+						return false;
+					}
+
+					var startDate = document.getElementById('startDate').value;
+					var endDate = document.getElementById('endDate').value;
+
+					if(endDate < startDate){
+						alert('Incorrect date input');
+						return false;
+					}
+					return true;
+				}
+
+				$(function() {
+						$("form").submit(function() {
+						$(this).submit(function() {
+							return false;
+						});
+						return true;
+					});
+				});

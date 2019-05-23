@@ -1,0 +1,11 @@
+//- Pug file for vnavigation bar that is used in several pages of the website
+link(rel='stylesheet', href='../css/universal.css', v='')
+.navbar
+  span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Menu
+  #mySidenav.sidenav
+    a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
+    a(href='/') Home
+
+.logo
+    a(href='/')
+        img(src= "/logo.png", alt='GPS', width='80', height='80')
