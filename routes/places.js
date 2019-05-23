@@ -112,7 +112,21 @@ router.post('/getPlaces', function (req, res) {
             ]
         }, function (err, resp) {
             if (err) throw err;
-            res.render('loadPlaces', { places: resp });
+            var placeArr = [];
+            for (let i = 0; i < resp.length; i++) {
+                var aPlaces = {
+                    id: resp[i]._id,
+                    name: resp[i].placeName,
+                    lat: parseFloat(resp[i].location[0].latitude),
+                    long: parseFloat(resp[i].location[0].longitude),
+                    address: resp[i].placeAddress,
+                    phone: resp[i].placePhone,
+                    pictures: resp[i].pictures
+                };
+
+                placeArr.push(aPlaces);
+            };
+            res.render('loadPlaces', { places: placeArr });
         });
     }
     else {

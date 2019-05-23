@@ -43,7 +43,8 @@ html(lang='en')
                       img(src= place.pictures, alt='place_pic')
                     .event_desc
                       p <b>Location:</b> #{place.placeAddress}
-                      p <b>Description:</b> #{place.placeDescription}
+                      p <b>Description:</b> 
+                      | #{place.placeDescription}
                     .event_tag
                       p <b>Cateogory:</b> #{place.category}
 
@@ -82,7 +83,7 @@ html(lang='en')
                   btn.name = 'tagFilter';
                   btn.value = places[i].category;
                   btn.onclick = function(){
-                      filterOut(places[i].placeTags[j]);
+                      filterOut(places[i].category);
                   }
                   filter.appendChild(btn);
               }
@@ -97,7 +98,7 @@ html(lang='en')
         function filterOut(cat) {
           var displayedPlaces = document.getElementsByClassName('filtered');
           for(let i = 0; i < displayedPlaces.length; i++){
-            if(displayedPlaces[i].getAttribute('category') === cat > -1 || cat === 'show all'){
+            if(displayedPlaces[i].getAttribute('category') === cat || cat === 'show all'){
               
               displayedPlaces[i].style.display = 'block';
             } else {
