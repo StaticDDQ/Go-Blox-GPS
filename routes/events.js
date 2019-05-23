@@ -28,7 +28,8 @@ var upload = multer({ storage: storage })
 
 // add event
 router.post('/addEvent', upload.single("pictures"), async function (req, res) {
-
+    req.body.pictures = req.file.filename;
+    console.log(req.body);
     // check each element for validity
     req.checkBody('name', 'Event name is required').notEmpty();
     req.checkBody('address', 'Address is required').notEmpty();
