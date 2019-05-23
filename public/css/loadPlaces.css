@@ -214,7 +214,7 @@ textarea:focus, input:focus{
     padding-bottom: 20px;
     padding-top: 20px;
     margin-top: 50px;
-    border-top: solid 8px #becad0;
+    border-top: solid 8px #becad0;           /* Footer height */
   }
   
   .footer li{
