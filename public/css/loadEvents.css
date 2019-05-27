@@ -27,7 +27,9 @@ body {
 /* container for the search events/search places */
 
 /* configure header elements */
-
+.navbar{
+    position: sticky;
+}
 .searching {
     grid-area: searchBox;
     display: inline-block;
