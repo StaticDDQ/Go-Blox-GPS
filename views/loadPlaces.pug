@@ -35,7 +35,7 @@ html(lang='en')
         if places
           .events
             each place in places
-              div(class='filtered ', name ='displayedPlaces', category=place.category, onclick="window.location.href='/places/getPlace/" + place._id + "'")
+              div(class='filtered ', name ='displayedPlaces', category=place.category, onclick="window.location.href='/places/getPlace/" + place.id + "'")
                   .event_card
                     .event_title
                       h3 #{place.placeName}
