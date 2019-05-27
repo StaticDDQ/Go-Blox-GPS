@@ -127,7 +127,7 @@ router.post('/getPlaces', function (req, res) {
 
                 placeArr.push(aPlaces);
             };
-            res.render('loadPlaces', { places: placeArr });
+            res.render('loadPlaces', { places: placeArr, isLoggedIn: req.user !== undefined });
         });
     }
     else {

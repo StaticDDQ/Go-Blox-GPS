@@ -57,7 +57,7 @@ app.get('/places', function (req, res) {
 
                 placeArr.push(aPlaces);
             };
-            res.render('loadPlacesFirst', {places: placeArr});
+            res.render('loadPlacesFirst', {places: placeArr, isLoggedIn: req.user !== undefined});
         });
     }
     else {

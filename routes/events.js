@@ -197,7 +197,7 @@ router.get('/findEvent', function (req, res) {
                 arrayed.push(aEvent);      
             }
             
-            res.render('loadEventsFirst', { events: arrayed });
+            res.render('loadEventsFirst', { events: arrayed, isLoggedIn: req.user !== undefined });
         });
     }
 })
