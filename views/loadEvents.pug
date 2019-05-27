@@ -36,22 +36,22 @@ html(lang='en')
             each event in events
                
               div#eachEvent(class='filtered ', name ='displayedEvents', tags=event.tags, onclick="window.location.href='/events/getEvent/" + event.id + "'")
-                  .event_card
-                    .event_title
-                      h3 #{event.name}
-                    .event_pic
-                      img(src= event.pictures, alt='event_pic')
-                    .event_desc
-                      p <b>Start Date:</b> #{event.startDate}
-                      p <b>End Date:</b> #{event.endDate}
-                      p <b>Start Time:</b> #{event.startTime}
-                      p <b>End Time:</b> #{event.endTime}
-                      p <b>Location:</b> #{event.address}
-                      br
-                      p <b>Description:</b> 
-                      | #{event.description}
-                    .event_tag
-                      p <b>Tags:</b> #{event.tags}
+                .event_card
+                  .event_title
+                    h3 #{event.name}
+                  .event_pic
+                    img(src= event.pictures, alt='event_pic')
+                  .event_desc
+                    p <b>Start Date:</b> #{event.startDate}
+                    p <b>End Date:</b> #{event.endDate}
+                    p <b>Start Time:</b> #{event.startTime}
+                    p <b>End Time:</b> #{event.endTime}
+                    p <b>Location:</b> #{event.address}
+                    br
+                    p <b>Description:</b> 
+                    | #{event.description}
+                  .event_tag
+                    p <b>Tags:</b> #{event.tags}
 
       //- Footer
       .footer

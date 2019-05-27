@@ -27,17 +27,17 @@ html
           a#logout(href='/members/logout') Logout :(
 
       a.logo(href='/')
-          img.logo(src= "/logo.png", alt='GPS', width='80', height='80')
+        img.logo(src= "/logo.png", alt='GPS', width='80', height='80')
 
 
       //- contains basic profile info for user
       .basic_profile
         -
-            var source = user.display.public_id !== '' ? user.display.url : '/profilePic.png'
+          var source = user.display.public_id !== '' ? user.display.url : '/profilePic.png'
 
         img.profile(src= source, alt='profile_picture')
 
-        -var fullname = firstName + ' ' + lastName;
+        - var fullname = firstName + ' ' + lastName;
         h3 #{user.firstName} #{user.lastName}
         h4 @#{user.userName}
         h4 Member since || #{user.joined_date}
@@ -96,11 +96,11 @@ html
                 | New password:
                 input#newPwd(name='password', type='password', placeholder='Password', pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}", onclick="openSpan()")
                 div(class='popup')
-                    span(class="popuptext" id="pwdSpan")
-                        #message
-                            p#let(class='invalid') Require lowercase letter
-                            p#num(class='invalid') Require number
-                            p#len(class='invalid') Require 8 characters
+                  span(class="popuptext" id="pwdSpan")
+                    #message
+                      p#let(class='invalid') Require lowercase letter
+                      p#num(class='invalid') Require number
+                      p#len(class='invalid') Require 8 characters
                 br
                 | Retype new password:
                 input#retype(type='password', name='retype')
@@ -116,37 +116,37 @@ html
         #Interests.tabcontent
           h3 Your Interests:
           if user.interests
-              #interest_tag
-                ul
-                  each interest in user.interests
-                    li #{interest}
+            #interest_tag
+              ul
+                each interest in user.interests
+                  li #{interest}
           #des
             h3 Some description about you:
           if user.desc
-              p
-                | #{user.desc}
+            p
+              | #{user.desc}
         #Events.tabcontent
           .gridEvent
             .attend
               h3 Events Joined
-                  if eventsJoined
-                      ul
-                          each event in eventsJoined
-                              a(href='/events/getEvent/' + event._id)
-                                  li #{event.name}
+                if eventsJoined
+                  ul
+                    each event in eventsJoined
+                      a(href='/events/getEvent/' + event._id)
+                        li #{event.name}
             .created
               h3 Events Created
-                  if eventsCreated
-                      ul
-                          each userEvent in eventsCreated
-                              a(href='/events/getEvent/' + userEvent._id)
-                                  li #{userEvent.name}
+                if eventsCreated
+                  ul
+                    each userEvent in eventsCreated
+                      a(href='/events/getEvent/' + userEvent._id)
+                        li #{userEvent.name}
         #Places.tabcontent
           h3 Places to go
           ul
-              if user.bookmark
-                  each place in user.bookmark
-                      li #{place}
+            if user.bookmark
+              each place in user.bookmark
+                li #{place}
         #Friends.tabcontent
           form(action='/members/searchUser', method='post')
             input(type='text', placeholder="Search user...", name='username')
@@ -154,23 +154,23 @@ html
           h3 Following
           if user.followedUsers
             each friend in user.followedUsers
-                a(href='/members/profile/' + friend)
-                    li @#{friend}
+              a(href='/members/profile/' + friend)
+                li @#{friend}
         #Reviews.tabcontent
           h3 Your reviews
 
           ul
             if rating
-                each rate in rating
-                    #reviewCard
-                        li
-                            p.eventName
-                              |#{rate.eventName} - #{rate.datePublished} 
-                              span 
-                              input.deleteRating(type='button', value='X', id=rate._id.toString())
-                            p Rating: #{rate.stars}/5
-                            p.eventDesc Description:
-                            p #{rate.desc}
+              each rate in rating
+                #reviewCard
+                  li
+                    p.eventName
+                      |#{rate.eventName} - #{rate.datePublished} 
+                      span 
+                      input.deleteRating(type='button', value='X', id=rate._id.toString())
+                    p Rating: #{rate.stars}/5
+                    p.eventDesc Description:
+                    p #{rate.desc}
 
       //- Footer
       .footer
@@ -178,220 +178,96 @@ html
           | © 2019 Get People Socilaizing. All rights reserved.
 
     //- Javascript codes
+    script
+        include ../public/js/navbar.js
+        include ../public/js/profileEdit.js
     script.
-      document.getElementById('start').click();
+        var user = !{ JSON.stringify(user) };
 
-      var pwd = document.getElementById('newPwd');
-      var letter = document.getElementById('let');
-      var number = document.getElementById('num');
-      var length = document.getElementById('len');
+        user.interests.forEach(function (element) {
+            tags.push(element);
+            var tag = document.createElement('input');
+            tag.type = 'text';
+            tag.value = element;
+            tag.name = 'interests';
+            tag.readonly = true;
+            tag.onclick = function () {
+                var index = tags.indexOf(element);
+                tags.splice(index, 1);
+                tag.parentNode.removeChild(tag);
+            }
 
-      var isValid = false;
+            tagLst.appendChild(tag);
+        });
 
-      pwd.onkeyup = function() {
+        //- Dynamic update function
+        $(function () {
 
-          // Validate lowercase letters
-          var lowerCaseLetters = /[a-z]/g;
-          if(pwd.value.match(lowerCaseLetters)) {  
-              letter.classList.remove("invalid");
-              letter.classList.add("valid");
-          } else {
-              letter.classList.remove("valid");
-              letter.classList.add("invalid");
-              isValid = false;
-              return;
-          }
+            $('#followUser').click(function (event) {
+                event.preventDefault();
 
-          // Validate numbers
-          var numbers = /[0-9]/g;
-          if(pwd.value.match(numbers)) {  
-              number.classList.remove("invalid");
-              number.classList.add("valid");
-          } else {
-              number.classList.remove("valid");
-              number.classList.add("invalid");
-              isValid = false;
-              return;
-          }
-  
-          // Validate length
-          if(pwd.value.length >= 8) {
-              length.classList.remove("invalid");
-              length.classList.add("valid");
-          } else {
-              length.classList.remove("valid");
-              length.classList.add("invalid");
-              isValid = false;
-              return;
-          }
+                var thisUser = {
+                    username: $('#followUser')[0].name
+                };
 
-          isValid = true;
-      }
+                if ($('#followUser')[0].value === 'Follow') {
+                    $.ajax({
+                        url: '/members/followUser',
+                        type: 'put',
+                        data: thisUser,
+                        success: function (data) {
+                            $('#followUser').val('Unfollow');
+                        }
+                    });
+                }
+                else {
+                    $.ajax({
+                        url: '/members/unfollowUser',
+                        type: 'put',
+                        data: thisUser,
+                        success: function (data) {
+                            $('#followUser').val('Follow');
+                        }
+                    });
+                }
+            });
 
-      function openSpan() {
-          var popup = document.getElementById("pwdSpan");
-          popup.classList.toggle("show");
-      }
+            $('#submitChanges').click(function (event) {
+                event.preventDefault();
+                if (!isValid) {
+                    alert('Invalid password!')
+                    return;
+                }
 
-      function openTab(evt, tabName) {
+                var formData = {
+                    password: $('#newPwd')[0].value,
+                    retype: $('#retype')[0].value,
+                    oldPwd: $('#oldPwd')[0].value
+                };
 
-          // Declare all variables
-          var i, tabcontent, tablinks;
-          // Get all elements with class="tabcontent" and hide them
-          tabcontent = document.getElementsByClassName("tabcontent");
-          for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-          }
-          // Get all elements with class="tablinks" and remove the class "active"
-          tablinks = document.getElementsByClassName("tablinks");
-          for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-          }
-          // Show the current tab, and add an "active" class to the button that opened the tab
-          document.getElementById(tabName).style.display = "block";
-          evt.currentTarget.className += " active";
-      }
+                $.ajax({
+                    url: '/members/updatePassword',
+                    type: 'put',
+                    data: formData
+                }).done(function (data) {
+                    if (data)
+                        alert("Password changed");
+                    else
+                        alert("Incorrect input");
+                });
+            });
 
-      //- Navigation bar functions
-      function openNav() {
-          document.getElementById("mySidenav").style.width = "250px";
-      }
+            $('.deleteRating').click(function (event) {
+                event.preventDefault();
 
-      function closeNav() {
-          document.getElementById("mySidenav").style.width = "0";
-      }
-
-      // Setting tab functions
-      function openSettings(){
-          document.getElementById("overlay").style.display = "block";
-      }
-
-      var tags = [];
-      var user = !{JSON.stringify(user)};
-      var tagLst = document.getElementById('checked');
-
-      user.interests.forEach(function(element){
-          tags.push(element);
-          var tag = document.createElement('input');
-          tag.type = 'text';
-          tag.value = element;
-          tag.name = 'interests';
-          tag.readonly = true;
-          tag.onclick = function(){
-              var index = tags.indexOf(element);
-              tags.splice(index,1);
-              tag.parentNode.removeChild(tag);
-          }
-
-          tagLst.appendChild(tag);
-      });
-
-      function removeSettings(){
-          document.getElementById("overlay").style.display = "none";
-          tags = [];
-      }
-
-      function previewImage(event){
-          var reader = new FileReader();
-          var imageField = document.getElementById("image-field")
-          reader.onload = function(){
-              if(reader.readyState == 2){
-                  imageField.src = reader.result;
-              }
-          }
-          reader.readAsDataURL(event.target.files[0] );
-      }
-
-      function addTag() {
-          var tagValue = document.getElementById('input');
-
-          if(tagValue.value.length > 0 && !tags.includes(tagValue.value.toLowerCase())){
-              var tag = document.createElement('input');
-              tag.type = 'text';
-              tag.value = tagValue.value.toLowerCase();
-              tag.name = 'interests';
-              tag.readonly = true;
-              tag.onclick = function(){
-                  var index = tags.indexOf(tag.value.toLowerCase());
-                  tags.splice(index,1);
-                  tag.parentNode.removeChild(tag);
-              }
-
-              tagLst.appendChild(tag);
-
-              tags.push(tagValue.value.toLowerCase());
-          }
-          tagValue.value = "";
-      }
-
-      //- Dynamic update function
-      $(function(){
-
-          $('#followUser').click(function(event){
-              event.preventDefault();
-
-              var thisUser = {
-                  username: $('#followUser')[0].name
-              };
-
-              if($('#followUser')[0].value === 'Follow'){
-                  $.ajax({
-                      url: '/members/followUser',
-                      type: 'put',
-                      data: thisUser,
-                      success: function(data){
-                          $('#followUser').val('Unfollow');
-                      }
-                  });
-              }
-              else {
-                  $.ajax({
-                      url: '/members/unfollowUser',
-                      type: 'put',
-                      data: thisUser,
-                      success: function(data){
-                          $('#followUser').val('Follow');
-                      }
-                  });
-              }
-          });
-
-          $('#submitChanges').click(function(event){
-              event.preventDefault();
-              if(!isValid){
-                  alert('Invalid password!')
-                  return;
-              }
-
-              var formData = {
-                  password: $('#newPwd')[0].value,
-                  retype: $('#retype')[0].value,
-                  oldPwd: $('#oldPwd')[0].value
-              };
-
-              $.ajax({
-                  url: '/members/updatePassword',
-                  type: 'put',
-                  data: formData
-              }).done(function(data){
-                  if(data)
-                      alert("Password changed");
-                  else
-                      alert("Incorrect input");
-              });
-          });
-
-          $('.deleteRating').click(function(event){
-              event.preventDefault();
-
-              $.ajax({
-                  url: '/ratings/deleteRating/' + $(this)[0].id,
-                  type: 'delete',
-                  context: this,
-                  success: function(data){
-                    $(this).parents('li').remove();
-                  }
-              });
-          });
-      });
-
+                $.ajax({
+                    url: '/ratings/deleteRating/' + $(this)[0].id,
+                    type: 'delete',
+                    context: this,
+                    success: function (data) {
+                        $(this).parents('li').remove();
+                    }
+                });
+            });
+        });
+        

@@ -232,8 +232,8 @@ router.post('/getEvents', function (req, res) {
             };
 
             arrayed.push(aEvent);      
-        }
-        res.render('loadEvents', { events : arrayed});
+            }
+            res.render('loadEvents', { events: arrayed, isLoggedIn: req.user !== undefined });
     });
 });
 
