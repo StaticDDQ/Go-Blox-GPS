@@ -96,7 +96,13 @@ html
                 input#oldPwd(type='password', name='oldPwd')
                 br
                 | New password:
-                input#newPwd(type='password', name='password')
+                input#newPwd(name='password', type='password', placeholder='Password', pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}", onclick="openSpan()")
+                div(class='popup')
+                    span(class="popuptext" id="pwdSpan")
+                        #message
+                            p#let(class='invalid') Require lowercase letter
+                            p#num(class='invalid') Require number
+                            p#len(class='invalid') Require 8 characters
                 br
                 | Retype new password:
                 input#retype(type='password', name='retype')
@@ -177,6 +183,58 @@ html
     //- Javascript codes
     script.
       document.getElementById('start').click();
+
+      var pwd = document.getElementById('newPwd');
+      var letter = document.getElementById('let');
+      var number = document.getElementById('num');
+      var length = document.getElementById('len');
+
+      var isValid = false;
+
+      pwd.onkeyup = function() {
+
+          // Validate lowercase letters
+          var lowerCaseLetters = /[a-z]/g;
+          if(pwd.value.match(lowerCaseLetters)) {  
+              letter.classList.remove("invalid");
+              letter.classList.add("valid");
+          } else {
+              letter.classList.remove("valid");
+              letter.classList.add("invalid");
+              isValid = false;
+              return;
+          }
+
+          // Validate numbers
+          var numbers = /[0-9]/g;
+          if(pwd.value.match(numbers)) {  
+              number.classList.remove("invalid");
+              number.classList.add("valid");
+          } else {
+              number.classList.remove("valid");
+              number.classList.add("invalid");
+              isValid = false;
+              return;
+          }
+  
+          // Validate length
+          if(pwd.value.length >= 8) {
+              length.classList.remove("invalid");
+              length.classList.add("valid");
+          } else {
+              length.classList.remove("valid");
+              length.classList.add("invalid");
+              isValid = false;
+              return;
+          }
+
+          isValid = true;
+      }
+
+      function openSpan() {
+          var popup = document.getElementById("pwdSpan");
+          popup.classList.toggle("show");
+      }
 
       function openTab(evt, tabName) {
 
@@ -303,6 +361,11 @@ html
 
           $('#submitChanges').click(function(event){
               event.preventDefault();
+              if(!isValid){
+                  alert('Invalid password!')
+                  return;
+              }
+
               var formData = {
                   password: $('#newPwd')[0].value,
                   retype: $('#retype')[0].value,

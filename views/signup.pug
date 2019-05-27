@@ -123,6 +123,7 @@ html(lang='en')
         } else {
             letter.classList.remove("valid");
             letter.classList.add("invalid");
+            isValid = false;
             return;
         }
 
@@ -134,6 +135,7 @@ html(lang='en')
         } else {
             number.classList.remove("valid");
             number.classList.add("invalid");
+            isValid = false;
             return;
         }
   
@@ -144,6 +146,7 @@ html(lang='en')
         } else {
             length.classList.remove("valid");
             length.classList.add("invalid");
+            isValid = false;
             return;
         }
 
