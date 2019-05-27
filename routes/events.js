@@ -5,6 +5,7 @@ const path = require('path');
 const multer = require('multer');
 var cloudinary = require('cloudinary').v2;
 var NodeGeoCoder = require("node-geocoder");
+const limiter = require('express-rate-limit');
 
 // Get event model
 let Event = require('../models/event');
@@ -26,8 +27,16 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage })
 
+// to set up limit for how many events to be made in a day
+const createEventLimiter = limiter({
+    windowMs: 24 * 60 * 60 * 1000, // 24 hour window
+    max: 2, // start blocking after 2 requests
+  });
+
+
+
 // add event
-router.post('/addEvent', upload.single("pictures"), async function (req, res) {
+router.post('/addEvent', upload.single("pictures"), createEventLimiter, async function (req, res) {
     req.body.pictures = req.file.filename;
     console.log(req.body);
     // check each element for validity
