@@ -1,0 +1,27 @@
+//- Pug file for the map which can be reused anywhere
+//- link(rel='stylesheet', href='../css/leaflet.css', v='')
+style
+  include ../../public/css/leaflet.css
+.mapping  
+  #map
+  script(src='http://cdn.leafletjs.com/leaflet-0.7/leaflet.js')
+  script.
+    var map = L.map('map').setView([-37.814, 144.96332], 12);
+    mapLink =
+    '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+    L.tileLayer(
+    'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; ' + mapLink + ' Contributors',
+    maxZoom: 18,
+    }).addTo(map);
+          
+  //- Display markers for places
+  if place
+    script.
+        var marker_place = new L.Marker([#{place.lat},#{place.long}]);
+
+        marker_place.bindPopup(
+        "<div id='antos'><div class='anto'><img src=#{place.pictures} style='width: 100px; height: 100px; object-fit: cover'/></div><div class='anto2' style='position: relative'><a href=\'/places/getPlace/#{place._id}\'><b>#{place.placeName}</b></a><br/>Address: #{place.placeAddress}<br/>Phone: #{place.placePhone}</div></div>");
+        
+        map.addLayer(marker_place);
+

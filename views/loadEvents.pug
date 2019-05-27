@@ -31,7 +31,7 @@ html(lang='en')
       
       //- search for events and displaying the details of the events
       .displayEvents
-        if events
+        if events.length > 0
           .events
             each event in events
                
@@ -52,6 +52,8 @@ html(lang='en')
                     | #{event.description}
                   .event_tag
                     p <b>Tags:</b> #{event.tags}
+        else
+          p(style="text-align:center") <b>No events found!</b>
 
       //- Footer
       .footer

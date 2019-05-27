@@ -32,7 +32,7 @@ html(lang='en')
           
       //- search for places and displaying the details of the places
       .displayEvents
-        if places
+        if places.length > 0
           .events
             each place in places
               div(class='filtered ', name ='displayedPlaces', category=place.category, onclick="window.location.href='/places/getPlace/" + place.id + "'")
@@ -47,6 +47,8 @@ html(lang='en')
                     | #{place.placeDescription}
                   .event_tag
                     p <b>Cateogory:</b> #{place.category}
+        else
+          p(style="text-align:center") <b>No places found!</b>
 
       //- Footer
       .footer

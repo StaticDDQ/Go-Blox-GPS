@@ -169,10 +169,11 @@ html
                 #reviewCard
                   li
                     p.eventName
-                      |#{rate.eventName} - #{rate.datePublished} 
+                      a(href='/events/getEvent/'+rate.eventID)
+                        |#{rate.eventName} - #{rate.datePublished} 
                       span 
-                      if !notCurr
-                        input.deleteRating(type='button', value='X', id=rate._id.toString())
+                        if !notCurr
+                          input.deleteRating(type='button', value='X', id=rate._id.toString())
                     p Rating: #{rate.stars}/5
                     p.eventDesc Description:
                     p #{rate.desc}
