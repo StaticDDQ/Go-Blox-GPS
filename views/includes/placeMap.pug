@@ -14,10 +14,7 @@ style
     attribution: '&copy; ' + mapLink + ' Contributors',
     maxZoom: 18,
     }).addTo(map);
-          
-  //- Display markers for places
-  if place
-    script.
-        var marker_place = new L.Marker([#{place.lat},#{place.long}]);
+
+    var marker_place = new L.Marker([#{place.lat},#{place.long}]);
         map.addLayer(marker_place);
 
