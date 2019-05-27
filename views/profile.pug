@@ -6,6 +6,8 @@ html
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
     link(href="https://fonts.googleapis.com/css?family=Heebo:300&display=swap", rel="stylesheet")
     link(href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto&display=swap", rel="stylesheet")
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js")
   body
     //- configure layout with grid
@@ -136,7 +138,8 @@ html
                               a(href='/events/getEvent/' + userEvent._id)
                                   li #{userEvent.name}
         #Places.tabcontent
-          h3 Places to go
+          h3 Your bookmarks 
+            i.fa.fa-bookmark(aria-hidden='true')  
           ul
               if user.bookmark
                   each place in user.bookmark
