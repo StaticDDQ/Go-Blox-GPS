@@ -31,8 +31,6 @@ var upload = multer({ storage: storage })
 const createEventLimiter = limiter({
     windowMs: 24 * 60 * 60 * 1000, // 24 hour window
     max: 2, // start blocking after 2 requests
-    message:
-      "Too many events created from this IP, please try again tomorrow"
   });
 
 
