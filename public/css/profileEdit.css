@@ -325,9 +325,8 @@ body{
 /* reviews tab */
 #reviewCard{
   list-style-type: none;
-  border-bottom: solid 1px #4f4f4f;
+  /* border-bottom: solid 1px #4f4f4f; */
   width: 100%;
-  
   padding-bottom: 10px;
   margin-bottom: 10px;
 }
@@ -341,25 +340,32 @@ body{
 
 .eventName{
   font-weight: bolder;
-  font-size: 20px;
+  font-size: 1.3em;
   text-decoration: underline;
   color: #ED7755;
 }
 
 .eventDesc{
   font-weight: bold;
+  font-size: 1em;
 }
 
 .deleteRating{
-  border: none;
+  border: solid 1px;
+  border-radius: 50%;
   color: #707070;
-  font-size: 20px;
+  font-size: 1em;
+  width: 25px;
+  height: 25px;
 }
 
 .deleteRating:hover{
-  color: #333333;
-  font-size: 20px;
+  background-color: #e15848;
+  color: white;
+  font-size: 1em;
+  border: solid 1px;
 }
+
 
 /* configure setting which uses overlay */
 .settings {

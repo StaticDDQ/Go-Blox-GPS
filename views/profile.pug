@@ -42,7 +42,8 @@ html
         -var fullname = firstName + ' ' + lastName;
         h3 #{user.firstName} #{user.lastName}
         h4 @#{user.userName}
-        h4 Member since || #{user.joined_date}
+        h4 Member since: 
+        h4 #{user.joined_date}
         h4 Date of Birth: #{user.DOB}
 
         if notCurr
