@@ -16,7 +16,7 @@ var addUser = async function(req, res) {
 
     // will not add if same username exists
     if (!dupliUser) {
-        //dupliUser = await findEmail(req.body.email);
+        dupliUser = await findEmail(req.body.email);
         if (!dupliUser) {
             var data = new Members({
                 "firstName": req.body.firstName,
