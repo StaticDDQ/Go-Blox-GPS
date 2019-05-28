@@ -173,10 +173,11 @@ html
                         |#{rate.eventName} - #{rate.datePublished} 
                       span 
                         if !notCurr
-                          input.deleteRating(type='button', value='X', id=rate._id.toString())
+                          input.deleteRating(type='button', value='Delete', id=rate._id.toString())
                     p Rating: #{rate.stars}/5
                     p.eventDesc Description:
                     p #{rate.desc}
+
 
       //- Footer
       .footer
