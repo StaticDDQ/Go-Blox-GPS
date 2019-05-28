@@ -152,13 +152,11 @@ body{
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-  /* color: #ddd; */
   border-bottom: solid 2px #E15848;
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
-  /* color: #ccc; */
   border-bottom: solid 2px #E15848;
 }
 
@@ -352,17 +350,16 @@ body{
 
 .deleteRating{
   border: solid 1px;
-  border-radius: 50%;
+  border-radius: 5px;
   color: #707070;
-  font-size: 1em;
-  width: 25px;
-  height: 25px;
+  font-size: 0.8em;
+  /* width: 25px; */
 }
 
 .deleteRating:hover{
   background-color: #e15848;
   color: white;
-  font-size: 1em;
+  font-size: 0.8em;
   border: solid 1px;
 }
 
