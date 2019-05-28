@@ -4,7 +4,7 @@ style
   include ../../public/css/leaflet.css
 .mapping  
   #map
-  script(src='http://cdn.leafletjs.com/leaflet-0.7/leaflet.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.2/leaflet.js')
   script.
     var map = L.map('map').setView([#{place.lat}, #{place.long}], 12);
     mapLink =
