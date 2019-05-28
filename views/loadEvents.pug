@@ -31,27 +31,30 @@ html(lang='en')
       
       //- search for events and displaying the details of the events
       .displayEvents
-        if events
+        if events.length > 0
           .events
             each event in events
                
               div#eachEvent(class='filtered ', name ='displayedEvents', tags=event.tags, onclick="window.location.href='/events/getEvent/" + event.id + "'")
-                  .event_card
-                    .event_title
-                      h3.title #{event.name}
-                      p Date: #{event.startDate} to #{event.endDate}
-                      p Time: #{event.startTime} - #{event.endTime}
-                      p Location: #{event.address}
-                    .event_pic
-                      img(src= event.pictures, alt='event_pic')
-                    .event_desc
-                      p 
-                        b Description:
-                      p #{event.description}
-                    .event_tag
-                      p 
-                        b Tags: 
-                      p #{event.tags}
+
+                .event_card
+                  .event_title
+                    h3.title #{event.name}
+                    p Date: #{event.startDate} to #{event.endDate}
+                    p Time: #{event.startTime} - #{event.endTime}
+                    p Location: #{event.address}
+                  .event_pic
+                    img(src= event.pictures, alt='event_pic')
+                  .event_desc
+                    p 
+                      b Description:
+                    p 
+                  .event_tag
+                    p 
+                      b Tags: 
+                    p 
+        else
+          p(style="text-align:center") <b>No events found!</b>
 
       //- Footer
       .footer

@@ -37,9 +37,9 @@ html(lang='en')
           br
           if event.joinedUsers
             ul
-                each user in event.joinedUsers
-                    a(href='/members/profile/' + user)
-                        li #{user}
+              each user in event.joinedUsers
+                a(href='/members/profile/' + user)
+                  li #{user}
 
       .reviews
         h2 Reviews
@@ -57,10 +57,10 @@ html(lang='en')
             p Average Ratings:
             | #{avg}/5
             each rating in ratings
-                .rating_card
-                    p USER: #{rating.userName}
-                    p STARS: #{rating.stars}/5
-                    p DESCRIPTION: #{rating.desc}
+              .rating_card
+                p USER: #{rating.userName}
+                p STARS: #{rating.stars}/5
+                p DESCRIPTION: #{rating.desc}
       .footer
         p(style='color:white')
           | © 2019 Get People Socilaizing. All rights reserved.

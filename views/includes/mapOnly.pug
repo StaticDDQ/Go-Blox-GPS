@@ -30,16 +30,16 @@ style
           
           map.addLayer(marker);
           
-  //- Display markers for places (Jansen pls work on the backend)
+  //- Display markers for places
   if places
       each place in places
         script.
           var marker_place = new L.Marker([#{place.lat},#{place.long}]);
           if(#{isLoggedIn} === true){
-          marker_place.bindPopup(
+            marker_place.bindPopup(
             "<div id='antos'><div class='anto'><img src=#{place.pictures} style='width: 100px; height: 100px; object-fit: cover'/></div><div class='anto2' style='position: relative'><a href=\'/places/getPlace/#{place.id}\'><b>#{place.placeName}</b></a><br/>Address: #{place.placeAddress}<br/>Phone: #{place.phone}</div></div>");
           } else{
-          marker_place.bindPopup(
+            marker_place.bindPopup(
             "<div id='antos'><div class='anto'><img src=#{place.pictures} style='width: 100px; height: 100px; object-fit: cover'/></div><div class='anto2' style='position: relative'><b>#{place.placeName}</b><br/>Address: #{place.placeAddress}<br/>Phone: #{place.phone}</div></div>");
           }
           map.addLayer(marker_place);
