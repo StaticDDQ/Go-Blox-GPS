@@ -36,41 +36,56 @@ html(lang='en')
           p <b>Tags:</b> #{event.tags}
           br
           if event.joinedUsers
+            p <b>Users joined</b>
             ul
               each user in event.joinedUsers
                 a(href='/members/profile/' + user)
                   li #{user}
 
+      //- Reviews      
       .reviews
         h2 Reviews
-        #addedRating
+        //- Displaying the review created by the user
         if ratings.length > 0
-            - 
-                var avg = 0;
-                var counter = 0;
-                ratings.forEach(function(rating){
-                    avg += rating.stars;
-                    counter++;
-                });
-                avg /= counter;
-                avg = avg.toFixed(2);
-            p Average Ratings:
-            | #{avg}/5
-            each rating in ratings
-              .rating_card
-                p USER: #{rating.userName}
-                p STARS: #{rating.stars}/5
-                p DESCRIPTION: #{rating.desc}
+          - 
+            var avg = 0;
+            var counter = 0;
+            ratings.forEach(function(rating){
+              avg += rating.stars;
+              counter++;
+            });
+            avg /= counter;
+            avg = avg.toFixed(2);
+          p Average Ratings:
+          | #{avg}/5
+
+          each rating in ratings
+            .rating_card
+              a(href='/members/profile/' + rating.userName)
+                p #{rating.userName}
+              -   
+                var n = 1;
+                var leftover = 5 - rating.stars;
+              div(class='userStars')
+                while n++ <= rating.stars
+                  span(class = 'starred rated', value='&nbsp')
+                while leftover-- > 0
+                  span(class = 'starred', value='&nbsp')
+              p DESCRIPTION: 
+              | #{rating.desc}
+      //- Footer              
       .footer
         p(style='color:white')
           | © 2019 Get People Socilaizing. All rights reserved.
-          
+    
     script.
+        document.getElementById('desc').value = '';
 
+        //- Navigation bar funtctions
         function openNav() {
             document.getElementById("mySidenav").style.width = "250px";
         }
+
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
         }
-
