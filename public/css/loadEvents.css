@@ -15,8 +15,9 @@ body {
 /* configure the grid */
 .container {
     display: grid;
+    grid-gap: 5vh;
     grid-template-columns: 0fr 1fr 0fr;
-    grid-template-rows: 0fr 1fr 0fr;
+    grid-template-rows: auto;
     min-height: 100vh;
     grid-template-areas: 
     "navbar searchBox logo"
@@ -89,7 +90,7 @@ button{
     height: 250px;
     width: 250px;
     margin: 20px;
-    margin-top: 30px;
+    /* margin-top: 30px; */
     border-radius: 5px;
     z-index:1;
 }
@@ -97,6 +98,8 @@ button{
 .filterSide{
     grid-area: filterSide;
     padding-left: 20px;
+    /* position: sticky; */
+    overflow: hidden;
 }
 
 .filterSide h3{
@@ -107,9 +110,46 @@ button{
     padding-bottom: 10px;
     padding-top: 5px;
 }
+
 #input{
     font-size: 15px;
     margin-bottom: 10px;
+}
+
+#filter{
+    overflow: scroll;
+    width: 20vw;
+    height: 14vh;
+}
+
+.filterTag{
+    background-color: white;
+    border: 1px solid #becad0;
+    padding: 3px;
+    margin-left: 2px;
+    margin-bottom: 3px;
+    border-radius: 5px;
+}
+
+.filterTag:hover{
+    background-color:#becad0;
+}
+.filterTag button.active{
+    background: #ED7755;
+}
+.all{
+    padding: 3px;
+    margin-bottom: 3px;
+    background-color: white;
+    border: 1px solid #becad0;
+    border-radius: 5px;
+}
+
+.all:hover{
+    background-color:#becad0;
+}
+.all .active{
+    background-color: #e15848;
 }
 
 .button{
@@ -159,10 +199,13 @@ button{
 .event_title{
     grid-area: event_title;
     padding-bottom: 20px;
-    font-weight: bold;
-    font-size: 20px;
     margin-right:auto;
     overflow:auto;
+}
+
+.title{
+    font-weight: bold;
+    font-size: 1.5em;
 }
 
 .event_pic{
