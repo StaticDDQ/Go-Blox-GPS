@@ -1,29 +1,20 @@
 /* For index, about */
 * {
     margin: 0;
-    padding: 0; 
-    
+    padding: 0;   
 }
 
 /* General body formatting */
-
 body {
     font-family: 'Quicksand';
+    /* background: rgb(255,249,248); */
     background-image: linear-gradient(to top right, #f5bdab, #90a4bc);
     background-repeat:no-repeat;
     background-position: center;
     background-attachment: fixed;
-    /* -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover; */
-    /* background-repeat: no-repeat; */
-    /* height: 100%; */
-    
 }
 
  /* configuring the grid styles */
-
 .gridContainer {
     display: grid;
     grid-template-columns: auto;
@@ -41,22 +32,21 @@ body {
     border-radius: .7em;
     align-content: center;
     margin: 100px auto;
-    padding: 20px;
+    padding: 50px 40px;
     box-shadow: 0px 2px 2px 0px rgba(53, 53, 53, 0.75);
 }
 
 /* Format Header */
-
 h1 {
     font-size: 40px;
     font-family: Arial, Helvetica, sans-serif;
     letter-spacing: 2px;
-    padding-bottom: 10vh;
+    padding-bottom: 5vh;
+    padding-top: 5vh;
     color: #647a94;
 }
 
 /* Formatting the input boxes */
-
 p {
     font-size: 20px;
 }
@@ -75,7 +65,6 @@ input {
 }
 
 /* Login Elements */
-
 .logins input {
     background: none;
     border: none;
@@ -83,8 +72,6 @@ input {
     padding: 20px 20px 10px 20px;
     height: 4vh;
     width: auto;
-
-    
 }
 
 .logins {
@@ -92,7 +79,6 @@ input {
 }
 
 /* Login button */
-
 .loginButton input {
     height: 6vh;
     width: auto;
@@ -102,7 +88,6 @@ input {
     border: none;
     border: .5px solid #707070;
     border-radius: .4em;
-
 }
 .loginButton {
     text-align: left;
@@ -118,7 +103,6 @@ input {
 }
 
 /* Sign up button */
-
 .signUpButton input {
     height: 5vh;
     width: auto;
@@ -129,7 +113,6 @@ input {
     background: none;
     border: none;
     text-align: left;
-    
 }
 
 .signUpButton {
@@ -144,4 +127,3 @@ input {
     background: none;
     border-bottom: .1em solid #f5bdab;
 }
-
