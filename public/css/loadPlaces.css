@@ -10,8 +10,10 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-color: black;
-    background: rgb(213,221,232);
-    background: linear-gradient(167deg, rgba(213,221,232,1) 0%, #ffc7bb 65%);
+    /* background: #f4f4f4; */
+    /* background: linear-gradient(167deg, rgba(213,221,232,1) 0%, #ffc7bb 65%); */
+    background: linear-gradient(to top, rgba(175,88,140,1) 30%, rgba(255,130,101,1) 100%);
+
 }
 
 /* configure the grid */
@@ -72,7 +74,7 @@ body {
 
 /* Drop down button */
 button.dropBtn {
-    background-color: rgb(0, 0, 0);
+    background-color: black;
     color: rgb(255, 255, 255);
     padding: 10px;
     margin-top: 10px;
@@ -126,8 +128,8 @@ button.dropBtn {
 /* Change color of dropdown links on hover */
 .dropdown-content input:hover {
     /* background-color: #ddd; */
-    border-bottom: black;
-    border-bottom: solid;
+    /* border-color: #ED7755; */
+    border-bottom: solid 2px #ED7755;
 }
 
 /* Show the dropdown menu on hover */
@@ -137,7 +139,8 @@ button.dropBtn {
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropBtn {
-    background-color: #e15848;
+    background-color: black;
+    color: #ED7755;
 } 
 
 /* Search bar */
@@ -150,38 +153,44 @@ button.dropBtn {
 }
 
 ::placeholder{
-   color: #e15848;
-   font-style: italic;
-}
-
-.search{
-   width: 70%;
-   height: auto;
-   font-size: 1em;
-   padding: 5px;
-   margin: 10px;
-   border-radius: 7px;
-}
-
-.searching input[type=text]:hover{
-    border-color: #a0a0a0 #b9b9b9 #b9b9b9 #b9b9b9;
-}
-
-.searching:focus{
-    border-color:#4d90fe;
-}
-
-.searching input[type=submit]{
+    color: #a0a0a0;
+    font-style: italic;
+ }
+ 
+ .search{
+    width: 70%;
+    height: auto;
     font-size: 1em;
-    padding: 5px;
-    border-radius: 10px;
-    margin-top: 3vh;
-}
-
-.searching input[type=submit]:hover{
-    color: #ED7755;
-}
-
+    padding: 7px;
+    /* margin: 10px; */
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border: none;
+ }
+ 
+ .searching input[type=text]:hover{
+     border-color: #a0a0a0 #b9b9b9 #b9b9b9 #b9b9b9;
+ }
+ 
+ .searching:focus{
+     border-color:#4d90fe;
+ }
+ 
+ .searching input[type=submit]{
+     font-size: 1em;
+     padding: 7px;
+     border-top-right-radius: 3px;
+     border-bottom-right-radius: 3px;
+     margin-top: 3vh;
+     border: none;
+     background-color: rgb(213,221,232);
+ }
+ 
+ .searching input[type=submit]:hover{
+     /* color: #ED7755; */
+    background-color: #becad0;
+ }
+ 
 /* configure the map */
 .mapping{
 	grid-area: mapping;
@@ -205,7 +214,7 @@ textarea:focus, input:focus{
 /* configure footer */
 .footer{
     grid-area: footer; 
-    background-color: #90A4BC;
+    background-color:#90A4BC;
     padding-left: 5px;
     padding-bottom: 20px;
     padding-top: 20px;
