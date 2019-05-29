@@ -45,13 +45,9 @@ html(lang='en')
                     p Location: #{event.address}
                   .event_pic
                     img(src= event.pictures, alt='event_pic')
-                  .event_desc
-                    p 
-                      b Description:
-                    p 
                   .event_tag
                     p 
-                      b Tags: 
+                      b Tags: #{event.tags}
                     p 
         else
           p(style="text-align:center") <b>No events found!</b>

@@ -16,6 +16,25 @@ style
     maxZoom: 18,
     }).addTo(map);
 
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        alert('Geolocation is not supported');
+    }
+
+    function showPosition(position){
+
+        var marker = new L.Marker([position.coords.latitude, position.coords.longitude]);
+
+        map.addLayer(marker);
+        
+        marker.bindPopup(
+            "<div id='antos'><div class='anto2' style='position: relative'>You are here!</div></div>"
+        ).openPopup();
+
+        map.panTo([position.coords.latitude, position.coords.longitude]);
+    }
+
   //- Display markers for events
   if events
       each evented in events
