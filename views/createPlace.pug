@@ -113,20 +113,22 @@ html(lang='en')
 							span.checkmark
 							|  Uncategorized
 						br
-						//- //- tags changed to categories
-						//- .searchBar
-						//-   input#input(type='text', placeholder='Search Tags')
-						//-   br
-						//-   input(type='button', value='Add tag', onclick='addTag()')
 
 						//- #checked
 						.agree
 							input#agree(type='checkbox', value='agreed')
 							|  I agree to the terms and conditions
 							br
-						//- Button to submit the new event created
-						.createEventButton
-							input(type="submit" value="Create Place")
+
+							// Button to submit the new event created
+						#overlay
+							.submitBtns
+								p Are you sure you are done?
+								br
+								input(type='submit', value="Yes")
+								input#no(type='button', value="No", onclick='removePopup()')
+						br
+						input#but(type='button', value="Create", onclick='openPopup()')
 
 			//- JS to preview the images uploaded
 			script.
@@ -138,6 +140,16 @@ html(lang='en')
 				function closeNav() {
 						document.getElementById("mySidenav").style.width = "0";
 				}
+
+				// Setting tab functions
+				function openPopup(){
+					document.getElementById("overlay").style.display = "block";
+				}
+
+				function removePopup(){
+					document.getElementById("overlay").style.display = "none";
+				}
+
 				function previewFile() {
 						//- var preview = document.querySelector('img'); //selects the query named img
 						var previewbox = document.getElementById('preview'); // get image by ID
