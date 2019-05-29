@@ -1,12 +1,10 @@
 /* CSS FOR signup.pug */
-
 * {
     margin: 0;
     padding: 0;
 }
 
 /* Formatting the general look */
-
 body {
     color:#333;
     font-family: 'Quicksand';
@@ -14,21 +12,15 @@ body {
     background-repeat:no-repeat;
     background-position: center;
     background-attachment: fixed;
-    /* -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover; */
 }
 
 /* Grid container configuration */
-
 .gridContainer {
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: auto;
     grid-template-areas: 
     "box";
-
  }
 
 .box {
@@ -48,7 +40,6 @@ form {
 }
 
 /* Formatting the input boxes */
-
 p {
     text-align: left;
 }
@@ -62,7 +53,6 @@ input {
 }
 
 /* Formatting header */
-
 h1 {
     font-size: 40px;
     font-family: Arial, Helvetica, sans-serif;
@@ -94,7 +84,6 @@ h1 {
 }
 
 /* Configuring terms and conditions */
-
 .agree input {
     padding: .5em;
     width: 20px;
@@ -115,7 +104,6 @@ h1 {
 }
 
 /* Entering first and last name */
-
 .signUpsFirstName {
     grid-area: firstname;
     text-align: left;
@@ -139,13 +127,12 @@ h1 {
 }
 
 /* Sign Up Button*/
-
 .signUpButton input {
     height: 6vh;
-    width: 9vw;
+    width: auto;
     padding: 10px;
     font-family: 'Quicksand';
-    font-size: 1.1vw;
+    font-size: 1em;
     border: none;
     border: .5px solid #707070;
     border-radius: .4em;
@@ -164,11 +151,10 @@ h1 {
 }
 
 /* Login button configuration */
-
 .loginButton input {
     height: 5vh;
-    width: 12vw;
-    font-size: 1.1vw;
+    width: auto;
+    font-size: 1em;
     padding: 5px; 
     color: #555555;
     font-family: 'Quicksand';
@@ -191,7 +177,6 @@ h1 {
 }
 
 /* hover over forms */
-
 .tooltip {
     position: relative;
     display: inline-block;
@@ -244,11 +229,6 @@ h1 {
 }
 
 .submitBtns {
-    /* display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-    grid-template-areas: 
-    "one password"; */
     background-color: #f1f1f1;
     padding: 2vw;
     justify-content: center;
@@ -258,7 +238,6 @@ h1 {
     font-family: 'Quicksand';
     color:  rgb(20, 20, 20);
     border-radius: .7em;
-
 }
 
 .submitBtns p {
