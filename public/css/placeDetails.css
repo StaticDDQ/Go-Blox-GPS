@@ -130,6 +130,20 @@ p.contacts {
   border-color:rgb(206, 91, 66);
   color: white;
 }
+
+#bookmark{
+  border: none;
+  background-color: #90A4BC;
+  padding: 5px;
+  color: white;
+  border-radius: 3px;
+}
+
+#bookmark:hover{
+  background-color: #5d8eca;
+  color: white;
+  border: none;
+}
 /* add reviews and ratings*/
 .reviews{
     grid-area: reviews;
