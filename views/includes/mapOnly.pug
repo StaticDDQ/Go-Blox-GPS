@@ -4,7 +4,7 @@ style
   include ../../public/css/leaflet.css
 .mapping  
   #map
-  script(src='http://cdn.leafletjs.com/leaflet-0.7/leaflet.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.2/leaflet.js')
   script.
     var map = L.map('map').setView([-37.814, 144.96332], 12);
     mapLink =
@@ -19,22 +19,28 @@ style
       each evented in events
         script.
           var marker = new L.Marker([#{evented.lat},#{evented.long}]);
-          
-          marker.bindPopup(
+          if(#{isLoggedIn} === false){
+            marker.bindPopup(
+            "<div id='antos'><div class='anto'><img src=#{evented.pictures} style='width: 100px; height: 100px; object-fit: cover'/></div><div class='anto2' style='position: relative'><b>#{evented.name}</b><br/>Address: #{evented.address}<br/>Phone: #{evented.phone}<br/>Email: #{evented.email}</div></div>");
+          }else{
+            marker.bindPopup(
             "<div id='antos'><div class='anto'><img src=#{evented.pictures} style='width: 100px; height: 100px; object-fit: cover'/></div><div class='anto2' style='position: relative'><a href=\'/events/getEvent/#{evented.id}\'><b>#{evented.name}</b></a><br/>Address: #{evented.address}<br/>Phone: #{evented.phone}<br/>Email: #{evented.email}</div></div>");
+  
+          }
+          
           map.addLayer(marker);
-          marker.on('dblclick', function onClick(e){
-            window.location.href = '/events/getEvent/#{evented.id}'
-          });
-  //- Display markers for places (Jansen pls work on the backend)
+          
+  //- Display markers for places
   if places
       each place in places
         script.
           var marker_place = new L.Marker([#{place.lat},#{place.long}]);
-          marker_place.bindPopup(
+          if(#{isLoggedIn} === true){
+            marker_place.bindPopup(
+            "<div id='antos'><div class='anto'><img src=#{place.pictures} style='width: 100px; height: 100px; object-fit: cover'/></div><div class='anto2' style='position: relative'><a href=\'/places/getPlace/#{place.id}\'><b>#{place.placeName}</b></a><br/>Address: #{place.placeAddress}<br/>Phone: #{place.phone}</div></div>");
+          } else{
+            marker_place.bindPopup(
             "<div id='antos'><div class='anto'><img src=#{place.pictures} style='width: 100px; height: 100px; object-fit: cover'/></div><div class='anto2' style='position: relative'><b>#{place.placeName}</b><br/>Address: #{place.placeAddress}<br/>Phone: #{place.phone}</div></div>");
+          }
           map.addLayer(marker_place);
-          marker_place.on('dblclick', function onClick(e){
-            window.location.href = '/places/getPlace/#{place.id}'
-          });
 

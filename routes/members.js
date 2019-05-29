@@ -143,7 +143,10 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 router.post('/register', upload.single("display"), async function (req, res) {
-
+    req.body.display= {
+        public_id: '',
+        url: req.file.filename
+    };
     // check each element for validity
     req.checkBody('firstName', 'First name is required').notEmpty();
     req.checkBody('lastName', 'Last name is required').notEmpty();
@@ -203,17 +206,18 @@ router.post('/register', upload.single("display"), async function (req, res) {
 router.post('/updateUser', upload.single("display"), async function (req, res) {
     
 
-    await Member.findOne({userName: req.user.userName}, async function(err, result){
-        var pic_delete_id = result.display.id
-        if(pic_delete_id !== undefined){
-            await cloudinary.uploader.destroy(pic_delete_id, function(err, result) {
-                if(err) throw err;
-            });
+    await Member.findOne({ userName: req.user.userName }, async function (err, result) {
+        if (req.body.display) {
+            var pic_delete_id = result.display.id
+            if (pic_delete_id !== undefined) {
+                await cloudinary.uploader.destroy(pic_delete_id, function (err, result) {
+                    if (err) throw err;
+                });
+            }
         }
     });
     if(req.file !== undefined){
-    await cloudinary.uploader.upload(req.file.path,
-        function (error, result) {
+        await cloudinary.uploader.upload(req.file.path, function (error, result) {
 
             if (result.public_id === '') {
                 req.body['display'] = {
@@ -227,35 +231,30 @@ router.post('/updateUser', upload.single("display"), async function (req, res) {
                 url: result.secure_url
             };
         }
-            Member.findOneAndUpdate(
-                { userName: req.user.userName }, {
-                    $set: {
-                        'display': req.body.display,
-                        'interests': req.body.interests,
-                        'desc': req.body.desc
-                    }
-                }, function (err, resp) {
-                    if (err) throw err;
-                    res.redirect('/members/userProfile');
-                });
+        Member.findOneAndUpdate(
+            { userName: req.user.userName }, {
+                $set: {
+                    'display': req.body.display,
+                    'interests': req.body.interests,
+                    'desc': req.body.desc
+                }
+            }, function (err, resp) {
+                if (err) throw err;
+                res.redirect('/members/userProfile');
+            });
 
         });
     } else {
-            req.body['display'] = {
-                public_id: '',
-                url: ''
-                }; 
-            Member.findOneAndUpdate(
-                { userName: req.user.userName }, {
-                    $set: {
-                        'display': req.body.display,
-                        'interests': req.body.interests,
-                        'desc': req.body.desc
-                    }
-                }, function (err, resp) {
-                    if (err) throw err;
-                    res.redirect('/members/userProfile');
-                });
+        Member.findOneAndUpdate(
+            { userName: req.user.userName }, {
+                $set: {
+                    'interests': req.body.interests,
+                    'desc': req.body.desc
+                }
+            }, function (err, resp) {
+                if (err) throw err;
+                res.redirect('/members/userProfile');
+            });
 
         }
 });

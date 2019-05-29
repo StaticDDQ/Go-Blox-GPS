@@ -91,6 +91,8 @@ router.get('/getPlace/:id', function (req, res) {
     Place.findById(req.params.id, function (err, place) {
         if (err) throw err;
         if (place != null) {
+            place['lat'] = parseFloat(place.location[0].latitude);
+            place['long'] = parseFloat(place.location[0].longitude);
             res.render('placeDetails', {
                 place: place,
                 isBookmarked: req.user !== undefined && req.user.bookmark.includes(place.placeName)
@@ -127,7 +129,7 @@ router.post('/getPlaces', function (req, res) {
 
                 placeArr.push(aPlaces);
             };
-            res.render('loadPlaces', { places: placeArr });
+            res.render('loadPlaces', { places: placeArr, isLoggedIn: req.user !== undefined });
         });
     }
     else {
@@ -143,7 +145,7 @@ router.post('/getPlacesByCategory/', function (req, res) {
             category: req.body.category
         }, function (err, resp) {
             if (err) throw err;
-            res.render('loadPlaces', { places: resp });
+            res.render('loadPlaces', { places: resp, isLoggedIn: req.user !== undefined });
         });
     }
     else {

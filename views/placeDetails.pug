@@ -5,7 +5,7 @@ html(lang='en')
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     style
-      include ../public/css/eventDetails.css
+      include ../public/css/placeDetails.css
       include ../public/css/universal.css
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
@@ -14,6 +14,7 @@ html(lang='en')
   body
     .grid
       include includes/navbar.pug
+      
 
       //- Event picture displayed 
       .imageContent
@@ -26,6 +27,8 @@ html(lang='en')
           p <b>Address:</b> #{place.placeAddress}
           p <b>Description:</b>
           p #{place.placeDescription}
+        include includes/placeMap.pug
+        .reference
           p.contacts <b>Contact Details:</b>
           p <b>Phone Number:</b> #{place.placePhone}
           p <b>Category:</b> #{place.category}
@@ -36,7 +39,6 @@ html(lang='en')
                 if(isBookmarked)
                     txt = "Stop bookmark";
               button#bookmark(value= place.placeName) #{txt}
-            
       .footer
         p(style='color:white')
           | © 2019 Get People Socilaizing. All rights reserved.

@@ -27,18 +27,18 @@ html(lang='en')
       
       .searchCategory
         -
-            var categories = ['Food', 'Shopping', 'Education', 'Health', 'Entertainment',
-            'Night', 'Nature', 'Art', 'Sports', 'Music', 'Recreation', 'Religious',
-            'Uncategorized'];
+          var categories = ['Food', 'Shopping', 'Education', 'Health', 'Entertainment',
+          'Night', 'Nature', 'Art', 'Sports', 'Music', 'Recreation', 'Religious',
+          'Uncategorized'];
 
         h2 Find by category
         .dropdown
-            button.dropBtn Categories
+          button.dropBtn Categories
             .dropdown-content
-                each cat in categories
-                    form(action='/places/getPlacesByCategory/', method='post')
-                        input(type='hidden', name='category', value= cat)
-                        input(type='submit', value=cat)
+              each cat in categories
+                form(action='/places/getPlacesByCategory/', method='post')
+                  input(type='hidden', name='category', value= cat)
+                  input(type='submit', value=cat)
 
       //- Footer
       .footer
@@ -48,8 +48,8 @@ html(lang='en')
     script.
         // Side Navigation Bar
         function openNav() {
-          document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("mySidenav").style.width = "250px";
         }
         function closeNav() {
-          document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("mySidenav").style.width = "0";
         }

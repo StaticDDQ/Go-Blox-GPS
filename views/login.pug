@@ -13,16 +13,16 @@ html(lang='en')
     //- Login form
     .container
       form(action='/members/authenticate', method='post')
-          h1 LOGIN
-          h4 #{error}
-          .logins
-            input(title='Please Enter Your username', name='username', type='text', placeholder='Username')
-            br
-          .logins
-            input(title='password', name='password', type='password', placeholder='Password')
-            br
-          .loginButton
-            input(type='submit', value='Log in')
+        h1 LOGIN
+        h4 #{error}
+        .logins
+          input(title='Please Enter Your username', name='username', type='text', placeholder='Username')
+          br
+        .logins
+          input(title='password', name='password', type='password', placeholder='Password')
+          br
+        .loginButton
+          input(type='submit', value='Log in')
       form(action='/members/signup', method='get')
-          .signUpButton
-            input(type='submit', value='Create an account')
+        .signUpButton
+          input(type='submit', value='Create an account')

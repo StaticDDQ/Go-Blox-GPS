@@ -7,23 +7,23 @@ html
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
   body
     .grid
-        //- Navigation menu
-        include includes/navbarNonUser.pug
-        .logo
-            a(href='/') 
-                img(src= "/logo.png", alt='GPS', width='80', height='80')
-        .content
-            h1
-              | Your account has been successfully verified!
-              br
-              |     Please, proceed to a login page.
-            .btn
-                form(action='/members/login')
-                    button(type='submit') Log me in
+      //- Navigation menu
+      include includes/navbarNonUser.pug
+      .logo
+        a(href='/') 
+          img(src= "/logo.png", alt='GPS', width='80', height='80')
+      .content
+        h1
+          | Your account has been successfully verified!
+          br
+          |     Please, proceed to a login page.
+          .btn
+            form(action='/members/login')
+              button(type='submit') Log me in
     script.
-      function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-      }
-      function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-      }
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }

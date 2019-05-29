@@ -37,20 +37,20 @@ html(lang='en')
           p <b>Tags:</b> #{event.tags}
           br
           -
-              var canJoin = true;
-              var date = new Date();
-              var y = event.endDate.slice(0,4);
-              if(y < date.getFullYear()) {
-                  canJoin = false;
-              }
-              var m = event.endDate.slice(5,7);
-              if(y === date.getFullYear() && m < date.getMonth()+1) {
-                  canJoin = false;
-              }
-              var d = event.endDate.slice(8,10);
-              if(y === date.getFullYear() && m === date.getMonth()+1 && d < date.getDate()) {
-                  canJoin = false;
-              }
+            var canJoin = true;
+            var date = new Date();
+            var y = event.endDate.slice(0,4);
+            if(y < date.getFullYear()) {
+              canJoin = false;
+            }
+            var m = event.endDate.slice(5,7);
+            if(y === date.getFullYear() && m < date.getMonth()+1) {
+              canJoin = false;
+            }
+            var d = event.endDate.slice(8,10);
+            if(y === date.getFullYear() && m === date.getMonth()+1 && d < date.getDate()) {
+              canJoin = false;
+            }
 
           if canJoin
             #join
@@ -63,53 +63,53 @@ html(lang='en')
         //- Ratings
       .ratings
         h2 Add reviews:
-            div#starRatings(class='stars', rating='3')
-                span(class='star rated', value='&nbsp;', onclick='setRating(event)')
-                span(class='star rated', value='&nbsp;', onclick='setRating(event)')
-                span(class='star rated', value='&nbsp;', onclick='setRating(event)')
-                span(class='star', value='&nbsp;', onclick='setRating(event)')
-                span(class='star', valie='&nbsp;', onclick='setRating(event)')
-            input#stars(type='hidden', value='3')
-            input#eventID(type='hidden', value=event._id)
-            input#eventName(type='hidden', value=event.name)
-            textarea#desc(name="description" cols="40" rows="5")
-            br
-            input#submitReview(type='button', value='Submit review')
-            ul#response
+          div#starRatings(class='stars', rating='3')
+            span(class='star rated', value='&nbsp;', onclick='setRating(event)')
+            span(class='star rated', value='&nbsp;', onclick='setRating(event)')
+            span(class='star rated', value='&nbsp;', onclick='setRating(event)')
+            span(class='star', value='&nbsp;', onclick='setRating(event)')
+            span(class='star', valie='&nbsp;', onclick='setRating(event)')
+          input#stars(type='hidden', value='3')
+          input#eventID(type='hidden', value=event._id)
+          input#eventName(type='hidden', value=event.name)
+          textarea#desc(name="description" cols="40" rows="5")
+          br
+          input#submitReview(type='button', value='Submit review')
+          ul#response
       //- Reviews      
       .reviews
         h2 Reviews
         //- Displaying the review created by the user
         if ratings.length > 0
-            - 
-                var avg = 0;
-                var counter = 0;
-                ratings.forEach(function(rating){
-                    avg += rating.stars;
-                    counter++;
-                });
-                avg /= counter;
-                avg = avg.toFixed(2);
-            p Average Ratings:
-            | #{avg}/5
+          - 
+            var avg = 0;
+            var counter = 0;
+            ratings.forEach(function(rating){
+              avg += rating.stars;
+              counter++;
+            });
+            avg /= counter;
+            avg = avg.toFixed(2);
+          p Average Ratings:
+          | #{avg}/5
         
         #addedRating
 
         if ratings.length > 0
-            each rating in ratings
-                .rating_card
-                    a(href='/members/profile/' + rating.userName)
-                        p #{rating.userName}
-                    -   
-                        var n = 1;
-                        var leftover = 5 - rating.stars;
-                    div(class='userStars')
-                        while n++ <= rating.stars
-                            span(class = 'starred rated', value='&nbsp')
-                        while leftover-- > 0
-                            span(class = 'starred', value='&nbsp')
-                    p DESCRIPTION: 
-                    | #{rating.desc}
+          each rating in ratings
+            .rating_card
+              a(href='/members/profile/' + rating.userName)
+                p #{rating.userName}
+              -   
+                var n = 1;
+                var leftover = 5 - rating.stars;
+              div(class='userStars')
+                while n++ <= rating.stars
+                  span(class = 'starred rated', value='&nbsp')
+                while leftover-- > 0
+                  span(class = 'starred', value='&nbsp')
+              p DESCRIPTION: 
+              | #{rating.desc}
       //- Footer              
       .footer
         p(style='color:white')
