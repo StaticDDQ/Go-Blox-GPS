@@ -6,14 +6,31 @@ style
   #map
   script(src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.2/leaflet.js')
   script.
+
     var map = L.map('map').setView([-37.814, 144.96332], 12);
     mapLink =
     '<a href="http://openstreetmap.org">OpenStreetMap</a>';
     L.tileLayer(
-    'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; ' + mapLink + ' Contributors',
     maxZoom: 18,
     }).addTo(map);
+
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        alert('Geolocation is not supported');
+    }
+
+    function showPosition(position){
+
+        var marker = new L.Marker([position.coords.latitude, position.coords.longitude]);
+        marker.bindPopup(
+            "<div id='antos'><div class='anto2' style='position: relative'>You are here!</div></div>"
+        );
+        map.addLayer(marker);
+    }
+
   //- Display markers for events
   if events
       each evented in events
