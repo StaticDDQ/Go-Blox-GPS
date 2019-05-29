@@ -202,7 +202,6 @@ router.post('/register', upload.single("display"), async function (req, res) {
     }
 });
 
-/// TAKE NOTE HERE
 router.post('/updateUser', upload.single("display"), async function (req, res) {
     
 

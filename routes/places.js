@@ -1,7 +1,6 @@
 // JavaScript source code
 const express = require('express');
 const router = express.Router();
-const path = require('path');
 const multer = require('multer');
 var cloudinary = require('cloudinary').v2;
 var NodeGeoCoder = require("node-geocoder");
@@ -22,13 +21,6 @@ var storage = multer.diskStorage({
     }
 });
 
-// FOR REFERENCES
-// "placeName": String,
-// "placeAddress": String,
-// "placeDescription": String,
-// "placePhone": String,
-// "category": String,
-// "pictures": String
 var upload = multer({ storage: storage })
 
 // add places
