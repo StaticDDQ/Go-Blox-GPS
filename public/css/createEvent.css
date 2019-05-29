@@ -59,7 +59,6 @@ h1 {
 form {
     color: rgb(236,118,85);
     font-size: 20px;
-
 }
 
 /* Formatting the input boxes */
@@ -148,12 +147,27 @@ input, textarea {
     font-family: 'Quicksand';
 }
 
-.searchBar input {
+.searchBar input{
     width: 10vw;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     align-content: center;
     font-family: 'Quicksand';
+}
+#checked {
+    margin-top: 10px;
+
+}
+#checked input {
+    width: 8vw;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    align-content: center;
+    font-family: 'Quicksand';
+    border-radius: .4em;
+    border: .5px solid #707070;
+    margin: 5px;
+    text-align: center;
 }
 
 .bottom button {
@@ -187,20 +201,33 @@ input, textarea {
 
  /* Create Event button configuration */
 
-.createEventButton input {
-    height: 6vh;
-    width: 11vw;
-    padding: 10px 10px 10px 10px; 
+.searchBar input#butt {
+    height: 5vh;
+    width: auto;
+    padding: 11px 20px;
     font-family: 'Quicksand';
-    font-size: 1.2vw;
+    font-size: .7em;
     border: none;
     border: .5px solid #707070;
     border-radius: .4em;
-    
 }
 
-.createEventButton {
-    
+.searchBar #butt { 
+    padding-top: 20px;
+    margin: 10px;
+}
+.createEventButton input {
+    height: 6vh;
+    width: auto;
+    padding: 11px 20px;
+    font-family: 'Quicksand';
+    font-size: .8em;
+    border: none;
+    border: .5px solid #707070;
+    border-radius: .4em;
+}
+
+.createEventButton { 
     text-align: left;
     padding-top: 20px;
 }
@@ -209,6 +236,13 @@ input, textarea {
 .createEventButton input.sfHover,
 .createEventButton input.current-menu-item {
     background-color: #f5bdab;
+    color:  rgb(255, 255, 255);
+}
+
+.searchBar input#butt:hover,
+.searchBar input#butt.sfHover,
+.searchBar input#butt.current-menu-item {
+    background-color: rgb(236,118,85);
     color:  rgb(255, 255, 255);
 }
 
