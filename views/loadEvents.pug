@@ -13,14 +13,14 @@ html(lang='en')
     .container
       //- Navigation menu
       include includes/navbar.pug
-    
+
       //- Navigation menu
       include includes/mapOnly.pug
         .filterSide
           h3 Filter
           input#input(type='text', placeholder='Search Tags', name='name', onkeyup='addTag()')
           #filter
-      
+
       //- Searchbar to find events
       .searching
         form(action='/events/getEvents', method='post')
@@ -28,13 +28,13 @@ html(lang='en')
           input(type='submit', value='Find')
 
       //- search for tags
-      
+
       //- search for events and displaying the details of the events
       .displayEvents
         if events.length > 0
           .events
             each event in events
-               
+
               div#eachEvent(class='filtered ', name ='displayedEvents', tags=event.tags, onclick="window.location.href='/events/getEvent/" + event.id + "'")
 
                 .event_card
@@ -45,21 +45,17 @@ html(lang='en')
                     p Location: #{event.address}
                   .event_pic
                     img(src= event.pictures, alt='event_pic')
-                  .event_desc
-                    p 
-                      b Description:
-                    p 
                   .event_tag
-                    p 
-                      b Tags: 
-                    p 
+                    p
+                      b Tags: #{event.tags}
+                    p
         else
           p(style="text-align:center") <b>No events found!</b>
 
       //- Footer
       .footer
         p(style='color:white')
-          | © 2019 Get People Socilaizing. All rights reserved. 
+          | © 2019 Get People Socilaizing. All rights reserved.
 
     script.
         // Side Navigation Bar
@@ -120,11 +116,11 @@ html(lang='en')
         }
         //- Adding Tags to the events
         function addTag() {
-            
+
           var input, filter, tagDiv;
           input = document.getElementById('input');
           filter = input.value.toUpperCase();
-          
+
           tagDiv = document.getElementsByName('tagFilter');
           tagDiv.forEach(function(element) {
             if(element.value.toUpperCase().indexOf(filter) > -1 && filter.length > 0 || filter.length === 0){
