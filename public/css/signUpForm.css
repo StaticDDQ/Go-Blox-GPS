@@ -14,10 +14,6 @@ body {
     background-repeat:no-repeat;
     background-position: center;
     background-attachment: fixed;
-    /* -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover; */
 }
 
 /* Grid container configuration */
@@ -28,7 +24,6 @@ body {
     grid-template-rows: auto;
     grid-template-areas: 
     "box";
-
  }
 
 .box {
@@ -142,10 +137,10 @@ h1 {
 
 .signUpButton input {
     height: 6vh;
-    width: 9vw;
+    width: auto;
     padding: 10px;
     font-family: 'Quicksand';
-    font-size: 1.1vw;
+    font-size: 1em;
     border: none;
     border: .5px solid #707070;
     border-radius: .4em;
@@ -167,8 +162,8 @@ h1 {
 
 .loginButton input {
     height: 5vh;
-    width: 12vw;
-    font-size: 1.1vw;
+    width: auto;
+    font-size: 1em;
     padding: 5px; 
     color: #555555;
     font-family: 'Quicksand';
