@@ -7,7 +7,7 @@ style
   script(src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.2/leaflet.js')
   script.
 
-    var map = L.map('map').setView([-37.814, 144.96332], 12);
+    var map = L.map('map').setView([-37.814, 144.96332], 14);
     mapLink =
     '<a href="http://openstreetmap.org">OpenStreetMap</a>';
     L.tileLayer(
@@ -23,7 +23,7 @@ style
           var marker = new L.Marker([#{evented.lat},#{evented.long}]);
           if(#{isLoggedIn} === false){
             marker.bindPopup(
-            "<div id='antos'><div class='anto'><img src=#{evented.pictures} style='width: 100px; height: 100px; object-fit: cover'/></div><div class='anto2' style='position: relative'><b>#{evented.name}</b><br/>Address: #{evented.address}<br/>Phone: #{evented.phone}<br/>Email: #{evented.email}</div></div>");
+            "<div id='antos'><div class='anto'><img src=#{evented.pictures} style='width: 100px; height: 100px; object-fit: cover'/></div><div class='anto2' style='position: relative'><b>#{evented.name}</b><br/>Address: #{evented.address}</div></div>");
           }else{
             marker.bindPopup(
             "<div id='antos'><div class='anto'><img src=#{evented.pictures} style='width: 100px; height: 100px; object-fit: cover'/></div><div class='anto2' style='position: relative'><a href=\'/events/getEvent/#{evented.id}\'><b>#{evented.name}</b></a><br/>Address: #{evented.address}<br/>Phone: #{evented.phone}<br/>Email: #{evented.email}</div></div>");
@@ -36,13 +36,17 @@ style
   if places
       each place in places
         script.
-          var marker_place = new L.Marker([#{place.lat},#{place.long}]);
+          var placeMark = L.icon({
+            iconUrl: 'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png',
+            iconSize: [ 41, 41 ]
+          });
+          var marker_place = new L.Marker([#{place.lat},#{place.long}], {icon: placeMark});
           if(#{isLoggedIn} === true){
             marker_place.bindPopup(
             "<div id='antos'><div class='anto'><img src=#{place.pictures} style='width: 100px; height: 100px; object-fit: cover'/></div><div class='anto2' style='position: relative'><a href=\'/places/getPlace/#{place.id}\'><b>#{place.placeName}</b></a><br/>Address: #{place.placeAddress}<br/>Phone: #{place.phone}</div></div>");
           } else{
             marker_place.bindPopup(
-            "<div id='antos'><div class='anto'><img src=#{place.pictures} style='width: 100px; height: 100px; object-fit: cover'/></div><div class='anto2' style='position: relative'><b>#{place.placeName}</b><br/>Address: #{place.placeAddress}<br/>Phone: #{place.phone}</div></div>");
+            "<div id='antos'><div class='anto'><img src=#{place.pictures} style='width: 100px; height: 100px; object-fit: cover'/></div><div class='anto2' style='position: relative'><b>#{place.placeName}</b><br/>Address: #{place.placeAddress}</div></div>");
           }
           map.addLayer(marker_place);
 
