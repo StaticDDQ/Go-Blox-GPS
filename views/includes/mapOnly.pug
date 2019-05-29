@@ -7,7 +7,7 @@ style
   script(src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.2/leaflet.js')
   script.
 
-    var map = L.map('map').setView([-37.814, 144.96332], 14);
+    var map = L.map('map').setView([-37.814, 144.96332], 15);
     mapLink =
     '<a href="http://openstreetmap.org">OpenStreetMap</a>';
     L.tileLayer(
@@ -20,7 +20,11 @@ style
   if events
       each evented in events
         script.
-          var marker = new L.Marker([#{evented.lat},#{evented.long}]);
+          var eventMark = L.icon({
+            iconUrl: '/event.png',
+            iconSize: [ 41, 41 ]
+          });
+          var marker = new L.Marker([#{evented.lat},#{evented.long}], {icon: eventMark});
           if(#{isLoggedIn} === false){
             marker.bindPopup(
             "<div id='antos'><div class='anto'><img src=#{evented.pictures} style='width: 100px; height: 100px; object-fit: cover'/></div><div class='anto2' style='position: relative'><b>#{evented.name}</b><br/>Address: #{evented.address}</div></div>");
@@ -37,7 +41,7 @@ style
       each place in places
         script.
           var placeMark = L.icon({
-            iconUrl: 'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png',
+            iconUrl: '/place.png',
             iconSize: [ 41, 41 ]
           });
           var marker_place = new L.Marker([#{place.lat},#{place.long}], {icon: placeMark});
