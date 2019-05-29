@@ -7,7 +7,6 @@ const config = require('./config/database');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const session = require('express-session');
-// const limiter = require('express-rate-limit');
 
 // use moment to format date and time
 app.locals.moment = require('moment');
@@ -19,14 +18,16 @@ let Places = require('./models/place');
 var port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(session({
     secret: 'secret',
     resave: true,
     saveUninitialized: true
 }));
+
 app.use(expressValidator());
-// app.use(limiter);
+
 app.set('view engine','pug');
 app.set('trust proxy', 1);
 

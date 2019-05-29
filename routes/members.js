@@ -287,16 +287,6 @@ router.put('/addEvent/:userName', function (req, res) {
     Member.findOneAndUpdate({ userName: req.params.userName }, { $push: { joinedEvents : req.body.eventName} });
 });
 
-// delete member
-router.delete('/deleteMember/:username', function (req, res) {
-
-    Member.findOneAndDelete(
-        { userName: req.params.username }, function (err, resp) {
-            if (err) throw err;
-            res.send(resp);
-        });
-});
-
 // update user with the description and list of interested tags
 router.post('/storeInfo', function (req, res) {
     Member.findOneAndUpdate({ userName: req.user.userName }, { $set: { 'desc': req.body.description, 'interests': req.body.interests, 'firstTime': false } }, function (err, result) {
