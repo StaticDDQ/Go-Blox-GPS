@@ -1,7 +1,7 @@
 doctype html
 html(lang='en')
   head
-    title Create Event
+    title Event Details
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     style
@@ -9,6 +9,7 @@ html(lang='en')
       include ../public/css/universal.css
     //- link(rel='stylesheet', href='../css/eventDetails.css', type='text/css')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
+    link(href="https://fonts.googleapis.com/css?family=Heebo:300&display=swap", rel="stylesheet")
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js")
 
@@ -23,13 +24,20 @@ html(lang='en')
         .textContent
 
           h2 #{event.name}
-          a(href='/members/profile/'+event.organizer)
-            p <b>Organised by:</b> #{event.organizer}
-          p <b>Start Date:</b> #{event.startDate}
-          p <b>End Date:</b> #{event.endDate}
-          p <b>Start Time:</b> #{event.startTime}
-          p <b>End Time:</b> #{event.endTime}
-          p <b>Description:</b>
+          a#org(href='/members/profile/'+event.organizer)
+            p <b>Organised by #{event.organizer} </b>
+          br
+          h3 <b>Date</b>
+          .date
+            p#s <b>Start Date:</b> #{event.startDate}
+            p#e <b>End Date:</b> #{event.endDate}
+          br  
+          h3 <b>Time</b>
+          .time
+            p#s <b>Start Time:</b> #{event.startTime}
+            p#e <b>End Time:</b> #{event.endTime}
+          br
+          h3 <b>Description:</b>
           p #{event.description}
           p.contacts <b>Contact Details:</b>
           p <b>Email:</b> #{event.email}
