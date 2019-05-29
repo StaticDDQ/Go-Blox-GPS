@@ -336,6 +336,14 @@ body{
   font-size: 15px;
 }
 
+#reviewCard a{
+  color: #4f4f4f;
+}
+
+#reviewCard a:hover{
+  color: #E15848;
+}
+
 .eventName{
   font-weight: bolder;
   font-size: 1.3em;
