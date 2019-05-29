@@ -7,21 +7,19 @@
 /* General body formatting */
 body {
     font-family: 'Quicksand';
-    /* background: rgb(255,249,248); */
     background-image: linear-gradient(to top right, #f5bdab, #90a4bc);
     background-repeat:no-repeat;
     background-position: center;
     background-attachment: fixed;
 }
 
- /* configuring the grid styles */
+ /* Configuring the grid styles */
 .gridContainer {
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: auto;
     grid-template-areas: 
     "container";
-
  }
 
 .container {
