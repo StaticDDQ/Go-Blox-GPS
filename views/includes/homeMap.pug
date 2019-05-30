@@ -40,7 +40,7 @@ style
     }
 
   //- Display markers for events
-  if events
+  if events.length > 0
       each evented in events
         script.
           var eventMark = L.icon({
@@ -60,7 +60,7 @@ style
           map.addLayer(marker);
           
   //- Display markers for places
-  if places
+  if places.length > 0
       each place in places
         script.
           var placeMark = L.icon({
@@ -76,4 +76,6 @@ style
             "<div id='antos'><div class='anto'><img src=#{place.pictures} style='width: 100px; height: 100px; object-fit: cover'/></div><div class='anto2' style='position: relative'><b>#{place.placeName}</b><br/>Address: #{place.placeAddress}<br/></div></div>");
           }
           map.addLayer(marker_place);
-
+  if places.length === 0 && events.length === 0
+    script.
+        alert("No event or place found!");

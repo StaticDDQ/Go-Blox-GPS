@@ -98,62 +98,6 @@ async function lookUpEvent(eventName) {
     return found;
 }
 
-// if want to search
-router.post('/maps/search', async function(req,res){
-    var arrayed = [];
-    await Event.find({
-        $or: [
-            {name: {$regex: req.body.search, $options: 'i' }},
-            {email: {$regex: req.body.search, $options: 'i' }},
-            {organizers: {$regex: req.body.search, $options: 'i' }},
-            {address: {$regex: req.body.search, $options: 'i' }},
-        ] }, function (err, resp) {
-
-        for (let i = 0; i < resp.length; i++){
-            var aEvent = {
-                id: resp[i]._id,
-                name: resp[i].name,
-                organizer: resp[i].organizer,
-                lat: parseFloat(resp[i].location[0].latitude),
-                long: parseFloat(resp[i].location[0].longitude),
-                address: resp[i].address,
-                phone: resp[i].phone,
-                email: resp[i].email,
-                pictures: resp[i].pictures
-            };
-        
-
-            arrayed.push(aEvent);
-        };
-
-    });
-    var placeArr = []
-    await Places.find({
-        $or: [
-            {placeName: {$regex: req.body.search, $options: 'i' }},
-            {placeDescription: {$regex: req.body.search, $options: 'i' }},
-            {placeAddress: {$regex: req.body.search, $options: 'i' }}
-        ] }, function (err, resp) {
-        if (err) throw err;
-        for (let i = 0; i < resp.length; i++){
-            var aPlaces = {
-                id: resp[i]._id,
-                placeName: resp[i].placeName,
-                lat: parseFloat(resp[i].location[0].latitude),
-                long: parseFloat(resp[i].location[0].longitude),
-                placeAddress: resp[i].placeAddress,
-                phone: resp[i].placePhone,
-                pictures: resp[i].pictures
-            };
-
-            placeArr.push(aPlaces);
-        };
-    
-    });
-    await res.render('maps', {events: arrayed, places: placeArr, isLoggedIn: req.user !== undefined });
-
-});
-
 //change back to post
 router.get('/createEvent', function (req, res) {
     if (req.user === undefined)

@@ -47,42 +47,35 @@ h3{
 	right: 5vw;
 	font-size: 4.3vw;
 	color: #e15848;
-	letter-spacing: 1px;;
+	letter-spacing: 1px;
 }
 
 h4{
 	color: white;
-	font-size: 1.2vw;
+	font-size: 2.5vw;
 	text-align: right;
-	position: absolute;
-	top: 30vh;
-	right: 5vw;
-	font-weight: 100;
-	text-align: right;
+	position: relative;
+	top: 15vh;
 	padding-top: 5vh;
+    word-wrap: break-word;
 }
 
 h2{
 	color: #a7c4e8;
-	font-size: 1.3vw;
+	font-size: 2.5vw;
 	text-align: right;
-	position: absolute;
-	top: 50vh;
-	right: 5vw;
+	position: relative;
+	top: 10vh;
 	font-weight: bolder;
-	/* text-decoration: underline; */
 	padding-top: 8vh;
 }
 
 h5{
-	position: absolute;
+	position: relative;
 	text-align: right;
-	top: 65vh;
-	right: 5vw;
 	color: white;
 	font-weight: bold;
-	font-size: 1.3vw;
-	text-decoration: underline;
+	font-size: 2vw;
 	padding-top: 8vh;
 	letter-spacing: 2px;
 }
@@ -92,14 +85,12 @@ ul {
 	margin: 0;
 	padding: 0;
 	/* padding-right: 5vw; */
-	position: absolute;
-	top: 80vh;
-	right: 5vw;
+	position: relative;
 	text-decoration: none;
 	display: inline;
 	color: white;
 	padding-top: 5vh;
-	font-size: 1vw;
+	font-size: 2vw;
 
 	}
 	
@@ -107,7 +98,6 @@ li{
 	display: inline;
 	padding-left: 1vw;
 	color: white;
-	font-size: 1.3vw;
 	/* float: right; */
 }
 a{
@@ -120,9 +110,9 @@ a{
 }
 .searching{
 	padding-top: 8vh;
-	position: absolute;
-	top: 60vh;
-	right: 5vw;
+	position: relative;
+	top: 10vh;
+	left: 5vw;
 }
 form{
     position: relative;

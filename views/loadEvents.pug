@@ -19,6 +19,7 @@ html(lang='en')
         .filterSide
           h3 Filter
           input#input(type='text', placeholder='Search Tags', name='name', onkeyup='addTag()')
+          input.all(type='button', value = 'Show All', onclick="filterOut('show all')")
           #filter
 
       //- Searchbar to find events
@@ -72,14 +73,6 @@ html(lang='en')
 
         function loadTags(events) {
           let tags = [];
-          var showAll = document.createElement('input');
-          showAll.type = 'button';
-          showAll.value = 'Show All';
-          showAll.className = 'all';
-          showAll.onclick = function(){
-              filterOut('show all');
-          }
-          filter.appendChild(showAll);
 
           for (let i = 0; i < events.length; i++) {
             for (let j = 0; j < events[i].tags.length; j++) {
