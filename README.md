@@ -52,7 +52,9 @@ Views: profile.pug
 Users are able to create and add an event to the database. They fill in the various details about the event, while also being able to add customised tags so that their event can be more likely to appear in future searches.
 
 Models: Events
+
 Routes: /events/addEvent, /events/createEvent
+
 Views: createEvent.pug
 
 ### Get event
