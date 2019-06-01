@@ -37,7 +37,7 @@ html(lang='en')
               | Password:
               br
               input#pwd(name='password', type='password', placeholder='Password', pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}", onclick="openSpan()")
-              .popup
+              div(class='popup')
                 span(class="popuptext" id="pwdSpan")
                   #message
                     p#let(class='invalid') Require lowercase letter
