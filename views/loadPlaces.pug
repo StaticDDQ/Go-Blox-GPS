@@ -44,10 +44,10 @@ html(lang='en')
                     img(src= place.pictures, alt='place_pic')
                   .event_desc
                     p <b>Location:</b> #{place.placeAddress}
+                    p <b>Cateogory:</b> #{place.category}
                     p <b>Description:</b> 
                     | #{place.placeDescription}
-                  .event_tag
-                    p <b>Cateogory:</b> #{place.category}
+                    
         else
           p(style="text-align:center") <b>No places found!</b>
 
