@@ -3,6 +3,8 @@
 Repository for team Go-Blox
 Written by Nicola, Raisa, Daphne and Jansen
 
+GET PEOPLE SOCIALIZING
+
 ## FUNCTIONALITIES
 All functionalities listed below are using the mongooseController.js as their controller to interact with the database.
 
@@ -142,9 +144,12 @@ Routes: /ratings/deleteRating/:id
 
 Views: profile.pug
 
-_________________
 
-Progress
+
+_________________
+OUR PROGRESS
+
+DELIVERABLE 3:
 
 Currently there are 16 RESTful routes for our 3 core functionalities,
 - Create Events
@@ -180,7 +185,7 @@ Temporarily, the website starts at user login, a failed login will open a failur
 
 
 __________________________
-Deliverable 4
+DELIVERABLE 4: 
 
 We have successfully implemented the front and back-end of our three original functionalities:
 
@@ -218,5 +223,3 @@ We also started developing the front end on some pages including:
 - home page: which will direct new users to create a user account and login.
 
 Some backend functionalities we've created:
-
-
