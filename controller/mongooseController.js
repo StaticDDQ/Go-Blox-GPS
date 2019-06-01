@@ -1,6 +1,7 @@
 const Members = require('../models/member');
 const nodemailer = require('nodemailer');
 
+// used to send email confirmation
 var transport = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
@@ -14,7 +15,7 @@ var addUser = async function(req, res) {
 
     var dupliUser = await findUser(req.body.userName);
 
-    // will not add if same username exists
+    // will not add if same username or/and emial exists
     if (!dupliUser) {
         dupliUser = await findEmail(req.body.email);
         if (!dupliUser) {
@@ -36,6 +37,7 @@ var addUser = async function(req, res) {
                 "active": false
             });
 
+            // save user to db and send an email
             data.save(function (err, newMember) {
                 if (!err) {
                     var link = "http://" + req.get('host') + "/members/verify?user=" + newMember.userName;
@@ -52,6 +54,7 @@ var addUser = async function(req, res) {
 
                     });
 
+                    // reload page, asking user to verify email
                     res.render('signup', {
                         error: newMember.userName + ', please verify your email!'
                     });

@@ -3,14 +3,12 @@ const router = express.Router();
 const mongooseController = require('../controller/mongooseController');
 const passport = require('passport');
 const multer = require('multer');
-const path = require('path');
 var cloudinary = require('cloudinary').v2;
-var cloudConfig = require("../config/cloudinary");
 
 // used to get current date to record when user is created
 const moment = require('moment');
 
-// Get member model
+// Get all the model
 let Member = require('../models/member');
 let Rating = require('../models/rating');
 let Event = require('../models/event');
@@ -18,11 +16,14 @@ let Event = require('../models/event');
 // login as member
 router.post('/authenticate', function (req, res, next) {
     // successful log in will launch the user's profile
-    passport.authenticate('local', function (err, user, info) {
+    passport.authenticate('local', function (err, user) {
         if (err) return next(err);
+
+        // reload again if user failed
         if (!user) return res.render('login', { error: 'Incorrect username or password' });
         if (!user.active) return res.render('login', { error: 'User is not active' });
 
+        // load another page to set up profile if user is new
         req.logIn(user, function (err) {
             if (err) return next(err);
 
@@ -40,6 +41,7 @@ router.get('/userProfile', function (req, res) {
     if (req.user === undefined)
         res.redirect('/');
     else {
+        // load all ratings user made, events user created and joined onto profile page
         Rating.find({ userName: req.user.userName }, function (err, userRatings) {
             if (err) throw err;
             Event.find({ joinedUsers: req.user.userName }, function (err, eventsJoined) {
@@ -67,12 +69,14 @@ router.get('/profile/:user', function (req, res) {
         if (req.params.user === req.user.userName) {
             return res.redirect('/members/userProfile');
         }
+        // search user by username since it is unique
         var loginUser = {
             userName: req.params.user
         };
         Member.findOne(loginUser, function (err, result) {
             if (err) throw err;
             if (result) {
+                // load all user reviews, events created and joined to user profile
                 Rating.find({ userName: result.userName }, function (err, userRatings) {
                     if (err) throw err;
                     Event.find({ joinedUsers: result.userName }, function (err, eventsJoined) {
@@ -91,13 +95,13 @@ router.get('/profile/:user', function (req, res) {
                     });
                 });
             } else {
-                res.render('notFound');
+                return res.render('notFound');
             }
         });
     }
 });
 
-// open login page
+// open login page, immediately go to profile page if logged in
 router.get('/login', function (req, res) {
     if (req.user !== undefined)
         res.redirect('/members/userProfile/');
@@ -111,27 +115,18 @@ router.get('/logout', function (req, res) {
     res.redirect('/');
 });
 
-// get member (get from mockup database)
-router.get('/getFirstname/:firstname', function (req, res) {
-    Member.findOne({ firstName: req.params.firstname }, function (err, resp) {
-        if (err) throw err;
-        res.send(resp);
-    });
-});
-
 // open signup page
 router.get('/signup', function (req, res) {
     res.render('signup');
 });
 
+// load page after verifying user email
 router.get('/verify', function (req, res) {
     Member.findOneAndUpdate({ userName: req.query.user }, { $set: { active: true } }, function (err, user) {
         if (err) throw err;
         res.render('success');
     });
 });
-
-// register as member
 
 // setting up storage to upload media
 var storage = multer.diskStorage({
@@ -142,12 +137,13 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
+// registering a new user
 router.post('/register', upload.single("display"), async function (req, res) {
     req.body.display= {
         public_id: '',
         url: req.file.filename
     };
-    // check each element for validity
+    // check each element for validity, mostly check everything is filled
     req.checkBody('firstName', 'First name is required').notEmpty();
     req.checkBody('lastName', 'Last name is required').notEmpty();
     req.checkBody('userName', 'Username is required').notEmpty();
@@ -159,10 +155,11 @@ router.post('/register', upload.single("display"), async function (req, res) {
 
     var error = req.validationErrors();
     if (!error) {
+        // check if password matches with retyped password
         req.checkBody('password_confirm', 'Password does not match').equals(req.body.password);
         error = req.validationErrors();
         if (!error) {
-            // add join date of user
+            // add join date of user, set format of user's name, fixed date format
             req.body['firstName'] = upperCaseName(req.body['firstName']);
             req.body['lastName'] = upperCaseName(req.body['lastName']);
             req.body['joined_date'] = moment().format('MMM Do YY');
@@ -170,17 +167,18 @@ router.post('/register', upload.single("display"), async function (req, res) {
 
             var reqURL;
             if (req.file !== undefined) {
+                // upload user profile pic to cloudinary
                 await cloudinary.uploader.upload(req.file.path,
                     function (error, result) {
                         if (error) throw error;
-                        // reqURL = result.secure_url;
                         reqURL = {
                             public_id: result.public_id,
                             url: result.secure_url
                         }
 
                     });
-            } else{
+            } else {
+                // else load a default profile pic
                 reqURL = {
                     public_id: '',
                     url: ''
@@ -188,7 +186,7 @@ router.post('/register', upload.single("display"), async function (req, res) {
             }
 
             req.body['display'] = reqURL;
-
+            // next phase, check if username and email exists in the database
             mongooseController.addUser(req, res);
         } else {
             res.render('signup', {
@@ -202,10 +200,11 @@ router.post('/register', upload.single("display"), async function (req, res) {
     }
 });
 
+// update user's interests, description, or profile pic
 router.post('/updateUser', upload.single("display"), async function (req, res) {
     
-
     await Member.findOne({ userName: req.user.userName }, async function (err, result) {
+        // if there is a new profile pic, remove old one in cloudinary database
         if (req.body.display) {
             var pic_delete_id = result.display.id
             if (pic_delete_id !== undefined) {
@@ -215,6 +214,7 @@ router.post('/updateUser', upload.single("display"), async function (req, res) {
             }
         }
     });
+    // upload new picture to cloudinary
     if(req.file !== undefined){
         await cloudinary.uploader.upload(req.file.path, function (error, result) {
 
@@ -230,6 +230,7 @@ router.post('/updateUser', upload.single("display"), async function (req, res) {
                 url: result.secure_url
             };
         }
+        // update display, interests, and description
         Member.findOneAndUpdate(
             { userName: req.user.userName }, {
                 $set: {
@@ -244,6 +245,7 @@ router.post('/updateUser', upload.single("display"), async function (req, res) {
 
         });
     } else {
+        // only update description and interests
         Member.findOneAndUpdate(
             { userName: req.user.userName }, {
                 $set: {
@@ -258,7 +260,9 @@ router.post('/updateUser', upload.single("display"), async function (req, res) {
         }
 });
 
+// update password inside settings in profile page
 router.put('/updatePassword', function (req, res) {
+    // check if everything is filled and correct
     req.checkBody('password', 'Require password').notEmpty();
     req.checkBody('oldPwd', 'Old password does not match').equals(req.user.password);
     req.checkBody('retype', 'Does not match').equals(req.body.password);
@@ -272,6 +276,7 @@ router.put('/updatePassword', function (req, res) {
             res.send(result);
         });
     } else {
+        // do nothing
         res.send(null);
     }
 });
@@ -320,7 +325,7 @@ router.put('/bookmark', function (req, res) {
     });
 });
 
-// stop bookmarking a place
+// stop bookmarking a place from member schema
 router.put('/stopBookmark', function (req, res) {
     Member.findOneAndUpdate({ userName: req.user.userName }, {
         $pull: { 'bookmark': req.body.name }
