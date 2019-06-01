@@ -9,10 +9,7 @@ body {
     font-family: 'Heebo';
     background-repeat: no-repeat;
     background-size: cover;
-    /* background-color: black; */
     background: #f4f4f4;
-    /* background: linear-gradient(167deg, rgba(213,221,232,1) 0%, #ffc7bb 65%); */
-    /* background: linear-gradient(to top, rgba(175,88,140,1) 30%, rgba(255,130,101,1) 100%); */
 }
 
 /* configure the grid */
@@ -21,8 +18,6 @@ body {
 /* container for the search events/search places */
 .container_first {
     display: grid;
-    /* grid-template-rows: 0.2fr 1fr 0fr;
-    grid-template-columns: .2fr 1fr 0.15fr; */
     grid-template-rows: 0fr 1fr 0fr;
     grid-template-columns: .2fr 1fr .2fr;
     grid-template-areas: 
@@ -58,7 +53,6 @@ body {
 
 /* Search category */
 .searchCategory {
-    /* text-align: center; */
     justify-content: center;
     display: inline-block;
     margin-top: 30px;
@@ -66,7 +60,6 @@ body {
 }
 
 .searchCategory h2 {
-    /* text-align: center; */
     font-size: 20px;
     justify-content: center;
     display: inline-block;
@@ -186,7 +179,6 @@ button.dropBtn {
  }
  
  .searching input[type=submit]:hover{
-     /* color: #ED7755; */
     background-color: #becad0;
  }
  
@@ -251,6 +243,7 @@ textarea:focus, input:focus{
     float: right;
 }
 
+/* Configure Responsive Grid */
 @media (max-width:800px){
     .container_first {
         display: grid;

@@ -270,6 +270,7 @@ color: white;
     border-bottom: solid 0.3px #ED7755;
 }
 
+/* Configure Responsive Grid */
 @media (max-width:800px){
     .container{
         display: grid;

@@ -23,6 +23,7 @@ body {
     "footer footer footer";
 }
 
+/* Configure Search Bar */
 .searching {
     grid-area: searching;
     display: inline-block;
@@ -65,7 +66,6 @@ body {
 }
 
 .searching input[type=submit]:hover{
-    /* color: #ED7755; */
    background-color: #becad0;
 }
 
@@ -130,6 +130,7 @@ textarea:focus, input:focus{
   
   }
 
+/* Configure responsive Grid */
   @media (max-width:800px){
     .container_first {
         display: grid;

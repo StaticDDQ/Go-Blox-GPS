@@ -98,6 +98,7 @@ a#org:hover{
   text-align: left;
 }
 
+/* configure the tag for the event */
 #interest_tag{
   grid-area: interest_tag;
   word-break: break-all;
