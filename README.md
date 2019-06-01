@@ -89,7 +89,7 @@ In the event detail page users can join events. Once they joined events, user ca
 #### Add category
 Each place is associated with one category which is done during place creation. This is to make searching specific places easier for the user.
 
-**Models:**Places
+**Models:** Places
 
 **Routes:** /places/addPlace, /places/createPlace
 
