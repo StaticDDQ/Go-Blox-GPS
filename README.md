@@ -3,40 +3,38 @@
 Repository for team Go-Blox
 Written by Nicola, Raisa, Daphne and Jansen
 
-GET PEOPLE SOCIALIZING
-
 ## FUNCTIONALITIES
 All functionalities listed below are using the mongooseController.js as their controller to interact with the database.
 
 ### Create member (sign up page)
 Create member functionality allows users to create their own account to be able to access the other functionalities. They are to input some personal information, a description of themselves and can create customised interest tags. After the form is filled in, an email would be sent to the user’s email address  for verification.
 
-Models: Member
+**Models:** Member
 
-Routes: /members/register, /members/signup, /members/verify
+**Routes:** /members/register, /members/signup, /members/verify
 
-Views:  signup.pug, profileTags.pug
+**Views:**  signup.pug, profileTags.pug
 
 
 ### Log in
 
 Users are able to login after verifying their email. Login involves inputting the user’s username and password. Allows users to use more of the website’s functionality.
 
-Models: Member
+**Models:** Member
 
-Routes: /members/authenticate, /members/logout, /members/login, /members/storeInfo
+**Routes:** /members/authenticate, /members/logout, /members/login, /members/storeInfo
 
-Views: login.pug
+**Views:** login.pug
 
 ### Find members
 
 Users are are able to search other users by searching a keyword that match with their username, first name, or last name. This is allows users to follow other users and track what they are doing.
 
-Models: Member
+**Models:** Member
 
-Routes: /members/userProfile, /members/profile/:user, /members/followUser, /members/unfollowUser, /members/searchUser
+**Routes:** /members/userProfile, /members/profile/:user, /members/followUser, /members/unfollowUser, /members/searchUser
 
-Views: profile.pug
+**Views:** profile.pug
 
 ### Update member (settings)
 #### Update images
@@ -48,20 +46,20 @@ Users can add or remove interests which is similar to tags for events. This is a
 #### Update description
 Users can change what they want to display in their profile page. This adds a level of personality which any users can appreciate.
 
-Models: Member
+**Models:** Member
 
-Routes: /members/updatePassword, /members/updateUser, /members/userProfile
+**Routes:** /members/updatePassword, /members/updateUser, /members/userProfile
 
-Views: profile.pug
+**Views:** profile.pug
 
 ### Add event
 Users are able to create and add an event to the database. They fill in the various details about the event, while also being able to add customised tags so that their event can be more likely to appear in future searches.
 
-Models: Events
+**Models:** Events
 
-Routes: /events/addEvent, /events/createEvent
+**Routes:** /events/addEvent, /events/createEvent
 
-Views: createEvent.pug
+**Views:** createEvent.pug
 
 ### Get event
 When a user searches for an event, the user can get results based on 3 ways: through looking through a map,  by searched keywords or by tags.
@@ -72,30 +70,30 @@ Users can search up keywords in the search bar, which can allow users to look up
 #### Filtered by tags
 Users can further filter their searches by clicking on the tags that would narrow their searches by showing only those that have that tag.
 
-Models: Events
+**Models:** Events
 
-Routes: /events/getEvent/:id, /events/findEvent, /events/getEvent, /events/getEventById
+**Routes:** /events/getEvent/:id, /events/findEvent, /events/getEvent, /events/getEventById
 
-Views: homeMap.pug, maps.pug, loadEvents.pug, loadEventsFirst.pug, eventDetails.pug
+**Views:** homeMap.pug, maps.pug, loadEvents.pug, loadEventsFirst.pug, eventDetails.pug
 
 ### Join Events
 In the event detail page users can join events. Once they joined events, user can see events in their profile that they joined (under the events tag). The organizer of the event can see the list of users who joined the events. Users cannot join an event that happened in the past. Users can also unjoin an event.
 
-Models: Events
+**Models:** Events
 
-Routes: /events/joinEvent, /events/declineEvent, /events/addUser/:name
+**Routes:** /events/joinEvent, /events/declineEvent, /events/addUser/:name
 
-Views: eventDetails.pug, profile.pug
+**Views:** eventDetails.pug, profile.pug
 
 ### Add places
 #### Add category
 Each place is associated with one category which is done during place creation. This is to make searching specific places easier for the user.
 
-Models: Places
+**Models:**Places
 
-Routes: /places/addPlace, /places/createPlace
+**Routes:** /places/addPlace, /places/createPlace
 
-Views: createPlace.pug
+**Views:** createPlace.pug
 
 ### Get places
 When a user searches for an places, the user can get results based on 3 ways: through looking through a map,  by searched keywords or by categories.
@@ -106,54 +104,51 @@ Users can search up keywords in the search bar, which can allow users to look up
 #### Filtered by Category
 Users can further filter their searches by selecting a category to narrow their searches by showing only places in those categories.
 
-Models: Places
+**Models:** Places
 
-Routes: /places/getPlaces, /places/getPlace/:id, /places/getPlacesByCategory
+**Routes:** /places/getPlaces, /places/getPlace/:id, /places/getPlacesByCategory
 
-Views: loadPlaces.pug, loadPlacesFirst.pug, placeDetails.pug, map.pug, homeMap.pug
+**Views:** loadPlaces.pug, loadPlacesFirst.pug, placeDetails.pug, map.pug, homeMap.pug
 
 ### Bookmark places
 Users can bookmark places that they wish to visit. This is through clicking on the the bookmark button on the places page, and they can view their bookmarks under the bookmark option in their profile page.
 
-Models: Members
+**Models:** Members
 
-Routes: /members/bookmark, /members/stopBookmark
+**Routes:** /members/bookmark, /members/stopBookmark
 
-Views: placeDetails.pug, profile.pug
+**Views:** placeDetails.pug, profile.pug
 
 ### Add ratings
 Users can add ratings through by adding a description and give a rating by selecting the number of stars (out of 5). They can then press submit, and it will be placed.
 
-Models: Ratings
+**Models:** Ratings
 
-Routes: /ratings/addRating
+**Routes:** /ratings/addRating
 
-Views: eventDetails.pug
+**Views:** eventDetails.pug
 
 ### Get ratings
 Users are able to see their own and other ratings from users. This is so users can delete their own ratings and see other people’s opinion on an event.
 
-Models: Ratings, Events
+**Models:** Ratings, Events
 
-Routes: /events/getEvent/:id
+**Routes:** /events/getEvent/:id
 
-Views: eventDetails.pug
+**Views:** eventDetails.pug
 
 ### Delete ratings
 Users are able to delete their own reviews that they have posted on any place or event. This can be done through selecting the ratings option on their own profile and clicking the cross beside each rating.
 
-Models: Ratings, Events
+**Models:** Ratings, Events
 
-Routes: /ratings/deleteRating/:id
+**Routes:** /ratings/deleteRating/:id
 
-Views: profile.pug
-
-
+**Views:** profile.pug
 
 _________________
-OUR PROGRESS
 
-DELIVERABLE 3:
+Progress
 
 Currently there are 16 RESTful routes for our 3 core functionalities,
 - Create Events
@@ -189,7 +184,7 @@ Temporarily, the website starts at user login, a failed login will open a failur
 
 
 __________________________
-DELIVERABLE 4: 
+Deliverable 4
 
 We have successfully implemented the front and back-end of our three original functionalities:
 
@@ -227,3 +222,5 @@ We also started developing the front end on some pages including:
 - home page: which will direct new users to create a user account and login.
 
 Some backend functionalities we've created:
+
+
