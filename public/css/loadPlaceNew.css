@@ -121,6 +121,43 @@ button{
     font-size: 15px;
     margin-bottom: 10px;
 }
+#filter{
+    overflow-y: auto;
+    width: 250px;
+    height: 14vh;
+}
+
+.filterTag{
+    background-color: white;
+    border: 1px solid #becad0;
+    padding: 3px;
+    margin-left: 2px;
+    margin-bottom: 3px;
+    border-radius: 5px;
+    font-family: 'Quicksand';
+}
+
+.filterTag:hover{
+    background-color:#becad0;
+}
+.filterTag button.active{
+    background: #ED7755;
+}
+.all{
+    padding: 3px;
+    margin-bottom: 3px;
+    background-color: white;
+    border: 1px solid #becad0;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+.all:hover{
+    background-color:#becad0;
+}
+.all .active{
+    background-color: #e15848;
+}
 
 .button{
     background-color: #90A4BC;
@@ -154,6 +191,7 @@ button{
     padding-top: 20px;
     margin-top: 30px;
     margin-bottom: 30px;
+    margin-right: 20px;
     background-color: white;
 }
 

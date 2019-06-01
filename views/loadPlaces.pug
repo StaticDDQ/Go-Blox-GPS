@@ -23,7 +23,7 @@ html(lang='en')
           h3 Filter
           p Category
           input#input(type='text', placeholder='Search Category', name='name', onkeyup='addCategory()')
-          input.all(type='button', value = 'Show All', onclick="filterOut('show all')")
+          input.all(type='button', value = 'SHOW ALL', onclick="filterOut('show all')")
           #filter
       //- Searchbar to find places
       .searching
@@ -77,6 +77,7 @@ html(lang='en')
                   var btn = document.createElement('input');
                   btn.type = 'button';
                   btn.name = 'tagFilter';
+                  btn.className = 'filterTag';
                   btn.value = places[i].category;
                   btn.onclick = function(){
                       filterOut(places[i].category);
