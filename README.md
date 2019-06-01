@@ -33,7 +33,9 @@ Views: login.pug
 Users are are able to search other users by searching a keyword that match with their username, first name, or last name. This is allows users to follow other users and track what they are doing.
 
 Models: Member
+
 Routes: /members/userProfile, /members/profile/:user, /members/followUser, /members/unfollowUser, /members/searchUser
+
 Views: profile.pug
 
 ### Update member (settings)
@@ -47,7 +49,9 @@ Users can add or remove interests which is similar to tags for events. This is a
 Users can change what they want to display in their profile page. This adds a level of personality which any users can appreciate.
 
 Models: Member
+
 Routes: /members/updatePassword, /members/updateUser, /members/userProfile
+
 Views: profile.pug
 
 ### Add event
