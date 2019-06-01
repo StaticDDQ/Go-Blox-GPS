@@ -46,7 +46,7 @@ body {
    padding: 7px;
    border-top-left-radius: 3px;
    border-bottom-left-radius: 3px;
-   border: none;
+   border: solid 0.5px rgb(213,221,232);
 }
 
 .searching input[type=text]:hover{
@@ -63,7 +63,7 @@ body {
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
     margin-top: 3vh;
-    border: none;
+    border: solid 0.5px rgb(213,221,232);
     background-color: rgb(213,221,232);
 }
 
@@ -104,8 +104,8 @@ button{
 
 .filterSide input[type=text]{
     border-radius: 5px;
-    border: none;
     padding: 5px;
+    border: solid 0.5px rgb(213,221,232);
 }
 
 .filterSide h3{
