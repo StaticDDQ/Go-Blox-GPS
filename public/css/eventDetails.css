@@ -98,10 +98,48 @@ a#org:hover{
   text-align: left;
 }
 
+/* configure the tag for the event */
+#interest_tag{
+  grid-area: interest_tag;
+  word-break: break-all;
+  width: 100%;
+  height: auto;
+  margin-top: 10px;
+  padding-bottom: 5px;
+  margin-right: 10px;
+}
+
+#interest_tag li{
+  list-style-type: none;
+  position: relative;
+  border: solid 1px #707070;
+  display: inline;
+  margin-right: 10px;
+  border-radius: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 15px;
+  color:black;
+  line-height: 1.8em;
+}
+
 /* configure join event buttons */
 .join{
     display: inline-block;
 }
+
+a {
+    color: #d86141;
+    text-decoration: none;
+    list-style-type: none;
+    font-size: 1em;
+  }
+  
+  
+  a:hover{
+    color: #4f4f4f;
+  }
+
 
 #yes{
   width: 50px;

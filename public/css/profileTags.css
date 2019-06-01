@@ -15,10 +15,6 @@ body{
     background-repeat:no-repeat;
     background-position: center;
     background-attachment: fixed;
-    /* -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover; */
 }
 
 /* Configure grid */
@@ -187,11 +183,6 @@ input#but.current-menu-item
 }
 
 .submitBtns {
-    /* display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-    grid-template-areas: 
-    "one password"; */
     background-color: #f1f1f1;
     padding: 20px;
     justify-content: center;

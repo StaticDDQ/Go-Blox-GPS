@@ -9,6 +9,7 @@ html(lang='en')
       include ../public/css/universal.css
     
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
+    link(href="https://fonts.googleapis.com/css?family=Heebo:300&display=swap", rel="stylesheet")
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js")
 
@@ -24,23 +25,40 @@ html(lang='en')
 
           h2 #{event.name}
           p <b>Organised by:</b> You
-          p <b>Start Date:</b> #{event.startDate}
-          p <b>End Date:</b> #{event.endDate}
-          p <b>Start Time:</b> #{event.startTime}
-          p <b>End Time:</b> #{event.endTime}
+          br
+          h3 <b>Date</b>
+          .date
+            p#s <b>Start Date:</b> #{event.startDate}
+            p#e <b>End Date:</b> #{event.endDate}
+          br  
+          h3 <b>Time</b>
+          .time
+            p#s <b>Start Time:</b> #{event.startTime}
+            p#e <b>End Time:</b> #{event.endTime}
+          br
+          h3 <b>Description:</b>
+          p #{event.description}
+          p.contacts <b>Contact Details:</b>
+          p <b>Email:</b> #{event.email}
+          p <b>Phone Number:</b> #{event.phone}
+          p <b>Tags:</b>
+          #interest_tag
+            ul
+              each tags in event.tags
+                li #{tags}
           p <b>Description:</b>
           p #{event.description}
           p.contacts <b>Contact Details:</b>
           p <b>Email:</b> #{event.email}
           p <b>Phone Number:</b> #{event.phone}
-          p <b>Tags:</b> #{event.tags}
           br
+
           if event.joinedUsers
             p <b>Users joined</b>
             ul
               each user in event.joinedUsers
-                a(href='/members/profile/' + user)
-                  li #{user}
+                a#users(href='/members/profile/' + user)
+                  li @#{user}
 
       //- Reviews      
       .reviews

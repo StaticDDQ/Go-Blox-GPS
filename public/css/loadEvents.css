@@ -26,6 +26,8 @@ body {
 .navbar{
     position: sticky;
 }
+
+/* configure search bar */
 .searching {
     grid-area: searching;
     display: inline-block;
@@ -122,6 +124,8 @@ button{
     margin-bottom: 10px;
 }
 
+/* filter the tag */
+
 #filter{
     overflow-y: auto;
     width: 250px;
@@ -168,7 +172,6 @@ button{
 .displayEvents{
     grid-area: displayEvents;
     display: grid;
-    /* grid-template-rows: auto; */
 }
 
 .displayEvents h2{
@@ -207,7 +210,6 @@ button{
 
 .event_title{
     grid-area: event_title;
-    /* padding-bottom: 20px; */
     margin-right:auto;
     overflow:auto;
 }
@@ -269,7 +271,7 @@ color: white;
     border-bottom: solid 0.3px #ED7755;
 
 }
-
+/* configure responsive grid */
 @media (max-width:800px){
     .container{
         display: grid;
@@ -345,12 +347,4 @@ color: white;
         margin-bottom: 10px;
         background-color: white;
     }
-
-    /* .event_pic{
-        width: 50%;
-        height: 50%;
-    } */
-
-
-
 }
