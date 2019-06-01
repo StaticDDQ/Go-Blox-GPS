@@ -194,6 +194,7 @@ button{
     margin-top: 10px;
     margin-bottom: 10px;
     background-color: white;
+    margin-right: 20px;
 }
 
 .event_card:hover {
