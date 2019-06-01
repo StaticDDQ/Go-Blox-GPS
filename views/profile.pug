@@ -191,21 +191,23 @@ html
     script.
         var user = !{ JSON.stringify(user) };
 
-        user.interests.forEach(function (element) {
-            tags.push(element);
-            var tag = document.createElement('input');
-            tag.type = 'text';
-            tag.value = element;
-            tag.name = 'interests';
-            tag.readonly = true;
-            tag.onclick = function () {
-                var index = tags.indexOf(element);
-                tags.splice(index, 1);
-                tag.parentNode.removeChild(tag);
-            }
+        if(user.interests){
+            user.interests.forEach(function (element) {
+                tags.push(element);
+                var tag = document.createElement('input');
+                tag.type = 'text';
+                tag.value = element;
+                tag.name = 'interests';
+                tag.readonly = true;
+                tag.onclick = function () {
+                    var index = tags.indexOf(element);
+                    tags.splice(index, 1);
+                    tag.parentNode.removeChild(tag);
+                }
 
-            tagLst.appendChild(tag);
-        });
+                tagLst.appendChild(tag);
+            });
+        }
 
         //- Dynamic update function
         $(function () {
