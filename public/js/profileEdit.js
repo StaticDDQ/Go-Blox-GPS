@@ -18,7 +18,6 @@ pwd.onkeyup = function () {
         letter.classList.remove("valid");
         letter.classList.add("invalid");
         isValid = false;
-        return;
     }
 
     // Validate numbers
@@ -30,7 +29,6 @@ pwd.onkeyup = function () {
         number.classList.remove("valid");
         number.classList.add("invalid");
         isValid = false;
-        return;
     }
 
     // Validate length
@@ -41,7 +39,6 @@ pwd.onkeyup = function () {
         length.classList.remove("valid");
         length.classList.add("invalid");
         isValid = false;
-        return;
     }
 
     isValid = true;

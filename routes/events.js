@@ -9,7 +9,6 @@ const limiter = require('express-rate-limit');
 
 // Get event model
 let Event = require('../models/event');
-let Places = require('../models/place');
 let Rating = require('../models/rating');
 
 // to show to get long and lat
@@ -32,8 +31,6 @@ const createEventLimiter = limiter({
     windowMs: 24 * 60 * 60 * 1000, // 24 hour window
     max: 2, // start blocking after 2 requests
   });
-
-
 
 // add event
 router.post('/addEvent', upload.single("pictures"), createEventLimiter, async function (req, res) {
@@ -190,14 +187,6 @@ router.post('/getEvents', function (req, res) {
     });
 });
 
-// update event
-router.put('/updateEvent/:name', function (req, res) {
-    Event.findOneAndUpdate(
-        { name: req.params.name }, { $set: req.body }, function (err, resp) { //callback functions
-            res.send(resp);
-        });
-});
-
 // if user joined an event append the name (and maybe link) to the user's json
 router.put('/addUser/:name', function (req, res) {
     var event = Event.findone({ name: req.params.name });
@@ -206,14 +195,6 @@ router.put('/addUser/:name', function (req, res) {
     jsonStr = JSON.stringify(obj);
     Event.findOneAndUpdate(
         { name: req.params.name }, { $set: jsonStr });
-});
-
-// delete event
-router.delete('/deleteEvent/:name', function (req, res) {
-    Event.findOneAndDelete({ name: req.params.name }, function (err, resp) {
-        if (err) throw err;
-        res.send(resp);
-    })
 });
 
 // map event
