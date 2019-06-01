@@ -9,11 +9,10 @@ body {
     font-family: 'Heebo';
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: black;
-    /* background: #f4f4f4; */
+    /* background-color: black; */
+    background: #f4f4f4;
     /* background: linear-gradient(167deg, rgba(213,221,232,1) 0%, #ffc7bb 65%); */
-    background: linear-gradient(to top, rgba(175,88,140,1) 30%, rgba(255,130,101,1) 100%);
-
+    /* background: linear-gradient(to top, rgba(175,88,140,1) 30%, rgba(255,130,101,1) 100%); */
 }
 
 /* configure the grid */
@@ -26,7 +25,10 @@ body {
     grid-template-columns: .2fr 1fr 0.15fr; */
     grid-template-rows: 0fr 1fr 0fr;
     grid-template-columns: .2fr 1fr .2fr;
-    grid-template-areas: "navbar searchBox logo" "searchCategory mapping logo" "footer footer footer";
+    grid-template-areas: 
+    "navbar searching logo" 
+    "searchCategory mapping logo" 
+    "footer footer footer";
     height: 100vh;
 }
 
@@ -97,7 +99,7 @@ button.dropBtn {
     background-color: #f1f1f1;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    z-index: 1000;
     border-radius: 3px;
 }
 
@@ -112,7 +114,6 @@ button.dropBtn {
 .dropdown-content input {
     color: black;
     background: none;
-    /* padding: 16px; */
     font-size: 16px;
     border: none;
     outline: none;
@@ -127,8 +128,6 @@ button.dropBtn {
 
 /* Change color of dropdown links on hover */
 .dropdown-content input:hover {
-    /* background-color: #ddd; */
-    /* border-color: #ED7755; */
     border-bottom: solid 2px #ED7755;
 }
 
@@ -145,7 +144,7 @@ button.dropBtn {
 
 /* Search bar */
 .searching {
-    grid-area: searchBox;
+    grid-area: searching;
     display: inline-block;
     max-height: 200px;
     text-align: center;
@@ -162,10 +161,9 @@ button.dropBtn {
     height: auto;
     font-size: 1em;
     padding: 7px;
-    /* margin: 10px; */
     border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-    border: none;
+    border-bottom-left-radius: 3px; 
+    border: solid 0.5px rgb(213,221,232);
  }
  
  .searching input[type=text]:hover{
@@ -184,6 +182,7 @@ button.dropBtn {
      margin-top: 3vh;
      border: none;
      background-color: rgb(213,221,232);
+     border: solid 0.5px rgb(213,221,232);
  }
  
  .searching input[type=submit]:hover{
@@ -251,3 +250,37 @@ textarea:focus, input:focus{
     grid-area: logo;
     float: right;
 }
+
+@media (max-width:800px){
+    .container_first {
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: 
+        "navbar logo" 
+        "searching searching"
+        "searchCategory searchCategory"
+        "mapping mapping" 
+        "footer footer";
+    }
+
+    #map {
+        height: 500px;
+        width: 85%;
+        margin: 20px;
+        display: inline-block;
+        border-radius: 5px;
+        border-style: double;
+    }
+    .footer{
+        grid-area: footer; 
+        background-color: #90A4BC;
+        padding-bottom: 20px;
+        padding-top: 20px;
+        margin-top: 50px;
+        border-top: solid 8px #becad0;
+        text-align: justify;
+        padding-left: 0;
+        padding-right: 20px;
+      }
+  }
