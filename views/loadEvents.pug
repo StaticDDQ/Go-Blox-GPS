@@ -2,7 +2,7 @@ doctype html
 html(lang='en')
   head
     meta(charset='UTF-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
     meta(http-equiv='X-UA-Compatible', content='ie=edge')
     link(rel='stylesheet', href='../css/loadEvents.css', v='')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
@@ -15,11 +15,12 @@ html(lang='en')
       include includes/navbar.pug
 
       //- Navigation menu
-      include includes/mapOnly.pug
+      .mapping
+        include includes/mapOnly.pug
         .filterSide
           h3 Filter
           input#input(type='text', placeholder='Search Tags', name='name', onkeyup='addTag()')
-          input.all(type='button', value = 'Show All', onclick="filterOut('show all')")
+          input.all(type='button', value = 'SHOW ALL', onclick="filterOut('show all')")
           #filter
 
       //- Searchbar to find events
