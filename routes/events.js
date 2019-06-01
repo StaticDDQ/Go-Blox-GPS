@@ -55,14 +55,14 @@ router.post('/addEvent', upload.single("pictures"), createEventLimiter, async fu
 
     var error = req.validationErrors();
     if (!error) {
-
+        // events must have atleast 1 tag
         req.checkBody('tags', 'Require atleast 1 tag').notEmpty();
         error = req.validationErrors();
 
         if (!error) {
 
             var reqURL;
-
+            // upload event pic to cloudinary
             await cloudinary.uploader.upload(req.file.path,
                 {
                     eager: [
@@ -77,6 +77,7 @@ router.post('/addEvent', upload.single("pictures"), createEventLimiter, async fu
             req.body.pictures = reqURL;
             var addNewEvent = new Event(req.body);
             addNewEvent['organizer'] = req.user.userName;
+            // load event page after creation
             addNewEvent.save(function (err, event) {
                 if (err) throw err;
 
@@ -92,13 +93,7 @@ router.post('/addEvent', upload.single("pictures"), createEventLimiter, async fu
     }
 });
 
-async function lookUpEvent(eventName) {
-    var found = null;
-    found = await Event.findOne({ name: eventName });
-    return found;
-}
-
-//change back to post
+//load create event page
 router.get('/createEvent', function (req, res) {
     if (req.user === undefined)
         res.redirect('/');
@@ -106,14 +101,16 @@ router.get('/createEvent', function (req, res) {
         res.render('createEvent');
 });
 
-// get event
+// get event by id
 router.get('/getEvent/:id', function (req, res) {
     Event.findById(req.params.id, function (err, event) {
         if (err) throw err;
         if (event != null) {
+            // load all reviews of this event
             Rating.find({ eventID: req.params.id }, function (err, result) {
                 if (err) throw err;
 
+                // load different page if event belongs to the user
                 if (req.user !== undefined && event.organizer === req.user.userName)
                     res.render('ownerEventDetails', { event: event, ratings: result });
                 else
@@ -128,13 +125,15 @@ router.get('/getEvent/:id', function (req, res) {
     })
 });
 
+// load find event page and get all event data in the db
 router.get('/findEvent', function (req, res) {
+    // if user is logged in
     if (req.user === undefined) {
         res.redirect('/');
     } else {
         Event.find({}).exec(function(err, resp){
             if(err) throw err;
-            var arrayed = []
+            var arrayed = [];
             for (let i = 0; i < resp.length; i++){
                 var aEvent = {
                     id: resp[i]._id,
@@ -165,7 +164,8 @@ router.post('/getEvents', function (req, res) {
             {organizers: {$regex: req.body.name, $options: 'i' }}
         ] }, function (err, resp) {
         if (err) throw err;
-        var arrayed = []
+        var arrayed = [];
+        // get required data to load events to the map
         for (let i = 0; i < resp.length; i++){
             var aEvent = {
                 id: resp[i].id,
@@ -185,8 +185,8 @@ router.post('/getEvents', function (req, res) {
             };
 
             arrayed.push(aEvent);      
-            }
-            res.render('loadEvents', { events: arrayed, isLoggedIn: req.user !== undefined });
+        }
+        res.render('loadEvents', { events: arrayed, isLoggedIn: req.user !== undefined });
     });
 });
 
