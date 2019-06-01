@@ -21,7 +21,7 @@ style
       each evented in events
         script.
           var eventMark = L.icon({
-            iconUrl: '/event.png',
+            iconUrl: '/events.png',
             iconSize: [ 41, 41 ]
           });
           var marker = new L.Marker([#{evented.lat},#{evented.long}], {icon: eventMark});
@@ -41,7 +41,7 @@ style
       each place in places
         script.
           var placeMark = L.icon({
-            iconUrl: '/place.png',
+            iconUrl: '/places.png',
             iconSize: [ 41, 41 ]
           });
           var marker_place = new L.Marker([#{place.lat},#{place.long}], {icon: placeMark});
