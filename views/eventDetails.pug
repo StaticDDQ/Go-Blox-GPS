@@ -39,10 +39,15 @@ html(lang='en')
           br
           h3 <b>Description:</b>
           p #{event.description}
+          p <b>Tags:</b> 
+          #interest_tag
+            ul
+              each tags in event.tags
+                li #{tags}
           p.contacts <b>Contact Details:</b>
           p <b>Email:</b> #{event.email}
           p <b>Phone Number:</b> #{event.phone}
-          p <b>Tags:</b> #{event.tags}
+          
           br
           -
             var canJoin = true;

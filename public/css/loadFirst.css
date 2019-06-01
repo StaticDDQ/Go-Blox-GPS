@@ -10,18 +10,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-color: #f4f4f4;
-    /* background: rgb(213,221,232); */
-    /* background: linear-gradient(to top, rgba(175,88,140,1) 30%, rgba(255,130,101,1) 100%); */
-
-    /* background: linear-gradient(167deg, rgba(213,221,232,1) 0%, #ffc7bb 65%); */
-    /* background-image: linear-gradient(to bottom right, #e15848 50%, #5d8eca 100%);
-    background: #ff836c; */
-    /* background: linear-gradient(170deg, rgba(255,208,181,1) 0%, rgba(238,180,192,1) 100%);
-    background: rgb(255,208,181); */
 }
-
-/* configure the grid */
-
 
 /* container for the search events/search places */
 .container_first {

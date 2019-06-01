@@ -3,6 +3,11 @@
 Repository for team Go-Blox
 Written by Nicola, Raisa, Daphne and Jansen
 
+
+_________________
+
+Progress
+
 Currently there are 16 RESTful routes for our 3 core functionalities,
 - Create Events
 - Get User (get member) 
