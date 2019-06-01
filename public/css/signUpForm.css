@@ -334,8 +334,25 @@ h1 {
 }
 
 /* Add a green text color and a checkmark when the requirements are right */
+
+#pwdSpan {
+    padding: 10px;
+    background-color:black;
+}
+
+.popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 20%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+
 .valid {
-    color: green;
+    color: rgb(198, 255, 124);
 }
 
     .valid:before {
@@ -345,7 +362,7 @@ h1 {
 
 /* Add a red text color and an "x" icon when the requirements are wrong */
 .invalid {
-    color: red;
+    color: rgb(255, 105, 67);
 }
 
     .invalid:before {
