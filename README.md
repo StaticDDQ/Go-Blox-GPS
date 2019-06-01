@@ -3,24 +3,33 @@
 Repository for team Go-Blox
 Written by Nicola, Raisa, Daphne and Jansen
 
-FUNCTIONALITIES
+# FUNCTIONALITIES
+
 All functionalities listed below are using the mongooseController.js as their controller to interact with the database.
-Create member (sign up page)
+
+Create member (sign up page):
+
 Create member functionality allows users to create their own account to be able to access the other functionalities. They are to input some personal information, a description of themselves and can create customised interest tags. After the form is filled in, an email would be sent to the user’s email address  for verification.
 
 Models: Member
+
 Routes: /members/register, /members/signup, /members/verify
+
 Views:  signup.pug, profileTags.pug
 
 
 Log in
+
 Users are able to login after verifying their email. Login involves inputting the user’s username and password. Allows users to use more of the website’s functionality.
 
 Models: Member
+
 Routes: /members/authenticate, /members/logout, /members/login, /members/storeInfo
+
 Views: login.pug
 
 Find members
+
 Users are are able to search other users by searching a keyword that match with their username, first name, or last name. This is allows users to follow other users and track what they are doing.
 
 Models: Member
