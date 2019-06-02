@@ -6,6 +6,8 @@ html(lang='en')
     meta(http-equiv='X-UA-Compatible', content='ie=edge')
     link(rel='stylesheet', href='../css/loadEvents.css', v='')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
+    link(href="https://fonts.googleapis.com/css?family=Heebo:300&display=swap", rel="stylesheet")
+
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
     title Search Events
   body
@@ -42,15 +44,15 @@ html(lang='en')
                 .event_card
                   .event_title
                     h3.title #{event.name}
-                    p Date: #{event.startDate} to #{event.endDate}
-                    p Time: #{event.startTime} - #{event.endTime}
-                    p Location: #{event.address}
+                    p <b>Date:</b> #{event.startDate} to #{event.endDate}
+                    p <b>Time:</b> #{event.startTime} - #{event.endTime}
+                    p <b>Location:</b> #{event.address}
                   .event_pic
                     img(src= event.pictures, alt='event_pic')
                   .event_tag
-                    p
-                      b Tags: #{event.tags}
-                    p
+                    ul <b>Tags</b>:  
+                      each tags in event.tags
+                        li #{tags}
         else
           p(style="text-align:center") <b>No events found!</b>
 

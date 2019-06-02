@@ -31,7 +31,6 @@ html
       a.logo(href='/')
         img.logo(src= "/logo.png", alt='GPS', width='80', height='80')
 
-
       //- contains basic profile info for user
       .basic_profile
         -
@@ -40,12 +39,12 @@ html
         img.profile(src= source, alt='profile_picture')
 
         - var fullname = firstName + ' ' + lastName;
-        h3 #{user.firstName} #{user.lastName}
-        h4 @#{user.userName}
-        h4 Member since: 
-        h4 #{user.joined_date}
-        h4 Date of Birth: #{user.DOB}
+        h2 #{user.firstName} #{user.lastName}
+        h4#uname @#{user.userName}
+        h4 Joined: #{user.joined_date}
+        h4 Birthday: #{user.DOB}
 
+        //- If not your profile page you can follow or unfollow other memebers
         if notCurr
           -
             var followText = 'Follow';
@@ -88,8 +87,7 @@ html
 
                 //- change
                 input#xButton2(type='submit', value='Change Details')
-
-              //- currently, only changing password is possible
+            //- Change password
             .password
               h2 Change Password:
               p
@@ -128,6 +126,8 @@ html
           if user.desc
             p
               | #{user.desc}
+
+        //- Events tab with events you created and joined
         #Events.tabcontent
           .gridEvent
             .attend
@@ -144,6 +144,7 @@ html
                     each userEvent in eventsCreated
                       a(href='/events/getEvent/' + userEvent._id)
                         li #{userEvent.name}
+        //- Places tab with places you've bookmarked
         #Places.tabcontent
           h3 Your bookmarks 
             i.fa.fa-bookmark(aria-hidden='true')  
@@ -151,6 +152,7 @@ html
             if user.bookmark
               each place in user.bookmark
                 li #{place}
+        //- Friends tab with list of people you follow as well as a search bar to look for friends
         #Friends.tabcontent
           form(action='/members/searchUser', method='post')
             input(type='text', placeholder="Search user...", name='username')
@@ -160,6 +162,7 @@ html
             each friend in user.followedUsers
               a(href='/members/profile/' + friend)
                 li @#{friend}
+        //- Reviews tab with all your reviews and you can delete them from here
         #Reviews.tabcontent
           h3 Your reviews
 
@@ -211,7 +214,7 @@ html
 
         //- Dynamic update function
         $(function () {
-
+            //- Follow another user
             $('#followUser').click(function (event) {
                 event.preventDefault();
 
@@ -230,6 +233,7 @@ html
                     });
                 }
                 else {
+                    //- Unfollow previously followed user
                     $.ajax({
                         url: '/members/unfollowUser',
                         type: 'put',
@@ -240,7 +244,7 @@ html
                     });
                 }
             });
-
+            //- Submit profile setting changes
             $('#submitChanges').click(function (event) {
                 event.preventDefault();
                 if (!isValid) {
@@ -266,6 +270,7 @@ html
                 });
             });
 
+            //- delete rating
             $('.deleteRating').click(function (event) {
                 event.preventDefault();
 

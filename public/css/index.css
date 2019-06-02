@@ -6,7 +6,7 @@
 
 /* General body formatting */
 body {
-    font-family: 'Quicksand';
+    font-family: 'Heebo';
     background-image: linear-gradient(to top right, #f5bdab, #90a4bc);
     background-repeat:no-repeat;
     background-position: center;
@@ -59,7 +59,7 @@ input {
     width: 16vw;
     padding: 2vw;
     align-content: center;
-    font-family: 'Quicksand';
+    font-family: 'Heebo';
 }
 
 /* Login Elements */
@@ -81,7 +81,7 @@ input {
     height: 6vh;
     width: auto;
     padding: 10px; 
-    font-family: 'Quicksand';
+    font-family: 'Heebo';
     font-size: 1em;
     border: none;
     border: .5px solid #707070;
@@ -107,7 +107,7 @@ input {
     font-size: 1em;
     padding: 5px; 
     color: #555555;
-    font-family: 'Quicksand';
+    font-family: 'Heebo';
     background: none;
     border: none;
     text-align: left;
