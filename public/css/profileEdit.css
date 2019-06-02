@@ -724,11 +724,44 @@ input#submitChanges.current-menu-item
   border: none;
 }
 
+/* Popup container */
 .popup {
   position: relative;
   display: inline-block;
   cursor: pointer;
 }
+
+  /* The actual popup (appears on top) */
+  .popup .popuptext {
+      visibility: hidden;
+      width: 160px;
+      background-color: lightgray;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px 0;
+      position: absolute;
+      z-index: 1;
+  }
+
+  /* Toggle this class when clicking on the popup container (hide and show the popup) */
+  .popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s
+}
+
+#pwdSpan {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  color: transparent;
+}
+
+.valid {
+  color: rgb(102, 197, 90);
+}
+
 
 
 
