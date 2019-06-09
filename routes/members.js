@@ -4,6 +4,7 @@ const mongooseController = require('../controller/mongooseController');
 const passport = require('passport');
 const multer = require('multer');
 var cloudinary = require('cloudinary').v2;
+const cloudinaryConfig = require("../config/cloudinary");
 
 // used to get current date to record when user is created
 const moment = require('moment');

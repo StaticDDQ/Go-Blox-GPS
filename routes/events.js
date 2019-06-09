@@ -7,6 +7,8 @@ var cloudinary = require('cloudinary').v2;
 var NodeGeoCoder = require("node-geocoder");
 const limiter = require('express-rate-limit');
 
+const cloudinaryConfig = require("../config/cloudinary");
+
 // Get event model
 let Event = require('../models/event');
 let Rating = require('../models/rating');

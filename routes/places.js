@@ -4,6 +4,7 @@ const router = express.Router();
 const multer = require('multer');
 var cloudinary = require('cloudinary').v2;
 var NodeGeoCoder = require("node-geocoder");
+const cloudinaryConfig = require("../config/cloudinary");
 
 // Get place model
 let Place = require('../models/place');
