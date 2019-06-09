@@ -36,7 +36,7 @@ html(lang='en')
             .signUps
               | Password:
               br
-              input#pwd(name='password', type='password', placeholder='Password', pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}", onclick="openSpan()")
+              input#pwd(name='password', type='password', placeholder='Password', onclick="openSpan()")
               div(class='popup')
                 span(class="popuptext" id="pwdSpan")
                   #message
