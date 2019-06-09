@@ -6,7 +6,7 @@
 }
 
 body {
-    font-family: 'Quicksand';
+    font-family: 'Heebo';
     background-repeat: no-repeat;
     background-size: cover;
     background-color: #f4f4f4;
@@ -134,7 +134,7 @@ button{
     margin-left: 2px;
     margin-bottom: 3px;
     border-radius: 5px;
-    font-family: 'Quicksand';
+    font-family: 'Heebo';
 }
 
 .filterTag:hover{

@@ -10,7 +10,7 @@
 
 body{
     color:#333;
-    font-family: 'Quicksand';
+    font-family: 'Heebo';
     background-image: linear-gradient(to top right, #f5bdab, #90a4bc); 
     background-repeat:no-repeat;
     background-position: center;
@@ -212,7 +212,7 @@ input, textarea {
     padding-top: 20px;
     margin: 10px;
 }
-.createEventButton input {
+input#but {
     height: 6vh;
     width: auto;
     padding: 11px 20px;
@@ -223,14 +223,13 @@ input, textarea {
     border-radius: .4em;
 }
 
-.createEventButton { 
+input#but { 
     text-align: left;
-    padding-top: 20px;
 }
 
-.createEventButton input:hover,
-.createEventButton input.sfHover,
-.createEventButton input.current-menu-item {
+input#but:hover,
+input#but.sfHover,
+input#but.current-menu-item {
     background-color: #f5bdab;
     color:  rgb(255, 255, 255);
 }
@@ -259,7 +258,7 @@ input, textarea {
 }
 /* Configuring terms and conditions */
 
-.agree input {
+.agree input{
     padding: .5em;
     width: 2vw;
 
@@ -285,6 +284,8 @@ li {
     list-style: none;
 }
 
+/* Configuring submission verification */
+
 #overlay {
     background-color: rgba(0, 0, 0, 0.5);
     background-attachment: fixed;
@@ -300,6 +301,8 @@ li {
     bottom: 0;
     z-index: 2;
 }
+
+/* Configuring submit button */
 
 .submitBtns {
     background-color: #f1f1f1;

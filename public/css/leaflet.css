@@ -1,3 +1,10 @@
+/* Configuring Grid
+ */
+
+ * {
+	 font-family: 'Heebo';
+ }
+
 #antos {
 	display: grid;
 	grid-template-areas: 

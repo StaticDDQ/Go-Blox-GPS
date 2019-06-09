@@ -1,5 +1,4 @@
-/* CSS FILE FOR createEvent.pug */
-
+/* CSS FILE FOR profileTags.pug */
 
 /* General body formatting */
 
@@ -10,7 +9,7 @@
 
 body{
     color:#333;
-    font-family: 'Quicksand';
+    font-family: 'Heebo';
     background-image: linear-gradient(to top right, #f5bdab, #90a4bc); 
     background-repeat:no-repeat;
     background-position: center;
@@ -71,7 +70,7 @@ input, textarea {
     width: 200px;
     padding: 20px;
     align-content: center;
-    font-family: 'Quicksand';
+    font-family: 'Heebo';
 }
 
 
@@ -81,7 +80,7 @@ input, textarea {
     padding-bottom: 20px;
     /* margin: 1vw auto; */
     align-content: center;
-    font-family: 'Quicksand';
+    font-family: 'Heebo';
 }
 
 input#but {
@@ -89,7 +88,7 @@ input#but {
     width: 10vw;
     padding-top: 20px;
     padding-bottom: 20px;
-    font-family: 'Quicksand';
+    font-family: 'Heebo';
     font-size: 1vw;
     border: none;
     border: .5px solid #707070;
@@ -189,7 +188,7 @@ input#but.current-menu-item
     margin: 33.5vh auto;
     width: 40vmax;
     height: auto;
-    font-family: 'Quicksand';
+    font-family: 'Heebo';
     color:  rgb(20, 20, 20);
     border-radius: .7em;
 
@@ -204,7 +203,7 @@ input#but.current-menu-item
     width: 11vw;
     padding: 10px; 
     margin-right: 2vw;
-    font-family: 'Quicksand';
+    font-family: 'Heebo';
     font-size: 1.2vw;
     border: .5px solid #707070;
     border-radius: .4em;

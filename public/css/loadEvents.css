@@ -1,7 +1,7 @@
 /* CSS FILE FOR loadEvents.pug */
 /* configure main layout */
 body {
-    font-family: 'Quicksand';
+    font-family: 'Heebo';
     background-color: #f4f4f4;
     padding: 0;
     margin: 0;
@@ -139,7 +139,7 @@ button{
     margin-left: 2px;
     margin-bottom: 3px;
     border-radius: 5px;
-    font-family: 'Quicksand';
+    font-family: 'Heebo';
 }
 
 .filterTag:hover{
@@ -219,6 +219,10 @@ button{
     font-size: 1.5em;
 }
 
+h3 {
+    margin-block-start: 0px;
+}
+
 .event_pic{
     grid-area: event_pic;
     padding-right: 10px;
@@ -230,9 +234,33 @@ button{
     height: auto;
 }
 
+/* configure the tag for the event */
 .event_tag{
     grid-area: event_tag;
-    padding-bottom: 10px;
+    word-break: break-all;
+    width: 100%;
+    height: auto;
+    margin-top: 5px;
+    margin-right: 10px;
+  }
+
+.event_tag ul{
+    padding-inline-start: 0px;
+    margin-block-start: 5px;
+}
+  
+.event_tag li{
+    list-style-type: none;
+    position: relative;
+    border: solid 1px #707070;
+    display: inline;
+    margin-right: 10px;
+    border-radius: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 15px;
+    color:black;
+    line-height: 1.8em;
 }
 
 /* configure footer */

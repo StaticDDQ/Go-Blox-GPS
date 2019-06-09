@@ -10,12 +10,14 @@ html
     link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.3.1/css/all.css')
     meta(name='viewport', content='width=device-width, initial-scale=1')
 
-  //-link(rel='stylesheet', href='http://cdn.leafletjs.com/leaflet-0.7/leaflet.css')
   body
     style
       include ../public/css/mappers.css
+    //- Initialize grid elemements
     .grid
+      //- Insert map
       include includes/homeMap.pug
+      //- For the description
       .desc
         h1 gps.
         h3
@@ -40,7 +42,7 @@ html
             span
               button(type='submit')
                 i.fa.fa-search
-          
+        //- Non user has to sign up or log  in
         if !isLoggedIn
           h5 DISCOVER MORE!
           .more
@@ -49,7 +51,7 @@ html
                 a(href='/members/signup') SIGN UP
               li
                 a(href='/members/login') LOGIN
-
+        //- Already logged users can go straight to their page
         else 
           .page
             ul

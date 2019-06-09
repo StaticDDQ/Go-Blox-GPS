@@ -5,6 +5,7 @@ html
     link(rel='stylesheet', type='text/css', href='css/success.css')
     link(rel='stylesheet', href='../css/universal.css', v='')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
+    link(href="https://fonts.googleapis.com/css?family=Heebo:300&display=swap", rel="stylesheet")
   body
     .grid
       //- Navigation menu
@@ -12,6 +13,7 @@ html
       .logo
         a(href='/') 
           img(src= "/logo.png", alt='GPS', width='80', height='80')
+      //- Success page after user verifies email
       .content
         h1
           | Your account has been successfully verified!
@@ -21,6 +23,7 @@ html
             form(action='/members/login')
               button(type='submit') Log me in
     script.
+        //- Function for navigation bar
         function openNav() {
             document.getElementById("mySidenav").style.width = "250px";
         }
