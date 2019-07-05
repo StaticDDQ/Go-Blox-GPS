@@ -1,7 +1,7 @@
 # Go-Blox, GPS (Get People Socializing)
 
 Repository for team Go-Blox
-Written by Nicola, Raisa, Daphne and Jansen
+Written by Raisa, Daphne, Nicola and Jansen
 
 ## FUNCTIONALITIES
 All functionalities listed below are using the mongooseController.js as their controller to interact with the database.
