@@ -1,4 +1,4 @@
-# INFO30005-2019-Go-Blox
+# Go-Blox, GPS (Get People Socializing)
 
 Repository for team Go-Blox
 Written by Nicola, Raisa, Daphne and Jansen
