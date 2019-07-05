@@ -6,31 +6,26 @@
 }
 
 body {
-    font-family: 'Quicksand';
+    font-family: 'Heebo';
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: black;
-    background: rgb(213,221,232);
-    background: linear-gradient(167deg, rgba(213,221,232,1) 0%, #ffc7bb 65%);
-    /* background-image: linear-gradient(to bottom right, #e15848 50%, #5d8eca 100%);
-    background: #ff836c; */
-    /* background: linear-gradient(170deg, rgba(255,208,181,1) 0%, rgba(238,180,192,1) 100%);
-    background: rgb(255,208,181); */
+    background-color: #f4f4f4;
 }
-
-/* configure the grid */
-
 
 /* container for the search events/search places */
 .container_first {
     display: grid;
     grid-template-rows: auto;
     grid-template-columns: .2fr 1fr 0.15fr;
-    grid-template-areas: "navbar searchBox logo" "mapping mapping mapping" "footer footer footer";
+    grid-template-areas: 
+    "navbar searching logo" 
+    "mapping mapping mapping" 
+    "footer footer footer";
 }
 
+/* Configure Search Bar */
 .searching {
-    grid-area: searchBox;
+    grid-area: searching;
     display: inline-block;
     max-height: 200px;
     text-align: center;
@@ -38,7 +33,7 @@ body {
 }
 
 ::placeholder{
-   color: #e15848;
+   color: #a0a0a0;
    font-style: italic;
 }
 
@@ -46,9 +41,10 @@ body {
    width: 70%;
    height: auto;
    font-size: 1em;
-   padding: 5px;
-   margin: 10px;
-   border-radius: 7px;
+   padding: 7px;
+   border: solid 0.5px rgb(213,221,232);
+   border-top-left-radius: 3px;
+   border-bottom-left-radius: 3px;
 }
 
 .searching input[type=text]:hover{
@@ -61,13 +57,16 @@ body {
 
 .searching input[type=submit]{
     font-size: 1em;
-    padding: 5px;
-    border-radius: 10px;
+    padding: 7px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
     margin-top: 3vh;
+    background-color: rgb(213,221,232);
+    border: solid 0.5px rgb(213,221,232);
 }
 
 .searching input[type=submit]:hover{
-    color: #ED7755;
+   background-color: #becad0;
 }
 
 button{
@@ -84,12 +83,11 @@ button{
 
 #map {
     height: 600px;
-    width: 60%;
+    width: 70%;
     margin: 20px;
     display: inline-block;
     border-radius: 5px;
     border-style: double;
-
 }
 
 textarea:focus, input:focus{
@@ -130,4 +128,38 @@ textarea:focus, input:focus{
   .footer li.current-menu-item {
       border-bottom: solid 0.3px #ED7755;
   
+  }
+
+/* Configure responsive Grid */
+  @media (max-width:800px){
+    .container_first {
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: 
+        "navbar logo" 
+        "searching searching"
+        "mapping mapping" 
+        "footer footer";
+    }
+
+    #map {
+        height: 500px;
+        width: 85%;
+        margin: 20px;
+        display: inline-block;
+        border-radius: 5px;
+        border-style: double;
+    }
+    .footer{
+        grid-area: footer; 
+        background-color: #90A4BC;
+        padding-bottom: 20px;
+        padding-top: 20px;
+        margin-top: 50px;
+        border-top: solid 8px #becad0;
+        text-align: justify;
+        padding-left: 0;
+        padding-right: 20px;
+      }
   }

@@ -6,7 +6,7 @@
 }
 
 body {
-    font-family: 'Quicksand';
+    font-family: 'Heebo';
     background-repeat: no-repeat;
     background-size: cover;
     background-color: #f4f4f4;
@@ -16,7 +16,6 @@ body {
 .container {
     display: grid;
     grid-template-columns: 0.3fr 1fr;
-    /* grid-template-rows: 0.005fr .05fr 5fr 0.1fr; */
     grid-template-rows: auto;
     grid-template-areas: "navbar navbar" "searchBox searchBox" "filterSide displayEvents" "footer footer";
 }
@@ -26,7 +25,6 @@ body {
     display: grid;
     grid-template-columns: 0.3fr 1fr;
     grid-template-rows: 0.005fr .05fr 2.5fr 0.1fr;
-    /* grid-template-rows: auto; */
     grid-template-areas: "navbar navbar" "searchBox searchBox" "filterSide displayEvents" "footer footer";
 }
 

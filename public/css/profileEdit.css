@@ -9,7 +9,6 @@
 body{
   font-family: "Heebo";
   background-color: #f4f4f4;
-  /* background-image: linear-gradient(to bottom right, #e15848, #90a4bc); */
   background-repeat:no-repeat;
   background-position: center;
   background-attachment: fixed;
@@ -38,13 +37,10 @@ body{
 .basic_profile{
   grid-area: basic_profile;
   text-align: center;
-  /* border: 1px solid #F5BDAB; */
   margin-left: 40px;
   padding-top: 10px;
-  /* background-color: rgb(236, 229, 227); */
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
-  /* border-right: solid 2px  #F5BDAB; */
   color: #f4f4f4;
   box-shadow: #4f4f4f;
   background-image: linear-gradient(to bottom right, #e15848, #5d8eca);
@@ -54,8 +50,14 @@ body{
   padding: 40px;
 }
 
-.basic_profile h3 {
-  font-family: 'Quicksand';
+.basic_profile h2 {
+  font-family: 'Heebo';
+  margin-top: 10px;
+}
+ h4#uname {
+  font-family: 'Heebo';
+  margin-bottom: 20px;
+  color: rgb(196, 217, 243);
 }
 
 .profile{
@@ -82,11 +84,9 @@ body{
 /* details about the person on the right side */
 .all_content{
   grid-area: all_content;
-  /* border: 1px solid #BECAD0; */
   margin-right: 40px;
   padding: 20px;
   background-color: white;
-  /* margin-left: 10px; */
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
 }
@@ -132,10 +132,8 @@ body{
 .tab {
   overflow: hidden;
   border: none;
-  /* background-color: #f1f1f1; */
-  /* border-top-left-radius: 20px; */
   border-top-right-radius: 20px;
-  font-family: 'Quicksand';
+  font-family: 'Heebo';
 }
 
 /* Style the buttons that are used to open the tab content */
@@ -148,6 +146,7 @@ body{
   padding: 10px;
   transition: 0.3s;
   margin-left: 5px;
+  border-bottom:white 2px solid;
 }
 
 /* Change background color of buttons on hover */
@@ -179,27 +178,13 @@ body{
   "attend"
   "created";
 }
-@media (min-width: 760px){
-  .gridEvent{
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: auto;
-    grid-template-areas: 
-    "attend created";
-  }
-}
-
 
 .attend{
   grid-area: attend;
-  /* background-color: #ccc; */
-  /* border-right: solid 1px black; */
 }
 
 .created{
   grid-area: created;
-  /* background-color: #ccc; */
-  /* padding-left: 1vw; */
 }
 
 #Events a{
@@ -214,21 +199,14 @@ body{
   padding: 10px;
   margin-top: 1vh;
   background: rgb(224, 224, 224);
-  /* background: linear-gradient(90deg, rgba(175,88,140,1) 0%, rgba(255,130,101,1) 100%); */
-  /* background-image: linear-gradient(to bottom right, #e15848, #5d8eca); */
-
-  /* background-image: linear-gradient(to left,#F5BDAB, #E15848 ); */
   margin-right: 1vw;
   width: 20vw;
 }
 
 #Events li:hover{
-  /* background: rgb(175,88,140); */
   background: rgb(175,88,140);
   background: linear-gradient(90deg, rgba(175,88,140,1) 49%, rgba(255,130,101,1) 100%);
-  /* background-color:#d86141; */
   color: white;
-  /* color: #4f4f4f; */
 }
 /* Places tab */
 #Places i{
@@ -251,6 +229,7 @@ body{
   margin-top: 1vh;
 }
 
+
 #Friends a:hover{
   color: #4f4f4f;
 }
@@ -261,8 +240,8 @@ body{
 #Friends input[type=text]{
   width: 30vw;
   padding: 5px;
-  margin-right: 0px;
-  border: none;
+  margin: 0;
+  border: solid 0.5px #ED7755;
 }
 
 #Friends input[type=submit]{
@@ -271,7 +250,7 @@ body{
   background-color: #ED7755;
   color: white;
   margin-left: 0px;
-  border: solid 1px #ED7755;
+  border: solid 0.5px #ED7755;
 }
 
 #Friends input[type=submit]:hover{
@@ -323,7 +302,6 @@ body{
 /* reviews tab */
 #reviewCard{
   list-style-type: none;
-  /* border-bottom: solid 1px #4f4f4f; */
   width: 100%;
   padding-bottom: 10px;
   margin-bottom: 10px;
@@ -334,6 +312,14 @@ body{
   padding-top: 10px;
   padding-bottom: 10px;
   font-size: 15px;
+}
+
+#reviewCard a{
+  color: #4f4f4f;
+}
+
+#reviewCard a:hover{
+  color: #E15848;
 }
 
 .eventName{
@@ -353,7 +339,6 @@ body{
   border-radius: 5px;
   color: #707070;
   font-size: 0.8em;
-  /* width: 25px; */
 }
 
 .deleteRating:hover{
@@ -398,7 +383,7 @@ body{
  }
 
  .settings h2 {
-   font-family: 'Quicksand';
+   font-family: 'Heebo';
    font-style: bold;
    color: #ED7755;
    padding-bottom: 4px;
@@ -429,7 +414,7 @@ input {
   font-size: 12px;
   width: 100px;
   align-content: center;
-  font-family: 'Quicksand';
+  font-family: 'Heebo';
   margin: 5px;
 }
 
@@ -440,10 +425,9 @@ input#xButton
   height: 30px;
   width: 70px;
   padding: 2px; 
-  font-family: 'Quicksand';
+  font-family: 'Heebo';
   font-size: 12px;
   border: none;
-  /* border: .5px solid #707070; */
   border: none;
   border-radius: .4em;
   margin: 5px;
@@ -457,10 +441,9 @@ input#xButton2 {
   height: 30px;
   width: 120px;
   padding: 2px; 
-  font-family: 'Quicksand';
+  font-family: 'Heebo';
   font-size: 12px;
   border: none;
-  /* border: .5px solid #707070; */
   border-radius: .4em;
   border: none;
   margin: 5px;
@@ -520,17 +503,6 @@ input#submitChanges.current-menu-item
         margin-left: -80px;
     }
 
-        /* Popup arrow */
-        .popup .popuptext::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 20%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: #555 transparent transparent transparent;
-        }
 
     /* Toggle this class when clicking on the popup container (hide and show the popup) */
     .popup .show {
@@ -561,21 +533,237 @@ input#submitChanges.current-menu-item
 }
 
 /* Add a green text color and a checkmark when the requirements are right */
-.valid {
-    color: green;
+
+#pwdSpan {
+  padding: 10px;
+  background-color:black;
 }
 
-    .valid:before {
-        position: relative;
-        left: -35px;
-    }
+.valid {
+  color: rgb(198, 255, 124);
+}
+
+  .valid:before {
+      position: relative;
+      left: -35px;
+  }
 
 /* Add a red text color and an "x" icon when the requirements are wrong */
 .invalid {
-    color: red;
+  color: rgb(255, 105, 67);
 }
 
-    .invalid:before {
-        position: relative;
-        left: -35px;
-    }
+  .invalid:before {
+      position: relative;
+      left: -35px;
+  }
+/* Responsive Grid */
+@media (min-width: 760px){
+  .gridEvent{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "attend created";
+  }
+
+}
+
+/* Configure layout for smaller displays */
+@media (max-width: 820px){ 
+  .grid {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 0.2fr 2.3fr;
+    grid-template-rows: 0.25fr 1fr 1fr 0fr;
+    grid-template-areas: 
+    "navbar logo" 
+    "basic_profile basic_profile"
+    "all_content all_content" 
+    "footer footer";
+  }
+
+ #overlay {
+  z-index: 1003;
+  overflow: -webkit-paged-x;
+}
+
+  /* profile sidebar */
+.basic_profile{
+  grid-area: basic_profile;
+  margin-left: 40px;
+  margin-right: 40px;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 0px;
+}
+
+/* details about the person on the right side */
+.all_content{
+  grid-area: all_content;
+  margin-left: 40px;
+  margin-right: 40px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+/* configure setting which uses overlay */
+.settings {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: 
+  "one"
+  "password";
+  background-color: #f1f1f1;
+  padding: 20px;
+  justify-content: center;
+  font-family: 'Roboto';
+  color:  rgb(20, 20, 20);
+  width: -webkit-fill-available;
+  margin: 0px;
+  height: -webkit-fill-available;
+
+ } 
+
+ .one {
+   grid-area: one;
+   padding-bottom: 20px;
+ }
+ .one input[type=text]{
+   padding: 5px;
+ }
+
+ .password {
+   grid-area: password;
+ }
+
+ .password input[type=password]{
+   padding: 5px;
+ }
+
+ .settings h2 {
+   font-family: 'Heebo';
+   font-style: bold;
+   color: #ED7755;
+   padding-bottom: 4px;
+ }
+ .settings img{
+  border: 1px solid #f4f4f4;
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+ }
+
+ input {
+  font-size: 12px;
+  width: 100px;
+  align-content: center;
+  font-family: 'Heebo';
+  margin: 5px;
+}
+
+.xButton button, 
+.xButton input,
+input#xButton
+ {
+  height: 30px;
+  width: 70px;
+  padding: 2px; 
+  font-family: 'Heebo';
+  font-size: 12px;
+  border: none;
+  border: none;
+  border-radius: .4em;
+  margin: 5px;
+  background-color: #90A4BC;
+  color: white;
+
+}
+
+input#submitChanges,
+input#xButton2 {
+  height: 30px;
+  width: 120px;
+  padding: 2px; 
+  font-family: 'Heebo';
+  font-size: 12px;
+  border: none;
+  border-radius: .4em;
+  border: none;
+  margin: 5px;
+  background-color: #90A4BC;
+  color: white;
+}
+.xButton {
+  text-align: left;
+  
+}
+
+#cancel {
+  align-content: right;
+}
+.xButton button:hover,
+.xButton button.sfHover,
+.xButton button.current-menu-item,
+.xButton input:hover,
+.xButton input.sfHover,
+.xButton input.current-menu-item,
+input#xButton:hover,
+input#xButton.sfHover,
+input#xButton.current-menu-item,
+input#xButton2:hover,
+input#xButton2.sfHover,
+input#xButton2.current-menu-item,
+input#submitChanges:hover,
+input#submitChanges.sfHover,
+input#submitChanges.current-menu-item
+ {
+  background-color: #5d8eca;
+  color:  rgb(255, 255, 255);
+  border: none;
+}
+
+/* Popup container */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+  /* The actual popup (appears on top) */
+  .popup .popuptext {
+      visibility: hidden;
+      width: 160px;
+      background-color: lightgray;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px 0;
+      position: absolute;
+      z-index: 1;
+  }
+
+  /* Toggle this class when clicking on the popup container (hide and show the popup) */
+  .popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s
+}
+
+#pwdSpan {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  color: transparent;
+}
+
+.valid {
+  color: rgb(102, 197, 90);
+}
+
+
+
+
+
+}

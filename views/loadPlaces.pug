@@ -9,6 +9,7 @@ html(lang='en')
       include ../public/css/loadPlaceNew.css
       include ../public/css/universal.css
     link(href='https://fonts.googleapis.com/css?family=Open+Sans|Quicksand', rel='stylesheet')
+    link(href="https://fonts.googleapis.com/css?family=Heebo:300&display=swap", rel="stylesheet")
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
     title Search Places
   body
@@ -23,6 +24,7 @@ html(lang='en')
           h3 Filter
           p Category
           input#input(type='text', placeholder='Search Category', name='name', onkeyup='addCategory()')
+          input.all(type='button', value = 'SHOW ALL', onclick="filterOut('show all')")
           #filter
       //- Searchbar to find places
       .searching
@@ -43,10 +45,10 @@ html(lang='en')
                     img(src= place.pictures, alt='place_pic')
                   .event_desc
                     p <b>Location:</b> #{place.placeAddress}
+                    p <b>Cateogory:</b> #{place.category}
                     p <b>Description:</b> 
                     | #{place.placeDescription}
-                  .event_tag
-                    p <b>Cateogory:</b> #{place.category}
+                    
         else
           p(style="text-align:center") <b>No places found!</b>
 
@@ -69,13 +71,6 @@ html(lang='en')
 
         function loadCategories(places) {
           let placeLst = [];
-          var showAll = document.createElement('input');
-          showAll.type = 'button';
-          showAll.value = 'Show All';
-          showAll.onclick = function(){
-              filterOut('show all');
-          }
-          filter.appendChild(showAll);
 
           for (let i = 0; i < places.length; i++) {
               if(!placeLst.includes(places[i].category)){
@@ -83,6 +78,7 @@ html(lang='en')
                   var btn = document.createElement('input');
                   btn.type = 'button';
                   btn.name = 'tagFilter';
+                  btn.className = 'filterTag';
                   btn.value = places[i].category;
                   btn.onclick = function(){
                       filterOut(places[i].category);

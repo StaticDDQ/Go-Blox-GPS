@@ -1,36 +1,25 @@
 /* For index, about */
 * {
     margin: 0;
-    padding: 0; 
-    
+    padding: 0;   
 }
 
 /* General body formatting */
-
 body {
-    font-family: 'Quicksand';
+    font-family: 'Heebo';
     background-image: linear-gradient(to top right, #f5bdab, #90a4bc);
     background-repeat:no-repeat;
     background-position: center;
     background-attachment: fixed;
-    /* -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover; */
-    /* background-repeat: no-repeat; */
-    /* height: 100%; */
-    
 }
 
- /* configuring the grid styles */
-
+ /* Configuring the grid styles */
 .gridContainer {
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: auto;
     grid-template-areas: 
     "container";
-
  }
 
 .container {
@@ -39,25 +28,23 @@ body {
     background-color: rgb(255,249,248);
     border: solid 1px rgb(214,201,201);
     border-radius: .7em;
-    padding: 100px;
     align-content: center;
-    width: 20vw;
     margin: 100px auto;
+    padding: 50px 40px;
     box-shadow: 0px 2px 2px 0px rgba(53, 53, 53, 0.75);
 }
 
 /* Format Header */
-
 h1 {
     font-size: 40px;
     font-family: Arial, Helvetica, sans-serif;
     letter-spacing: 2px;
-    padding-bottom: 10vh;
+    padding-bottom: 5vh;
+    padding-top: 5vh;
     color: #647a94;
 }
 
 /* Formatting the input boxes */
-
 p {
     font-size: 20px;
 }
@@ -72,17 +59,17 @@ input {
     width: 16vw;
     padding: 2vw;
     align-content: center;
-    font-family: 'Quicksand';
+    font-family: 'Heebo';
 }
 
 /* Login Elements */
-
 .logins input {
     background: none;
     border: none;
     border-bottom: 1px solid #707070;
     padding: 20px 20px 10px 20px;
-    
+    height: 4vh;
+    width: auto;
 }
 
 .logins {
@@ -90,17 +77,15 @@ input {
 }
 
 /* Login button */
-
 .loginButton input {
     height: 6vh;
-    width: 9vw;
+    width: auto;
     padding: 10px; 
-    font-family: 'Quicksand';
-    font-size: 1.1vw;
+    font-family: 'Heebo';
+    font-size: 1em;
     border: none;
     border: .5px solid #707070;
     border-radius: .4em;
-
 }
 .loginButton {
     text-align: left;
@@ -116,18 +101,16 @@ input {
 }
 
 /* Sign up button */
-
 .signUpButton input {
     height: 5vh;
-    width: 10vw;
-    font-size: 1.1vw;
+    width: auto;
+    font-size: 1em;
     padding: 5px; 
     color: #555555;
-    font-family: 'Quicksand';
+    font-family: 'Heebo';
     background: none;
     border: none;
     text-align: left;
-    
 }
 
 .signUpButton {
@@ -142,4 +125,3 @@ input {
     background: none;
     border-bottom: .1em solid #f5bdab;
 }
-

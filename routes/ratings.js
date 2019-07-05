@@ -5,9 +5,9 @@ const moment = require('moment')
 // Get rating model to save collection
 let Rating = require('../models/rating');
 
-// give rating
+// give rating to an event
 router.put('/addRating', function (req, res) {
-    // save the rating
+    // save the rating and give date timestamp
     var addNewRating = new Rating({
         eventID: req.body.eventID,
         stars: req.body.stars,
@@ -23,6 +23,7 @@ router.put('/addRating', function (req, res) {
     });
 });
 
+// happens in profile, delete rating will delete comment from that event
 router.delete('/deleteRating/:id', function (req, res) {
 
     Rating.findByIdAndDelete(req.params.id, function (err, result) {

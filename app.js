@@ -7,7 +7,6 @@ const config = require('./config/database');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const session = require('express-session');
-// const limiter = require('express-rate-limit');
 
 // use moment to format date and time
 app.locals.moment = require('moment');
@@ -19,14 +18,16 @@ let Places = require('./models/place');
 var port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(session({
     secret: 'secret',
     resave: true,
     saveUninitialized: true
 }));
+
 app.use(expressValidator());
-// app.use(limiter);
+
 app.set('view engine','pug');
 app.set('trust proxy', 1);
 
@@ -107,9 +108,70 @@ app.get('/', function (req, res) {
     
                 placeArr.push(aPlaces);
             };
-            res.render('maps', { events: arrayed, places: placeArr, isLoggedIn: req.user !== undefined });
+            if (placeArr.length === 0 && arryed.length === 0) {
+                return res.render('map', { events: null, places: null, isLoggedIn: req.user !== undefined });
+            }
+            return res.render('maps', { events: arrayed, places: placeArr, isLoggedIn: req.user !== undefined });
         });
     });    
+
+});
+
+// if want to search
+app.post('/maps/search', async function (req, res) {
+    var arrayed = [];
+    await Event.find({
+        $or: [
+            { name: { $regex: req.body.search, $options: 'i' } },
+            { email: { $regex: req.body.search, $options: 'i' } },
+            { organizers: { $regex: req.body.search, $options: 'i' } },
+            { address: { $regex: req.body.search, $options: 'i' } },
+        ]
+    }, function (err, resp) {
+
+        for (let i = 0; i < resp.length; i++) {
+            var aEvent = {
+                id: resp[i]._id,
+                name: resp[i].name,
+                organizer: resp[i].organizer,
+                lat: parseFloat(resp[i].location[0].latitude),
+                long: parseFloat(resp[i].location[0].longitude),
+                address: resp[i].address,
+                phone: resp[i].phone,
+                email: resp[i].email,
+                pictures: resp[i].pictures
+            };
+
+
+            arrayed.push(aEvent);
+        };
+
+    });
+    var placeArr = []
+    await Places.find({
+        $or: [
+            { placeName: { $regex: req.body.search, $options: 'i' } },
+            { placeDescription: { $regex: req.body.search, $options: 'i' } },
+            { placeAddress: { $regex: req.body.search, $options: 'i' } }
+        ]
+    }, function (err, resp) {
+        if (err) throw err;
+        for (let i = 0; i < resp.length; i++) {
+            var aPlaces = {
+                id: resp[i]._id,
+                placeName: resp[i].placeName,
+                lat: parseFloat(resp[i].location[0].latitude),
+                long: parseFloat(resp[i].location[0].longitude),
+                placeAddress: resp[i].placeAddress,
+                phone: resp[i].placePhone,
+                pictures: resp[i].pictures
+            };
+
+            placeArr.push(aPlaces);
+        };
+
+    });
+    await res.render('maps', { events: arrayed, places: placeArr, isLoggedIn: req.user !== undefined });
 
 });
 

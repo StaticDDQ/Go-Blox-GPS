@@ -1,10 +1,10 @@
 // JavaScript source code
 const express = require('express');
 const router = express.Router();
-const path = require('path');
 const multer = require('multer');
 var cloudinary = require('cloudinary').v2;
 var NodeGeoCoder = require("node-geocoder");
+const cloudinaryConfig = require("../config/cloudinary");
 
 // Get place model
 let Place = require('../models/place');
@@ -22,13 +22,6 @@ var storage = multer.diskStorage({
     }
 });
 
-// FOR REFERENCES
-// "placeName": String,
-// "placeAddress": String,
-// "placeDescription": String,
-// "placePhone": String,
-// "category": String,
-// "pictures": String
 var upload = multer({ storage: storage })
 
 // add places
@@ -51,7 +44,7 @@ router.post('/addPlace', upload.single("pictures"), async function (req, res) {
 
         if (!error) {
             var reqURL;
-
+            // upload picture to cloudinary database
             await cloudinary.uploader.upload(req.file.path,
                 {
                     eager: [
@@ -63,6 +56,7 @@ router.post('/addPlace', upload.single("pictures"), async function (req, res) {
                     reqURL = result.secure_url;
 
                 });
+            // add picture to place JSON and save it
             req.body.pictures = reqURL;
             var addNewPlace = new Place(req.body);
             addNewPlace.save(function (err, place) {
@@ -72,13 +66,13 @@ router.post('/addPlace', upload.single("pictures"), async function (req, res) {
         } else {
             res.render('createPlace', { errors: 'Require a category' });
         }
-
+        // reload while giving error message
     } else {
         res.render('createPlace', { errors: 'Incorrect place creation' });
     }
 });
 
-
+// load create place page if logged in
 router.get('/createPlace', function (req, res) {
     if (req.user === undefined)
         res.redirect('/');
@@ -86,13 +80,15 @@ router.get('/createPlace', function (req, res) {
         res.render('createPlace');
 });
 
-// get place
+// get place by id
 router.get('/getPlace/:id', function (req, res) {
     Place.findById(req.params.id, function (err, place) {
         if (err) throw err;
         if (place != null) {
+            // get location data to display place in map
             place['lat'] = parseFloat(place.location[0].latitude);
             place['long'] = parseFloat(place.location[0].longitude);
+            // check if place is bookmarked or not
             res.render('placeDetails', {
                 place: place,
                 isBookmarked: req.user !== undefined && req.user.bookmark.includes(place.placeName)
@@ -103,7 +99,7 @@ router.get('/getPlace/:id', function (req, res) {
     })
 });
 
-// get places by name
+// get places by by checking keywords with the name or address
 router.post('/getPlaces', function (req, res) {
     if (req.user !== undefined) {
         Place.find({
@@ -114,6 +110,7 @@ router.post('/getPlaces', function (req, res) {
         }, function (err, resp) {
             if (err) throw err;
             var placeArr = [];
+            // get all place data to be displayed onto the map
             for (let i = 0; i < resp.length; i++) {
                 var aPlaces = {
                     id: resp[i]._id,
@@ -137,10 +134,10 @@ router.post('/getPlaces', function (req, res) {
     }
 });
 
-// get events by name
+// get place by category if logged in
 router.post('/getPlacesByCategory/', function (req, res) {
     if (req.user !== undefined) {
-        // find the event
+        // find the place
         Place.find({
             category: req.body.category
         }, function (err, resp) {

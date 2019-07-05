@@ -6,16 +6,18 @@ html
     link(rel='stylesheet',type='text/css', href='mappers.css')
     link(href="https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap", rel="stylesheet")
     link(href="https://fonts.googleapis.com/css?family=Heebo:300&display=swap", rel="stylesheet")
-    link(href='https://fonts.googleapis.com/css?family=Pacifico&display=swap', rel='stylesheet')
-
+    link(href='https://fonts.googleapis.com/css?family=Pacifico&display=swap', rel='stylesheet')   
     link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.3.1/css/all.css')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
 
-  //-link(rel='stylesheet', href='http://cdn.leafletjs.com/leaflet-0.7/leaflet.css')
   body
     style
       include ../public/css/mappers.css
+    //- Initialize grid elemements
     .grid
-      include includes/mapOnly.pug
+      //- Insert map
+      include includes/homeMap.pug
+      //- For the description
       .desc
         h1 gps.
         h3
@@ -34,22 +36,25 @@ html
           br
           |meet new people with likeminded values! :)  
           h2 FIND EVENTS AND PLACES
-          .searching
-            form(action="/events/maps/search", method="post")
-              input(type="search", placeholder="Search events or places...",name="search")
-              button.i.fa.fa-search(type='submit')
-          
-          if !isLoggedIn
-            h5 DISCOVER MORE!
-            .more
-              ul
-                li
-                  a(href='/members/signup') SIGN UP
-                li
-                  a(href='/members/login') LOGIN
-
-          else 
+        .searching
+          form(action="/maps/search", method="post")
+            input(type="text", placeholder="Search events or places...",name="search")
+            span
+              button(type='submit')
+                i.fa.fa-search
+        //- Non user has to sign up or log  in
+        if !isLoggedIn
+          h5 DISCOVER MORE!
+          .more
             ul
               li
-                a#page(href='/members/login') Go to your page 
+                a(href='/members/signup') SIGN UP
+              li
+                a(href='/members/login') LOGIN
+        //- Already logged users can go straight to their page
+        else 
+          .page
+            ul
+              li
+                a(href='/members/login') Go to your page 
 

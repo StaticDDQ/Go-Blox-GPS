@@ -7,9 +7,10 @@ var cloudinary = require('cloudinary').v2;
 var NodeGeoCoder = require("node-geocoder");
 const limiter = require('express-rate-limit');
 
+const cloudinaryConfig = require("../config/cloudinary");
+
 // Get event model
 let Event = require('../models/event');
-let Places = require('../models/place');
 let Rating = require('../models/rating');
 
 // to show to get long and lat
@@ -33,8 +34,6 @@ const createEventLimiter = limiter({
     max: 2, // start blocking after 2 requests
   });
 
-
-
 // add event
 router.post('/addEvent', upload.single("pictures"), createEventLimiter, async function (req, res) {
     req.body.pictures = req.file.filename;
@@ -55,14 +54,14 @@ router.post('/addEvent', upload.single("pictures"), createEventLimiter, async fu
 
     var error = req.validationErrors();
     if (!error) {
-
+        // events must have atleast 1 tag
         req.checkBody('tags', 'Require atleast 1 tag').notEmpty();
         error = req.validationErrors();
 
         if (!error) {
 
             var reqURL;
-
+            // upload event pic to cloudinary
             await cloudinary.uploader.upload(req.file.path,
                 {
                     eager: [
@@ -77,6 +76,7 @@ router.post('/addEvent', upload.single("pictures"), createEventLimiter, async fu
             req.body.pictures = reqURL;
             var addNewEvent = new Event(req.body);
             addNewEvent['organizer'] = req.user.userName;
+            // load event page after creation
             addNewEvent.save(function (err, event) {
                 if (err) throw err;
 
@@ -92,69 +92,7 @@ router.post('/addEvent', upload.single("pictures"), createEventLimiter, async fu
     }
 });
 
-async function lookUpEvent(eventName) {
-    var found = null;
-    found = await Event.findOne({ name: eventName });
-    return found;
-}
-
-// if want to search
-router.post('/maps/search', async function(req,res){
-    var arrayed = [];
-    await Event.find({
-        $or: [
-            {name: {$regex: req.body.search, $options: 'i' }},
-            {email: {$regex: req.body.search, $options: 'i' }},
-            {organizers: {$regex: req.body.search, $options: 'i' }},
-            {address: {$regex: req.body.search, $options: 'i' }},
-        ] }, function (err, resp) {
-
-        for (let i = 0; i < resp.length; i++){
-            var aEvent = {
-                id: resp[i]._id,
-                name: resp[i].name,
-                organizer: resp[i].organizer,
-                lat: parseFloat(resp[i].location[0].latitude),
-                long: parseFloat(resp[i].location[0].longitude),
-                address: resp[i].address,
-                phone: resp[i].phone,
-                email: resp[i].email,
-                pictures: resp[i].pictures
-            };
-        
-
-            arrayed.push(aEvent);
-        };
-
-    });
-    var placeArr = []
-    await Places.find({
-        $or: [
-            {placeName: {$regex: req.body.search, $options: 'i' }},
-            {placeDescription: {$regex: req.body.search, $options: 'i' }},
-            {placeAddress: {$regex: req.body.search, $options: 'i' }}
-        ] }, function (err, resp) {
-        if (err) throw err;
-        for (let i = 0; i < resp.length; i++){
-            var aPlaces = {
-                id: resp[i]._id,
-                name: resp[i].placeName,
-                lat: parseFloat(resp[i].location[0].latitude),
-                long: parseFloat(resp[i].location[0].longitude),
-                address: resp[i].placeAddress,
-                phone: resp[i].placePhone,
-                pictures: resp[i].pictures
-            };
-
-            placeArr.push(aPlaces);
-        };
-    
-    });
-    await res.render('maps', {events: arrayed, places: placeArr, isLoggedIn: req.user !== undefined });
-
-});
-
-//change back to post
+//load create event page
 router.get('/createEvent', function (req, res) {
     if (req.user === undefined)
         res.redirect('/');
@@ -162,14 +100,16 @@ router.get('/createEvent', function (req, res) {
         res.render('createEvent');
 });
 
-// get event
+// get event by id
 router.get('/getEvent/:id', function (req, res) {
     Event.findById(req.params.id, function (err, event) {
         if (err) throw err;
         if (event != null) {
+            // load all reviews of this event
             Rating.find({ eventID: req.params.id }, function (err, result) {
                 if (err) throw err;
 
+                // load different page if event belongs to the user
                 if (req.user !== undefined && event.organizer === req.user.userName)
                     res.render('ownerEventDetails', { event: event, ratings: result });
                 else
@@ -184,13 +124,15 @@ router.get('/getEvent/:id', function (req, res) {
     })
 });
 
+// load find event page and get all event data in the db
 router.get('/findEvent', function (req, res) {
+    // if user is logged in
     if (req.user === undefined) {
         res.redirect('/');
     } else {
         Event.find({}).exec(function(err, resp){
             if(err) throw err;
-            var arrayed = []
+            var arrayed = [];
             for (let i = 0; i < resp.length; i++){
                 var aEvent = {
                     id: resp[i]._id,
@@ -221,7 +163,8 @@ router.post('/getEvents', function (req, res) {
             {organizers: {$regex: req.body.name, $options: 'i' }}
         ] }, function (err, resp) {
         if (err) throw err;
-        var arrayed = []
+        var arrayed = [];
+        // get required data to load events to the map
         for (let i = 0; i < resp.length; i++){
             var aEvent = {
                 id: resp[i].id,
@@ -241,17 +184,9 @@ router.post('/getEvents', function (req, res) {
             };
 
             arrayed.push(aEvent);      
-            }
-            res.render('loadEvents', { events: arrayed, isLoggedIn: req.user !== undefined });
+        }
+        res.render('loadEvents', { events: arrayed, isLoggedIn: req.user !== undefined });
     });
-});
-
-// update event
-router.put('/updateEvent/:name', function (req, res) {
-    Event.findOneAndUpdate(
-        { name: req.params.name }, { $set: req.body }, function (err, resp) { //callback functions
-            res.send(resp);
-        });
 });
 
 // if user joined an event append the name (and maybe link) to the user's json
@@ -262,14 +197,6 @@ router.put('/addUser/:name', function (req, res) {
     jsonStr = JSON.stringify(obj);
     Event.findOneAndUpdate(
         { name: req.params.name }, { $set: jsonStr });
-});
-
-// delete event
-router.delete('/deleteEvent/:name', function (req, res) {
-    Event.findOneAndDelete({ name: req.params.name }, function (err, resp) {
-        if (err) throw err;
-        res.send(resp);
-    })
 });
 
 // map event

@@ -7,7 +7,7 @@
 }
   
 body{
-    font-family: "Quicksand";
+    font-family: "Heebo";
     text-align: justify;
     background-color: #f4f4f4;
 }
@@ -53,11 +53,14 @@ p.contacts {
   padding-right: 60px;
   padding-top: 50px;
   padding-bottom: 20px;
+  border-top-left-radius: .5em;
+  border-top-right-radius: .5em;
 }
 
 .main_img{
   width: 100%;
   height: auto;
+  border-radius: .25em;
 }
 
 /* configuring the text */
@@ -72,9 +75,52 @@ p.contacts {
     padding-right: 60px;
 }
 
+a#org{
+  color: #ED7755;
+  text-decoration: none;
+  font-style: italic;
+}
+a#org:hover{
+  color: rgb(209, 86, 52);
+  text-decoration: none;
+}
+
+.date {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.time {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 .text_content {
   text-align: left;
-    
+}
+
+/* configure the tag for the event */
+#interest_tag{
+  grid-area: interest_tag;
+  word-break: break-all;
+  width: 100%;
+  height: auto;
+  margin-top: 10px;
+  padding-bottom: 5px;
+  margin-right: 10px;
+}
+
+#interest_tag li{
+  list-style-type: none;
+  position: relative;
+  border: solid 1px #707070;
+  display: inline;
+  margin-right: 10px;
+  border-radius: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 15px;
+  color:black;
+  line-height: 1.8em;
 }
 
 /* configure join event buttons */
@@ -82,10 +128,18 @@ p.contacts {
     display: inline-block;
 }
 
-/* configure gallery */
-/* .gallery{
-    grid-area: gallery;
-} */
+a {
+    color: #d86141;
+    text-decoration: none;
+    list-style-type: none;
+    font-size: 1em;
+  }
+  
+  
+  a:hover{
+    color: #4f4f4f;
+  }
+
 
 #yes{
   width: 50px;
@@ -140,6 +194,8 @@ p.contacts {
     padding-right: 60px;
     padding-bottom: 50px;
     background-color: white;
+    border-bottom-left-radius: .5em;
+    border-bottom-right-radius: .5em;
 }
 .reviews h2{
   text-decoration: underline;
@@ -226,12 +282,25 @@ textarea{
       border-bottom: solid 0.3px #ED7755;
   
   }
+  input#submitReview{
+    width: auto;
+    font-size: 15px;
+    padding: 10px;
+    border: solid 1px rgb(206, 91, 66);
+    background-color: #ED7755;
+    color: white;
+  }
+  input#submitReview:hover{
+    background-color: rgb(206, 91, 66);
+    border-color:rgb(206, 91, 66);
+    color: white;
+  }
 
   /* add rating stars */
-
   .star{
       color: goldenrod;
       font-size: 2.0rem;
+      margin-right: 6px;
   }
 
   .star::before{

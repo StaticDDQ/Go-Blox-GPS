@@ -5,6 +5,7 @@ style
 .mapping  
   #map
   script(src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.2/leaflet.js')
+
   script.
 
     var map = L.map('map').setView([-37.814, 144.96332], 15);
@@ -16,8 +17,31 @@ style
     maxZoom: 18,
     }).addTo(map);
 
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        alert('Geolocation is not supported');
+    }
+
+    function showPosition(position){
+        var currLoc = L.icon({
+          iconUrl: "/user.png",
+          iconSize: [50,50]
+        });
+
+        var marker = new L.Marker([position.coords.latitude, position.coords.longitude], {icon: currLoc});
+
+        map.addLayer(marker);
+        
+        marker.bindPopup(
+            "<div id='antos'><div class='anto2' style='position: relative'>You are here!</div></div>"
+        ).openPopup();
+
+        map.panTo([position.coords.latitude, position.coords.longitude]);
+    }
+
   //- Display markers for events
-  if events
+  if events.length > 0
       each evented in events
         script.
           var eventMark = L.icon({
@@ -27,7 +51,7 @@ style
           var marker = new L.Marker([#{evented.lat},#{evented.long}], {icon: eventMark});
           if(#{isLoggedIn} === false){
             marker.bindPopup(
-            "<div id='antos'><div class='anto'><img src=#{evented.pictures} style='width: 100px; height: 100px; object-fit: cover'/></div><div class='anto2' style='position: relative'><b>#{evented.name}</b><br/>Address: #{evented.address}</div></div>");
+            "<div id='antos'><div class='anto'><img src=#{evented.pictures} style='width: 100px; height: 100px; object-fit: cover'/></div><div class='anto2' style='position: relative'><b>#{evented.name}</b><br/>Address: #{evented.address}<br/></div></div>");
           }else{
             marker.bindPopup(
             "<div id='antos'><div class='anto'><img src=#{evented.pictures} style='width: 100px; height: 100px; object-fit: cover'/></div><div class='anto2' style='position: relative'><a href=\'/events/getEvent/#{evented.id}\'><b>#{evented.name}</b></a><br/>Address: #{evented.address}<br/>Phone: #{evented.phone}<br/>Email: #{evented.email}</div></div>");
@@ -37,7 +61,7 @@ style
           map.addLayer(marker);
           
   //- Display markers for places
-  if places
+  if places.length > 0
       each place in places
         script.
           var placeMark = L.icon({
@@ -50,7 +74,9 @@ style
             "<div id='antos'><div class='anto'><img src=#{place.pictures} style='width: 100px; height: 100px; object-fit: cover'/></div><div class='anto2' style='position: relative'><a href=\'/places/getPlace/#{place.id}\'><b>#{place.placeName}</b></a><br/>Address: #{place.placeAddress}<br/>Phone: #{place.phone}</div></div>");
           } else{
             marker_place.bindPopup(
-            "<div id='antos'><div class='anto'><img src=#{place.pictures} style='width: 100px; height: 100px; object-fit: cover'/></div><div class='anto2' style='position: relative'><b>#{place.placeName}</b><br/>Address: #{place.placeAddress}</div></div>");
+            "<div id='antos'><div class='anto'><img src=#{place.pictures} style='width: 100px; height: 100px; object-fit: cover'/></div><div class='anto2' style='position: relative'><b>#{place.placeName}</b><br/>Address: #{place.placeAddress}<br/></div></div>");
           }
           map.addLayer(marker_place);
-
+  if places.length === 0 && events.length === 0
+    script.
+        alert("No event or place found!");

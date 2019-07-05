@@ -7,7 +7,7 @@
 }
   
 body{
-    font-family: "Quicksand";
+    font-family: "Heebo";
     text-align: justify;
     background-color: #f4f4f4;
 }
@@ -53,11 +53,14 @@ p.contacts {
   padding-right: 60px;
   padding-top: 50px;
   padding-bottom: 20px;
+  border-top-left-radius: .5em;
+  border-top-right-radius: .5em;
 }
 
 .main_img{
   width: 100%;
   height: auto;
+  border-radius: .25em;
 }
 
 /* configuring the text */
@@ -82,10 +85,6 @@ p.contacts {
     display: inline-block;
 }
 
-/* configure gallery */
-/* .gallery{
-    grid-area: gallery;
-} */
 
 #yes{
   width: 50px;
@@ -130,6 +129,20 @@ p.contacts {
   border-color:rgb(206, 91, 66);
   color: white;
 }
+
+#bookmark{
+  border: none;
+  background-color: #90A4BC;
+  padding: 5px;
+  color: white;
+  border-radius: 3px;
+}
+
+#bookmark:hover{
+  background-color: #5d8eca;
+  color: white;
+  border: none;
+}
 /* add reviews and ratings*/
 .reviews{
     grid-area: reviews;
@@ -140,6 +153,8 @@ p.contacts {
     padding-right: 60px;
     padding-bottom: 50px;
     background-color: white;
+    border-bottom-left-radius: .5em;
+    border-bottom-right-radius: .5em;
 }
 .reviews h2{
   text-decoration: underline;

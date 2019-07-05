@@ -6,7 +6,7 @@
 }
 
 body {
-    font-family: 'Quicksand';
+    font-family: 'Heebo';
     background-repeat: no-repeat;
     background-size: cover;
     background-color: #f4f4f4;
@@ -19,7 +19,7 @@ body {
     grid-template-rows: 0fr 1fr 0fr;
     min-height: 100vh;
     grid-template-areas: 
-    "navbar searchBox logo" 
+    "navbar searching logo" 
     "mapping displayEvents displayEvents" 
     "footer footer footer";
 }
@@ -32,7 +32,7 @@ body {
 /* configure header elements */
 
 .searching {
-    grid-area: searchBox;
+    grid-area: searching;
     display: inline-block;
     max-height: 200px;
     text-align: center;
@@ -40,7 +40,7 @@ body {
 }
 
 ::placeholder{
-   color: #e15848;
+   color: #a0a0a0;
    font-style: italic;
 }
 
@@ -48,9 +48,10 @@ body {
    width: 70%;
    height: auto;
    font-size: 1em;
-   padding: 5px;
-   margin: 10px;
-   border-radius: 7px;
+   padding: 7px;
+   border-top-left-radius: 3px;
+   border-bottom-left-radius: 3px;
+   border: solid 0.5px rgb(213,221,232);
 }
 
 .searching input[type=text]:hover{
@@ -63,13 +64,16 @@ body {
 
 .searching input[type=submit]{
     font-size: 1em;
-    padding: 5px;
-    border-radius: 10px;
+    padding: 7px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
     margin-top: 3vh;
+    border: solid 0.5px rgb(213,221,232);
+    background-color: rgb(213,221,232);
 }
 
 .searching input[type=submit]:hover{
-    color: #ED7755;
+    background-color: #becad0;
 }
 
 button{
@@ -90,7 +94,6 @@ button{
     height: 250px;
     width: 250px;
     margin: 20px;
-    margin-top: 30px;
     border-radius: 5px;
     z-index:1;
 }
@@ -98,6 +101,12 @@ button{
 .filterSide{
     grid-area: filterSide;
     padding-left: 20px;
+}
+
+.filterSide input[type=text]{
+    border-radius: 5px;
+    border: solid 0.5px rgb(213,221,232);
+    padding: 5px;
 }
 
 .filterSide h3{
@@ -112,6 +121,43 @@ button{
     font-size: 15px;
     margin-bottom: 10px;
 }
+#filter{
+    overflow-y: auto;
+    width: 250px;
+    height: 14vh;
+}
+
+.filterTag{
+    background-color: white;
+    border: 1px solid #becad0;
+    padding: 3px;
+    margin-left: 2px;
+    margin-bottom: 3px;
+    border-radius: 5px;
+    font-family: 'Heebo';
+}
+
+.filterTag:hover{
+    background-color:#becad0;
+}
+.filterTag button.active{
+    background: #ED7755;
+}
+.all{
+    padding: 3px;
+    margin-bottom: 3px;
+    background-color: white;
+    border: 1px solid #becad0;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+.all:hover{
+    background-color:#becad0;
+}
+.all .active{
+    background-color: #e15848;
+}
 
 .button{
     background-color: #90A4BC;
@@ -119,8 +165,8 @@ button{
 
 /* layout to show the events */
 .displayEvents{
+    grid-area: displayEvents;
     display: grid;
-    grid-template-rows: auto;
 }
 
 .displayEvents h2{
@@ -132,11 +178,10 @@ button{
 .event_card{
     display: grid;
     grid-template-columns: 2.4fr 4.6fr;
-    grid-template-rows: .4fr 2fr .1fr;
+    grid-template-rows: auto;
     grid-template-areas: 
     "event_title event_title"
-    "event_pic event_desc"
-    "event_tag event_tag";
+    "event_pic event_desc";
     border: 1px solid #becad0;
     border-radius: 4px;
     text-decoration: none;
@@ -146,6 +191,7 @@ button{
     padding-top: 20px;
     margin-top: 30px;
     margin-bottom: 30px;
+    margin-right: 20px;
     background-color: white;
 }
 
@@ -159,16 +205,15 @@ button{
 
 .event_title{
     grid-area: event_title;
-    padding-bottom: 20px;
     font-weight: bold;
     font-size: 20px;
     margin-right:auto;
-    overflow:auto;
+    padding-bottom: 10px;
 }
 
 .event_pic{
     grid-area: event_pic;
-    padding-right: 10px;
+    padding-right: 20px;
     padding-bottom: 10px;
 }
 
@@ -185,13 +230,9 @@ button{
 }
 
 .event_desc p{
-    padding-bottom: 5px;
-}
-
-.event_tag{
-    grid-area: event_tag;
     padding-bottom: 10px;
 }
+
 
 /* configure footer */
 .footer{
@@ -202,10 +243,6 @@ button{
     padding-top: 20px;
     margin-top: 50px;
     border-top: solid 8px #becad0;
-    /* position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 2rem;  */
   }
   
 .footer li{
@@ -231,5 +268,77 @@ color: white;
 .footer li.sfHover,
 .footer li.current-menu-item {
     border-bottom: solid 0.3px #ED7755;
+}
 
+/* Configure Responsive Grid */
+@media (max-width:800px){
+    .container{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        grid-template-areas: 
+        "navbar logo"
+        "searching searching"
+        "mapping mapping"
+        "filterSide filterSide"
+        "displayEvents displayEvents"
+        "footer footer";
+    }
+
+    .navbar{
+        position: relative;
+    }
+
+    .mapping{
+        grid-area: mapping;
+        position: relative;
+        top: 0px;
+        margin: 20px;
+        padding: 0;
+    }
+
+    #map{
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+    }
+
+    .filterSide{
+        grid-area: filterSide;
+        padding-top: 20px;
+    }
+
+    #filter{
+        overflow-y: auto;
+        width: 100%;
+        height: 50px;
+    }
+
+    .displayEvents{
+        grid-area: displayEvents;
+        margin-top: 400px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .events{
+        display: grid;
+    }
+    .event_card{
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: auto;
+        grid-template-areas: 
+        "event_pic" 
+        "event_title"
+        "event_desc";
+        border: 1px solid #becad0;
+        border-radius: 4px;
+        text-decoration: none;
+        overflow: hidden;
+        transition: all 0.2s ease-out;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        background-color: white;
+    }
 }
