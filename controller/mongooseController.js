@@ -1,14 +1,4 @@
 const Members = require('../models/member');
-const nodemailer = require('nodemailer');
-
-// used to send email confirmation
-var transport = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-        user: 'officialgoblox@gmail.com',
-        pass: 'goblox123'
-    }
-});
 
 // add user asynchronously if the username does not exists in mongoDB
 var addUser = async function(req, res) {
@@ -33,31 +23,15 @@ var addUser = async function(req, res) {
                 "display": req.body.display,
                 "followedUsers": req.body.followedUsers,
                 "interestedEvents": [],
-                "bookmark": [],
-                "active": false
+                "bookmark": []
             });
 
             // save user to db and send an email
             data.save(function (err, newMember) {
                 if (!err) {
-                    var link = "http://" + req.get('host') + "/members/verify?user=" + newMember.userName;
-
-                    let mailOption = {
-                        from: 'officialgoblox@gmail.com',
-                        to: newMember.email,
-                        subject: 'Email confirmation from GoBlox',
-                        html: "Here is a confirmation link for setting up your GPS account,<a href=" + link + "> Click here to verify</a>"
-                    };
-
-                    transport.sendMail(mailOption, function (err, info) {
-                        if (err) throw err;
-
-                    });
 
                     // reload page, asking user to verify email
-                    res.render('login', {
-                        error: newMember.userName + ', please verify your email!'
-                    });
+                    res.render('login');
                 } else {
                     throw err;
                 }

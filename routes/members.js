@@ -22,7 +22,6 @@ router.post('/authenticate', function (req, res, next) {
 
         // reload again if user failed
         if (!user) return res.render('login', { error: 'Incorrect username or password' });
-        if (!user.active) return res.render('login', { error: 'User is not active' });
 
         // load another page to set up profile if user is new
         req.logIn(user, function (err) {

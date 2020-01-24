@@ -13,7 +13,6 @@ const memberSchema = new mongoose.Schema({
     "DOB": String,
     "joined_date": String,
     "password": String,
-    "active": Boolean,
     "display":Object,
     "desc": String,
     "interests": [String],
