@@ -43,7 +43,7 @@ var addUser = async function(req, res) {
                     var link = "http://" + req.get('host') + "/members/verify?user=" + newMember.userName;
 
                     let mailOption = {
-                        from: 'officialgobloxs@gmail.com',
+                        from: 'officialgoblox@gmail.com',
                         to: newMember.email,
                         subject: 'Email confirmation from GoBlox',
                         html: "Here is a confirmation link for setting up your GPS account,<a href=" + link + "> Click here to verify</a>"
