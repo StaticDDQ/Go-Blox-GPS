@@ -55,7 +55,7 @@ var addUser = async function(req, res) {
                     });
 
                     // reload page, asking user to verify email
-                    res.render('signup', {
+                    res.render('login', {
                         error: newMember.userName + ', please verify your email!'
                     });
                 } else {
